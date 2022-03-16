@@ -1,7 +1,6 @@
 package com.spring.cafealley.board.mapper;
 
 import java.util.List;
-
 import com.spring.cafealley.command.BoardVO;
 
 public interface IBoardMapper {
