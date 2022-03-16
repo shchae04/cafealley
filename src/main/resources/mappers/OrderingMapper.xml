@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.spring.cafealley.ordering.mapper.IOrderingMapper">
+  
+  
+  	<insert id="order">
+  	INSERT INTO ordering
+  	(ordernum, userid, cartno, ordertotalprice, orderstatus, 
+  	orderusername, orderuserphone1, orderuserphone2, orderuserphone3, orderuseremail,
+  	deliveryname, deliverypostnum, deliverybasicaddr, deliverydetailaddr,
+  	deliveryphone1, deliveryphone2, deliveryphone3, deliverymemo,
+  	paymethod, paybankname, paybank)
+  	VALUES(ordernum_seq.NEXTVAL, #{userid}, #{cartno}, #{ordertotalprice}, #{orderstatus},
+  	#{orderusername}, #{orderuserphone1}, #{orderuserphone2}, #{orderuserphone3}, #{orderuseremail},
+  	#{deliveryname}, #{deliverypostnum}, #{deliverybasicaddr}, #{deliverydetailaddr},
+  	#{deliveryphone1}, #{deliveryphone2}, #{deliveryphone3}, #{deliverymemo},
+  	#{paymethod}, #{paybankname}, #{paybank})
+  	</insert>
+  	
+  	<select id="getList" resultType="com.spring.cafealley.command.OrderingVO">
+  	SELECT * FROM ordering
+  	</select>
+  	
+  	
+  	<select id="getOrder" resultType="com.spring.cafealley.command.OrderingVO">
+  	SELECT * FROM ordering
+  	WHERE ordernum = #{ordernum}
+  	</select>
+  	
+  	
+  	<update id="modify">
+  	UPDATE ordering
+  	SET orderstatus = #{orderstatus}, deliverytracknum = #{deliverytracknum}
+  	WHERE ordernum = #{ordernum}
+  	</update>
+  	
+  	<delete id="delete">
+  	delete ordering
+  	WHERE ordernum = #{ordernum}
+  	</delete>
+  
+  
+  </mapper>

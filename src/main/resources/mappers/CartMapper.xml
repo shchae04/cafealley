@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.cafealley.cart.mapper.ICartMapper">
+
+<!-- 등록 하기 -->
+<insert id="">
+	INSERT INTO cart(cartno, prono, userid, countno, counttotal)
+	VALUES(cart_seq.NEXTVAL, #{prono}, #{userid}, #{countno}, #{counttotal})
+</insert>
+
+<select id="select" resultType="com.spring.cafealley.command.CartVO">
+	SELECT * FROM cart
+	WHERE cartno = #{cartno}
+</select>
+
+<update id="">
+</update>
+
+<delete id="">
+	DELETE FROM cart
+	WHERE cartno = #{cartno}
+</delete>
+
+	
+	
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

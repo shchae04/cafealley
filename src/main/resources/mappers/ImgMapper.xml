@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.cafealley.img.mapper.IImgMapper">
+
+<insert id="upload">
+INSERT INTO img
+(filenum, filename, filename2, filename3, filepath, foldername)
+VALUES(file_seq.NEXTVAL, #{filename}, #{filename2}, #{filename3}, #{filepath), #{foldername})
+
+</insert>
+
+<select id="select" resultType="com.spring.cafealley.command.ImgVO">
+	SELECT * FROM img
+	WHERE filenum = #{filenum}
+</select>
+
+<update id="">
+</update>
+
+<delete id="delete">
+	DELETE FROM img
+	WHERE filenum = #{filenum}
+</delete>
+	
+	
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
