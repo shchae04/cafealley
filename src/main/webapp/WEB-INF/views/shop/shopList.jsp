@@ -1,44 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>memMgmt</title>
+    <title>shopList</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
 
     <style>
-        .body {
-            width: 100%;
+
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
-        .section {
+
+        body {
+            width: 100%;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        .container{
+            min-width: 1200px;
+            margin-top: 170px;
+        }
+        section {
             display: block;
             width: 90%;
             margin: 50px auto;
         }
-        .container{
-            min-width: 1200px;
-            margin-top: 180px;
-            margin-bottom: 50px;
+
+        .row > span,
+        .row > span > a {
+            color: #555555;
+            font-size: 13px;
         }
 
-        .ord-mgmt-title {
-            font-size: 29px;
+        .row > span > a.crt-page {
             font-weight: bold;
         }
 
-        .ord-mgmt-table {
-            margin: 30px 0;
+        .prod-list-inner img {
+            width: 270px;
+            height: 300px;
+        }
+
+        li {
+            margin: 20px 0;
+        }
+
+        /* li:hover {
+        } */
+
+        .prod-content {
+            padding: 15px 0;
+        }
+        .prod-content .info span {
+            display: block;
+        }
+        .prod-content .info,
+        .prod-content .price {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
         }
     </style>
 
 </head>
-
 <body>
-
     <header>
 
         <div class="header">
@@ -46,6 +90,7 @@
                 <div class="header-logo">
                     <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
                 </div>
+    
     
                 <ul class="header-nav header-nav-upper clearfix">
                     <li><a data-toggle="modal" href="#myModal">로그인</a></li>
@@ -85,6 +130,7 @@
         </div>
     
     </header>
+    
     
     <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
     <div class="modal fade" id="myModal">
@@ -132,103 +178,123 @@
         </div>
     </div>
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <p class="ord-mgmt-title">멤버십 회원 관리</p>
-                    <table class="table ord-mgmt-table w-auto text-center align-middle">
-                        <thead>
-                            <tr>
-                                <td>아이디</td>
-                                <td>입금자명</td>
-                                <td>입금은행</td>
-                                <td>총금액(몇개월)</td>
-                                <td>결제상태</td>
-                                <td>결제요청일</td>
-                                <td>구독시작일</td>
-                                <td>멤버십번호</td>
-                                <td>승인버튼</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>abc1234</td>
-                                <td>홍길동</td>
-                                <td>ㅇㅇ은행</td>
-                                <td>48,000원(12개월)</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                    </select>
-                                </td>
-                                <td>0000.00.00</td>
-                                <td>0000.00.00</td>
-                                <td>00000000</td>
-                                <td><button type="button" class="btn-xs">구독승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>abc1234</td>
-                                <td>김철수</td>
-                                <td>ㅇㅇ은행</td>
-                                <td>12,000원(3개월)</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                    </select>
-                                </td>
-                                <td>0000.00.00</td>
-                                <td>0000.00.00</td>
-                                <td>00000000</td>
-                                <td><button type="button" class="btn-xs">구독승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>abc1234</td>
-                                <td>김아무개</td>
-                                <td>ㅇㅇ은행</td>
-                                <td>24,000원(6개월)</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                    </select>
-                                </td>
-                                <td>0000.00.00</td>
-                                <td>0000.00.00</td>
-                                <td>00000000</td>
-                                <td><button type="button" class="btn-xs">구독승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>abc1234</td>
-                                <td>이영희</td>
-                                <td>ㅇㅇ은행</td>
-                                <td>4,000원(1개월)</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                    </select>
-                                </td>
-                                <td>0000.00.00</td>
-                                <td>0000.00.00</td>
-                                <td>00000000</td>
-                                <td><button type="button" class="btn-xs">구독승인</button></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
+    <section class="container">
+        <ul class="row">
+            <span>
+                <a href="#">Home</a> &#707; <a href="#">쇼핑몰(사업자전용)</a> &#707; <a href="#" class="crt-page">원두</a>
+            </span>
+            <hr>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- 그리드 한줄 끝-->
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="col-xs-3">
+                <div class="prod-list-inner">
+                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
+                    <div class="prod-content clearfix">
+                        <div class="info">
+                            <span>일리 원두 클래식 로스트</span>
+                        </div>
+                        <div class="price">
+                            <strong>199,000원</strong>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </section>
-
     <footer>
 
         <div class="footer-container clearfix">
-    
+
             <div class="footer-left">
                 <div class="footer-logo">
                     <a href="#"><img width="150px" src="../img/logo2.png" alt="logo"></a>
@@ -246,7 +312,7 @@
                         href="mailto:coffeealley.gmail.com">coffeealley.gmail.com</a>
                 </p>
             </div>
-    
+
             <div class="footer-right clearfix">
                 <ul class="footer-nav clearfix">
                     <li><a href="#">사이트 소개</a></li>
@@ -255,20 +321,19 @@
                 </ul>
                 <div class="footer-sns">
                     <a href="#"><span class="fa-brands fa-facebook-square"></span></a>
-    
+
                     <a href="#"><span class="fa fa-instagram"></span></a>
-    
+
                     <a href="#"><span class="fa-brands fa-youtube"></span></a>
                 </div>
-    
+
+
+
             </div>
-    
+
         </div>
-    
+
     </footer>
-    
-            <script src="../js/jquery-3.6.0.min.js"></script>
-            <script src="../js/bootstrap.js"></script>
     
 </body>
 </html>

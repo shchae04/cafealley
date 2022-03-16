@@ -1,24 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주문 완료</title>
+    <title>memMgmt</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/kwstyle.css">
+    <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
+
+    <style>
+        .body {
+            width: 100%;
+        }
+        .section {
+            display: block;
+            width: 90%;
+            margin: 50px auto;
+        }
+        .container{
+            min-width: 1200px;
+            margin-top: 180px;
+            margin-bottom: 50px;
+        }
+
+        .ord-mgmt-title {
+            font-size: 29px;
+            font-weight: bold;
+        }
+
+        .ord-mgmt-table {
+            margin: 30px 0;
+        }
+    </style>
+
 </head>
+
 <body>
 
     <header>
+
         <div class="header">
             <nav class="header-container">
                 <div class="header-logo">
                     <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
                 </div>
-    
     
                 <ul class="header-nav header-nav-upper clearfix">
                     <li><a data-toggle="modal" href="#myModal">로그인</a></li>
@@ -58,7 +87,6 @@
         </div>
     
     </header>
-    
     
     <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
     <div class="modal fade" id="myModal">
@@ -106,102 +134,101 @@
         </div>
     </div>
 
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="ord-mgmt-title">멤버십 회원 관리</p>
+                    <table class="table ord-mgmt-table w-auto text-center align-middle">
+                        <thead>
+                            <tr>
+                                <td>아이디</td>
+                                <td>입금자명</td>
+                                <td>입금은행</td>
+                                <td>총금액(몇개월)</td>
+                                <td>결제상태</td>
+                                <td>결제요청일</td>
+                                <td>구독시작일</td>
+                                <td>멤버십번호</td>
+                                <td>승인버튼</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>abc1234</td>
+                                <td>홍길동</td>
+                                <td>ㅇㅇ은행</td>
+                                <td>48,000원(12개월)</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                    </select>
+                                </td>
+                                <td>0000.00.00</td>
+                                <td>0000.00.00</td>
+                                <td>00000000</td>
+                                <td><button type="button" class="btn-xs">구독승인</button></td>
+                            </tr>
+                            <tr>
+                                <td>abc1234</td>
+                                <td>김철수</td>
+                                <td>ㅇㅇ은행</td>
+                                <td>12,000원(3개월)</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                    </select>
+                                </td>
+                                <td>0000.00.00</td>
+                                <td>0000.00.00</td>
+                                <td>00000000</td>
+                                <td><button type="button" class="btn-xs">구독승인</button></td>
+                            </tr>
+                            <tr>
+                                <td>abc1234</td>
+                                <td>김아무개</td>
+                                <td>ㅇㅇ은행</td>
+                                <td>24,000원(6개월)</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                    </select>
+                                </td>
+                                <td>0000.00.00</td>
+                                <td>0000.00.00</td>
+                                <td>00000000</td>
+                                <td><button type="button" class="btn-xs">구독승인</button></td>
+                            </tr>
+                            <tr>
+                                <td>abc1234</td>
+                                <td>이영희</td>
+                                <td>ㅇㅇ은행</td>
+                                <td>4,000원(1개월)</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                    </select>
+                                </td>
+                                <td>0000.00.00</td>
+                                <td>0000.00.00</td>
+                                <td>00000000</td>
+                                <td><button type="button" class="btn-xs">구독승인</button></td>
+                            </tr>
 
+                        </tbody>
+                    </table>
 
-
-    <div class="finor-container" style="margin-top: 200px; margin-left: 250px;">
-        <div class="finor-wrapper">
-            <div class="inner-finor">
-                <table class="finor-table">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <i class="fa-solid fa-truck fa-10x" style="fill: black;"></i>
-                            </td>
-                            <td style="text-align: justify;">
-                                <h3>고객님의 주문이 완료되었습니다.</h3>
-                                <div class="fixdivta">
-                                <h5>주문정보 <span style="font-size: 24px; font-weight: 900; color: red;">12345-67890</span>
-                                    </h4>
-                                    <h5>주문일자 &nbsp;<span style="font-size: 15px; color: gray;">2022-03-07 17:06</span>
-                                    </h5>
-                                </div>
-
-
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
+                </div>
             </div>
-            <div class="inner-finor" style="text-align: center; margin-top: 30px; width: 100%;">
-                <button class="btn btn-lg">마이페이지</button>&emsp;&emsp;
-                <button class="btn btn-lg">홈으로</button>
-            </div>
         </div>
-        <div class="finor-wrapper2">
-            <h4 style="margin-bottom: 15px;">주문 정보</h4>
-        </div>
-        <div class="finor-wrapper2">
-            <table class="finor-infota">
-                <thead>
-                    <tr class="finor-infoth">
-                        <th></th>
-                        <th>상품명</th>
-                        <th>판매가</th>
-                        <th>수량</th>
-                        <th>주문상태</th>
-                        <th>합계</th>
-                        </tr>
-                </thead>
-                <tbody>
-                    <tr class="finor-infobo">
-                        <td><img src="../img/prod1.jpg" alt=""></td>
-                        <td>베트남 커피</td>
-                        <td>30,000원</td>
-                        <td>2개</td>
-                        <td>입금대기</td>
-                        <td style="font-size: 16px; font-weight: 900;">60,000원</td>
-                </tbody>
-            </table>
-            <table class="finor-infota">
-                <tbody>
-                    <tr class="finor-infolo">
-                        <td>
-                            <span>상품구매금액 <strong>60,000원</strong> + 배송비 3,000 =</span>
-                            <span style="font-size: 20px; color: orange;">TOTAL : ₩ 63,000</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="finor-wrapper2" style="margin-top: 40px;">
-            <h4 style="margin-bottom: 15px;">배송지정보</h4>
-        </div>
-        <div class="finor-wrapper2">
-            <table class="finor-infota">
-                <tbody class="finor-transinfota" style="text-align: left;">
-                    <tr>
-                        <td style="width: 200px;">수취인</td>
-                        <td>홍길동</td>
-                    </tr>
-                    <tr>
-                        <td>배송지</td>
-                        <td>사랑시 고백구 행복동</td>
-                    </tr>
-                    <tr>
-                        <td>연락처</td>
-                        <td>010-1234-5678</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <br>
-            <br>
-        </div>
-    </div>
+    </section>
 
     <footer>
+
         <div class="footer-container clearfix">
     
             <div class="footer-left">
@@ -236,20 +263,14 @@
                     <a href="#"><span class="fa-brands fa-youtube"></span></a>
                 </div>
     
-    
-    
             </div>
     
         </div>
     
     </footer>
-
-
-         <script src="../js/jquery-3.6.0.min.js"></script>
-         <script src="../js/bootstrap.js"></script>
-
-
-
+    
+            <script src="../js/jquery-3.6.0.min.js"></script>
+            <script src="../js/bootstrap.js"></script>
+    
 </body>
-
 </html>

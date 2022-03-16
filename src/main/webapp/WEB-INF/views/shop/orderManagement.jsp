@@ -1,10 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>shopList</title>
+    <title>orderManagement</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -15,7 +17,6 @@
     <script src="../js/bootstrap.js"></script>
 
     <style>
-
         @font-face {
             font-family: 'S-CoreDream-4Regular';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
@@ -23,62 +24,28 @@
             font-style: normal;
         }
 
-        body {
+         body {
             width: 100%;
             font-family: 'S-CoreDream-4Regular';
-        }
-
-        .container{
-            min-width: 1200px;
-            margin-top: 170px;
         }
         section {
             display: block;
             width: 90%;
-            margin: 50px auto;
+            margin: 160px auto;
+        }
+        .container{
+            min-width: 1200px;
         }
 
-        .row > span,
-        .row > span > a {
-            color: #555555;
-            font-size: 13px;
-        }
-
-        .row > span > a.crt-page {
+        .ord-mgmt-title {
+            font-size: 29px;
             font-weight: bold;
         }
 
-        .prod-list-inner img {
-            width: 270px;
-            height: 300px;
-        }
-
-        li {
-            margin: 20px 0;
-        }
-
-        /* li:hover {
-        } */
-
-        .prod-content {
-            padding: 15px 0;
-        }
-        .prod-content .info span {
-            display: block;
-        }
-        .prod-content .info,
-        .prod-content .price {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .clearfix::after {
-            content: '';
-            display: block;
-            clear: both;
+        .ord-mgmt-table {
+            margin: 30px 0;
         }
     </style>
-
 </head>
 <body>
     <header>
@@ -175,120 +142,110 @@
             </div>
         </div>
     </div>
+    
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="ord-mgmt-title">주문 관리</p>
+                    <table class="table ord-mgmt-table w-auto text-center align-middle">
+                        <thead>
+                            <tr>
+                                <td>주문번호</td>
+                                <td>주문자아이디</td>
+                                <td>상품번호</td>
+                                <td>총 주문 가격</td>
+                                <td>주문 날짜</td>
+                                <td>주문 상태</td>
+                                <td>배송 정보</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>abc1234</td>
+                                <td>8,9,48,20,88</td>
+                                <td>247900</td>
+                                <td>22/03/10</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                        <option value="pre-del">배송준비중</option>
+                                        <option value="being-del">배송중</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button id="btn-del-info">배송정보보기</button>
+                                </td>
+                            </tr>
 
-    <section class="container">
-        <ul class="row">
-            <span>
-                <a href="#">Home</a> &#707; <a href="#">쇼핑몰(사업자전용)</a> &#707; <a href="#" class="crt-page">원두</a>
-            </span>
-            <hr>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
+                            <tr>
+                                <td>2</td>
+                                <td>abc1234</td>
+                                <td>8,9,48,20,88</td>
+                                <td>247900</td>
+                                <td>22/03/10</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                        <option value="pre-del">배송준비중</option>
+                                        <option value="being-del">배송중</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button id="btn-del-info">배송정보보기</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>abc1234</td>
+                                <td>8,9,48,20,88</td>
+                                <td>247900</td>
+                                <td>22/03/10</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                        <option value="pre-del">배송준비중</option>
+                                        <option value="being-del">배송중</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button id="btn-del-info">배송정보보기</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>4</td>
+                                <td>abc1234</td>
+                                <td>8,9,48,20,88</td>
+                                <td>247900</td>
+                                <td>22/03/10</td>
+                                <td>
+                                    <select>
+                                        <option value="wait-dep">입금대기중</option>
+                                        <option value="dep-cmp">입금완료</option>
+                                        <option value="pre-del">배송준비중</option>
+                                        <option value="being-del">배송중</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button id="btn-del-info">배송정보보기</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 그리드 한줄 끝-->
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-xs-3">
-                <div class="prod-list-inner">
-                    <img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-                    <div class="prod-content clearfix">
-                        <div class="info">
-                            <span>일리 원두 클래식 로스트</span>
-                        </div>
-                        <div class="price">
-                            <strong>199,000원</strong>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </section>
+
+    
     <footer>
 
         <div class="footer-container clearfix">
@@ -333,5 +290,13 @@
 
     </footer>
     
+    <script>
+        $(function(){
+            $('#btn-del-info').click(function(){
+                window.open('http://127.0.0.1:5500/orderManagement.html', '사용자 배송정보', 'width=500, height=700, scrollbars=yes, resizable=no')
+            });//배송정보보기 버튼 이벤트 끝
+        }); //end jQuery
+    </script>
+
 </body>
 </html>

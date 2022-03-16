@@ -1,38 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유 게시판</title>
+    <title>주문 완료</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/shstyle.css">
-    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/kwstyle.css">
     <link rel="stylesheet" href="../css/style.css">
-    
+    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
 
-    <!-- header -->
-
     <header>
-
         <div class="header">
             <nav class="header-container">
                 <div class="header-logo">
                     <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
                 </div>
-
-
+    
+    
                 <ul class="header-nav header-nav-upper clearfix">
                     <li><a data-toggle="modal" href="#myModal">로그인</a></li>
                     <li><a href="#">#님<span class="caret"></span></a></li>
                     <li><a href="#">마이페이지</a></li>
                     <li><a href="#">회원가입</a></li>
                 </ul>
-
+    
                 <ul class="header-nav header-nav-dropdown clearfix">
                     <li><a href="#">사이트 소개</a></li>
                     <li><a href="#">Alley 위치</a></li>
@@ -58,18 +54,18 @@
                         </ul>
                     </li>
                 </ul>
-
+    
             </nav>
-
+    
         </div>
-
+    
     </header>
-
-
+    
+    
     <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
-
+    
             <!-- Modal Content -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,7 +93,7 @@
                                     <a href="#">카페회원 가입</a>
                                 </div>
                             </div>
-
+    
                             <div class="login-p-center">또는</div>
                             <button type="button" class="btn btn-block"
                                 style="background-color: #04cf5c; color: white;"><strong>N</strong></strong></button>
@@ -115,149 +111,101 @@
 
 
 
-
-
-
-
-    <section>
-
-        <div class="container" style="margin-top: 150px;">
-            <div class="row">
-                <div class="board-table">
-                    <div class="titlebox">
-
-                    </div>
-                </div>
-
-                <!-- 검색창을 배치하고 싶을 때 -->
-                <div class="listhead" style="margin-bottom: 100px;">
-                    <div
-                        style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
-                        <strong>게시판</strong>
-                    </div>
-                    <form class="navbar-form navbar-right" action="#" method="get">
-                        <div class="input-group">
-                            <div class="search-wrap clearfix">
-                                <select class="form-control search-select" id="condition">
-                                    <option value="title">제목</option>
-
-                                    <option value="writer">작성자</option>
-
-                                </select>
-                                <button id="searchbtn" type="button" class="btn btn-info search-btn">검색</button>
-                                <input type="text" class="form-control search-input">
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-
-                <table class="table table-hover table-bordered listtable">
-                    <thead>
-                        <th style="width: 4%; color: black;">번호</th>
-                        <th style="width: 75%; color: black; text-align: center;">제목</th>
-                        <th style="width: 12%;">작성자</th>
-                        <th style="width: 10%;">작성일</th>
-
-                    </thead>
-                    <!-- 게시글 가져오기 반복문-->
-                    <!-- dummy 데이터 입니다 -->
+    <div class="finor-container" style="margin-top: 200px; margin-left: 250px;">
+        <div class="finor-wrapper">
+            <div class="inner-finor">
+                <table class="finor-table">
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td><a href="https://www.naver.com">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
+                            <td>
+                                <i class="fa-solid fa-truck fa-10x" style="fill: black;"></i>
+                            </td>
+                            <td style="text-align: justify;">
+                                <h3>고객님의 주문이 완료되었습니다.</h3>
+                                <div class="fixdivta">
+                                <h5>주문정보 <span style="font-size: 24px; font-weight: 900; color: red;">12345-67890</span>
+                                    </h4>
+                                    <h5>주문일자 &nbsp;<span style="font-size: 15px; color: gray;">2022-03-07 17:06</span>
+                                    </h5>
+                                </div>
 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
+
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
-
-                <hr>
-                <button type="button" class="write btn btn-info">글쓰기</button>
-
-
-                <div class="text-center">
-                    <ul class="pagination mypage">
-                        <li><a href="#">이전</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">다음</a></li>
-                    </ul>
-                </div>
-
-
-
+            </div>
+            <div class="inner-finor" style="text-align: center; margin-top: 30px; width: 100%;">
+                <button class="btn btn-lg">마이페이지</button>&emsp;&emsp;
+                <button class="btn btn-lg">홈으로</button>
             </div>
         </div>
+        <div class="finor-wrapper2">
+            <h4 style="margin-bottom: 15px;">주문 정보</h4>
         </div>
-    </section>
-
-
-    <!-- footer -->
-
+        <div class="finor-wrapper2">
+            <table class="finor-infota">
+                <thead>
+                    <tr class="finor-infoth">
+                        <th></th>
+                        <th>상품명</th>
+                        <th>판매가</th>
+                        <th>수량</th>
+                        <th>주문상태</th>
+                        <th>합계</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr class="finor-infobo">
+                        <td><img src="../img/prod1.jpg" alt=""></td>
+                        <td>베트남 커피</td>
+                        <td>30,000원</td>
+                        <td>2개</td>
+                        <td>입금대기</td>
+                        <td style="font-size: 16px; font-weight: 900;">60,000원</td>
+                </tbody>
+            </table>
+            <table class="finor-infota">
+                <tbody>
+                    <tr class="finor-infolo">
+                        <td>
+                            <span>상품구매금액 <strong>60,000원</strong> + 배송비 3,000 =</span>
+                            <span style="font-size: 20px; color: orange;">TOTAL : ₩ 63,000</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="finor-wrapper2" style="margin-top: 40px;">
+            <h4 style="margin-bottom: 15px;">배송지정보</h4>
+        </div>
+        <div class="finor-wrapper2">
+            <table class="finor-infota">
+                <tbody class="finor-transinfota" style="text-align: left;">
+                    <tr>
+                        <td style="width: 200px;">수취인</td>
+                        <td>홍길동</td>
+                    </tr>
+                    <tr>
+                        <td>배송지</td>
+                        <td>사랑시 고백구 행복동</td>
+                    </tr>
+                    <tr>
+                        <td>연락처</td>
+                        <td>010-1234-5678</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
 
     <footer>
-
         <div class="footer-container clearfix">
-
+    
             <div class="footer-left">
                 <div class="footer-logo">
                     <a href="#"><img width="150px" src="../img/logo2.png" alt="logo"></a>
@@ -275,7 +223,7 @@
                         href="mailto:coffeealley.gmail.com">coffeealley.gmail.com</a>
                 </p>
             </div>
-
+    
             <div class="footer-right clearfix">
                 <ul class="footer-nav clearfix">
                     <li><a href="#">사이트 소개</a></li>
@@ -284,35 +232,23 @@
                 </ul>
                 <div class="footer-sns">
                     <a href="#"><span class="fa-brands fa-facebook-square"></span></a>
-
+    
                     <a href="#"><span class="fa fa-instagram"></span></a>
-
+    
                     <a href="#"><span class="fa-brands fa-youtube"></span></a>
                 </div>
-
-
-
+    
+    
+    
             </div>
-
+    
         </div>
-
+    
     </footer>
 
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script>
-        //검색
-        const $searchbtn = document.querySelector('#searchbtn');
 
-        $searchbtn.addEventListener('click', function (e) {
-            const keyword = document.querySelector('#searchbtn').value;
-            const condition = document.querySelector('#condition').value;
-
-            location.href = "/project/list?keyword=" + keyword + "&condition=" + condition;
-
-        });
-    </script>
-
+         <script src="../js/jquery-3.6.0.min.js"></script>
+         <script src="../js/bootstrap.js"></script>
 
 
 

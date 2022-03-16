@@ -1,6 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +38,7 @@
 
         .page-desc {
             margin-top: 20px;
-            text-align: right;
+            text-align: left;
         }
 
         .row {
@@ -207,6 +208,35 @@
             font-style: italic;
         }
 
+        /*  */
+
+        .prod-img input[type="file"] {
+            width: 100px;
+            height: 100px;
+            margin-right: -20px;
+            background: transparent;
+            color: transparent;
+            z-index: 999;
+
+        }
+
+        .prod-img input[type="file"]::-webkit-file-upload-button {
+            display: none;
+        }
+
+        .prod-img label {
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin-left: -100px;
+            z-index: 1;
+            font-size: 10px;
+            text-align: center;
+            pointer-events: none;
+            padding-top: 20px;
+        }
+
+
         .clearfix::after {
             content: '';
             display: block;
@@ -331,7 +361,7 @@
 
     <section>
         <div class="container">
-            <p class="page-title">상품 등록</p>
+            <p class="page-title">상품 수정</p>
             <p class="page-desc"><strong style="color:red;">*</strong> 상품 카테고리를 먼저 선택해주세요.</p>
             <div class="row">
                 <div class="col-xs-12 cart-list clearfix">
@@ -349,7 +379,8 @@
                         <tbody>
                             <tr>
                                 <td class="prod-category">
-                                    <select name="" id="">
+                                    <select name="" id="category">
+                                        <option value="non-selected">-</option>
                                         <option value="">원두</option>
                                         <option value="">티/액상차</option>
                                         <option value="">유제품</option>
@@ -359,27 +390,28 @@
                                     </select>
                                 </td>
                                 <td class="prod-img">
-                                    <img src="../img/paul bassett.jpg" alt="" width="100px" height="100px">
+                                    <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+                                    <input type="file" name="" id="img" disabled>
                                 </td>
                                 <td class="prod-info">
                                     옵션 존재시 상품명과 함께 괄호내에 옵션명 기재<br>
                                     ex) 상품명(옵션명)<br>
-                                    <input type="text" name="" id="" placeholder="">
+                                    <input type="text" name="" placeholder="" disabled>
                                 </td>
-                                <td class="prod-qty">
-                                    <input type="number" name="" id="" min="1">
+                                <td class="prod-qty numeric">
+                                    <input type="number" name="" min="1" max="99999" disabled>
                                 </td>
-                                <td class="prod-normal-price">
-                                    <input type="text"> 원
+                                <td class="prod-normal-price numeric" >
+                                    <input type="text" onkeyup="regex(this)" disabled> 원
                                 </td>
-                                <td class="prod-discount-price">
-                                    <input type="text" name="" id="">원
+                                <td class="prod-discount-price numeric" >
+                                    <input type="text" onkeyup="regex(this)" disabled>원
                                 </td>
                             </tr>
                             <tr>
                                 <td class="prod-desc" colspan="7">
                                     <p>상품 상세설명</p>
-                                    <textarea name="" id=""></textarea>
+                                    <textarea name="" id="" disabled></textarea>
                                 </td>
                             </tr>
 
@@ -392,7 +424,7 @@
                     <br>
                     <div class="lower-bar clearfix">
                         <div class="divforright">
-                            <button class="btn-all-order"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+                            <button class="btn-all-order"> <span class="glyphicon glyphicon-ok"></span> 상품 수정완료</button>
                         </div>
                     </div>
 
@@ -458,6 +490,7 @@
 
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.js"></script>
+
     <script>
         const $table = document.querySelector('.table');
 
@@ -479,6 +512,81 @@
                 e.target.parentNode.parentNode.parentNode.remove();
             }
         })
+
+        const $tableinputs = document.querySelectorAll('.table input'); // 테이블 내의 인풋
+        const $tabletextarea = document.querySelector('.table textarea'); // 테이블 내의 텍스트에리어
+
+        // 카테고리 선택해야 diabled 풀리게끔하기.
+        $table.addEventListener('change', e => {
+            if (!e.target.matches('#category')) {
+                return;
+            }
+            if (e.target.value === 'non-selected') {
+                for (let $input of $tableinputs) {
+                    $input.setAttribute('disabled', true);
+                }
+                $tabletextarea.setAttribute('disabled', true);
+            } else {
+                for (let $input of $tableinputs) {
+                    $input.removeAttribute('disabled');
+                }
+                $tabletextarea.removeAttribute('disabled');
+            }
+        });
+
+        // 유효성검사
+        const $confirmbtn = document.querySelector('.btn-all-order');
+        $confirmbtn.addEventListener('click', e => {
+            // 카테고리 미선택시 돌려보냄
+            if (document.querySelector('#category').value === 'non-selected') {
+                alert('카테고리를 선택해주세요.');
+                return;
+            }
+                                
+            // 인풋 하나라도 입력안하면 돌려보냄
+            for (let $input of $tableinputs) {
+                if ($input.value.trim() === '') {
+                    alert('모든 입력에대해 기재해주세요.');
+                    return;
+                }
+            }
+            if ($tabletextarea.value.trim() === '') {
+                alert('모든 입력에대해 기재해주세요.');
+                return;
+            }
+        });
+        function regex(input){
+            input.value = input.value.replace(/[^0-9]{1,10}/g,"");
+            if(parseInt(input.value)>999999999){
+                input.value="";
+            }
+        }
+
+
+        // 이미지 파일 업로드시 이미지 파일 띄우게끔
+        const $imgfile = document.querySelector('#img');
+        $imgfile.addEventListener('change', e=>{
+            readURL(e.target);
+        });
+        
+        function readURL(input){
+            var reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
+                //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
+                reader.readAsDataURL(input.files[0]);
+                console.log()
+                // fileDiv내의 img태그 아이디 가져오기
+                // FileReader 객체가 생성되서 동작을 한다면,
+                reader.onload = function (event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
+                    // 위에서 얻어온 img태그 아이디를 통해 img src 바꿔줌.
+                    $('label[for="img"]').html('<img id="fileImg" src="'+ event.target.result + '" alt="upload" style="width:100px; height:100px;"/>');
+                    $('#fileImg').css('margin-top', '-20px');
+                }
+        }
+
+
+
+
+
     </script>
 
 

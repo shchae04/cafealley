@@ -1,22 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>memSbscrInfo</title>
+    <!--부트스트랩-->
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/shstyle.css">
-    <script src="../js/style.js" defer></script>
-    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
+
+    <style>
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
     
+        .container {
+            min-width: 1200px;
+            margin-top: 150px;
+            margin-bottom: 150px;
+        }
+    
+        .membership {
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    
+        .membership-text {
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            padding: 20px;
+            margin: 20px;
+        }
+    
+        .membership-text3 {
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            padding: 80px;
+            margin: 20px;
+        }
+    </style>
+
 </head>
 
 <body>
-
-
     
 <header>
 
@@ -66,7 +98,6 @@
 
 </header>
 
-
 <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -113,100 +144,69 @@
     </div>
 </div>
 
-
-
-
-        <script src="../js/jquery-3.6.0.min.js"></script>
-        <script src="../js/bootstrap.js"></script>
-
-   
-
     <section>
-        <div class="container" style="margin-top: 200px;">
+        <div class="container">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="row">
-                      
-                        <div class="col-xs-12">
-                            <h3 class="write-service">
-                                수정페이지
-                            </h3>
+                <div class="col-sm-12 text-center">
+                    <br>
+                    <h1><strong>멤버십 구독 서비스</strong></h1>
+
+                    <div class="membership">
+                        cafe alley 만의 구독 서비스<br>
+                        cafe alley에 등록된 모든 카페의 멤버십 통합!<br>
+                        어느 곳에서나 10잔 이상 구매시 1잔 무료!
+                    </div>
+
+
+                    <div class=containter-fluid>
+                        <div class="row">
+                            <!--내용은 변경-->
+                            <div class="col-md-4">
+                                <h3><strong>회원 구독 서비스</strong></h3>
+                                <div class="membership-text">
+                                    <strong>cafe alley만의 모든 카페 멤버십을 통합!!</strong><br>
+                                    <br>
+                                    어느 카페든 10잔을 구매했을 경우 <br>
+                                    <strong>1잔 무료 서비스!</strong><br>
+                                    <br>
+                                    커피 맛집, 디저트 맛집 <br>
+                                    노키즈존, 반려동물 동반가능 등 <br>
+                                    편의시설을 따로따로 알아 볼 필요 없이 <br>
+                                    한번에 찾아 볼 수 있는 편리함!
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <h3><strong>사장님 구독 서비스</strong></h3>
+                                <div class="membership-text">
+                                    카페 물품 <br>
+                                    이곳 저곳 돌아다니지 않고 <br>
+                                    한 곳에서 편리하게! <br>
+                                    시중가보다 더욱 저렴하게! <br>
+                                    <br>
+                                    우리 가게의 홍보를 보다 쉽게! <br>
+                                    고객 관리를 더 편리하게! <br>
+                                    커뮤니티로 <br>
+                                    고객 유치는 자연스럽게!
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <h3><strong>금액 안내</strong></h3>
+                                <div class="membership-text3">
+                                    이 모든 혜택을<br>
+                                    월 4,000원에 만나보세요!
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <form name="writeform" style="border-top: 3px solid black; padding: 30px;" >
-                      <!-- 
-
-                        <div class="row col-xs-12">
-                          <label for="">게시판 선택</label> 
-                          <select style="width: 93%;" name="category" class="category" id="">
-                            <option value="notice"  hidden>공지 게시판</option>
-                            <option value="event" hidden>이벤트 게시판</option>
-                            <option value="community" selected>커뮤니티 게시판</option>
-                          </select>
-                        </div>
-                      -->
-                        <div class="form-group" style="border-bottom: 3px solid black; padding-bottom: 20px;">
-                             
-                            <label for="writer" >
-                                작성자
-                            </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="writer" readonly style="cursor: auto; border-color: transparent; background-color: transparent; width: 8%;">
-                        </div>
-                        <div class="form-group"  style="border-bottom: 3px solid black; padding-bottom: 20px;">
-                             
-                            <label for="title">
-                                제목
-                            </label>
-                            <input type="text" class="form-control" id="title" name="title" style="width: 20%; background-color: transparent;"/>
-                        </div>
-
-                        <div id='image_preview'>
-                            
-                            <input type='file' name="file" id='btnAtt' multiple='multiple'/>
-                            <div id='att_zone' 
-                            data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
-                        </div>
-
-                        <div class="form-group"  style="border-top: 3px solid black; padding-top: 20px; margin-top: 20px;" >
-                            <label for="exampletextarea">
-                                내용
-                            </label>
-                           
-                            <textarea class="form-control" name="content" id="content" rows="9"></textarea>
-                        </div>
-                        
-                        
-                        
-                       
-                        
-                        <div class="form-group">
-                          <!-- 작성과 수정 같은 페이지 -->
-                          <div class="clerafix">
-                            <button class="detailbtn btn btn-delete" id="delbtn">삭제</button>
-                            <button class="detailbtn btn btn-primary" id="modbtn">수정</button>
-                            <button class="detailbtn btn btn-dark" id="listbtn">목록</button>
-                          </div>
-
-
-                            
-                          
-                            
-                        </div>
-                    </form>
-                    
-                      
-                        
-                             
-                        
-                    
+                    <br>
+                    <button type="button" class="btn">구독 서비스 신청</button>
                 </div>
+
             </div>
         </div>
-    </section>
-
-
-
-      
 
 <footer>
 
@@ -244,58 +244,14 @@
                 <a href="#"><span class="fa-brands fa-youtube"></span></a>
             </div>
 
-
-
         </div>
 
     </div>
 
 </footer>
 
-
-
-
-    
-<script>
-  // 제목 
-  const title = document.getElementById('title')
-  console.log(title)
-
-  //내용
-  const content = document.getElementById('content')
-  console.log(content)
-
-  // 등록버튼
-  document.querySelector('#regbtn').addEventListener('click',function(){
-
-    if(title.value === '' || content.value === '') {
-      event.preventDefault();
-      alert('제목과 내용을 확인해주세요.')
-      return; 
-    }
-
-    document.writeform.submit();
-    
-
-  });
-
-  //취소버튼 
-  document.querySelector('#stopbtn').addEventListener('click',function(e){
-    if(confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')){
-
-      location.href = 'https://www.google.com';
-    }
-    return;
-  });
-
- 
- 
-
-</script>
-
-
-   
-
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
 </body>
 
 </html>

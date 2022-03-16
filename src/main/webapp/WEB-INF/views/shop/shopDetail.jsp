@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -159,9 +161,9 @@
         .prod-sel .prod-text,
         .prod-sel select {
             margin: 30px 0;
-            
+
         }
-    
+
 
         .prod-sel select {
             width: 140px;
@@ -457,6 +459,14 @@
 
                 <div class="col-xs-12 prod-detail">
                     <img src="../img/paul_bassett_detail.jpg" alt="prod-detail">
+                    <p style="text-align:center; margin-top:50px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi blanditiis aliquam quam
+                        necessitatibus, voluptatibus dolorum consequatur obcaecati quidem ea, veritatis commodi sit, vel
+                        deserunt placeat est error accusantium praesentium quia. Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. Amet, et. Animi, non. Veritatis nulla ratione soluta, cumque libero fuga
+                        voluptatem assumenda dolore illum maxime saepe harum atque alias deleniti quo? Lorem ipsum dolor
+                        sit amet, consectetur adipisicing elit. Recusandae incidunt fugiat officia tempore possimus
+                        ullam, cum doloremque error pariatur itaque alias repellendus dignissimos maxime, voluptatem
+                        temporibus esse eligendi soluta expedita.</p>
                 </div>
 
             </div>
