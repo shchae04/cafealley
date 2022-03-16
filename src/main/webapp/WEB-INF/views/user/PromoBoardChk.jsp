@@ -1,11 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>promoreplyChk</title>
+    <title>promoboardChk</title>
     <!--부트스트랩-->
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -17,14 +18,14 @@
             display: block;
             clear: both;
         }
-
+    
         .container {
             min-width: 1200px;
             margin-top: 150px;
             margin-bottom: 50px;
         }
     </style>
-
+    
 </head>
 
 <body>
@@ -36,15 +37,14 @@
                 <div class="header-logo">
                     <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
                 </div>
-
-
+    
                 <ul class="header-nav header-nav-upper clearfix">
                     <li><a data-toggle="modal" href="#myModal">로그인</a></li>
                     <li><a href="#">#님<span class="caret"></span></a></li>
                     <li><a href="#">마이페이지</a></li>
                     <li><a href="#">회원가입</a></li>
                 </ul>
-
+    
                 <ul class="header-nav header-nav-dropdown clearfix">
                     <li><a href="#">사이트 소개</a></li>
                     <li><a href="#">Alley 위치</a></li>
@@ -70,17 +70,17 @@
                         </ul>
                     </li>
                 </ul>
-
+    
             </nav>
-
+    
         </div>
-
+    
     </header>
-
+    
     <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
-
+    
             <!-- Modal Content -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -108,7 +108,7 @@
                                     <a href="#">카페회원 가입</a>
                                 </div>
                             </div>
-
+    
                             <div class="login-p-center">또는</div>
                             <button type="button" class="btn btn-block"
                                 style="background-color: #04cf5c; color: white;"><strong>N</strong></strong></button>
@@ -131,19 +131,17 @@
                     <ul class="nav nav-tabs">
                         <li><a href="#">회원정보</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티게시판<span
-                                    class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">작성글보기</a></li>
                                 <li><a href="#">작성댓글보기</a></li>
                             </ul>
                         </li>
                         <li class="dropdown active">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">홍보게시판<span
-                                    class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">홍보게시판<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">작성글보기</a></li>
-                                <li class="active"><a href="#">작성댓글보기</a></li>
+                                <li class="active"><a href="#">작성글보기</a></li>
+                                <li><a href="#">작성댓글보기</a></li>
                             </ul>
                         </li>
                         <li><a href="#">주문내역/배송조회</a></li>
@@ -151,34 +149,41 @@
 
                     <br>
                     <h3>
-                        <strong>홍보 작성 댓글 보기</strong>
+                        <strong>홍보 작성글 보기</strong>
                     </h3>
                     <br>
+
                     <form action="#">
                         <!--테이블 자동 크기 조절-->
                         <table class="table table-hover w-auto">
                             <thead>
-                                <th>댓글</th>
-                                <th>작성게시글</th>
+                                <th>번호</th>
+                                <th>제목</th>
                                 <th>작성일</th>
+                                <th>조회수</th>
                             </thead>
 
+                            <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
                             <tbody>
                                 <tr>
-                                    <td><a href="#">댓글 내용 작성 목록입니다 (자동크기 조절로 크기 조절 가능합니다)</a></td>
-                                    <td>댓글을 작성한 게시글 입니다</td>
+                                    <td>3</td>
+                                    <td><a href="#">작성자가 작성했던 게시글의 작성글 목록입니다</a></td>
                                     <td>0000.00.00</td>
+                                    <td>00</td>
                                 </tr>
                                 <tr>
-                                    <td><a href="#">댓글 내용을 클릭하면 해당 작성 게시글 상세보기 창으로 이동합니다</a></td>
-                                    <td>작성게시글</td>
+                                    <td>2</td>
+                                    <td><a href="#">작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다</a></td>
                                     <td>0000.00.00</td>
+                                    <td>00</td>
                                 </tr>
                                 <tr>
-                                    <td><a href="#">댓글내용</a></td>
-                                    <td>작성게시글</td>
+                                    <td>1</td>
+                                    <td><a href="#">제목</a></td>
                                     <td>0000.00.00</td>
+                                    <td>00</td>
                                 </tr>
+
                             </tbody>
                         </table>
 
@@ -244,7 +249,7 @@
     
             <script src="../js/jquery-3.6.0.min.js"></script>
             <script src="../js/bootstrap.js"></script>
-            
+
 </body>
 
 </html>
