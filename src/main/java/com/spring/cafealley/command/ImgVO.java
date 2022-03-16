@@ -29,11 +29,11 @@ public class ImgVO {
 	
 	private int filenum;
 	
-	private String fileName;
-	private String fileName2;
-	private String fileName3;
-	private String filePath;
-	private String folderName;
+	private String filename;
+	private String filename2;
+	private String filename3;
+	private String filepath;
+	private String foldername;
 	
 
 }

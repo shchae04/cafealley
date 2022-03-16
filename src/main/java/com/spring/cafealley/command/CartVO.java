@@ -26,11 +26,10 @@ CREATE SEQUENCE cart_seq
 public class CartVO {
 	
 	private int cartno;
-	
 	private int prono;
-	private String userId;
+	private String userid;
 	private int countno;
-	private int countTotal;
+	private int counttotal;
 	
 	
 
