@@ -1,0 +1,334 @@
+/*======= 웹 폰트 선언 =======*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+/* 디자인 시작 시 기본적으로 선언하는 문법 */
+* {
+    /* 기본 선언: 마진, 패딩 0, 요소 크기를 border를 기준으로.*/
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    min-width: 320px;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+img {
+    max-width: 100%; /*사이즈가 변해도 넓이를 유지*/
+    height: auto; /* 사이즈가 변해도 비율을 유지 */
+}
+
+ul, ol, dl, li {
+    /*리스트 스타일은 사용할 일이 많지 않아요.*/
+    list-style: none; 
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.content{
+    margin-top: 150px;
+}
+
+
+
+/* ========== 댓글 ========== */
+.reply-wrap {
+    background: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.reply-wrap .reply-image {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+
+.reply-content textarea {
+    resize: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.reply-input > .form-control {
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+.reply-input {
+    float: left;
+}
+
+.reply-group button {
+    float: right;
+}
+
+.reply-group small {
+    margin-left: 10px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.reply-group a {
+    text-decoration: none;
+    color: #777;
+    float: right;
+}
+
+/* board_detail css */
+
+.detailbtn {
+    float: right;
+}
+
+.submitbtn {
+    float: right;
+}
+
+.right {
+    float: right;
+}
+
+.replyid {
+    float: left;
+    
+}
+
+.detailform  div  input {
+    cursor: auto;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+/* 수정 체크 */
+.modifycheck {
+    float: right;
+}
+
+/* board_write css */
+
+textarea {
+    resize: none;
+}
+
+section {
+    margin-top: 50px;
+    min-width: 1200px;
+    margin: 0 auto;
+}
+
+/* .titlebox {
+    font-size: 20px;
+    font-weight:bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    } 
+*/
+
+.titlefoot {
+    float: right;
+}
+
+#att_zone{
+	
+	min-height:100px;
+	padding:10px;
+	border:1px solid #AC7C7C;
+    border-radius: 8px;
+}
+#att_zone:empty:before{
+	content : attr(data-placeholder);
+	color : #999;
+	font-size:.9em;
+}
+
+/* board_list */
+
+section {
+    margin: 30px 50px;
+}
+
+.write {
+    float: right;
+}
+
+tr>td>a {
+    color: black;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.btn:hover {
+    background-color: lightgray;
+}
+
+.titlebox {
+    border-top: 3px solid black;
+}
+
+.mypage li a {
+    color: black;
+}
+
+.listtable {
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px #000;   
+}
+
+
+/* board_notice */
+.notice-img {
+    float: left;
+    margin: 20px auto;
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+}
+
+ /* board_notice_detail */
+
+ .detailwrapper .form-group input {
+    background: white;
+    cursor: auto;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.inputcontent {
+    width: 100%;
+}
+.selbtn {
+    float: left;
+}
+
+.write-service {
+    text-align: center;
+}
+
+.category {
+    text-align: center;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.noticetable tr td a{
+    color: black;
+}
+
+.noticetable {
+    border-top: 3px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.multiimg img {
+    border-radius: 20px;
+}
+s
+/* board-modi */
+
+.inputimg button{
+    margin-top: 0;
+    position: relative;
+    top: 40px;
+    border: 1px dotted black;
+    border-radius: 6px;
+    right: 42px
+}
+
+
+
+.inputimg {
+    display: inline-block;
+}
+
+.popimg{
+    position: relative;
+}
+
+.mulitimg > img,button {
+    position: relative;
+}
+
+.deletebtn {
+    position: relative;
+    left: 200px;
+    top: 172px;
+    border-radius: 6px;
+    border: 1px solid black;
+    color: black;
+}
+
+.maincon {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.modi div input {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+
+/* emailQnA */
+
+.writerarea {
+    border: 1px solid black;
+}
+
+body {
+    background-color: none;
+}
+
+textarea[name=qna]::placeholder {
+    color: black;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+.qnatitle {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    padding: 15px;
+}
+
+.qnaborder {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* subscribe-charge */
+.checkcharge {
+    float: right;
+}
+
+.checkcharge input {
+    margin: 0 10px;
+}
+
+.subscribeprice {
+    float: right;
+}
+

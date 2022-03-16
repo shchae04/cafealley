@@ -1,0 +1,238 @@
+
+
+/* 폰트 */
+@font-face {
+    font-family: 'S-CoreDream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+body,
+html {
+    font-family: 'S-CoreDream';
+    font-weight: 500;
+}
+
+
+a:focus{
+    text-decoration: none;
+}
+
+
+/* 헤더 */
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-width: 1200px;
+
+    width: 100%;
+    z-index: 50;
+    background-color: white;
+
+    /*position을 이용하면 요소가 겹쳐질 수 있다. 숫자가 제일 높은값이 위로 떠오른다*/
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: black;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.login-center {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.login-center2 {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.login-p-center {
+    text-align: center;
+}
+
+.header-container {
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+
+.header-nav {
+    position: absolute;
+    right: 20px;
+    background-color: #ffffff;
+}
+
+.header-nav>li {
+    float: left;
+    list-style: none;
+    padding: 10px;
+}
+
+.header-nav-upper {
+    position: absolute;
+    background-color: #fdfdfd;
+    top: 5px;
+}
+
+.header-logo img {
+    margin: 15px 0 0 15px;
+
+}
+
+.header-nav-dropdown {
+    padding: 0;
+    margin: 0;
+    bottom: 0px;
+    font-size: 20px;
+    margin-right: 50px;
+}
+
+.header-nav-upper .dropdown-menu li {
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+/* footer */
+
+
+footer {
+    min-width: 1200px;
+    width: 100%;
+    height: 250px;
+    color: #ffffff;
+    display: block;
+    bottom: 0px;
+}
+
+.footer-container {
+    padding-top: 30px;
+    position: relative;
+    background-color: black;
+}
+
+.footer-left span,
+.footer-left p {
+    padding-left: 15px;
+}
+
+.footer-name {
+    font-size: 40px;
+}
+
+.footer-desc {
+    font-size: 18px;
+}
+
+.footer-right {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+}
+
+.footer-sns {
+    display: block;
+    width: 150px;
+    float: right;
+}
+
+.footer-sns>a {
+    font-size: 30px;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.fa-facebook-square {
+    color: #4267B2;
+}
+
+.fa-instagram {
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+    color: white;
+    border-radius: 5px;
+}
+
+.fa-youtube {
+    color: #FF0000;
+}
+
+.footer-nav>li {
+    float: left;
+    list-style: none;
+    padding: 5px;
+}
+
+.footer-copyright a,
+.footer-copyright a:visited,
+.footer-copyright a:hover,
+.footer-nav>li>a,
+.footer-nav>li>a:hover {
+    color: white;
+}
+
+.footer-copyright {
+    padding-bottom: 20px;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    background: white;
+    border: none;
+
+}
+
+.dropdown-menu li {
+    border-top: 2px solid black;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: 2px solid black;
+}
+
+.dropdown-menu li a:hover {
+    font-weight: bolder;
+    background: none;
+}
+
+#header-barcode {
+    height: 250px;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
