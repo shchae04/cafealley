@@ -4,8 +4,6 @@ import java.util.List;
 // 조장 메세지
 import com.spring.cafealley.command.BoardVO;
 
-
-
 public interface IBoardMapper {
 
 	//글 등록
