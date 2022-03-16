@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -427,7 +428,7 @@
             margin-top: 150px;
         }
 
-        #myModal4 .modal-promimg img[src="../img/upload.png"] {
+        #myModal4 .modal-promimg img[alt="upload"] {
             width: 300px;
             min-height: 300px;
             margin: 0 250px 100px;
@@ -445,6 +446,12 @@
 </head>
 
 <body>
+
+
+    <%@ include file="../include/header.jsp"%>
+    
+    
+    
     
     <!---------------------------------------------------------- 글 상세  Modal ---------------------------------------------------------->
     <div class="modal fade" id="myModal2">
@@ -470,16 +477,16 @@
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
                                     <!-- 첫번째 순번이라 active -->
-                                    <img src="../img/carousel1.jpg" alt="슬라이드1">
+                                    <img src="<c:url value='/img/carousel1.jpg'/>" alt="슬라이드1">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel2.jpg" alt="슬라이드2">
+                                    <img src="<c:url value='/img/carousel2.jpg'/>" alt="슬라이드2">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel3.jpg" alt="슬라이드3">
+                                    <img src="<c:url value='/img/carousel3.jpg'/>" alt="슬라이드3">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel4.jpg" alt="슬라이드4">
+                                    <img src="<c:url value='/img/carousel4.jpg'/>" alt="슬라이드4">
                                 </div>
                             </div>
 
@@ -503,7 +510,7 @@
 
                             <!--제목영역-->
                             <div class="profile">
-                                <img src="../img/profile.png">
+                                <img src="<c:url value='/img/profile.png'/>">
                             </div>
                             <div class="title">
                                 <p>coffeelover123</p>
@@ -523,7 +530,7 @@
                         <!-- 좋아요 및 해쉬태그 영역-->
                         <div class="like-inner">
                             <!--좋아요-->
-                            <img src="../img/like2.png"> <span>522</span>
+                            <img src="<c:url value='/img/like2.png'/>"> <span>522</span>
                             <!-- 해쉬태그 -->
                             <ul class="hashtag clearfix">
                                 <li><a href="#">#서울</a></li>
@@ -536,7 +543,7 @@
                         <div class="reply-inner">
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -546,7 +553,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -556,7 +563,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -566,7 +573,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -576,7 +583,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -586,7 +593,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -596,7 +603,7 @@
                             </div>
                             <div class="reply-content">
                                 <div class="profile">
-                                    <img src="../img/profile.png">
+                                    <img src="<c:url value='/img/profile.png'/>">
                                     <p>coffeehater321</p>
                                 </div>
                                 <div class="content">
@@ -648,16 +655,16 @@
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
                                     <!-- 첫번째 순번이라 active -->
-                                    <img src="../img/carousel1.jpg" alt="슬라이드1">
+                                    <img src="<c:url value='/img/carousel1.jpg'/>" alt="슬라이드1">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel2.jpg" alt="슬라이드2">
+                                    <img src="<c:url value='/img/carousel2.jpg'/>" alt="슬라이드2">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel3.jpg" alt="슬라이드3">
+                                    <img src="<c:url value='/img/carousel3.jpg'/>" alt="슬라이드3">
                                 </div>
                                 <div class="item">
-                                    <img src="../img/carousel4.jpg" alt="슬라이드4">
+                                    <img src="<c:url value='/img/carousel4.jpg'/>" alt="슬라이드4">
                                 </div>
                             </div>
 
@@ -681,7 +688,7 @@
 
                             <!--제목영역-->
                             <div class="profile">
-                                <img src="../img/profile.png">
+                                <img src="<c:url value='/img/profile.png'/>">
                             </div>
                             <div class="title">
                                 <p>coffeelover123</p>
@@ -772,7 +779,7 @@
 
                                     <label for="file" class="fileDiv">
                                         <p>클릭해서 업로드할 이미지를 선택해주세요.</p>
-                                        <img id="fileImg" src="../img/upload.png" alt="upload" />
+                                        <img id="fileImg" src="<c:url value='/img/upload.png'/>" alt="upload" />
                                         <input type="file" name="file" id="file" onchange="readURL(this)"
                                             style="display: none;">
                                     </label>
@@ -800,7 +807,7 @@
 
                             <!--제목영역-->
                             <div class="profile">
-                                <img src="../img/profile.png">
+                                <img src="<c:url value='/img/profile.png'/>">
                             </div>
                             <div class="title">
                                 <p>coffeelover123</p>
@@ -929,7 +936,7 @@
                     <div class="title-inner">
                         <!--제목영역-->
                         <div class="profile">
-                            <img src="../img/profile.png">
+                            <img src="<c:url value='/img/profile.png'/>">
                         </div>
                         <div class="title">
                             <p>coffeelover123</p>
@@ -958,19 +965,19 @@
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
                                     <!-- 첫번째 순번이라 active -->
-                                    <a data-toggle="modal" href="#myModal2"><img src="../img/carousel1.jpg"
+                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel1.jpg'/>"
                                             alt="슬라이드1"></a>
                                 </div>
                                 <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="../img/carousel2.jpg"
+                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel2.jpg'/>"
                                             alt="슬라이드2"></a>
                                 </div>
                                 <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="../img/carousel3.jpg"
+                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel3.jpg'/>"
                                             alt="슬라이드3"></a>
                                 </div>
                                 <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="../img/carousel4.jpg"
+                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel4.jpg'/>"
                                             alt="슬라이드4"></a>
                                 </div>
                             </div>
@@ -992,7 +999,7 @@
                     </div>
                     <div class="like-inner">
                         <!--좋아요-->
-                        <img src="../img/like2.png"> <span>522</span>
+                        <img src="<c:url value='/img/like2.png'/>"> <span>522</span>
                         <!-- 해쉬태그 -->
                         <ul class="hashtag clearfix">
                             <li><a href="#">#서울</a></li>
@@ -1001,7 +1008,7 @@
                         </ul>
                     </div>
                     <div class="link-inner">
-                        <a href="##"><img src="../img/like1.png" alt="like1">&nbsp;좋아요</a>
+                        <a href="##"><img src="<c:url value='/img/like1.png'/>" alt="like1">&nbsp;좋아요</a>
                         <a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
                         <a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
                     </div>
@@ -1012,7 +1019,7 @@
     </div>
 
 
-
+<%@include file="../include/footer.jsp"%>
 
     <script>
         const $area = document.getElementById('area');
@@ -1108,7 +1115,7 @@
             $itemdiv.classList.add('item');
             $itemdiv.innerHTML = `<label for="file${filecount}" class="fileDiv">
                                         <p>클릭해서 업로드할 이미지를 선택해주세요.</p>
-                                        <img id="fileImg${filecount}" src="../img/upload.png" alt="upload" />
+                                        <img id="fileImg${filecount}" src="<c:url value='/img/upload.png'/>" alt="upload" />
                                         <input type="file" name="file" id="file${filecount}" onchange="readURL(this)"
                                         style="display: none;">
                                     </label>`;
@@ -1160,7 +1167,7 @@
 
                                     <label for="file" class="fileDiv">
                                         <p>클릭해서 업로드할 이미지를 선택해주세요.</p>
-                                        <img id="fileImg" src="../img/upload.png" alt="upload" />
+                                        <img id="fileImg" src="<c:url value='/img/upload.png'/>" alt="upload" />
                                         <input type="file" name="file" id="file" onchange="readURL(this)"
                                             style="display: none;">
                                     </label>
