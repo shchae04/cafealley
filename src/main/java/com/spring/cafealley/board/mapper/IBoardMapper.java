@@ -1,6 +1,13 @@
 package com.spring.cafealley.board.mapper;
 
 import java.util.List;
+// 조장 메세지
+
+// 또또또
+
+// 충돌
+
+
 
 import com.spring.cafealley.command.BoardVO;
 
