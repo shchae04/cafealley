@@ -29,4 +29,5 @@ public interface IBoardMapper {
 	//삭제
 	void delete(int bno);
 	
+	//연지 브랜치 시작
 }
