@@ -24,13 +24,13 @@ public class ProductVO {
 	
 	private int prono;
 	
-	private String proName;
-	private int proPrice;
-	private int proSellPrince;
-	private String proCate;
-	private String proDetail;
-	private String proStock;
-	private int fileNum;
+	private String proname;
+	private int proprice;
+	private int prosellrrice;
+	private String procate;
+	private String prodetail;
+	private String prostock;
+	private int filenum;
 	
 	
 
