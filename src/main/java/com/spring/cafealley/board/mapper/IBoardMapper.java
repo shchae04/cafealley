@@ -3,7 +3,7 @@ package com.spring.cafealley.board.mapper;
 import java.util.List;
 // 조장 메세지
 //박경완 1234
-// 또또또
+// 또또또 브랜치
 import com.spring.cafealley.command.BoardVO;
 
 public interface IBoardMapper {
