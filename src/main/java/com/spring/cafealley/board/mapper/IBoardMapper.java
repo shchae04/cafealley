@@ -6,6 +6,9 @@ import com.spring.cafealley.command.BoardVO;
 
 public interface IBoardMapper {
 
+	//보이드 SH
+	void shshshs(BoardVO vo);
+	
 	//글 등록
 	void regist(BoardVO vo);
 	
