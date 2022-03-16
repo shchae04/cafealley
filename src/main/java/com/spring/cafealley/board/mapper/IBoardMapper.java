@@ -7,7 +7,7 @@ import com.spring.cafealley.command.BoardVO;
 
 
 
-public interface BoardMapper {
+public interface IBoardMapper {
 
 	//글 등록
 	void regist(BoardVO vo);
