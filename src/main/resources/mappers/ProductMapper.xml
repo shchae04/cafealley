@@ -6,19 +6,19 @@
 
 <mapper namespace="com.spring.cafealley.product.mapper.IProductMapper">
 
-<insert id="">
+<insert id="regist">
 	INSERT INTO product(prono, proname, proprice, prosellprice, procate, prodetail, prostock, filenum)
 	VALUES(pro_seq.NEXTVAL, #{proname}, #{proprice}, #{prosellprice}, #{procate}, #{prodetail}, #{prostock}, #{filenum})
 </insert>
 
-<select id="select" resultType="com.spring.cafealley.command.ProductVO">
+<select id="search" resultType="com.spring.cafealley.command.ProductVO">
 	SELECT * FROM product
+	WHERE proname = ${proname}
 </select>
 
-<update id="">
-</update>
 
-<delete id="">
+
+<delete id="delete">
 	DELETE FROM product
 	WHERE prono = #{prono}
 </delete>
