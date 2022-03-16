@@ -30,6 +30,6 @@ public interface IBoardMapper {
 	void delete(int bno);
 	
 	
-	void minji();
+	//void minji();
 	
 }
