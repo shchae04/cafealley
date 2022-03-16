@@ -1,7 +1,7 @@
 package com.spring.cafealley.board.mapper;
 
 import java.util.List;
-
+// 조장 메세지
 import com.spring.cafealley.command.BoardVO;
 
 
