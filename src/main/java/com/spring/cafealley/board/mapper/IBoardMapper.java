@@ -26,4 +26,7 @@ public interface IBoardMapper {
 	//삭제
 	void delete(int bno);
 	
+	
+	void minji();
+	
 }
