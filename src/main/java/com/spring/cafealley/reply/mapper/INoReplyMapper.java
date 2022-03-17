@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.spring.cafealley.command.ReplyVO;
 
-public interface IReplyMapper {
+public interface INoReplyMapper {
 
 	//등록
 	void replyRegist(ReplyVO vo);

@@ -8,15 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.spring.cafealley.board.mapper.IBoardMapper;
+import com.spring.cafealley.board.mapper.INoBoardMapper;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.util.PageVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/config/db-config.xml")
 public class BoardTest {
 	
 	@Autowired
-	private IBoardMapper mapper;
+	private INoBoardMapper mapper;
 	
 	@Test
 	public void registTest() {
@@ -43,7 +44,8 @@ public class BoardTest {
 	
 	@Test
 	public void getListTest() {
-		List<BoardVO> list = mapper.getList();
+		PageVO page = new PageVO();
+		List<BoardVO> list = mapper.getList(page);
 		for(BoardVO vo : list) {
 			System.out.println(vo);
 		}

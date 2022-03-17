@@ -4,17 +4,17 @@ import java.util.List;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.util.PageVO;
 
-public interface IBoardMapper {
+public interface IEvBoardMapper {
 
 	
 	//글 등록
 	void regist(BoardVO vo);
 	
 	//글 목록
-	List<BoardVO> getList();
+	List<BoardVO> getList(PageVO vo);
 	
 	//총 게시물 수
-//	int getTotal(PageVO vo);
+	int getTotal(PageVO vo);
 	
 	//상세보기
 	BoardVO getContent(int bno);
