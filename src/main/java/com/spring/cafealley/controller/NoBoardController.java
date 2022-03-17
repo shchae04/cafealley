@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.cafealley.board.service.INoBoardService;
+import com.spring.cafealley.board.service.IBoardService;
 
 @Controller
 @RequestMapping("/noBoard")
 public class NoBoardController {
 
 	@Autowired
-	private INoBoardService service;
+	private IBoardService service;
 	
 	@GetMapping("/noticeBoardDetail")
 	public String nodetail() {
