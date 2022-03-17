@@ -8,9 +8,16 @@ public interface IUserService {
 	//아이디 중복 확인
 	int idCheck(String userId);
 	
-	//회원가입
+	//회원 가입
 	void userJoin(UserVO vo);
 	
+	/*
+	//일반회원 가입
+	void genUserJoin(UserVO vo);
+	
+	//사업자 회원가입
+	void bsnsUserJoin(UserVO vo);
+	*/
 	//로그인
 	UserVO login(String userId, String userPw);
 	

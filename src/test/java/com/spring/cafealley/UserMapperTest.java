@@ -23,15 +23,8 @@ public class UserMapperTest {
 		vo.setUserid("abc1234");
 		vo.setUsername("홍길동");
 		vo.setUserpw("aaaa1234");
-		vo.setUserphone1("010");
-		vo.setUserphone2("1111");
-		vo.setUserphone3("2222");
 		vo.setUseremail("abc1234@naver.com");
-		vo.setAddrbasic("서울 마포구 신촌로 176");
-		vo.setAddrdetail("중앙빌딩");
-		vo.setZipcode("22730");
-		vo.setBusinessnum("0323393339");
-		mapper.userjoin(vo);
+		mapper.userJoin(vo); 
 	}
 	
 	@Test

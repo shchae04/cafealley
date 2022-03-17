@@ -1,38 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>로그인 폼</title>
-    
-    <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
-    
-    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>로그인 폼</title>
 
-    
+<link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
+
+
+
+
 </head>
 
 <body style="background-color: black;">
 
-	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../include/header.jsp"%>
 
-       <div class="container" style="margin-top: 150px;">
-    <div class="titlebox">
-        <h3 style="color: white;">회원가입</h3>
-    </div>
-    </div>
-    <!-- 폼 섹션 -->
-    <section>
-        <div class="container">
-            <div class="row rowtext" style="margin: 0 auto;">
-                <div class="col-xs-12 join-form">
-                    <form action="#" class="form-inline" name="regForm">
-                        <div class="toprow">
-                            <pre class="jointx">
+	<div class="container" style="margin-top: 150px;">
+		<div class="titlebox">
+			<h3 style="color: white;">회원가입</h3>
+		</div>
+	</div>
+	<!-- 폼 섹션 -->
+	<section>
+		<div class="container">
+			<div class="row rowtext" style="margin: 0 auto;">
+				<div class="col-xs-12 join-form">
+					<form action="<c:url value='/user/genUserJoin' />" method="post" class="form-inline" id="regForm" name="regForm">
+						<div class="toprow">
+							<pre class="jointx">
 <!--줄 맞춤 xx-->
 이용약관
 제 1 조 (목적)
@@ -251,12 +251,13 @@
 
 
 </pre>
-                    <hr>
-                    <pre class="jointx">
+							<hr>
+							<pre class="jointx">
 
 
 
-골목 커피 (이하 “회사”라 한다)는 회원님의 개인정보를 안전하게 보호하기 위하여 최선의 노력을 다하고 있으며, <정보통신망 이용촉진 및 정보보호 등에 관한 법률>과<개인정보 보호법> 등 개인정보와 관련된 법령상의 규정들을 준수하며, 관련 법령에 의거한 개인정보 취급방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다. 
+골목 커피 (이하 “회사”라 한다)는 회원님의 개인정보를 안전하게 보호하기 위하여 최선의 노력을 다하고 있으며, <정보통신망
+									이용촉진 및 정보보호 등에 관한 법률>과<개인정보 보호법> 등 개인정보와 관련된 법령상의 규정들을 준수하며, 관련 법령에 의거한 개인정보 취급방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다. 
 
 회사는 개인정보 취급방침을 통하여 이용자께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있고, 개인정보 보호를 위해 어떠한 조치가 취해지고 있는지에 대하여 알려드립니다. 개인정보 취급방침은 www.redlambcoffee.com사이트에 공개하여 이용자가 언제나 용이하게 열람할 수 있도록 하고 있습니다.
 
@@ -405,7 +406,8 @@
 
 1. 회원님은 자신의 개인정보를 보호할 의무가 있으며, 회원님 본인의 부주의나 인터넷상의 문제 등으로 개인정보가 유출되어 발생한 문제에 대하여 회사는 일체의 책임을 지지 않습니다.
 
-2. 회원님의 개인정보를 최신의 상태로 정확하게 입력하시기 바랍니다. 회원님의 부정확한 정보 입력으로 발생하는 문제의 책임은 회원님 자신에게 있으며, 타인의 개인정보를 도용하여 회원가입 또는 서비스 이용 시 회원자격 상실과 함께 <정보통신망 이용촉진 및 정보보호 등에 관한 법률> 등에 의거하여 처벌될 수 있습니다.
+2. 회원님의 개인정보를 최신의 상태로 정확하게 입력하시기 바랍니다. 회원님의 부정확한 정보 입력으로 발생하는 문제의 책임은 회원님 자신에게 있으며, 타인의 개인정보를 도용하여 회원가입 또는 서비스 이용 시 회원자격 상실과 함께 <정보통신망
+									이용촉진 및 정보보호 등에 관한 법률> 등에 의거하여 처벌될 수 있습니다.
 
 3. 회원님은 개인정보를 보호 받을 권리와 함께 스스로를 보호하고 타인의 정보를 침해하지 않을 의무도 가지고 있습니다. 아이디, 비밀번호를 포함한 회원님의 개인정보가 유출되지 않도록 조심하시고, 게시물을 포함한 타인의 개인정보를 훼손하지 않도록 유의해 주시기 바랍니다.
 
@@ -494,163 +496,281 @@
 이 개인정보 취급방침은 커피 골목 개인정보를 취급하는 모든 사이트(모바일 웹/앱 포함)에 동일하게 적용됩니다.
 
 
-            </pre>
-                            <hr>
-                            <!--체크박스-->
-                            <label for="join-checkbox" style="cursor: pointer;">
-                                <input type="checkbox" id="join-checkbox" style="margin-left: 25px;" class="agree" > 이용약관을 모두 동의합니다.
-                              </label>
-                        </div>
-
-
-                        <div class="lowrow">
-                            <div class="form-inline form-group">
-                                <label for="name"><span class="redstar">* &nbsp;</span>이름</label> &emsp;&emsp;&emsp;&emsp;&nbsp;
-                                <input type="text" name="name" id="name" class="nameinput" placeholder="이름을 입력하세요.">
-                            </div>
-                            <br>
-
-
-                            <div class="form-inline form-group">
-                                <label for="id"><span class="redstar">* &nbsp;</span>아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
-                                <div class="input-group">
-                                    <input type="text" id="id" class="idinput" name="id" placeholder="아이디(영문 포함 4~12자 이상)">
-                                    <div class="input-group-addon">
-                                        <button id="idCheckBtn" class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
-                                    </div>
-                                </div>
-                                <span id="msgid">*필수 사항입니다.</span> <!-- 아이디 중복 여부 메세지 공간 -->
-                            </div>
-
-                            <div class="form-inline form-group">
-                                <label for="password"><span class="redstar">* &nbsp;</span>비밀번호</label>&emsp;&emsp;&nbsp;&nbsp;
-                                <input type="password" id="password" class="pwinput" placeholder="비밀번호 (영 대/소문자, 숫자조합 8~16자)">
-                                <span id="msgPw"></span> <!-- 비밀번호 유효성 메세지 공간 -->
-                            </div>
-
-                            <div class="form-inline form-group">
-                                <label for="pw-confirm"><span class="redstar">* &nbsp;</span>비밀번호 확인</label>&nbsp;
-                                <input type="password" id="pw-confirm" class="pwcheckinput" placeholder="비밀번호를 확인해 주세요.">
-                                <span id="msgPw-c"></span> <!-- 비밀번호 유효성 메세지 공간 -->
-                            </div>
-
-                            <div class="form-inline form-group">
-                                <label for="hp"><span class="redstar">* &nbsp;</span>이메일</label>&emsp;&emsp;&emsp;&nbsp;
-                                <div class="input-group">
-                                    <input type="text" id="#" class="email" style="width: 350px;" placeholder="이메일을 입력하세요.">
-                                    <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">이메일인증</button>
-                                    </div>
-                                </div>
-                            </div>
-							
-							<!-- 사업자 회원에게만 보여짐 -->
-							<c:if test="${type == 'business'}">
-	                            <div class="form-inline form-group">
-	                                <label for="addr-num"><span class="redstar">* &nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
-	                                <div class="input-group">
-	                                    <input type="text" id="addr-num" class="postnum" placeholder="우편번호를 검색하세요." readonly>
-	                                    <div class="input-group-addon">
-	                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">우편번호검색</button>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            
-	                            <div class="form-inline form-group">
-	                                <label for="fraddr"><span class="redstar">* &nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp;
-	                                <input type="text" id="fraddr" class="fraddr" placeholder="기본주소를 입력하세요.">
-	                            </div>
-	
-	                            <div class="form-inline form-group">
-	                                <label for="seaddr">&emsp;상세주소</label>&emsp;&emsp;&nbsp;
-	                                <input type="text" id="seaddr" class="seaddr" placeholder="상세주소를 입력하세요.">
-	                            </div>
-	                            
-							</c:if>
-							
-                            <div class="form-group">
-                                <label for="hp">&emsp;전화번호</label>&emsp;&emsp;&nbsp;
-                                <div class="input-group">
-                                    <select name="phone" class="phone">
-                                        <option>010</option>
-                                        <option>011</option>
-                                        <option>018</option>
-                                    </select>
-                                    - <input type="text" name="phone2" class="phone2">
-                                    - <input type="text" name="phone3" class="phone3">
-
-                                </div>
-                            </div>
-							
-							<!-- 사업자 회원에게만 보여짐 -->
-							<c:if test="${type == 'business'}">
-	                            <div class="form-inline form-group busnum" style="display: inline-block;">
-	                                <label for="seaddr"><span class="redstar">* &nbsp;</span>사업자 번호</label>&emsp;
-	                                <input type="text" id="" class="busnuminput" placeholder="사업자 번호를 입력하세요.">
-	                            </div>
-                            </c:if>
-
-                            <div class="endbtn clearfix">
-                                <div style="float: left;">
-                                <button type="button" class="btn-lg">취소</button>
-                                <button type="button" id="regist" class="btn-lg btn-success" style="background-color: black; margin-bottom: 30px;">회원가입</button>
-                            <br> 
-                            <br>   
-                            </div>
-                            </div>
-
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-            </div>
-    </section>
-    
-
-	<%@ include file="../include/footer.jsp" %>
-
-
-<script>
-
-        function check() {
-            const $form = document.regForm;
-            const $name = document.querySelector('.nameinput');
-            const $id = document.querySelector('.idinput');
-            const $pw = document.querySelector('.pwinput');
-            const $pwcheck = document.querySelector('.pwcheckinput');
-            const $email = document.querySelector('.email');
-            const $postnum = document.querySelector('.postnum');
-            const $addr1 = document.querySelector('.fraddr');
-            const $addr2 = document.querySelector('.seaddr');
-            const $phone = document.querySelector('.phone');
-            const $phone2 = document.querySelector('.phone2');
-            const $phone3 = document.querySelector('.phone3');
-            const $agree = document.querySelector('.agree');
-            const $busnumdiv = document.querySelector('.busnum'); /* 사업자 번호 div : 일반회원 가입 시 display none */
-            const $busnuminput = document.querySelector('.busnuminput');
-
-            const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value ; 
-	
             
-            const idtest = /^[a-z]+[a-z0-9]{4,12}$/g;
-            var pwtest = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            var emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-            var phonetest = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-            var busnumtest = /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/;
+							</pre>
+							<hr>
+							<!--체크박스-->
+							<label for="join-checkbox" style="cursor: pointer;"> <input
+								type="checkbox" id="join-checkbox" style="margin-left: 25px;"
+								class="agree"> 이용약관을 모두 동의합니다.
+							</label>
+						</div>
 
-            if($name.value === '') {
+
+						<div class="lowrow">
+							<div class="form-inline form-group">
+								<label for="name"><span class="redstar">* &nbsp;</span>이름</label>
+								&emsp;&emsp;&emsp;&emsp;&nbsp; <input type="text" name="username"
+									id="username" class="nameinput" placeholder="이름을 입력하세요.">
+							</div>
+							<br>
+
+
+							<div class="form-inline form-group">
+								<label for="id"><span class="redstar">* &nbsp;</span>아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
+								<div class="input-group">
+									<input type="text" id="userid" class="idinput" name="userid"
+										placeholder="아이디(영문 포함 4~12자 이상)">
+									<div class="input-group-addon">
+										<button id="idCheckBtn" class="btn btn-primary"
+											style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
+									</div>
+								</div>
+								<span id="msgid">*필수 사항입니다.</span>
+								<!-- 아이디 중복 여부 메세지 공간 -->
+							</div>
+
+							<div class="form-inline form-group">
+								<label for="password"><span class="redstar">*
+										&nbsp;</span>비밀번호</label>&emsp;&emsp;&nbsp;&nbsp; <input type="password"
+									id="userpw" class="pwinput" name="userpw"
+									placeholder="비밀번호 (영 대/소문자, 숫자조합 8~16자)"> <span
+									id="msgPw"></span>
+								<!-- 비밀번호 유효성 메세지 공간 -->
+							</div>
+
+							<div class="form-inline form-group">
+								<label for="pw-confirm"><span class="redstar">*
+										&nbsp;</span>비밀번호 확인</label>&nbsp; <input type="password" id="pw-confirm"
+									class="pwcheckinput" placeholder="비밀번호를 확인해 주세요."> <span
+									id="msgPw-c"></span>
+								<!-- 비밀번호 유효성 메세지 공간 -->
+							</div>
+
+							<div class="form-inline form-group">
+								<label for="hp"><span class="redstar">* &nbsp;</span>이메일</label>&emsp;&emsp;&emsp;&nbsp;
+								<div class="input-group">
+									<input type="text" name="useremail" id="useremail" class="email" style="width: 350px;"
+										placeholder="이메일을 입력하세요.">
+									<div class="input-group-addon">
+										<button class="btn btn-primary"
+											style="background-color: lightgray; color: black; border: 0px;">이메일인증</button>
+									</div>
+								</div>
+							</div>
+
+							<!-- 사업자 회원에게만 보여짐 -->
+							<c:if test="${userType == 'business'}">
+								<div class="form-inline form-group">
+									<label for="addr-num"><span class="redstar">*
+											&nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
+									<div class="input-group">
+										<input type="text" name="zipcode" id="postnum" class="postnum"
+											placeholder="우편번호를 검색하세요." readonly>
+										<div class="input-group-addon">
+											<button id="btnZipCode" class="btn btn-primary"
+												style="background-color: lightgray; color: black; border: 0px;">우편번호검색</button>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-inline form-group">
+									<label for="fraddr"><span class="redstar">*
+											&nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp; <input type="text" id="fraddr"
+										class="fraddr" name="addrbasic" placeholder="기본주소를 입력하세요.">
+								</div>
+
+								<div class="form-inline form-group">
+									<label for="seaddr">&emsp;상세주소</label>&emsp;&emsp;&nbsp; <input
+										type="text" id="seaddr" class="seaddr"
+										placeholder="상세주소를 입력하세요." name="addrdetail">
+								</div>
+
+							</c:if>
+
+							<div class="form-group">
+								<label for="hp">&emsp;전화번호</label>&emsp;&emsp;&nbsp;
+								<div class="input-group">
+									<select name="userphone1" id="userphone1" class="phone">
+										<option>010</option>
+										<option>011</option>
+										<option>018</option>
+									</select> - <input type="text" id="userphone2" name="userphone2" class="phone2"> - <input
+										type="text" name="phone3" id="userphone3" class="phone3">
+
+								</div>
+							</div>
+
+							<!-- 사업자 회원에게만 보여짐 -->
+							<c:if test="${type == 'business'}">
+								<div class="form-inline form-group busnum"
+									style="display: inline-block;">
+									<label for="seaddr"><span class="redstar">*
+											&nbsp;</span>사업자 번호</label>&emsp; <input type="text"
+										class="busnuminput" id="businessnum" name="businessnum" placeholder="사업자 번호를 입력하세요.">
+								</div>
+							</c:if>
+
+							<div class="endbtn clearfix">
+								<div style="float: left;">
+									<button type="button" class="btn-lg">취소</button>
+									<button type="button" id="regist" class="btn-lg btn-success"
+										style="background-color: black; margin-bottom: 30px;">회원가입</button>
+									<br> <br>
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<%@ include file="../include/footer.jsp"%>
+
+	<!-- 카카오 api를 이용하기 위한 코드 -->
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<script>
+		//제이쿼리 시작
+		$(function() {
+
+			// id idCheckBtn msgid
+			//아이디 중복체크 검증
+			$('#idCheckBtn').click(function() {
+				console.log('아이디 중복체크 버튼 클릭');
+				
+				if($('#userId').val() === '') {//공백 체크
+					alert('아이디는 필수 값 입니다.');
+					return;
+				}
+				
+				$(this).attr('type', 'button');
+				$('.btn-success').attr('type', 'button');//회원가입 버튼 기능 없애기
+				const userid = $('#userid').val();//아이디 값
+
+				//비동기 통신 시작
+				$.ajax({
+					type : 'post',
+					url : '<c:url value="/user/idCheck" />',
+					data : userid,
+					contentType : 'application/json',
+					success : function(data) {
+						if (data === 'available') {
+							console.log('비동기 success');
+							$('#userid').attr('readonly', true);
+							$('#msgid').html('사용 가능한 아이디입니다.');
+						} else {
+							console.log('비동기 fail');
+							$('#msgid').html('중복된 아이디입니다.');
+						}
+					},
+					error : function() {
+						console.log('비동기 error');
+						alert('서버 에러입니다. 관리자에게 문의하세요.');
+					}
+
+				});//중복체크 비동기 통신 끝
+
+			});//아이디 중복 체크 끝
+			
+			
+			//우편번호 검색 버튼 클릭 시 주소 api
+			$('#btnZipCode').click(function() {
+				$('#regist').attr('type', 'button');
+				searchAddress();
+			});
+			
+			
+			
+			
+		});//end jQuery
+
+		//다음 주소 api 사용해보기
+		function searchAddress() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('postnum').value = data.zonecode;
+	                document.getElementById("fraddr").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("fraddr").focus();
+	            }
+	        }).open();
+	    }
+		
+
+		const userType = '${userType}';
+		
+		// 회원가입 버튼 누르면 정규표현식 발동
+		document.getElementById('regist').onclick = function() {
+			if(userType === 'business') {
+				console.log('userType = business 정규표현식 발동');
+				bsnsMemcheck();
+			} else{
+				console.log('userType = null 정규표현식 발동');
+				genMemcheck();
+			}
+		}
+		
+		
+		const $form = document.regForm;
+		const $name = document.querySelector('.nameinput');
+		const $id = document.querySelector('.idinput');
+		const $pw = document.querySelector('.pwinput');
+		const $pwcheck = document.querySelector('.pwcheckinput');
+		const $email = document.querySelector('.email');
+		const $postnum = document.querySelector('.postnum');
+		const $addr1 = document.querySelector('.fraddr');
+		const $addr2 = document.querySelector('.seaddr');
+		const $phone = document.querySelector('.phone');
+		const $phone2 = document.querySelector('.phone2');
+		const $phone3 = document.querySelector('.phone3');
+		const $agree = document.querySelector('.agree');
+		const $busnumdiv = document.querySelector('.busnum');
+		//사업자 번호 div : 일반회원 가입 시 display none
+		const $busnuminput = document.querySelector('.busnuminput');
+
+		//const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value;
+
+		const idtest = /^[a-z0-9]{4,12}$/;
+		const pwtest = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+		const emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		const phonetest = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+		const busnumtest = /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/;
+
+		//사업자 회원일 경우 발동되는 정규 표현식
+		function bsnsMemcheck() {
+
+			document.getElementById('regist').setAttribute('type', 'button');
+			console.log('사업자 회원 정규표현식 발동');
+
+			if($name.value === '') {
                 alert('이름을 입력해 주세요');
                 $name.focus();
                 return;
-            } else if($id.value === '') {
-            	alert('아이디를 입력해 주세요');
-                $id.focus();
-                return;
             } else if (!idtest.test($id.value)) {
-                alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
-                return;
-            } else if (!pwtest.test($pw.value)) {
+				alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
+				return;
+			} else if (!pwtest.test($pw.value)) {
                 alert('비밀번호는 하나 이상의 대문자 + 숫자 + 툭수문자 조합으로 8자리 이상 사용해야 합니다.');
                 $pw.value = '';
                 $pw.focus();
@@ -700,54 +820,66 @@
                 return;
             }
             if(confirm('회원가입 하시겠습니까?')) {
+				console.log('사업자회원 정규표현식 통과');
+				$form.setAttribute('action', '<c:url value="/user/bsnsUserJoin" />');
                 $form.submit();
             } else {
                 return;
             }
 
-        }
+		}
 
+		//일반 회원일 경우 발동되는 정규 표현식
+		function genMemcheck() {
+			document.getElementById('regist').setAttribute('type', 'button');
+			console.log('일반회원 정규표현식 발동');
 
-        document.getElementById('regist').onclick = check;
-        
-        //제이쿼리 시작
-        $(function() {
-        	
-			// id idCheckBtn msgid
-			//아이디 중복체크 검증
-        	$('#idCheckBtn').click(function() {
-        		const id = $('#id').val();//아이디 값
-    			
-    			//비동기 통신 시작
-    			$.ajax({
-    				type: 'post',
-    				url: '<c:url value="/user/idCheck" />',
-    				data: id,
-    				contentType: 'application/json',
-    				success: function(data) {
-    					if(data === 'available') {
-    						$('#id').attr('readonly', true);
-    						$('#msgid').html('사용 가능한 아이디입니다.');
-    					} else {
-    						$('#msgid').html('중복된 아이디입니다.');
-    					}
-    				},
-    				error: function() {
-    					alert('서버 에러입니다. 관리자에게 문의하세요.');
-    				}
-    				
-    			});//중복체크 비동기 통신 끝
-    			
-    		});//아이디 중복 체크 끝
-			});//아이디 중복체크 끝
-        	
-        	
-		});//end jQuery
-        
-        
-    </script>
+			if ($name.value === '') {
+				alert('이름을 입력해 주세요');
+				$name.focus();
+				return;
+			} else if ($id.value === '') {
+				alert('아이디를 입력해 주세요');
+				$id.focus();
+				return;
+			} else if (!idtest.test($id.value)) {
+				alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
+				return;
+			} else if (!pwtest.test($pw.value)) {
+				alert('비밀번호는 하나 이상의 대문자와 숫자, 특수문자 조합으로 8자리 이상이어야 합니다.');
+				$pw.value = '';
+				$pw.focus();
+				return;
+			} else if ($pw.value !== $pwcheck.value) {
+				alert('비밀번호가 일치하지 않습니다.');
+				$pw.value = '';
+				$pwcheck.value = '';
+				$pw.focus();
+				return;
+			} else if (!emailtest.test($email.value)) {
+				alert('이메일 양식이 올바르지 않습니다 예)aaa@aaa.aaa');
+				$email.focus();
+				return;
+			}
+			if (!$agree.checked) {
+				alert('이용 약관을 동의해 주세요');
+				$agree.focus();
+				return;
+			}
+			if (confirm('회원가입 하시겠습니까?')) {
+				console.log('일반회원 정규표현식 통과');
+				$form.submit();
+			} else {
+				return;
+			}
 
-    <!--
+		}
+		
+
+	
+	</script>
+
+	<!--
         아이디 
         아이디는 4~12자 이어야 합니다.
 
@@ -780,8 +912,8 @@
 -->
 
 
-        <script src="../js/jquery-3.6.0.min.js"></script>
-        <script src="../js/bootstrap.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
 
 
 
