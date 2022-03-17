@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.spring.cafealley.board.mapper.INoBoardMapper;
+import com.spring.cafealley.board.mapper.IBoardMapper;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.util.PageVO;
 
 @Service
-public class NoBoardService implements INoBoardService {
+public class BoardService implements IBoardService {
 
-	private INoBoardMapper mapper;
+	private IBoardMapper mapper;
 	
 	@Override
 	public void regist(BoardVO vo) {

@@ -2,6 +2,7 @@ package com.spring.cafealley.board.mapper;
 
 import java.util.List;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IBoardMapper {
 
@@ -10,7 +11,7 @@ public interface IBoardMapper {
 	void regist(BoardVO vo);
 	
 	//글 목록
-//	List<BoardVO> getList(PageVO vo);
+	List<BoardVO> getList();
 	
 	//총 게시물 수
 //	int getTotal(PageVO vo);
