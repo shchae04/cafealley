@@ -13,6 +13,7 @@
 	VALUES(cart_seq.NEXTVAL, #{prono}, #{userid}, #{countno}, #{counttotal})
 </insert>
 
+
 <select id="select" resultType="com.spring.cafealley.command.CartVO">
 	SELECT * FROM cart
 	WHERE userid = #{userid}
