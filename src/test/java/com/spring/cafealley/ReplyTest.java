@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.spring.cafealley.board.mapper.IBoardMapper;
+import com.spring.cafealley.board.mapper.INoBoardMapper;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ReplyVO;
-import com.spring.cafealley.reply.mapper.IReplyMapper;
+import com.spring.cafealley.reply.mapper.INoReplyMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/config/db-config.xml")
 public class ReplyTest {
 	
 	@Autowired
-	private IReplyMapper mapper;
+	private INoReplyMapper mapper;
 	
 	@Test
 	public void registTest() {
