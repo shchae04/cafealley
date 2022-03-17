@@ -18,7 +18,7 @@
 	</insert>
 	
 	<!-- 회원 정보 조회 -->
-	<select id="getInfo" resultType="com.spring.cafealley.user.model.UserVO">
+	<select id="getInfo" resultType="com.spring.cafealley.command.UserVO">
 		SELECT userid,
 		userpw,
 		username,

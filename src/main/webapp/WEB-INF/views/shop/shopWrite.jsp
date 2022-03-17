@@ -1,521 +1,345 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>shopDetail</title>
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- 폰트어썸 -->
-    <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
-    <link href="//font.elice.io/EliceDigitalBaeum.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shopDetail</title>
 
+<link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
 
+<style>
+body {
+	width: 100%;
+}
 
-    <style>
-        body {
-            width: 100%;
-        }
+section {
+	display: block;
+	width: 90%;
+	margin: 50px auto;
+	padding-left: 120px;
+}
 
-        section {
-            display: block;
-            width: 90%;
-            margin: 50px auto;
-            padding-left: 120px;
-        }
+.container {
+	min-width: 1200px;
+	margin-top: 200px;
+}
 
-        .container {
-            min-width: 1200px;
-            margin-top: 200px;
-        }
+.row {
+	border-top: 2px solid black;
+	min-width: 1100px;
+	max-width: 1100px;
+}
 
-        .row {
-            border-top: 2px solid black;
-            min-width: 1100px;
-            max-width: 1100px;
+.detail-info {
+	margin: 30px 0 30px 0;
+}
 
-        }
+.prod-img {
+	margin-top: 30px;
+	width: 450px;
+}
 
-        .detail-info {
-            margin: 30px 0 30px 0;
-        }
+.container img {
+	max-width: 350px;
+	display: block;
+	margin: 0 auto;
+}
 
-        .prod-img {
-            margin-top: 30px;
-            width: 450px;
-        }
+input[type="number"] {
+	border: 1px solid #ddd;
+	width: 40px;
+	text-align: center;
+	color: black;
+}
 
-        .container img {
-            max-width: 350px;
-            display: block;
-            margin: 0 auto;
-        }
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	opacity: 1;
+}
 
-        input[type="number"] {
-            border: 1px solid #ddd;
-            width: 40px;
-            text-align: center;
-            color: black;
-        }
+.detail-info .title {
+	font-size: 20px;
+	font-weight: bold;
+}
 
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            opacity: 1;
-        }
+.detail-info .price {
+	border-top: 1px solid #ddd;
+}
 
-        .detail-info .title {
-            font-size: 20px;
-            font-weight: bold;
-        }
+.detail-info input[type="text"] {
+	border: 1px solid #ddd;
+	width: 40px;
+	position: relative;
+}
 
-        .detail-info .price {
-            border-top: 1px solid #ddd;
-        }
+.detail-info .btn-num-up, .detail-info .btn-num-down {
+	width: 13px;
+	height: 9px;
+	display: block;
+}
 
-        .detail-info input[type="text"] {
-            border: 1px solid #ddd;
-            width: 40px;
-            position: relative;
-        }
+.qty-up-down {
+	position: absolute;
+	margin-left: 2px;
+}
 
-        .detail-info .btn-num-up,
-        .detail-info .btn-num-down {
-            width: 13px;
-            height: 9px;
-            display: block;
-        }
+.org-price, .sell-price, .quantity {
+	margin-top: 30px;
+}
 
-        .qty-up-down {
-            position: absolute;
-            margin-left: 2px;
-        }
+.quantity {
+	margin-bottom: 20px;
+}
 
-        .org-price,
-        .sell-price,
-        .quantity {
-            margin-top: 30px;
-        }
+.detail-info .delivery {
+	display: inline;
+}
 
-        .quantity {
-            margin-bottom: 20px;
-        }
+.detail-info .prod-text {
+	color: gray;
+	font-size: 13px;
+	display: inline-block;
+	width: 100px;
+}
 
-        .detail-info .delivery {
-            display: inline;
-        }
+.detail-info input[type="text"] {
+	cursor: default;
+}
 
-        .detail-info .prod-text {
-            color: gray;
-            font-size: 13px;
-            display: inline-block;
-            width: 100px;
-        }
+.detail-control .left {
+	/* .btn-cart .btn-order */
+	float: left;
+}
 
-        .detail-info input[type="text"] {
-            cursor: default;
-        }
+.detail-control .right {
+	float: right;
+}
 
-        .detail-control .left {
-            /* .btn-cart .btn-order */
-            float: left;
-        }
+.detail-control .price .left {
+	font-size: 18px;
+	line-height: 45px;
+}
 
-        .detail-control .right {
-            float: right;
-        }
+.detail-control .price .right {
+	font-size: 24px;
+}
 
-        .detail-control .price .left {
-            font-size: 18px;
-            line-height: 45px;
-        }
+button.btn-cart, button.btn-order {
+	width: 48%;
+	height: 50px;
+}
 
-        .detail-control .price .right {
-            font-size: 24px;
-        }
+.btn-cart {
+	background: black;
+	color: white;
+	border: 1px solid black;
+	margin-right: 10px;
+}
 
-        button.btn-cart,
-        button.btn-order {
-            width: 48%;
-            height: 50px;
-        }
+.btn-order {
+	background: white;
+	color: black;
+	border: 1px solid black;
+}
 
-        .btn-cart {
-            background: black;
-            color: white;
-            border: 1px solid black;
-            margin-right: 10px;
-        }
+.prod-sel .prod-text, .prod-sel select {
+	margin: 30px 0;
+}
 
-        .btn-order {
-            background: white;
-            color: black;
-            border: 1px solid black;
+.prod-sel select {
+	width: 140px;
+	outline: none;
+	border: 1px solid #ddd;
+}
 
-        }
+/* 간편선택 바구니 */
+.easy-cart>div {
+	width: 100%;
+}
 
-        .prod-sel .prod-text,
-        .prod-sel select {
-            margin: 30px 0;
-            
-        }
-    
+.easy-text {
+	width: 440px;
+	height: 39px;
+	background: white;
+	padding: 20px 20px;
+	border-bottom: 1px solid black;
+	border-top: 2px solid black;
+}
 
-        .prod-sel select {
-            width: 140px;
-            outline: none;
-            border: 1px solid #ddd;
-        }
+.easy-text>p {
+	display: inline-block;
+	margin: 0 7px;
+	color: black;
+	font-size: 12px;
+}
 
-        /* 간편선택 바구니 */
-        .easy-cart>div {
-            width: 100%;
-        }
+.select-list {
+	width: 440px;
+	height: 51px;
+	font-size: 12px;
+	padding: 0 30px;
+	border-bottom: 1px solid black;
+}
 
-        .easy-text {
-            width: 440px;
-            height: 39px;
-            background: white;
-            padding: 20px 20px;
-            border-bottom: 1px solid black;
-            border-top: 2px solid black;
-        }
+.select-list>.selected-prod {
+	width: 176px;
+	height: 50px;
+	padding: 15px 0;
+	display: inline-block
+}
 
-        .easy-text>p {
-            display: inline-block;
-            margin: 0 7px;
-            color: black;
-            font-size: 12px;
-        }
+.selected-qty {
+	position: relative;
+}
 
-        .select-list {
-            width: 440px;
-            height: 51px;
-            font-size: 12px;
-            padding: 0 30px;
-            border-bottom: 1px solid black;
+.selected-qty>input[type="text"] {
+	width: 40px;
+	height: 22px;
+}
 
-        }
+/* 간편선택 바구니 */
+.easy-cart {
+	display: none;
+	cursor: default;
+}
 
-        .select-list>.selected-prod {
-            width: 176px;
-            height: 50px;
-            padding: 15px 0;
-            display: inline-block
-        }
+.easy-cart .select-list .qty-up-down {
+	padding: 15px 0;
+	position: absolute;
+	bottom: 16px;
+}
 
-        .selected-qty {
-            position: relative;
-        }
+.select-list .selected-qty {
+	width: 100px;
+	height: 50px;
+	display: inline-block;
+}
 
-        .selected-qty>input[type="text"] {
-            width: 40px;
-            height: 22px;
-        }
+.select-list .selected-price {
+	width: 70px;
+	height: 50px;
+	display: inline-block;
+}
 
-        /* 간편선택 바구니 */
+.select-list .btn-remove .fa-xmark {
+	width: 13px;
+	height: 13px;
+	background: black;
+	color: #fff;
+	padding-left: 3px;
+	padding-top: 1px;
+}
 
-        .easy-cart {
-            display: none;
-            cursor: default;
-        }
+.total-price {
+	width: 440px;
+	height: 49px;
+	display: inline-block;
+	padding: 15px 20px;
+	background: #E9E9E9;
+}
 
-        .easy-cart .select-list .qty-up-down {
-            padding: 15px 0;
-            position: absolute;
-            bottom: 16px;
-        }
+.total-price .sp-total-text, .total-price .sp-total-price {
+	font-weight: 900;
+	font-size: 13px;
+}
 
+.total-price .sp-total-text {
+	margin-left: 230px;
+}
 
+.total-price .sp-total-price {
+	margin-left: 15px;
+}
 
-        .select-list .selected-qty {
-            width: 100px;
-            height: 50px;
-            display: inline-block;
-        }
+/* 상세 설명, 이미지 부분 */
+.prod-detail {
+	border-top: 2px solid black;
+	margin: 50px 0;
+	padding-top: 50px;
+}
 
+.prod-detail>img {
+	min-width: 80%;
+}
 
-        .select-list .selected-price {
-            width: 70px;
-            height: 50px;
-            display: inline-block;
-        }
-
-        .select-list .btn-remove .fa-xmark {
-            width: 13px;
-            height: 13px;
-            background: black;
-            color: #fff;
-            padding-left: 3px;
-            padding-top: 1px;
-        }
-
-        .total-price {
-            width: 440px;
-            height: 49px;
-            display: inline-block;
-            padding: 15px 20px;
-            background: #E9E9E9;
-        }
-
-        .total-price .sp-total-text,
-        .total-price .sp-total-price {
-            font-weight: 900;
-            font-size: 13px;
-        }
-
-        .total-price .sp-total-text {
-            margin-left: 230px;
-        }
-
-        .total-price .sp-total-price {
-            margin-left: 15px;
-        }
-
-
-
-        /* 상세 설명, 이미지 부분 */
-
-        .prod-detail {
-            border-top: 2px solid black;
-            margin: 50px 0;
-            padding-top: 50px;
-        }
-
-        .prod-detail>img {
-            min-width: 80%;
-        }
-
-        /* --------------------------------- */
-    </style>
+/* --------------------------------- */
+</style>
 
 </head>
 
 <body>
 
+	<%@ include file="../include/header.jsp"%>
 
-    <header>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6 prod-img">
+					<img src="<c:url value='/img/paul bassett.jpg'/>" alt="paul bassett coffee">
+				</div>
+				<div class="col-xs-6">
+					<div class="detail-info">
+						<p class="title">폴 바셋 시그니처 블렌드 풀 포텐셜 1.01kg</p>
+						<p class="price">
+						<p class="org-price">
+							<span class="prod-text">정가</span> <s>45,000원</s>
+						</p>
+						<p class="sell-price">
+							<span class="prod-text">판매가</span> <strong>24,700원</strong>
+						</p>
+						</p>
+						<p class="quantity">
+							<!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
+						</p>
+						<p class="delivery">
+							<span class="prod-text">배송비</span> <strong>3000원</strong>
+						</p>
+						<p class="prod-sel">
+							<span class="prod-text">옵션선택</span> <select id="sel-option">
+								<option value="not-selected">선택</option>
+								<option value="whole-beans">원두상태</option>
+								<option value="prench">프렌치분쇄</option>
+								<option value="drip">드립분쇄</option>
+								<option value="espresso">에스프레소분쇄</option>
+							</select>
 
-        <div class="header">
-            <nav class="header-container">
-                <div class="header-logo">
-                    <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
-                </div>
+							<!-- 간편선택 바구니 -->
+						<div id="easyCart" class="easy-cart">
+							<div class="easy-text">
+								<i class="fa-solid fa-check"></i>
+								<p>다른옵션도 구매하시려면 옵션을 반복하여 선택해 주세요.</p>
+							</div>
+							<div class="total-price">
+								<span class="sp-total-text">상품 금액 합계</span> <span
+									class="sp-total-price">00,000원</span>
+							</div>
+						</div>
+						</p>
+					</div>
 
+					<div class="detail-control">
+						<div class="order clearfix">
+							<button class="left btn-cart">장바구니</button>
+							<button class="left btn-order">구매하기</button>
+						</div>
+					</div>
+					<!-- end 'detail-control' -->
+				</div>
 
-                <ul class="header-nav header-nav-upper clearfix">
-                    <li><a data-toggle="modal" href="#myModal">로그인</a></li>
-                    <li class="dropdown">
-                        <a href="#">#님<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li id="header-name">#님(일반회원)</li>
-                            <li>cafealley123@gmail.com</li>
-                            <li>마이페이지</li>
-                            <li id="header-barcode">barcode here</li>
-                        </ul>
-                    </li>
-                    <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="#">고객문의</a></li>
-                </ul>
+				<div class="col-xs-12 prod-detail">
+					<img src="<c:url value='/img/paul_bassett_detail.jpg'/>" alt="prod-detail">
+				</div>
 
-                <ul class="header-nav header-nav-dropdown clearfix">
-                    <li><a href="#">사이트 소개</a></li>
-                    <li><a href="#">Alley 위치</a></li>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Coffee Talk</a></li>
-                    <li><a href="#">카페 게시판</a></li>
-                    <li class="dropdown">
-                        <a href="#">이벤트</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">이벤트 요약</a></li>
-                            <li><a href="#">이벤트 공지</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Owner Mall </span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">원두</a></li>
-                            <li><a href="#">티 / 액상차</a></li>
-                            <li><a href="#">유제품</a></li>
-                            <li><a href="#">시럽 / 소스</a></li>
-                            <li><a href="#">파우더 / 농축액</a></li>
-                            <li><a href="#">커피용품, 머신</a></li>
-                        </ul>
-                    </li>
-                </ul>
+			</div>
+		</div>
+	</section>
 
-            </nav>
+	<%@ include file="../include/footer.jsp" %>
 
-        </div>
-
-    </header>
-
-
-    <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-
-            <!-- Modal Content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">로그인</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="#">
-                        <h5>아이디</h5>
-                        <input type="text" class="form-control" placeholder="Text input">
-                        <h5>비밀번호</h5>
-                        <input type="password" class="form-control" placeholder="password input">
-                        <label>
-                            <input type="checkbox">
-                            <small>로그인 유지</small>
-                        </label>
-                        <div class="login-center">
-                            <button type="button" class="btn btn-primary btn-block">Log In</button>
-                            <div class="login-center2 clearfix">
-                                <div style="float:left;">
-                                    아직 회원이 아니신가요?
-                                </div>
-                                <div style="float: right;">
-                                    <a href="#">일반회원 가입</a><br>
-                                    <a href="#">카페회원 가입</a>
-                                </div>
-                            </div>
-
-                            <div class="login-p-center">또는</div>
-                            <button type="button" class="btn btn-block"
-                                style="background-color: #04cf5c; color: white;"><strong>N</strong></strong></button>
-                        </div>
-                    </form>
-                    <br>
-                    <div class="login-p-center">네이버 가입은 일반 회원만 가능합니다.</div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6 prod-img">
-                    <img src="../img/paul bassett.jpg" alt="paul bassett coffee">
-                </div>
-                <div class="col-xs-6">
-                    <div class="detail-info">
-                        <p class="title">폴 바셋 시그니처 블렌드 풀 포텐셜 1.01kg</p>
-                        <p class="price">
-                            <p class="org-price">
-                                <span class="prod-text">정가</span> <s>45,000원</s>
-                            </p>
-                            <p class="sell-price">
-                                <span class="prod-text">판매가</span> <strong>24,700원</strong>
-                            </p>
-                        </p>
-                        <p class="quantity">
-                            <!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
-                        </p>
-                        <p class="delivery">
-                            <span class="prod-text">배송비</span> <strong>3000원</strong>
-                        </p>
-                        <p class="prod-sel">
-                            <span class="prod-text">옵션선택</span>
-                            <select id="sel-option">
-                                <option value="not-selected">선택</option>
-                                <option value="whole-beans">원두상태</option>
-                                <option value="prench">프렌치분쇄</option>
-                                <option value="drip">드립분쇄</option>
-                                <option value="espresso">에스프레소분쇄</option>
-                            </select>
-
-                            <!-- 간편선택 바구니 -->
-                            <div id="easyCart" class="easy-cart">
-                                <div class="easy-text">
-                                    <i class="fa-solid fa-check"></i>
-                                    <p>다른옵션도 구매하시려면 옵션을 반복하여 선택해 주세요.</p>
-                                </div>
-                                <div class="total-price">
-                                    <span class="sp-total-text">상품 금액 합계</span> <span
-                                        class="sp-total-price">00,000원</span>
-                                </div>
-                            </div>
-                        </p>
-                    </div>
-
-                    <div class="detail-control">
-                        <div class="order clearfix">
-                            <button class="left btn-cart">장바구니</button>
-                            <button class="left btn-order">구매하기</button>
-                        </div>
-                    </div><!-- end 'detail-control' -->
-                </div>
-
-                <div class="col-xs-12 prod-detail">
-                    <img src="../img/paul_bassett_detail.jpg" alt="prod-detail">
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-
-
-    <footer>
-
-        <div class="footer-container clearfix">
-
-            <div class="footer-left">
-                <div class="footer-logo">
-                    <a href="#"><img width="150px" src="../img/logo2.png" alt="logo"></a>
-                    <span class="footer-name">Cafe Alley</span><br><br>
-                    <span class="footer-desc">논 브랜디드 카페의 활성화, 커피 문화를 선도합니다.</span>
-                </div>
-                <hr>
-                <p class="footer-business">
-                    대표자 : 김골목 | E-MAIL : info@info.com<br>
-                    사업자번호 : 123-45-67890 | 개인정보보호책임자 : 김골목 | 통신판매업 : 2019-서울마포-0001<br>
-                    주소 : 서울특별시 마포구 대흥동
-                </p>
-                <p class="footer-copyright">
-                    Copyright © 2022 COFFEE ALLEY (c). All Rights Reserved E-mail : <a
-                        href="mailto:coffeealley.gmail.com">coffeealley.gmail.com</a>
-                </p>
-            </div>
-
-            <div class="footer-right clearfix">
-                <ul class="footer-nav clearfix">
-                    <li><a href="#">사이트 소개</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보 처리방침</a></li>
-                </ul>
-                <div class="footer-sns">
-                    <a href="#"><span class="fa-brands fa-facebook-square"></span></a>
-
-                    <a href="#"><span class="fa fa-instagram"></span></a>
-
-                    <a href="#"><span class="fa-brands fa-youtube"></span></a>
-                </div>
-
-
-
-            </div>
-
-        </div>
-
-    </footer>
-
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/bootstrap.js"></script>
-
-
-    <script>
+	<script>
         const $seloption = document.querySelector('#sel-option');
         const $easycart = document.querySelector('.easy-cart');
 

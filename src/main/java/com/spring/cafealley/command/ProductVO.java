@@ -23,13 +23,12 @@ CREATE TABLE product (
 public class ProductVO {
 	
 	private int prono;
-	
 	private String proname;
 	private int proprice;
 	private int prosellrrice;
 	private String procate;
 	private String prodetail;
-	private String prostock;
+	private int prostock;
 	private int filenum;
 	
 	
