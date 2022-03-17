@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -44,7 +43,7 @@
                     <br>
                 </div>
                 <div style="float: right;">
-                    <input class="recbtn" type="button" value="회원가입">
+                    <input id="genMember" class="recbtn" type="button" value="회원가입">
                 </div>
                 </div>
 
@@ -57,7 +56,7 @@
                     <br>
                 </div>
                 <div style="float: right;">
-                    <input class="recbtn" type="button" value="회원가입">
+                    <input id="bsnsMember" class="recbtn" type="button" value="회원가입">
                 </div>
                 </div>
 
@@ -68,6 +67,22 @@
 
 
      <%@ include file="../include/footer.jsp" %>
+
+	<script>
+		$(function() {
+			
+			//일반 회원 가입 클릭 시
+			$('#genMember').click(function() {
+				$('#genMember').attr("href", "<c: url value='/user/formJoinGen'>");
+			});//일반 회원 클릭 이벤트 끝
+			
+			// 사업자 회원 가입 클릭 시
+			$('#bsnsMember').click(function() {
+				$('#bsnsMember').attr("href", "<c: url value='/user/formJoinBsns'>");
+			});//사업자 회원 클릭 이벤트 끝
+			
+		});//end jQuery
+	</script>
 
 
 </body>

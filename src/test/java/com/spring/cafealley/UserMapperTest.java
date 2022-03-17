@@ -31,7 +31,7 @@ public class UserMapperTest {
 		vo.setAddrdetail("중앙빌딩");
 		vo.setZipcode("22730");
 		vo.setBusinessnum("0323393339");
-		mapper.join(vo);
+		mapper.userjoin(vo);
 	}
 	
 	@Test
@@ -59,7 +59,7 @@ public class UserMapperTest {
 	
 	@Test
 	public void deleteUserTest() {// 회원 탈퇴 테스트 완료
-		mapper.deleteUser("abc1234");
+		mapper.deleteUser("abc1234", "abcd1234");
 	}
 	
 
