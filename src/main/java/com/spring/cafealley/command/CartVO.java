@@ -3,7 +3,6 @@ package com.spring.cafealley.command;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 /*
 CREATE TABLE cart (
 	cartno	NUMBER(5,0)	NOT NULL,
