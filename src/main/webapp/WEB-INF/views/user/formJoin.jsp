@@ -516,10 +516,10 @@
                                 <div class="input-group">
                                     <input type="text" id="id" class="idinput" name="id" placeholder="아이디(영문 포함 4~12자 이상)">
                                     <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
+                                        <button id="idCheckBtn" class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
                                     </div>
                                 </div>
-                                <span id="msgid">*필수 사항입니다.</span> <!-- 아이디 중복 여부 메세지 공간 -->
+                                <span id="msgId">*필수 사항입니다.</span> <!-- 아이디 중복 여부 메세지 공간 -->
                             </div>
 
                             <div class="form-inline form-group">
@@ -696,6 +696,40 @@
 
 
         document.getElementById('regist').onclick = check;
+        
+        //제이쿼리 시작
+        $(function () {
+        	
+        	//아이디 중복체크
+			$('#idCheckBtn').click(function() {
+				
+				const id = $('#id').val();//아이디 값
+				
+				//
+				
+				$.ajax({
+					type : 'post',
+					url : '<c: url value="/user/idCheck" />',
+					data : id,
+					contentType : 'application/json',
+					success : function(data) {
+						if(data === 'available') {
+							$('#id').attr('readonly', true);
+							$('#msgId').html('사용가능한 아이디 입니다.');
+						}
+					}
+				});//아이디 중복체크 ajax 끝
+				
+				
+				
+				
+				
+				
+				
+			});//아이디 중복체크 끝
+		});//end jQuery
+        
+        
     </script>
 
     <!--
@@ -723,10 +757,6 @@
 
         숫자 3자리 - 숫자 2자리 - 숫자 5자리
         /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/
-
-
-
-
 
 -->
 
