@@ -15,7 +15,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public int idCheck(String userId) {
-		return 0;
+		return mapper.idCheck(userId);
 	}
 
 	@Override

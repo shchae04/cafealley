@@ -506,7 +506,7 @@
                         <div class="lowrow">
                             <div class="form-inline form-group">
                                 <label for="name"><span class="redstar">* &nbsp;</span>이름</label> &emsp;&emsp;&emsp;&emsp;&nbsp;
-                                <input type="text" name="name" id="" class="nameinput" placeholder="이름을 입력하세요.">
+                                <input type="text" name="name" id="name" class="nameinput" placeholder="이름을 입력하세요.">
                             </div>
                             <br>
 
@@ -516,7 +516,7 @@
                                 <div class="input-group">
                                     <input type="text" id="id" class="idinput" name="id" placeholder="아이디(영문 포함 4~12자 이상)">
                                     <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
+                                        <button id="idCheckBtn" class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
                                     </div>
                                 </div>
                                 <span id="msgid">*필수 사항입니다.</span> <!-- 아이디 중복 여부 메세지 공간 -->
@@ -624,7 +624,9 @@
             const $busnuminput = document.querySelector('.busnuminput');
 
             const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value ; 
-
+	
+            
+            const idtest = /^[a-z]+[a-z0-9]{4,12}$/g;
             var pwtest = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
             var emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
             var phonetest = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -634,8 +636,12 @@
                 alert('이름을 입력해 주세요');
                 $name.focus();
                 return;
-            } else if ($id.value.length < 4 || $id.value.length > 12) {
-                alert('아이디는 4~12자 이어야 합니다.');
+            } else if($id.value === '') {
+            	alert('아이디를 입력해 주세요');
+                $id.focus();
+                return;
+            } else if (!idtest.test($id.value)) {
+                alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
                 return;
             } else if (!pwtest.test($pw.value)) {
                 alert('비밀번호는 하나 이상의 대문자 + 숫자 + 툭수문자 조합으로 8자리 이상 사용해야 합니다.');
@@ -696,6 +702,42 @@
 
 
         document.getElementById('regist').onclick = check;
+        
+        //제이쿼리 시작
+        $(function() {
+        	
+			// id idCheckBtn msgid
+			//아이디 중복체크 검증
+        	$('#idCheckBtn').click(function() {
+        		const id = $('#id').val();//아이디 값
+    			
+    			//비동기 통신 시작
+    			$.ajax({
+    				type: 'post',
+    				url: '<c:url value="/user/idCheck" />',
+    				data: id,
+    				contentType: 'application/json',
+    				success: function(data) {
+    					if(data === 'available') {
+    						$('#id').attr('readonly', true);
+    						$('#msgid').html('사용 가능한 아이디입니다.');
+    					} else {
+    						$('#msgid').html('중복된 아이디입니다.');
+    					}
+    				},
+    				error: function() {
+    					alert('서버 에러입니다. 관리자에게 문의하세요.');
+    				}
+    				
+    			});//중복체크 비동기 통신 끝
+    			
+    		});//아이디 중복 체크 끝
+			});//아이디 중복체크 끝
+        	
+        	
+		});//end jQuery
+        
+        
     </script>
 
     <!--
