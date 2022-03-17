@@ -183,9 +183,15 @@ tr>td>a {
     border-top: 3px solid black;
 }
 
-.mypage li a {
-    color: black;
-}
+.pagination > li > a {
+        background-color: black !important;
+        color: white !important;
+    }
+.pagination > li > a:hover {
+        background-color: gray !important;
+        color: white !important;
+    }
+
 
 .listtable {
     border-collapse: collapse;
@@ -331,4 +337,28 @@ textarea[name=qna]::placeholder {
 .subscribeprice {
     float: right;
 }
+
+/* 처리 상세 */
+	.pagination {
+            margin-left: 430px;
+        }
+
+        .pagination .page-link {
+            color: #000;
+        }
+
+        .pagination .cur-page {
+            background: #000;
+            color: #fff;
+        }
+        .pagination .page-link:active,
+        .pagination .page-pre:active,
+        .pagination .page-link:focus,
+        .pagination .page-pre:focus,
+        .pagination .page-link:hover,
+        .pagination .page-pre:hover {
+            color: #000;
+        }
+
+    
 
