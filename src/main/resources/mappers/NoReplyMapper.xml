@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.cafealley.reply.mapper.INoReplyMapper">
+
+	<insert id="replyRegist">
+	INSERT INTO noreply (rno, bno, writer,content)
+	VALUES (noreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
+	</insert>
+	
+	<update id="replyUpdate">
+	UPDATE noreply
+	SET content = #{content}, regdate = sysdate, ismod = '1'
+	WHERE rno = #{rno}
+	</update>
+	
+	<delete id="replyDelete">
+	DELETE FROM noreply
+	WHERE rno = #{rno}
+	</delete>
+	
+	<select id="getList">
+	<!-- 페이징 처리 아직.  -->
+	</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
