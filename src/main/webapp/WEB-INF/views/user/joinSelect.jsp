@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>       
 <!DOCTYPE html>
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 완료</title>
+    <title>회원가입 선택</title>
     
     <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
  
@@ -73,12 +73,12 @@
 			
 			//일반 회원 가입 클릭 시
 			$('#genMember').click(function() {
-				$('#genMember').attr("href", "<c: url value='/user/formJoinGen'>");
+				$('#genMember').attr("href", "<c: url value='/user/formJoinGen'/>");
 			});//일반 회원 클릭 이벤트 끝
 			
 			// 사업자 회원 가입 클릭 시
 			$('#bsnsMember').click(function() {
-				$('#bsnsMember').attr("href", "<c: url value='/user/formJoinBsns'>");
+				$('#bsnsMember').attr("href", "<c: url value='/user/formJoinBsns'/>");
 			});//사업자 회원 클릭 이벤트 끝
 			
 		});//end jQuery
@@ -87,4 +87,3 @@
 
 </body>
 </html>
-
