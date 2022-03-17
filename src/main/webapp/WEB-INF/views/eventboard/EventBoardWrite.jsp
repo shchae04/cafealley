@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -143,7 +144,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>글 작성</strong>
+                                <strong>글 작성하기</strong>
                             </h3>
                             
                         </div>
@@ -187,7 +188,7 @@
 
                         <div class="write" style="float: right; margin-bottom: 40px;">
                             <!-- 취소버튼 -> 목록으로. -->
-                            <button id="stopbtn" type="button"
+                            <button id="delbtn" type="button"
                                 style="background-color: #fff; border-color: #000; color:#000" class="btn btn-primary">
                                 취소
                             </button>
@@ -263,8 +264,8 @@
         const content = document.getElementById('content')
         console.log(content)
 
-        // 등록버튼
-        document.querySelector('#regbtn').addEventListener('click', function () {
+        // 수정버튼
+        document.querySelector('#modbtn').addEventListener('click', function () {
 
             if (title.value === '' || content.value === '') {
                 event.preventDefault();
@@ -277,8 +278,8 @@
 
         });
 
-        //취소버튼 
-        document.querySelector('#stopbtn').addEventListener('click', function (e) {
+        // 삭제버튼
+        document.querySelector('#delbtn').addEventListener('click', function (e) {
             if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
                 location.href = 'https://www.google.com';

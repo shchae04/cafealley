@@ -279,7 +279,7 @@
 
         // 삭제버튼
         document.querySelector('#delbtn').addEventListener('click', function (e) {
-            if (confirm('작성하신 내용은 삭제됩니다')) {
+            if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
                 location.href = 'https://www.google.com';
             }
