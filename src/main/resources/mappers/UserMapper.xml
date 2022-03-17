@@ -4,9 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.cafealley.user.mapper.IUserMapper">
-
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM users
+		WHERE userid = #{userid}
+	</select>
+	
+	
+	
 	<!-- 회원가입 -->
-	<insert id="join">
+	<insert id="userJoin">
+		INSERT INTO users
+		(userid, userpw, username,
+		userphone1, userphone2, userphone3, useremail,
+		addrbasic, addrdetail,zipcode, businessnum, filenum)
+		VALUES(#{userid}, #{userpw}, #{username},
+		#{userphone1, jdbcType=VARCHAR}, #{userphone2, jdbcType=VARCHAR}, #{userphone3, jdbcType=VARCHAR},
+		#{useremail},#{addrbasic, jdbcType=VARCHAR}, #{addrdetail, jdbcType=VARCHAR}, #{zipcode, jdbcType=VARCHAR},
+		#{businessnum, jdbcType=VARCHAR}, #{filenum, jdbcType=VARCHAR})
+	</insert>
+	
+	<!--  
+	<insert id="BsnsUserJoin">
 		INSERT INTO users
 		(userid, userpw, username,
 		userphone1, userphone2, userphone3, useremail1,
@@ -16,8 +37,9 @@
 		#{useremail1},#{addrbasic}, #{addrdetail}, #{zipcode},
 		#{businessnum}, #{filenum})
 	</insert>
+	-->
 	
-	<!-- 회원 정보 조회 -->
+	<!-- 회원 정보 조회 
 	<select id="getInfo" resultType="com.spring.cafealley.command.UserVO">
 		SELECT userid,
 		userpw,
@@ -35,6 +57,7 @@
 		FROM users
 		WHERE userid=#{userid}
 	</select>
+	-->
 	
 	<!-- 회원정보 수정 -->
 	<update id="updateUser">
