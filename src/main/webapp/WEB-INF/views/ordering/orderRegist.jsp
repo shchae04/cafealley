@@ -80,14 +80,18 @@
 						<td style="padding-top: 20px; padding-bottom: 20px;"><span>상품구매금액
 								<strong id="product-total-price">0</strong> 원 + 배송비 3,000 =
 						</span> <span style="font-size: 20px; color: orange;">TOTAL : ₩ <strong
-								id="total-price">0</strong>원 <!-- js에서 계산됨. --> <input
-								type="hidden" name="ordertotalprice" value="">
+								id="total-price">0</strong>원
+
 						</span></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<form action="#">
+		<form action="#" method="post">
+			<!-- 일단 임시로. -->
+			<input type="hidden" name="carttype" value="2">
+			<!-- js에서 계산됨. -->
+			<input type="hidden" name="ordertotalprice">
 			<div class="finor-wrapper2" style="margin-top: 40px;">
 				<h4 style="margin-bottom: 15px; display: inline-block;">주문자정보</h4>
 				&nbsp; <input type="checkbox"><span>회원 정보와 동일</span>
@@ -223,7 +227,7 @@
 
 			<div class="finor-wrapper2">
 				<div style="text-align: center; margin-top: 40px;">
-					<input type="checkbox" id="r4"/> <label for="r4"
+					<input type="checkbox" id="r4" /> <label for="r4"
 						style="cursor: pointer;"><span>상기 결제 정보를 확인 하였으며,
 							구매 진행에 동의 합니다.</span></label>
 				</div>

@@ -9,12 +9,12 @@
   
   	<insert id="order">
   	INSERT INTO ordering
-  	(ordernum, userid, ordertotalprice, 
+  	(ordernum, userid, carttype, ordertotalprice, 
   	orderusername, orderuserphone1, orderuserphone2, orderuserphone3, orderuseremail,
   	deliveryname, deliverypostnum, deliverybasicaddr, deliverydetailaddr,
   	deliveryphone1, deliveryphone2, deliveryphone3, deliverymemo,
   	paymethod, paybankname, paybank)
-  	VALUES(ordernum_seq.NEXTVAL, #{userid}, #{cartno}, #{ordertotalprice}, #{orderstatus},
+  	VALUES(ordernum_seq.NEXTVAL, #{userid}, #{carttype},#{ordertotalprice},
   	#{orderusername}, #{orderuserphone1}, #{orderuserphone2}, #{orderuserphone3}, #{orderuseremail},
   	#{deliveryname}, #{deliverypostnum}, #{deliverybasicaddr}, #{deliverydetailaddr},
   	#{deliveryphone1}, #{deliveryphone2}, #{deliveryphone3}, #{deliverymemo},

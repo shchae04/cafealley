@@ -9,6 +9,7 @@ import lombok.ToString;
 /*CREATE TABLE ordering(
 		ordernum NUMBER(10,0) NOT NULL PRIMARY KEY,
 		userid VARCHAR2(50) NOT NULL,
+		carttype NUMBER(10,0) NOT NULL,
 		ordertotalprice NUMBER(10,0) NOT NULL,
 		orderstatus VARCHAR2(30) default 'waitdeposit',
 		orderdate DATE	DEFAULT sysdate	NOT NULL,
@@ -33,7 +34,7 @@ import lombok.ToString;
 		refunddetailreason VARCHAR2(300),
 		refundtracknum VARCHAR2(100),
 		refundbankname VARCHAR2(50),
-		refundbak VARCHAR2(50)
+		refundbank VARCHAR2(50)
 	);
 
 
@@ -42,13 +43,17 @@ import lombok.ToString;
 	    INCREMENT BY 1
 	    MAXVALUE 10000
 	    NOCYCLE
-	    NOCACHE;*/
+	    NOCACHE;
+*/
+
+
 @Getter
 @Setter
 @ToString
 public class OrderingVO {
 	private int ordernum;
 	private String userid;
+	private int carttype;
 	private int ordertotalprice;
 	private String orderstatus;
 	private Timestamp orderdate;
@@ -75,13 +80,14 @@ public class OrderingVO {
 	private String refundbankname;
 	private String refundbank;
 	
-	public OrderingVO(String userid, int ordertotalprice,
+	public OrderingVO(String userid, int carttype, int ordertotalprice,
 			String orderusername, String orderuserphone1, String orderuserphone2,
 			String orderuserphone3, String orderuseremail, String deliveryname, String deliverypostnum,
 			String deliverybasicaddr, String deliverydetailaddr, String deliveryphone1, String deliveryphone2,
 			String deliveryphone3, String deliverymemo, String paymethod, String paybankname, String paybank) {
 
 		this.userid = userid;
+		this.carttype = carttype;
 		this.ordertotalprice = ordertotalprice;
 		this.orderusername = orderusername;
 		this.orderuserphone1 = orderuserphone1;
@@ -99,8 +105,7 @@ public class OrderingVO {
 		this.paymethod = paymethod;
 		this.paybankname = paybankname;
 		this.paybank = paybank;
-	}	
-	
+	}		
 	
 	
 }
