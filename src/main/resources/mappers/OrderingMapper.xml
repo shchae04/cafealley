@@ -9,7 +9,7 @@
   
   	<insert id="order">
   	INSERT INTO ordering
-  	(ordernum, userid, cartno, ordertotalprice, orderstatus, 
+  	(ordernum, userid, ordertotalprice, 
   	orderusername, orderuserphone1, orderuserphone2, orderuserphone3, orderuseremail,
   	deliveryname, deliverypostnum, deliverybasicaddr, deliverydetailaddr,
   	deliveryphone1, deliveryphone2, deliveryphone3, deliverymemo,

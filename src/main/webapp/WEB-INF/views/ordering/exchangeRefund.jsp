@@ -339,9 +339,12 @@
     
     <%@ include file="../include/footer.jsp" %>
     
-    <script>
+  <script>
 
         $(function(){
+
+            const getNumCheck = RegExp(/[0-9]/); // 숫자 
+
             
             // 전체선택 클릭 이벤트
             $('#select_all').click(function() {
@@ -395,27 +398,31 @@
                 }
             });//반품 체크 이벤트 끝
 
-
             //신청하기 버튼 유효성 검사
             $('#exApply').click(function(){
                if(!$('#exCheck').is(':checked')&&!$('#refCheck').is(':checked')) {
-                    $('#exApply').attr('type', 'button');
                     alert('교환/반품 양식을 작성해 주세요.');
 
                 } else if($('#exCheck').is(':checked')) {//교환을 선택할 경우
-                    if ($('#exSelReason').val() === 'none' || $('#exSelBank').val() === 'none' || $('#exInputAcnt').val() === '' || $('#exInputAddr').val() === '') {
-                        $('#exApply').attr('type', 'button');
-                        alert('정보를 빠짐없이 기입해주세요.');
+                    if ($('#exSelReason').val() === 'none'|| $('#exInputDelNum').val() === '' || $('#exInputAddr').val() === '') {
+                        alert('정보를 빠짐없이 기입해 주세요.');
+                    } else if (!getNumCheck.test($('#exInputDelNum').val())) {
+                        alert('운송장 번호는 숫자로만 입력해 주세요.');
+                    } else {
+                        $('exApply').attr('type', 'submit');
+                        alert('교환/환불신청이 완료 되었습니다.');
                     }
                 } else if($('#refCheck').is(':checked')) {//반품을 선택할 경우
                     if ($('#refSelReason').val() === 'none' || $('#refSelBank').val() === 'none' || $('#refInputAcnt').val() === '') {
-                        $('#exApply').attr('type', 'button');
-                        alert('정보를 빠짐없이 기입해주세요.');
+                        alert('정보를 빠짐없이 기입해 주세요.');
+                    } else if(!getNumCheck.test($('#exInputDelNum').val()) || !getNumCheck.test($('#refInputAcnt').val())) {
+                        alert('운송장 번호와 계좌번호는 숫자로만 입력해 주세요.');
+                    } else {
+                        $('exApply').attr('type', 'submit')
+                        alert('교환/환불신청이 완료 되었습니다.');
                     }
                 }
             });
-            
-
 
         });//end jQuery
 

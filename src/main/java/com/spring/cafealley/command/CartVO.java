@@ -27,8 +27,8 @@ public class CartVO {
 	private int cartno;
 	private int prono;
 	private String userid;
-	private int countno;
-	private int counttotal;
+	private int countno; // 수량 
+	private int counttotal; // 합계금액 (이렇게 직관성 없이 db컬럼명을...) 
 	
 	
 
