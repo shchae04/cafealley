@@ -42,6 +42,9 @@
         .ord-mgmt-table {
             margin: 30px 0;
         }
+        a{
+        	font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -58,8 +61,8 @@
                             <tr>
                                 <td>주문번호</td>
                                 <td>주문자아이디</td>
-                                <td>상품번호</td>
                                 <td>총 주문 가격</td>
+                                <td>주문 정보</td>
                                 <td>주문 날짜</td>
                                 <td>주문 상태</td>
                                 <td>배송 정보</td>
@@ -69,65 +72,8 @@
                             <tr>
                                 <td>1</td>
                                 <td>abc1234</td>
-                                <td>8,9,48,20,88</td>
-                                <td>247900</td>
-                                <td>22/03/10</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                        <option value="pre-del">배송준비중</option>
-                                        <option value="being-del">배송중</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button id="btn-del-info">배송정보보기</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>abc1234</td>
-                                <td>8,9,48,20,88</td>
-                                <td>247900</td>
-                                <td>22/03/10</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                        <option value="pre-del">배송준비중</option>
-                                        <option value="being-del">배송중</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button id="btn-del-info">배송정보보기</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>abc1234</td>
-                                <td>8,9,48,20,88</td>
-                                <td>247900</td>
-                                <td>22/03/10</td>
-                                <td>
-                                    <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                        <option value="pre-del">배송준비중</option>
-                                        <option value="being-del">배송중</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button id="btn-del-info">배송정보보기</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>4</td>
-                                <td>abc1234</td>
-                                <td>8,9,48,20,88</td>
-                                <td>247900</td>
+                                <td>${orderlist.userid}</td>
+                                <td><a href="#">xxxx 외 x개</a></td>
                                 <td>22/03/10</td>
                                 <td>
                                     <select>
