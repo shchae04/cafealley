@@ -17,26 +17,26 @@ public class NoBoardController {
 	@GetMapping("/noDetail")
 	public String nodetail() {
 		System.out.println("공지 상세보기 페이지로 이동");		
-		return "communityboard/noticeBoardDetail";
+		return "noticeboard/noticeBoardDetail";
 	}
 	
 	@GetMapping("/noList")
 	public String nolist() {
 		System.out.println("공지 리스트 페이지로 이동");
-		return "communityboard/comBoardList";
+		return "noticeboard/noticeBoardList";
 	}
 	
 	@GetMapping("/noWrite")
 	public String noWrite() {
 		System.out.println("공지 작성 페이지로 이동");
-		return "communityboard/comBoardWrite";
+		return "noticeboard/noticeBoardWrite";
 	}
 	
 	
 	@GetMapping("/noModi")
 	public String noModi() {
 		System.out.println("공지 수정 페이지로 이동");
-		return "communityboard/comBoardModi";
+		return "noticeboard/noticeBoardModify";
 	}
 	
 	
