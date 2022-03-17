@@ -156,7 +156,9 @@
                     </tbody>
                 </table>
 
-                		<button style="float: right;" type="button" class="write btn">글쓰기</button>
+                		<button style="float: right;" type="button" class="write btn"
+                		onclick="location.href='<c:url value="/noBoard/noWrite" />'"
+                		>글쓰기</button>
                 <hr>
 
 
@@ -214,6 +216,8 @@
             location.href = "/project/list?keyword=" + keyword + "&condition=" + condition;
 
         });
+        
+       
     </script>
 
 
