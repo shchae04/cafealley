@@ -13,13 +13,7 @@ VALUES(file_seq.NEXTVAL, #{filename}, #{filename2}, #{filename3}, #{filepath}, #
 
 </insert>
 
-<select id="select" resultType="com.spring.cafealley.command.ImgVO">
-	SELECT * FROM img
-	WHERE filenum = #{filenum}
-</select>
 
-<update id="">
-</update>
 
 <delete id="delete">
 	DELETE FROM img
