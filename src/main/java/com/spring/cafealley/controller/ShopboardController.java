@@ -11,5 +11,4 @@ public class ShopboardController {
 	@GetMapping("/shopList")
 	public void shopList() {}
 	
-	
 }

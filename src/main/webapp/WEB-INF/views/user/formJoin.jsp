@@ -20,7 +20,7 @@
 
 	<%@ include file="../include/header.jsp" %>
 
-    <div class="container" style="margin-top: 150px;">
+       <div class="container" style="margin-top: 150px;">
     <div class="titlebox">
         <h3 style="color: white;">회원가입</h3>
     </div>
@@ -505,37 +505,37 @@
 
                         <div class="lowrow">
                             <div class="form-inline form-group">
-                                <label for="name">이름</label> &emsp;&emsp;&emsp;&emsp;&nbsp;
-                                <input type="text" name="name" id="" class="nameinput" placeholder="이름을 입력하세요.">
+                                <label for="name"><span class="redstar">* &nbsp;</span>이름</label> &emsp;&emsp;&emsp;&emsp;&nbsp;
+                                <input type="text" name="name" id="name" class="nameinput" placeholder="이름을 입력하세요.">
                             </div>
                             <br>
 
 
                             <div class="form-inline form-group">
-                                <label for="id">아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                <label for="id"><span class="redstar">* &nbsp;</span>아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
                                 <div class="input-group">
                                     <input type="text" id="id" class="idinput" name="id" placeholder="아이디(영문 포함 4~12자 이상)">
                                     <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
+                                        <button id="idCheckBtn" class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
                                     </div>
                                 </div>
                                 <span id="msgid">*필수 사항입니다.</span> <!-- 아이디 중복 여부 메세지 공간 -->
                             </div>
 
                             <div class="form-inline form-group">
-                                <label for="password">비밀번호</label>&emsp;&emsp;&nbsp;&nbsp;
+                                <label for="password"><span class="redstar">* &nbsp;</span>비밀번호</label>&emsp;&emsp;&nbsp;&nbsp;
                                 <input type="password" id="password" class="pwinput" placeholder="비밀번호 (영 대/소문자, 숫자조합 8~16자)">
                                 <span id="msgPw"></span> <!-- 비밀번호 유효성 메세지 공간 -->
                             </div>
 
                             <div class="form-inline form-group">
-                                <label for="pw-confirm">비밀번호 확인</label>&nbsp;
+                                <label for="pw-confirm"><span class="redstar">* &nbsp;</span>비밀번호 확인</label>&nbsp;
                                 <input type="password" id="pw-confirm" class="pwcheckinput" placeholder="비밀번호를 확인해 주세요.">
                                 <span id="msgPw-c"></span> <!-- 비밀번호 유효성 메세지 공간 -->
                             </div>
 
                             <div class="form-inline form-group">
-                                <label for="hp">이메일</label>&emsp;&emsp;&emsp;&nbsp;
+                                <label for="hp"><span class="redstar">* &nbsp;</span>이메일</label>&emsp;&emsp;&emsp;&nbsp;
                                 <div class="input-group">
                                     <input type="text" id="#" class="email" style="width: 350px;" placeholder="이메일을 입력하세요.">
                                     <div class="input-group-addon">
@@ -545,7 +545,7 @@
                             </div>
 
                             <div class="form-inline form-group">
-                                <label for="addr-num">주소</label>&emsp;&emsp;&emsp;&emsp;&nbsp;
+                                <label for="addr-num"><span class="redstar">* &nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
                                 <div class="input-group">
                                     <input type="text" id="addr-num" class="postnum" placeholder="우편번호를 검색하세요." readonly>
                                     <div class="input-group-addon">
@@ -555,17 +555,17 @@
                             </div>
                             
                             <div class="form-inline form-group">
-                                <label for="fraddr">기본주소</label>&emsp;&emsp;&nbsp;
+                                <label for="fraddr"><span class="redstar">* &nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp;
                                 <input type="text" id="fraddr" class="fraddr" placeholder="기본주소를 입력하세요.">
                             </div>
 
                             <div class="form-inline form-group">
-                                <label for="seaddr">상세주소</label>&emsp;&emsp;&nbsp;
+                                <label for="seaddr">&emsp;상세주소</label>&emsp;&emsp;&nbsp;
                                 <input type="text" id="seaddr" class="seaddr" placeholder="상세주소를 입력하세요.">
                             </div>
 
                             <div class="form-group">
-                                <label for="hp">전화번호</label>&emsp;&emsp;&nbsp;
+                                <label for="hp">&emsp;전화번호</label>&emsp;&emsp;&nbsp;
                                 <div class="input-group">
                                     <select name="phone" class="phone">
                                         <option>010</option>
@@ -574,10 +574,13 @@
                                     </select>
                                     - <input type="text" name="phone2" class="phone2">
                                     - <input type="text" name="phone3" class="phone3">
-                                    <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">본인인증</button>
-                                    </div>
+
                                 </div>
+                            </div>
+
+                            <div class="form-inline form-group busnum" style="display: inline-block;">
+                                <label for="seaddr"><span class="redstar">* &nbsp;</span>사업자 번호</label>&emsp;
+                                <input type="text" id="" class="busnuminput" placeholder="사업자 번호를 입력하세요.">
                             </div>
 
                             <div class="endbtn clearfix">
@@ -596,11 +599,12 @@
             </div>
             </div>
     </section>
+    
 
 	<%@ include file="../include/footer.jsp" %>
 
 
-    <script>
+<script>
 
         function check() {
             const $form = document.regForm;
@@ -616,19 +620,28 @@
             const $phone2 = document.querySelector('.phone2');
             const $phone3 = document.querySelector('.phone3');
             const $agree = document.querySelector('.agree');
+            const $busnumdiv = document.querySelector('.busnum'); /* 사업자 번호 div : 일반회원 가입 시 display none */
+            const $busnuminput = document.querySelector('.busnuminput');
 
             const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value ; 
-
+	
+            
+            const idtest = /^[a-z]+[a-z0-9]{4,12}$/g;
             var pwtest = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
             var emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
             var phonetest = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+            var busnumtest = /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/;
 
             if($name.value === '') {
                 alert('이름을 입력해 주세요');
                 $name.focus();
                 return;
-            } else if ($id.value.length < 4 || $id.value.length > 12) {
-                alert('아이디는 4~12자 이어야 합니다.');
+            } else if($id.value === '') {
+            	alert('아이디를 입력해 주세요');
+                $id.focus();
+                return;
+            } else if (!idtest.test($id.value)) {
+                alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
                 return;
             } else if (!pwtest.test($pw.value)) {
                 alert('비밀번호는 하나 이상의 대문자 + 숫자 + 툭수문자 조합으로 8자리 이상 사용해야 합니다.');
@@ -647,20 +660,34 @@
                 return;
              /*} else if ($postnum.val === '') {
                 alert('우편번호를 검색하세요');
-                return; {*/
+                return; */
             } else if ($addr1.value === '') {
                 alert('기본 주소를 입력하세요');
                 $addr1.focus();
                 return;
-            } else if ($addr2.value === '') {
+            /*} else if ($addr2.value === '') {
                 alert('상세 주소를 입력하세요');
                 $addr2.focus();
-                return;
-            } else if (!phonetest.test(phone)) {
+                return; */
+            /*} else if (!phonetest.test(phone)) {
                 alert('전화번호 양식이 맞지 않습니다.');
                 $phone2.focus();
-                return;
-            } else if (!$agree.checked) {
+                return;*/
+
+                
+                /*사업자 영역이 display inline block일 때 발생*/
+            } else if ($busnumdiv.style.display == "inline-block") {
+                if($busnuminput.value == '') {
+                    alert('사업자 번호는 필수 입력 사항입니다.');
+                    $busnuminput.focus();
+                    return;
+                } else if(!busnumtest.test($busnuminput.value)) {
+                    alert('올바른 사업자등록번호 양식이 아닙니다.');
+                    $busnuminput.focus();
+                    return;
+                }
+
+            } if (!$agree.checked) {
                 alert('이용 약관을 동의해 주세요');
                 $agree.focus();
                 return;
@@ -675,6 +702,42 @@
 
 
         document.getElementById('regist').onclick = check;
+        
+        //제이쿼리 시작
+        $(function() {
+        	
+			// id idCheckBtn msgid
+			//아이디 중복체크 검증
+        	$('#idCheckBtn').click(function() {
+        		const id = $('#id').val();//아이디 값
+    			
+    			//비동기 통신 시작
+    			$.ajax({
+    				type: 'post',
+    				url: '<c:url value="/user/idCheck" />',
+    				data: id,
+    				contentType: 'application/json',
+    				success: function(data) {
+    					if(data === 'available') {
+    						$('#id').attr('readonly', true);
+    						$('#msgid').html('사용 가능한 아이디입니다.');
+    					} else {
+    						$('#msgid').html('중복된 아이디입니다.');
+    					}
+    				},
+    				error: function() {
+    					alert('서버 에러입니다. 관리자에게 문의하세요.');
+    				}
+    				
+    			});//중복체크 비동기 통신 끝
+    			
+    		});//아이디 중복 체크 끝
+			});//아이디 중복체크 끝
+        	
+        	
+		});//end jQuery
+        
+        
     </script>
 
     <!--
@@ -696,7 +759,22 @@
         '@' 포함여부와 대문자,소문자를 구분하지않게 표현식끝에 i 사용
 
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+
+        사업자 등록번호
+
+        숫자 3자리 - 숫자 2자리 - 숫자 5자리
+        /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/
+
+
+
+
+
 -->
+
+
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
 
 
 
