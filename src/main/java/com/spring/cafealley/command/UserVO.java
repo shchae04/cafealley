@@ -41,12 +41,4 @@ public class UserVO {
 	private long filenum;
 	private String admin;
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

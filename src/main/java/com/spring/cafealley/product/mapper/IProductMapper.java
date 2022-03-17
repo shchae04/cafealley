@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.spring.cafealley.command.ProductVO;
 
-public interface IPorductMapper {
+public interface IProductMapper {
 
-	List<ProductVO> select();
+	List<ProductVO> getList();
 }
