@@ -6,18 +6,18 @@
 <mapper namespace="com.spring.cafealley.reply.mapper.IReplyMapper">
 
 	<insert id="replyRegist">
-	INSERT INTO noreply (rno, bno, writer,content)
-	VALUES (noreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
+	INSERT INTO evreply (rno, bno, writer,content)
+	VALUES (evreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
 	</insert>
 	
 	<update id="replyUpdate">
-	UPDATE noreply
+	UPDATE evreply
 	SET content = #{content}, regdate = sysdate, ismod = '1'
 	WHERE rno = #{rno}
 	</update>
 	
 	<delete id="replyDelete">
-	DELETE FROM noreply
+	DELETE FROM evreply
 	WHERE rno = #{rno}
 	</delete>
 	
@@ -27,7 +27,7 @@
 			(
 			SELECT ROWNUM AS rn, tbl.* FROM
 				(
-				SELECT * FROM noreply
+				SELECT * FROM evreply
 				ORDER BY rno DESC
 				) tbl
 			)
