@@ -8,27 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/product")
 public class ProductController {
 
-	//관리자 상품 목록
+	//관리자 상품 목록 이동
 	@GetMapping("/productDetail")
-	public String getlist() {
-		
-		
-		return "product/productDetail";
-	}
+	public void getlist(){}
 	
-	//관리자 상품 수정
+	//
+	
+	
+	//관리자 상품 수정 이동
 	@GetMapping("/productModify")
-	public String modify() {
-		
-		return "product/productModify";
-	}
+	public void modify() {}
 	
 	
-	//관리자 상품 등록 
+	//관리자 상품 등록 이동
 	@GetMapping("/productWrite")
-	public String write() {
-		
-		return "product/productWrite";
-	}
+	public void write() {}
 	
 }
