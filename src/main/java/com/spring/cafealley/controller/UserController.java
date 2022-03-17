@@ -19,10 +19,7 @@ public class UserController {
 	private IUserService service;
 	
 	@GetMapping("/joinSelect")
-	public void joinSelect() {
-		
-	}
-	
+	public void joinSelect() {}
 	
 	
 	//일반 회원 가입버튼 클릭 시
@@ -34,10 +31,11 @@ public class UserController {
 	//사업자 회원 가입버튼 클릭 시 model객체에 사업자 회원 여부를 담음
 	@GetMapping("/formJoinBsns")
 	public String formJoinBsns(Model model) {
-		model.addAttribute("type", "general");
+		model.addAttribute("type", "business");
 		return "user/formJoin";
 	}
 	
+	//아이디 중복 체크(비동기)
 	@ResponseBody
 	@PostMapping("/idCheck")
 	public String idCheck(@RequestBody String userId) {

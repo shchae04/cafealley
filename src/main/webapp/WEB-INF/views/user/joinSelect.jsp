@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>       
 <!DOCTYPE html>
+
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 선택</title>
-    
-    <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
+    <title>회원 유형 고르기</title>
+    <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/> ">
  
     
 </head>
@@ -21,48 +21,51 @@
   	
     <div class="fin-container" style="margin-top: 200px;">
         <div class="fin-wrapper" style="display: block; margin: auto;">
+        
             <div>
                 <h1>회원가입</h1>
                 <br>
                 <span class="recborder">회원 가입 / 회원 유형</span>
-         
-                
-                
             </div>
-            <div class="" style="margin-top: 30px;">
-            <span class="fa-solid fa-user-group fa-10x"></span>
-                </div>
-       
+            
+            <div style="margin-top: 30px;">
+            	<span class="fa-solid fa-user-group fa-10x"></span>
+            </div>
+       </div>
 
         <div class="fin-wrapper" style="margin-top: 30px; width: 800px;">
             <div class="leftrec" style="display: inline-block;">
-                <div class="">
-                <div style="display: inline-block;">
-                    <h3 style="text-align: left;">개인회원</h3>
-                    <p style="text-align: left;">개인 회원 가입을 원하시면 선택해주세요</p>
-                    <br>
-                </div>
-                <div style="float: right;">
-                    <input id="genMember" class="recbtn" type="button" value="회원가입">
-                </div>
-                </div>
+                <div>
+                
+	                <div style="display: inline-block;">
+	                    <h3 style="text-align: left;">개인회원</h3>
+	                    <p style="text-align: left;">개인 회원 가입을 원하시면 선택해주세요</p>
+	                    <br>
+	                </div>
+	                
+	                <div style="float: right;">
+	                    <input id="genMember" class="recbtn" type="button" value="회원가입">
+	                </div>
+	                
+                </div><!-- 이름없는 div -->
 
-            </div>
+         	</div><!-- .leftrec -->
+         	
             <div class="leftrec" style="float: right;">
-                <div class="">
-                <div style="display: inline-block;">
-                    <h3 style="text-align: left;">사업자회원</h3>
-                    <p style="text-align: left;">사업자 회원 가입을 원하시면 선택해주세요</p>
-                    <br>
-                </div>
-                <div style="float: right;">
-                    <input id="bsnsMember" class="recbtn" type="button" value="회원가입">
-                </div>
-                </div>
-
-            </div>
-            </div>
-</div>
+                <div>
+	                <div style="display: inline-block;">
+	                    <h3 style="text-align: left;">사업자회원</h3>
+	                    <p style="text-align: left;">사업자 회원 가입을 원하시면 선택해주세요</p>
+	                    <br>
+	                </div>
+                	<div style="float: right;">
+	                    <input id="bsnsMember" class="recbtn" type="button" value="회원가입">
+	                </div>
+                </div><!-- 이름없는 div -->
+            </div><!-- .leftrec -->
+         </div><!-- fin-wrapper -->
+         
+	</div>
 
 
 
@@ -73,17 +76,20 @@
 			
 			//일반 회원 가입 클릭 시
 			$('#genMember').click(function() {
-				$('#genMember').attr("href", "<c: url value='/user/formJoinGen'/>");
+				location.href = "<c:url value='/user/formJoinGen' />";
 			});//일반 회원 클릭 이벤트 끝
 			
 			// 사업자 회원 가입 클릭 시
 			$('#bsnsMember').click(function() {
-				$('#bsnsMember').attr("href", "<c: url value='/user/formJoinBsns'/>");
+				location.href = "<c:url value='/user/formJoinBsns' />";
+
 			});//사업자 회원 클릭 이벤트 끝
 			
 		});//end jQuery
 	</script>
-
-
 </body>
+
+
 </html>
+
+>>>>>>> origin/Minji

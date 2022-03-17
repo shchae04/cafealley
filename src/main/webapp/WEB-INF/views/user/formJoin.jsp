@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -543,27 +543,31 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-inline form-group">
-                                <label for="addr-num"><span class="redstar">* &nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
-                                <div class="input-group">
-                                    <input type="text" id="addr-num" class="postnum" placeholder="우편번호를 검색하세요." readonly>
-                                    <div class="input-group-addon">
-                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">우편번호검색</button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-inline form-group">
-                                <label for="fraddr"><span class="redstar">* &nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp;
-                                <input type="text" id="fraddr" class="fraddr" placeholder="기본주소를 입력하세요.">
-                            </div>
-
-                            <div class="form-inline form-group">
-                                <label for="seaddr">&emsp;상세주소</label>&emsp;&emsp;&nbsp;
-                                <input type="text" id="seaddr" class="seaddr" placeholder="상세주소를 입력하세요.">
-                            </div>
-
+							
+							<!-- 사업자 회원에게만 보여짐 -->
+							<c:if test="${type == 'business'}">
+	                            <div class="form-inline form-group">
+	                                <label for="addr-num"><span class="redstar">* &nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
+	                                <div class="input-group">
+	                                    <input type="text" id="addr-num" class="postnum" placeholder="우편번호를 검색하세요." readonly>
+	                                    <div class="input-group-addon">
+	                                        <button class="btn btn-primary" style="background-color: lightgray; color: black; border: 0px;">우편번호검색</button>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="form-inline form-group">
+	                                <label for="fraddr"><span class="redstar">* &nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp;
+	                                <input type="text" id="fraddr" class="fraddr" placeholder="기본주소를 입력하세요.">
+	                            </div>
+	
+	                            <div class="form-inline form-group">
+	                                <label for="seaddr">&emsp;상세주소</label>&emsp;&emsp;&nbsp;
+	                                <input type="text" id="seaddr" class="seaddr" placeholder="상세주소를 입력하세요.">
+	                            </div>
+	                            
+							</c:if>
+							
                             <div class="form-group">
                                 <label for="hp">&emsp;전화번호</label>&emsp;&emsp;&nbsp;
                                 <div class="input-group">
@@ -577,11 +581,14 @@
 
                                 </div>
                             </div>
-
-                            <div class="form-inline form-group busnum" style="display: inline-block;">
-                                <label for="seaddr"><span class="redstar">* &nbsp;</span>사업자 번호</label>&emsp;
-                                <input type="text" id="" class="busnuminput" placeholder="사업자 번호를 입력하세요.">
-                            </div>
+							
+							<!-- 사업자 회원에게만 보여짐 -->
+							<c:if test="${type == 'business'}">
+	                            <div class="form-inline form-group busnum" style="display: inline-block;">
+	                                <label for="seaddr"><span class="redstar">* &nbsp;</span>사업자 번호</label>&emsp;
+	                                <input type="text" id="" class="busnuminput" placeholder="사업자 번호를 입력하세요.">
+	                            </div>
+                            </c:if>
 
                             <div class="endbtn clearfix">
                                 <div style="float: left;">
