@@ -7,12 +7,16 @@ import lombok.ToString;
 /*
  CREATE TABLE img (
 	filenum	NUMBER(5,0)	NOT NULL,
-	filename	VARCHAR2(50)		NOT NULL,
-	filename2	VARCHAR2(50)		NOT NULL,
-	filename3	VARCHAR2(50)		NOT NULL,
-	filepath	VARCHAR2(100)		NULL,
-	foldername	VARCHAR2(50)		NULL
+	filename	VARCHAR2(50)NOT NULL,
+	filename2	VARCHAR2(50) NULL,
+	filename3	VARCHAR2(50) NULL,
+	filepath	VARCHAR2(100)NULL,
+	foldername	VARCHAR2(50)NULL
 );
+
+--파일 name2,3은 null이 가능하게 수정함.
+ALTER TABLE img MODIFY filename2 VARCHAR2(50) NULL;
+ALTER TABLE img MODIFY filename3 VARCHAR2(50) NULL;
 
 CREATE SEQUENCE file_seq
     START WITH 1

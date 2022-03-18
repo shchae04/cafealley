@@ -34,7 +34,7 @@ public class ProductVO {
 	private int prono;
 	private String proname;
 	private int proprice;
-	private int prosellrrice;
+	private int prosellprice;
 	private String procategory;
 	private String prodetail;
 	private int prostock;

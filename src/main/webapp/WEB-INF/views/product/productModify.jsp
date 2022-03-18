@@ -232,6 +232,7 @@ input {
 	<%@ include file="../include/header.jsp"%>
 
 	<section>
+	<form action="productModi" method="post" enctype="mulitpart/form-data">
 		<div class="container">
 			<p class="page-title">상품 수정</p>
 			<p class="page-desc">
@@ -252,7 +253,7 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="prod-category"><select name="" id="category">
+								<td class="prod-category"><select name="procategory" id="category">
 										<option value="non-selected">-</option>
 										<option value="">원두</option>
 										<option value="">티/액상차</option>
@@ -263,21 +264,21 @@ input {
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
 										드롭하여<br>이미지를<br>업로드하세요
-								</label> <input type="file" name="" id="img" disabled></td>
+								</label> <input type="file" name="filename" id="img" disabled></td>
 								<td class="prod-info">옵션 존재시 상품명과 함께 괄호내에 옵션명 기재<br>
-									ex) 상품명(옵션명)<br> <input type="text" name="" placeholder=""
+									ex) 상품명(옵션명)<br> <input type="text" name="proname" placeholder=""
 									disabled>
 								</td>
-								<td class="prod-qty numeric"><input type="number" name=""
+								<td class="prod-qty numeric"><input type="number" name="prostock"
 									min="1" max="99999" disabled></td>
-								<td class="prod-normal-price numeric"><input type="text"
+								<td class="prod-normal-price numeric"><input type="text" name="proprice"
 									onkeyup="regex(this)" disabled> 원</td>
-								<td class="prod-discount-price numeric"><input type="text"
+								<td class="prod-discount-price numeric"><input type="text" name="prosellprice"
 									onkeyup="regex(this)" disabled>원</td>
 							</tr>
 							<tr>
 								<td class="prod-desc" colspan="7">
-									<p>상품 상세설명</p> <textarea name="" id="" disabled></textarea>
+									<p>상품 상세설명</p> <textarea name="prodetail" id="" disabled></textarea>
 								</td>
 							</tr>
 
@@ -302,7 +303,7 @@ input {
 		</div>
 
 
-
+	</form>
 	</section>
 
 	<%@ include file="../include/footer.jsp" %>
