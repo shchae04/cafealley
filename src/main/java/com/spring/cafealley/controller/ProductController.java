@@ -55,4 +55,10 @@ public class ProductController {
 		return "redirect:/product/productList";
 	}
 	
+	@PostMapping("/productModify")
+	public String modify(ProductVO vo,HttpSession session) {
+		service.updateProduct(vo);
+		System.out.println("productModify: Post요청");
+		return "redirec:/product/productList";
+	}
 }

@@ -21,8 +21,10 @@ public class OrderingService implements IOrderingService {
 	}
 
 	@Override
-	public List<OrderingVO> getList() {
-		return mapper.getList();
+	public List<OrderingVO> getList(String userid) {
+		List<OrderingVO> list = mapper.getList(userid);
+		System.out.println(list);
+		return list;
 	}
 
 	@Override
@@ -33,9 +35,8 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public void modify(OrderingVO vo) {
-		// TODO Auto-generated method stub
-
-	}
+		mapper.modify(vo);
+	}	
 
 	@Override
 	public void delete(int ordernum) {

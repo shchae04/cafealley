@@ -30,7 +30,7 @@
 		<div class="container">
 			<div class="row rowtext" style="margin: 0 auto;">
 				<div class="col-xs-12 join-form">
-					<form action="<c:url value='/user/genUserJoin' />" method="post" class="form-inline" id="regForm" name="regForm">
+					<form action="<c:url value='/user/joinFinish' />" method="post" class="form-inline" id="regForm" name="regForm">
 						<div class="toprow">
 							<pre class="jointx">
 <!--줄 맞춤 xx-->
@@ -569,7 +569,7 @@
 											placeholder="우편번호를 검색하세요." readonly>
 										<div class="input-group-addon">
 											<button id="btnZipCode" class="btn btn-primary"
-												style="background-color: lightgray; color: black; border: 0px;">우편번호검색</button>
+												style="background-color: lightgray; color: black; border: 0px;"  onclick="searchAddress()">우편번호검색</button>
 										</div>
 									</div>
 								</div>
@@ -596,13 +596,13 @@
 										<option>011</option>
 										<option>018</option>
 									</select> - <input type="text" id="userphone2" name="userphone2" class="phone2"> - <input
-										type="text" name="phone3" id="userphone3" class="phone3">
+										type="text" name="userphone3" id="userphone3" class="phone3">
 
 								</div>
 							</div>
 
 							<!-- 사업자 회원에게만 보여짐 -->
-							<c:if test="${type == 'business'}">
+							<c:if test="${userType == 'business'}">
 								<div class="form-inline form-group busnum"
 									style="display: inline-block;">
 									<label for="seaddr"><span class="redstar">*
@@ -632,8 +632,7 @@
 	<%@ include file="../include/footer.jsp"%>
 
 	<!-- 카카오 api를 이용하기 위한 코드 -->
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 	<script>
 		//제이쿼리 시작
@@ -679,19 +678,13 @@
 			});//아이디 중복 체크 끝
 			
 			
-			//우편번호 검색 버튼 클릭 시 주소 api
-			$('#btnZipCode').click(function() {
-				$('#regist').attr('type', 'button');
-				searchAddress();
-			});
-			
-			
-			
 			
 		});//end jQuery
-
+		
+		/*
 		//다음 주소 api 사용해보기
 		function searchAddress() {
+			document.getElementById('regist').setAttribute('type', 'button');
 	        new daum.Postcode({
 	            oncomplete: function(data) {
 	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -712,24 +705,13 @@
 	                document.getElementById('postnum').value = data.zonecode;
 	                document.getElementById("fraddr").value = addr;
 	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("fraddr").focus();
+	                document.getElementById("seaddr").focus();
 	            }
 	        }).open();
 	    }
-		
+		*/
 
-		const userType = '${userType}';
 		
-		// 회원가입 버튼 누르면 정규표현식 발동
-		document.getElementById('regist').onclick = function() {
-			if(userType === 'business') {
-				console.log('userType = business 정규표현식 발동');
-				bsnsMemcheck();
-			} else{
-				console.log('userType = null 정규표현식 발동');
-				genMemcheck();
-			}
-		}
 		
 		
 		const $form = document.regForm;
@@ -768,10 +750,10 @@
                 $name.focus();
                 return;
             } else if (!idtest.test($id.value)) {
-				alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
+				alert('아이디는 4~12자의 영문자와 숫자 조합이어야 합니다.');
 				return;
 			} else if (!pwtest.test($pw.value)) {
-                alert('비밀번호는 하나 이상의 대문자 + 숫자 + 툭수문자 조합으로 8자리 이상 사용해야 합니다.');
+                alert('비밀번호는 하나 이상의 대문자와 숫자, 특수문자 조합으로 8자리 이상이어야 합니다.');
                 $pw.value = '';
                 $pw.focus();
                 return;
@@ -785,34 +767,18 @@
                 alert('이메일 양식이 올바르지 않습니다 예)aaa@aaa.aaa');
                 $email.focus();
                 return;
-             /*} else if ($postnum.val === '') {
-                alert('우편번호를 검색하세요');
-                return; */
             } else if ($addr1.value === '') {
                 alert('기본 주소를 입력하세요');
                 $addr1.focus();
                 return;
-            /*} else if ($addr2.value === '') {
-                alert('상세 주소를 입력하세요');
-                $addr2.focus();
-                return; */
-            /*} else if (!phonetest.test(phone)) {
-                alert('전화번호 양식이 맞지 않습니다.');
-                $phone2.focus();
-                return;*/
-
-                
-                /*사업자 영역이 display inline block일 때 발생*/
-            } else if ($busnumdiv.style.display == "inline-block") {
-                if($busnuminput.value == '') {
+            } if($busnuminput.value == '') {
                     alert('사업자 번호는 필수 입력 사항입니다.');
                     $busnuminput.focus();
                     return;
-                } else if(!busnumtest.test($busnuminput.value)) {
-                    alert('올바른 사업자등록번호 양식이 아닙니다.');
-                    $busnuminput.focus();
-                    return;
-                }
+             } else if(!busnumtest.test($busnuminput.value)) {
+                 alert('올바른 사업자등록번호 양식이 아닙니다.');
+                 $busnuminput.focus();
+                 return;
 
             } if (!$agree.checked) {
                 alert('이용 약관을 동의해 주세요');
@@ -821,7 +787,6 @@
             }
             if(confirm('회원가입 하시겠습니까?')) {
 				console.log('사업자회원 정규표현식 통과');
-				$form.setAttribute('action', '<c:url value="/user/bsnsUserJoin" />');
                 $form.submit();
             } else {
                 return;
@@ -843,7 +808,7 @@
 				$id.focus();
 				return;
 			} else if (!idtest.test($id.value)) {
-				alert('아이디는 4~12자의 영문자와 숫자조합이어야 합니다.');
+				alert('아이디는 4~12자의 영문자와 숫자 조합이어야 합니다.');
 				return;
 			} else if (!pwtest.test($pw.value)) {
 				alert('비밀번호는 하나 이상의 대문자와 숫자, 특수문자 조합으로 8자리 이상이어야 합니다.');
@@ -875,6 +840,18 @@
 
 		}
 		
+		const userType = '${userType}';
+		
+		// 회원가입 버튼 누르면 정규표현식 발동
+		document.getElementById('regist').onclick = function() {
+			if(userType === 'business') {
+				console.log('userType = business 정규표현식 발동');
+				bsnsMemcheck();
+			} else{
+				console.log('userType = null 정규표현식 발동');
+				genMemcheck();
+			}
+		}
 
 	
 	</script>

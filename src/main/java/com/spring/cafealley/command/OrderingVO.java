@@ -1,8 +1,11 @@
 package com.spring.cafealley.command;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -50,6 +53,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderingVO {
 	private int ordernum;
 	private String userid;
@@ -107,5 +112,6 @@ public class OrderingVO {
 		this.paybank = paybank;
 	}		
 	
+	private List<CartVO> ordercart;
 	
 }

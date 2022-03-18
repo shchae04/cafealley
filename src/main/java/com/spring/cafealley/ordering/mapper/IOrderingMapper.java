@@ -8,7 +8,7 @@ public interface IOrderingMapper {
 	
 	void order(OrderingVO vo);
 	
-	List<OrderingVO> getList();
+	List<OrderingVO> getList(String userId);
 	
 	OrderingVO getOrder();
 	

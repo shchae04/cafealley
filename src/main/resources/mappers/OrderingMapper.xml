@@ -6,6 +6,62 @@
   
   <mapper namespace="com.spring.cafealley.ordering.mapper.IOrderingMapper">
   
+  	<!-- VO클래스의 멤버변수가 컬렉션 타입일 경우에는 collection 태그를 이용합니다. -->
+	<!--
+		collection 타입의 변수에 값을 매길 때는 어떤 객체로 포장해서 넣을 지를
+		새로운 resultMap으로 선언해 주셔야 합니다.
+	 -->
+  	<resultMap type="com.spring.cafealley.command.OrderingVO" id="orderInfo">
+  		<id property="ordernum" column="ordernum"/>
+  		<result property="userid" column="userid"/>
+  		<result property="carttype" column="carttype"/>
+  		<result property="ordertotalprice" column="ordertotalprice"/>
+  		<result property="orderstatus" column="orderstatus"/>
+  		<result property="orderdate" column="orderdate"/>
+  		<result property="deliverytracknum" column="deliverytracknum"/>
+  		<result property="orderusername" column="orderusername"/>
+  		<result property="orderuserphone1" column="orderuserphone1"/>
+  		<result property="orderuserphone2" column="orderuserphone2"/>
+  		<result property="orderuserphone3" column="orderuserphone3"/>
+  		<result property="orderuseremail" column="orderuseremail"/>
+  		<result property="deliveryname" column="deliveryname"/>
+  		<result property="deliverypostnum" column="deliverypostnum"/>
+  		<result property="deliverybasicaddr" column="deliverybasicaddr"/>
+  		<result property="deliverydetailaddr" column="deliverydetailaddr"/>
+  		<result property="deliveryphone1" column="deliveryphone1"/>
+  		<result property="deliveryphone2" column="deliveryphone2"/>
+  		<result property="deliveryphone3" column="deliveryphone3"/>
+  		<result property="deliverymemo" column="deliverymemo"/>
+  		<result property="paymethod" column="paymethod"/>
+  		<result property="paybankname" column="paybankname"/>
+  		<result property="paybank" column="paybank"/>
+  		<result property="refundreason" column="refundreason"/>
+  		<result property="refunddetailreason" column="refunddetailreason"/>
+  		<result property="refundtracknum" column="refundtracknum"/>
+  		<result property="refundbankname" column="refundbankname"/>
+  		<result property="refundbank" column="refundbank"/>
+  		<collection property="ordercart" resultMap="cart"/>
+  	</resultMap>
+  	
+  	
+  	<resultMap type="com.spring.cafealley.command.CartVO" id="cart">
+  		<id property="cartno" column="cartno"/>
+  		<result property="carttype" column="carttype"/>
+  		<result property="prono" column="prono"/>
+  		<result property="userid" column="userid"/>
+  		<result property="cartamount" column="cartamount"/>
+  		<result property="carttotalprice" column="carttotalprice"/>
+  	</resultMap>
+  	
+  
+  	<sql id="update">
+  		<if test="deliverytracknum != null and deliverytracknum != '' ">
+  			,deliverytracknum = #{deliverytracknum}
+  		</if>
+  	</sql>
+  
+  
+  
   
   	<insert id="order">
   	INSERT INTO ordering
@@ -21,26 +77,35 @@
   	#{paymethod}, #{paybankname}, #{paybank})
   	</insert>
   	
-  	<select id="getList" resultType="com.spring.cafealley.command.OrderingVO">
-  	SELECT * FROM ordering
+  	<select id="getList" resultMap="orderInfo">
+  	SELECT o.*,
+  		   c.*
+  	  FROM ordering o 
+  	  LEFT OUTER JOIN cart c
+  	    ON o.userid = c.userid 
+  	   AND o.carttype = c.carttype
+  	 WHERE o.userid = #{userid}
+  	 ORDER BY o.ordernum DESC
   	</select>
   	
   	
   	<select id="getOrder" resultType="com.spring.cafealley.command.OrderingVO">
-  	SELECT * FROM ordering
-  	WHERE ordernum = #{ordernum}
+  	SELECT * 
+  	  FROM ordering
+  	 WHERE ordernum = #{ordernum}
   	</select>
   	
   	
   	<update id="modify">
   	UPDATE ordering
-  	SET orderstatus = #{orderstatus}, deliverytracknum = #{deliverytracknum}
-  	WHERE ordernum = #{ordernum}
+  	   SET orderstatus = #{orderstatus}
+  		   <include refid="update"></include>
+  	 WHERE ordernum = #{ordernum}
   	</update>
   	
   	<delete id="delete">
-  	delete ordering
-  	WHERE ordernum = #{ordernum}
+  	DELETE ordering
+  	 WHERE ordernum = #{ordernum}
   	</delete>
   
   

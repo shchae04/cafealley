@@ -22,7 +22,7 @@
 		<div class="finor-wrapper2" style="margin: 40px; text-align: center;">
 			<h3>주문 결제</h3>
 		</div>
-		<div class="finor-wrapper2"">
+		<div class="finor-wrapper2">
 			<h4 style="text-align: left;">주문 상세 내역</h4>
 		</div>
 		<div class="finor-wrapper2">

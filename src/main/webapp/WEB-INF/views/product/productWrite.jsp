@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+    <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
+
 
 <style>
 body {
@@ -200,7 +202,7 @@ input {
 .prod-img input[type="file"] {
 	width: 100px;
 	height: 100px;
-	margin-right: -20px;
+	margin-right: -30px;
 	background: transparent;
 	color: transparent;
 	z-index: 999;
@@ -235,7 +237,6 @@ input {
 
 	<%@ include file="../include/header.jsp"%>
 
-
 	<section>
 	<form action="productWrite" method="post" enctype="multipart/form-data">
 		<div class="container">
@@ -260,12 +261,13 @@ input {
 							<tr>
 								<td class="prod-category"><select name="procategory" id="category">
 										<option value="non-selected">-</option>
-										<option value="원두">원두</option>
-										<option value="티">티/액상차</option>
-										<option value="우유">유제품</option>
-										<option value="시럽">시럽/소스</option>
-										<option value="파우더">파우더/농축액</option>
-										<option value="커피용품">커피용품, 머신</option>
+										<option value="beans">원두</option>
+										<option value="tea">티/액상차</option>
+										<option value="milk">유제품</option>
+										<option value="syrup">시럽/소스</option>
+										<option value="powder">파우더/농축액</option>
+										<option value="coffeemachine">커피용품, 머신</option>
+
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
 										드롭하여<br>이미지를<br>업로드하세요
@@ -283,15 +285,12 @@ input {
 							</tr>
 							<tr>
 								<td class="prod-desc" colspan="7">
-									<p>상품 상세설명</p> <textarea name="prodetail" id="" disabled></textarea>
+
+									<p>상품 상세설명</p> <textarea name="prodetail" id="prod-desc" disabled></textarea>
+
 								</td>
 							</tr>
-
 						</tbody>
-
-						<tfoot>
-
-						</tfoot>
 					</table>
 					<br>
 					<div class="lower-bar clearfix">
@@ -301,13 +300,9 @@ input {
 							</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
-
 		</div>
-
-
 	</form>
 	</section>
 
@@ -339,23 +334,69 @@ input {
 
         const $tableinputs = document.querySelectorAll('.table input'); // 테이블 내의 인풋
         const $tabletextarea = document.querySelector('.table textarea'); // 테이블 내의 텍스트에리어
-
-        // 카테고리 선택해야 diabled 풀리게끔하기.
+        const $prodDesc = document.getElementById('prod-desc');
+        
+        // 카테고리 선택시 이벤트
         $table.addEventListener('change', e => {
             if (!e.target.matches('#category')) {
                 return;
             }
+         	// 카테고리 선택해야 diabled 풀리게끔하기.
             if (e.target.value === 'non-selected') {
                 for (let $input of $tableinputs) {
                     $input.setAttribute('disabled', true);
                 }
                 $tabletextarea.setAttribute('disabled', true);
+                $prodDesc.textContent ='';
+                return;
             } else {
                 for (let $input of $tableinputs) {
                     $input.removeAttribute('disabled');
                 }
                 $tabletextarea.removeAttribute('disabled');
             }
+         	
+         	// 어떤 카테고리를 선택했느냐에 따라 textarea에 미리 띄워놓는다.
+         	if(e.target.value === 'beans'){
+         		$prodDesc.innerHTML = `
+제조연월일 : ex) 발주확인 후 당일 로스팅 생산방식
+유통기한 : ex) 제조일로부터 1년
+용량 : ex) 200g, 1kg/1P
+원재료및 함량 : ex) 아라비카 원두커피 100%
+상품 설명 : `;
+         	}
+         	else if (e.target.value === 'tea'){
+         		$prodDesc.innerHTML = `
+제조연월일 : ex) 별도표기
+유통기한 : ex) 제품뒷면표기일까지 (일,월,년,순)
+보관방법 : ex) 직사광선을 피하고 건조 서늘한 곳 또는 냉장보관/개봉 후에는 변질 우려가 있으므로 빠른 시일내에 섭취 요망
+제조국가 : ex) 뉴질랜드
+수입원 : ex) 샷 베버리지스 코리아 유한회사
+상품 설명 : `;
+         	}
+         	else if (e.target.value === 'syrup'){
+				$prodDesc.innerHTML = `
+제조연월일 : ex) 유통기한에서 36개월 전
+유통기한 : ex) 제품 상단 표기월 1일까지
+상품 설명 : 
+수입원 : ex) (주)애니원에프앤씨`;
+         	}
+         	else if (e.target.value ==='powder'){
+         		$prodDesc.innerHTML = `
+제조연월일 : ex) 별도표기
+유통기한 : ex) 제품뒷면표기일까지 (일,월,년,순)
+보관방법 : ex) 직사광선을 피하고 건조 서늘한 곳 보관`;
+         	}
+         	else if (e.target.value ==='milk'){
+         		$prodDesc.innerHTML = `
+제조연월일 : ex) 별도표기
+유통기한 : ex) 제품뒷면표기일까지 (일,월,년,순)
+상품 설명 : `;	
+         	}
+         	else{
+         		$prodDesc.innerHTML = `
+상품설명 : `;
+         	}	
         });
 
         // 유효성검사
@@ -379,13 +420,13 @@ input {
                 return;
             }
         });
+        
         function regex(input){
             input.value = input.value.replace(/[^0-9]{1,10}/g,"");
             if(parseInt(input.value)>999999999){
                 input.value="";
             }
         }
-
 
         // 이미지 파일 업로드시 이미지 파일 띄우게끔
         const $imgfile = document.querySelector('#img');
@@ -406,16 +447,10 @@ input {
                 reader.onload = function (event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
                     // 위에서 얻어온 img태그 아이디를 통해 img src 바꿔줌.
                     $('label[for="img"]').html('<img id="fileImg" src="'+ event.target.result + '" alt="upload" style="width:100px; height:100px;"/>');
-                    $('#fileImg').css('margin-top', '-20px');
+                    $('#fileImg').css('margin-top', '-30px');
                 }
         }
 
-
-
-
-
     </script>
-
-
 </body>
 </html>

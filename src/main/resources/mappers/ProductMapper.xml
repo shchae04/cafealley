@@ -9,17 +9,23 @@
   
   
   <sql id="category">
-		<if test="procategory == '원두'">
-			WHERE procategory = '원두'
+		<if test="procategory == 'beans'">
+			WHERE procategory = 'beans'
 		</if>
-		<if test="procategory == '시럽'">
-			WHERE procategory = '시럽'
+		<if test="procategory == 'tea'">
+			WHERE procategory = 'tea'
 		</if>
-		<if test="procategory == '커피머신'">
-			WHERE procategory = '커피머신'
+		<if test="procategory == 'milk'">
+			WHERE procategory = 'milk'
 		</if>
-		<if test="procategory == '캡슐'">
-			WHERE procategory = '캡슐'
+		<if test="procategory == 'syrup'">
+			WHERE procategory = 'syrup'
+		</if>
+		<if test="procategory == 'powder'">
+			WHERE procategory = 'powder'
+		</if>
+		<if test="procategory == 'coffeemachine'">
+			WHERE procategory = 'coffemachine'
 		</if>
 	</sql>
   
