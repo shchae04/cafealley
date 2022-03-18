@@ -420,6 +420,7 @@ tfoot tr td {
                                                                   그럼 이 페이지에서 가져올 때는 나중에 JS로직으로 만약 상품명 가져와서 안에 괄호 있는지 확인 들어감. 있으면 이 p태그에 띄우는 것. -->
 								</td>
 								<td class="prod-qty">
+								<!--추가  -->
 									<p>52</p>
 								</td>
 								<td class="prod-normal-price">
