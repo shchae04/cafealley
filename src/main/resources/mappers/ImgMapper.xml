@@ -8,8 +8,8 @@
 
 <insert id="upload">
 INSERT INTO img
-(filenum, filename, filename2, filename3, filepath, foldername)
-VALUES(file_seq.NEXTVAL, #{filename}, #{filename2}, #{filename3}, #{filepath}, #{foldername})
+(filenum, filename, filepath, foldername)
+VALUES(file_seq.NEXTVAL, #{filename}, #{filepath}, #{foldername})
 
 </insert>
 
