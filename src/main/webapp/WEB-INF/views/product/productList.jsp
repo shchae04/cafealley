@@ -141,8 +141,18 @@ section {
 	line-height: 1px;
 }
 
+.cart-table>tbody>tr>td>img{
+	margin-top: 20px;
+}
+
+
 .cart-table>tbody>tr>td>p {
-	margin: 0;
+	display: block;
+	padding: 5px;
+	margin-top: 50px;
+	padding: 5px;
+	width: auto;
+	height: 20px;
 }
 
 input[type="number"] {
@@ -172,8 +182,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: relative;
 }
 
-.cart-table>thead>tr>td, .cart-table>tbody>tr>td, .cart-table>tfoot>tr>td
-	{
+.cart-table>thead>tr>td, 
+.cart-table>tbody>tr>td, 
+.cart-table>tfoot>tr>td
+{
 	margin: 0;
 	vertical-align: middle;
 }
@@ -190,27 +202,27 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: absolute;
 }
 
-.cart-table button {
-	width: auto;
-	height: 20px;
-}
-
 .cart-table tr {
 	border-top: 1px solid #ddd;
+	
 }
 
 tfoot tr td {
 	border-top: none;
 }
 
-.cart-table .btn-direct-order .btn-remove {
-	margin: 7px;
-}
 
-.btn-remove, .btn-modify {
+.cart-table tr td p > .btn-remove,
+.cart-table tr td p > .btn-modify {
 	display: block;
-	padding: 5px;
 	cursor: pointer;
+	margin-left: 70px;
+}
+.cart-table>tbody>tr>td:last-child>p:first-child{
+	margin-top: 40px;
+}
+.cart-table>tbody>tr>td:last-child>p:last-child{
+	margin-top: 0;
 }
 
 .btn-remove:hover, .btn-modify:hover {
@@ -303,13 +315,13 @@ tfoot tr td {
 						<div class="divforleft">
 							<p>종류</p>
 							<ul class="select-category">
-								<li><a href="#">전체</a></li>
-								<li><a href="#">원두</a></li>
-								<li><a href="#">티/액상차</a></li>
-								<li><a href="#">유제품</a></li>
-								<li><a href="#">시럽/소스</a></li>
-								<li><a href="#">파우더/농축액</a></li>
-								<li><a href="#">커피용품, 머신</a></li>
+								<li><a href="<c:url value='product/productList'/>">전체</a></li>
+								<li><a href="<c:url value='product/productList/beans'/>">원두</a></li>
+								<li><a href="<c:url value='product/productList/tea'/>">티/액상차</a></li>
+								<li><a href="<c:url value='product/productList/milk'/>">유제품</a></li>
+								<li><a href="<c:url value='product/productList/syrup'/>">시럽/소스</a></li>
+								<li><a href="<c:url value='product/productList/powder'/>">파우더/농축액</a></li>
+								<li><a href="<c:url value='product/productList/coffeemachine'/>">커피용품, 머신</a></li>
 							</ul>
 						</div>
 						<div class="divforright">
@@ -325,7 +337,7 @@ tfoot tr td {
 
 
 					<table class="table w-auto text-center align-middle cart-table">
-						<thead>
+						<thead>				
 							<tr>
 								<td>상품 카테고리</td>
 								<td>상품 이미지</td>
@@ -338,106 +350,7 @@ tfoot tr td {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="prod-category">
-									<p>원두</p>
-								</td>
-								<td class="prod-img"><img src="<c:url value='/img/paul bassett.jpg'/>"
-									alt="" width="100px" height="100px"></td>
-								<td class="prod-number">
-									<p>1</p>
-								</td>
-								<td class="prod-info">
-									<p>폴 바셋 시그니처 블렌드 풀 포텐셜</p>
-									<p>(에스프레소 분쇄)</p> <!--  이 부분은 우리가 옵션컬럼이 없으니, 작성페이지에서 옵션이 있으면 어떤 옵션인지 상품명에 함께 () 내에 적으라고 할 것임. 
-                                                                  사실 관리자가 적는 것이니 트롤링하지 않는다는 전제로 어떤 로직을 짜서 강제하지는 않을 것.
-                                                                  그럼 이 페이지에서 가져올 때는 나중에 JS로직으로 만약 상품명 가져와서 안에 괄호 있는지 확인 들어감. 있으면 이 p태그에 띄우는 것. -->
-								</td>
-								<td class="prod-qty">
-									<p>52</p>
-								</td>
-								<td class="prod-normal-price">
-									<p>27,000원</p>
-								</td>
-								<td class="prod-discount-price">
-									<p>15,902원</p>
-								</td>
-								<td>
-									<p class="btn-modify">
-										수정<span class="glyphicon glyphicon-erase"></span>
-									</p>
-									<p class="btn-remove">
-										삭제<span class="glyphicon glyphicon-remove"> </span>
-									</p>
-								</td>
-							</tr>
-							<tr>
-								<td class="prod-category">
-									<p>원두</p>
-								</td>
-								<td class="prod-img"><img src="<c:url value='/img/paul bassett.jpg'/>"
-									alt="" width="100px" height="100px"></td>
-								<td class="prod-number">
-									<p>1</p>
-								</td>
-								<td class="prod-info">
-									<p>폴 바셋 시그니처 블렌드 풀 포텐셜</p>
-									<p>(에스프레소 분쇄)</p> <!--  이 부분은 우리가 옵션컬럼이 없으니, 작성페이지에서 옵션이 있으면 어떤 옵션인지 상품명에 함께 () 내에 적으라고 할 것임. 
-                                                                  사실 관리자가 적는 것이니 트롤링하지 않는다는 전제로 어떤 로직을 짜서 강제하지는 않을 것.
-                                                                  그럼 이 페이지에서 가져올 때는 나중에 JS로직으로 만약 상품명 가져와서 안에 괄호 있는지 확인 들어감. 있으면 이 p태그에 띄우는 것. -->
-								</td>
-								<td class="prod-qty">
-									<p>52</p>
-								</td>
-								<td class="prod-normal-price">
-									<p>27,000원</p>
-								</td>
-								<td class="prod-discount-price">
-									<p>15,902원</p>
-								</td>
-								<td>
-									<p class="btn-modify">
-										수정<span class="glyphicon glyphicon-erase"></span>
-									</p>
-									<p class="btn-remove">
-										삭제<span class="glyphicon glyphicon-remove"> </span>
-									</p>
-								</td>
-							</tr>
-							<tr>
-								<td class="prod-category">
-									<p>원두</p>
-								</td>
-								<td class="prod-img"><img src="<c:url value='/img/paul bassett.jpg'/>"
-									alt="" width="100px" height="100px"></td>
-								<td class="prod-number">
-									<p>1</p>
-								</td>
-								<td class="prod-info">
-									<p>폴 바셋 시그니처 블렌드 풀 포텐셜</p>
-									<p>(에스프레소 분쇄)</p> <!--  이 부분은 우리가 옵션컬럼이 없으니, 작성페이지에서 옵션이 있으면 어떤 옵션인지 상품명에 함께 () 내에 적으라고 할 것임. 
-                                                                  사실 관리자가 적는 것이니 트롤링하지 않는다는 전제로 어떤 로직을 짜서 강제하지는 않을 것.
-                                                                  그럼 이 페이지에서 가져올 때는 나중에 JS로직으로 만약 상품명 가져와서 안에 괄호 있는지 확인 들어감. 있으면 이 p태그에 띄우는 것. -->
-								</td>
-								<td class="prod-qty">
-								<!--추가  -->
-									<p>52</p>
-								</td>
-								<td class="prod-normal-price">
-									<p>27,000원</p>
-								</td>
-								<td class="prod-discount-price">
-									<p>15,902원</p>
-								</td>
-								<td>
-									<p class="btn-modify">
-										수정<span class="glyphicon glyphicon-erase"></span>
-									</p>
-									<p class="btn-remove">
-										삭제<span class="glyphicon glyphicon-remove"> </span>
-									</p>
-								</td>
-							</tr>
+							
 						</tbody>
 
 						<tfoot>
@@ -459,26 +372,65 @@ tfoot tr td {
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
-        const $table = document.querySelector('.table');
 
-        // 삭제버튼 누르면 tr삭제하는 로직
-        $table.addEventListener('click', e => {
-            if (!(e.target.matches('.btn-remove') || e.target.matches('.glyphicon-remove'))) {
-                return;
-            }
+        
+        $(function(){
+            let str = '';
+            // let page = 1; 나중에 페이지 적용되면..
+            getList(true);
 
-            // 여기에 상품이 등록된 판매게시글이 있는지 여부 확인해서 돌려보내거나
-            // 아니면 삭제를 진행하고 아래의 tr삭제를 진행하도록 하자.
+        	// 목록을 불러오는 함수
+        	function getList(reset){
+        		if(reset===true){
+        			str='';
+        		}
+        	
+	        	$.getJSON(
+	        			'<c:url value="/product/getList"/>',
+	        			function(productList){
+	        				console.log(productList);
+							for(let i=0; i<productList.length; i++){
+								str+="<tr>";
+								str+="<td class='+ prod-category'>";
+								str+="<p>" + productList[i].procategory + "</p>";
+								str+="</td>";
+								str+="<td class='prod-img'><img src='/cafealley/loadimg/display/"+ productList[i].filenum+ "/1'";
+								str+="alt='상품이미지'" + " width='100px'" + " height='100px'"+ "></td>";
+								str+="<td class='prod-number'>";
+								str+="<p>"+productList[i].prono+"</p>";
+								str+="</td>";
+								str+="<td class='prod-info'>";
+								str+="<p>"+productList[i].proname+"</p>";
+								str+="</td>";
+								str+="<td class='prod-qty'>";
+								str+="<p>"+productList[i].prostock+"</p>";
+								str+="</td>";
+								str+="<td class='prod-normal-price'>";
+								str+="<p>"+productList[i].proprice+"</p>";
+								str+="</td>";
+								str+="<td class='prod-discount-price'>";
+								str+="<p>"+productList[i].prosellprice+"</p>";
+								str+="</td>";
+								str+="<td>";
+								str+="<p style='width: fit-content; height: fit-content;'>";
+								str+="<span class='glyphicon glyphicon-erase btn-modify' id='"+productList[i].prono+"'>수정</span>";
+								str+="</p>";
+								str+="<p style='width: fit-content; height: fit-content;'>";
+								str+="<span class='glyphicon glyphicon-remove btn-remove' id='"+productList[i].prono + "'>삭제</span>";
+								str+="</p>";
+								str+="</td>";
+								str+="</tr>";
+								
+								$('tbody').html(str);
+							}
+	        			}// end function
+				); // end get JSON
+        	}
+        	
+        });
+        
+        
 
-
-            // 해당 tr삭제
-            if (e.target.matches('.btn-remove')) {
-                e.preventDefault();
-                e.target.parentNode.parentNode.remove();
-            } else {
-                e.target.parentNode.parentNode.parentNode.remove();
-            }
-        })
     </script>
 
 

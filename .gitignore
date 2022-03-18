@@ -3,4 +3,4 @@
 .project
 .springBeans
 target
-.properties
+Hikari.properties

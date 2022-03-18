@@ -728,7 +728,6 @@
 		const $phone3 = document.querySelector('.phone3');
 		const $agree = document.querySelector('.agree');
 		const $busnumdiv = document.querySelector('.busnum');
-		//사업자 번호 div : 일반회원 가입 시 display none
 		const $busnuminput = document.querySelector('.busnuminput');
 
 		//const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value;

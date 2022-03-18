@@ -1,6 +1,8 @@
 package com.spring.cafealley.command;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -25,7 +27,7 @@ CREATE SEQUENCE file_seq
     NOCYCLE
     NOCACHE;
   */
-
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -38,6 +40,35 @@ public class ImgVO {
 	private String filename3;
 	private String filepath;
 	private String foldername;
+	
+
+
+	public ImgVO(int filenum, String filename, String filepath, String foldername) {
+		super();
+		this.filenum = filenum;
+		this.filename = filename;
+		this.filepath = filepath;
+		this.foldername = foldername;
+	}
+
+	public ImgVO(int filenum, String filename, String filename2, String filepath, String foldername) {
+		super();
+		this.filenum = filenum;
+		this.filename = filename;
+		this.filename2 = filename2;
+		this.filepath = filepath;
+		this.foldername = foldername;
+	}
+	
+	public ImgVO(int filenum, String filename, String filename2, String filename3, String filepath, String foldername) {
+		super();
+		this.filenum = filenum;
+		this.filename = filename;
+		this.filename2 = filename2;
+		this.filename3 = filename3;
+		this.filepath = filepath;
+		this.foldername = foldername;
+	}
 	
 
 }

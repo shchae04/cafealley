@@ -271,7 +271,7 @@ input {
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
 										드롭하여<br>이미지를<br>업로드하세요
-								</label> <input type="file" name="filename" id="img" disabled></td>
+								</label> <input type="file" name="file" id="img" disabled></td>
 								<td class="prod-info">옵션 존재시 상품명과 함께 괄호내에 옵션명 기재<br>
 									ex) 상품명(옵션명)<br> <input type="text" name="proname" placeholder=""
 									disabled>

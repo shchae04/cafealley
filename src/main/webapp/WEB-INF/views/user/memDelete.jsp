@@ -54,14 +54,14 @@
 							value="hong1234" disabled>
 					</div>
 					<div>
-						<span>비밀번호 확인</span> &nbsp; <input type="password" value="">
+						<span>비밀번호 확인</span> &nbsp; <input type="password" id="userpw">
 					</div>
 				</div>
 				<div class="mw-button">
-					<button type="submit">
+					<button type="submit" id="btnDel">
 						<span
-							style="color: white; font-size: 20px; vertical-align: middle;">탈퇴
-							하기</span>
+							style="color: white; font-size: 20px; vertical-align: middle;">탈퇴하기
+						</span>
 					</button>
 				</div>
 				<br> <br>
@@ -72,8 +72,55 @@
 
 	</div>
 
-	<%@ include file="../include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp"%>
+
+
+	<script>
 	
+		/*
+		//제이쿼리 시작
+		$(function() {
+
+			const userpw = $('#userpw').val();
+			
+			$('#btnDel').click(function() {
+				
+				console.log('탈퇴하기 버튼 클릭됨');
+				
+				if(userpw === '') {// 공백 체크
+					alert('비밀번호를 입력해 주세요.');
+				}
+				
+				//비동기 통신 시작
+				$.ajax({
+					type = 'post',
+					url = '<c:url value="/user/memDelete" />',
+					data = userpw,
+					contentType : 'application/json',
+					success : function(data) {
+						if (data == 'match') {
+							console.log('비동기 success');
+							$('#userpw').attr('readonly', true);
+							alert('탈퇴되었습니다.');
+							location.href = "<c:url value='/' />";
+						} else {
+							console.log('비동기 fail');
+							alert('비밀번호를 확인해 주세요.');
+						}
+					},
+					error : function() {
+						console.log('비동기 error');
+						alert('서버 에러입니다. 관리자에게 문의하세요.');
+					}
+				});//end ajax
+				
+
+			});//탈퇴버튼 이벤트 끝
+
+		});//end jQuery
+		*/
+	</script>
+
 </body>
 
 </html>
