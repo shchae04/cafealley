@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
             margin: 160px auto;
         }
         .container{
-            min-width: 1200px;
+            min-width: 1100px;
         }
 
         .ord-mgmt-title {
@@ -53,10 +54,10 @@
     
     <section>
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
+            
+                
                     <p class="ord-mgmt-title">주문 관리</p>
-                    <table class="table ord-mgmt-table w-auto text-center align-middle">
+                    <table class="table ord-mgmt-table w-auto text-center align-middle" style="min-width: 800px; max-width: 1000px; min-height: 400px;">
                         <thead>
                             <tr>
                                 <td>주문번호</td>
@@ -65,44 +66,67 @@
                                 <td>주문 정보</td>
                                 <td>주문 날짜</td>
                                 <td>주문 상태</td>
-                                <td>배송 정보</td>
+                                <c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' }">
+                                	<td>배송 정보</td>
+                                </c:if>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="min-width: 1200px;">
+                        <c:forEach var="order" items="${orderList}">
                             <tr>
-                                <td>1</td>
-                                <td>abc1234</td>
-                                <td>${orderlist.userid}</td>
+                                <td>${order.ordernum}</td>
+                                <td>${order.userid}</td>
+                                <td>${order.ordertotalprice}</td>
+                                <td><a href="#">상품번호 :
+                                	<c:forEach var="cart" items="${order.ordercart}">
+                                		${cart.prono},
+                                	</c:forEach> 
+                                </a></td>
+                                <!-- 
                                 <td><a href="#">xxxx 외 x개</a></td>
-                                <td>22/03/10</td>
+                                 -->
+                                <td> <fmt:formatDate value="${order.orderdate}" pattern="YY/MM/dd hh:mm" /> </td>
                                 <td>
                                     <select>
-                                        <option value="wait-dep">입금대기중</option>
-                                        <option value="dep-cmp">입금완료</option>
-                                        <option value="pre-del">배송준비중</option>
-                                        <option value="being-del">배송중</option>
+                                        <option value="waitdeposit" ${order.orderstatus == 'waitdeposit' ? 'selected' : '' } >입금대기중</option>
+                                        <option value="completedeposit" ${order.orderstatus == 'completedeposit' ? 'selected' : ''}>입금완료</option>
+                                        <option value="waitdelivery" ${order.orderstatus == 'waitdelivery' ? 'selected' : ''} >배송준비중</option>
+                                        <option value="ontheboard">${order.orderstatus == 'ontheboard' ? 'selected' : '' }</option>
                                     </select>
                                 </td>
                                 <td>
+                                	<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' }">
                                     <button id="btn-del-info">배송정보보기</button>
+                                    </c:if>
+                                </td>
+                                <td>
+                                	<button class="btn-modify" type="button">수정하기</button>
                                 </td>
                             </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
 
-                </div>
-            </div>
+                
+            
         </div>
     </section>
 
     <%@ include file="../include/footer.jsp" %>
         
     <script>
+    
         $(function(){
             $('#btn-del-info').click(function(){
                 window.open('http://127.0.0.1:5500/orderManagement.html', '사용자 배송정보', 'width=500, height=700, scrollbars=yes, resizable=no')
             });//배송정보보기 버튼 이벤트 끝
         }); //end jQuery
+        
+        
+		const $table = document.querySelector('.table');
+    	$table.addEventListener('click', e=>{
+    		if(!e.target.matches(''))
+    	});
     </script>
 
 </body>
