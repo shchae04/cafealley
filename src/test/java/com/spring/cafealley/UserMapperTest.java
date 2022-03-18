@@ -52,7 +52,7 @@ public class UserMapperTest {
 	
 	@Test
 	public void deleteUserTest() {// 회원 탈퇴 테스트 완료
-		mapper.deleteUser("abc1234", "abcd1234");
+		mapper.deleteUser("abc1234");
 	}
 	
 

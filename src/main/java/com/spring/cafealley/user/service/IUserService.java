@@ -11,13 +11,6 @@ public interface IUserService {
 	//회원 가입
 	void userJoin(UserVO vo);
 	
-	/*
-	//일반회원 가입
-	void genUserJoin(UserVO vo);
-	
-	//사업자 회원가입
-	void bsnsUserJoin(UserVO vo);
-	*/
 	//로그인
 	UserVO login(String userId, String userPw);
 	
@@ -27,8 +20,13 @@ public interface IUserService {
 	//회원정보 수정
 	void updateUser(UserVO vo);
 	
+	//비밀번호 확인
+	int checkPw(String userpw);
+
+	
 	//회원 정보 삭제
-	void deleteUser(String userId, String userPw);
+	void deleteUser(String userPw);
+	//void deleteUser(String userId, String userPw);
 	
 	
 }
