@@ -65,13 +65,12 @@
                                 <td>총 주문 가격</td>
                                 <td>주문 정보</td>
                                 <td>주문 날짜</td>
-                                <td>주문 상태</td>
-                                <c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' }">
-                                	<td>배송 정보</td>
-                                </c:if>
+                                <td>주문 상태</td>                                
+								<td> </td>
+                                
                             </tr>
                         </thead>
-                        <tbody style="min-width: 1200px;">
+                        <tbody>
                         <c:forEach var="order" items="${orderList}">
                             <tr>
                                 <td>${order.ordernum}</td>
@@ -100,7 +99,7 @@
                                     </c:if>
                                 </td>
                                 <td>
-                                	<button class="btn-modify" type="button">수정하기</button>
+                                	<button class="btn-modify" type="button" onclick="location.href='<c:url value="/ordering/orderModify"/>">수정하기</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -125,7 +124,12 @@
         
 		const $table = document.querySelector('.table');
     	$table.addEventListener('click', e=>{
-    		if(!e.target.matches(''))
+    		// 수정버튼만 통과
+    		if(!e.target.matches('.btn-modify')){
+    			return;
+    		}
+    		
+    		
     	});
     </script>
 

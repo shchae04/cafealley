@@ -39,7 +39,6 @@ header {
     left: 0;
     top: 0;
     min-width: 1200px;
-	max-width: 1200px;
     width: 100%;
     z-index: 50;
     background-color: white;
@@ -131,7 +130,6 @@ a:active {
 
 footer {
     min-width: 1200px;
-    max-width: 1200px;
     width: 100%;
     height: 250px;
     color: #ffffff;
