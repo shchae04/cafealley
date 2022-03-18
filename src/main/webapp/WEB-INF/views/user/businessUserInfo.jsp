@@ -62,15 +62,7 @@
 
 					<br>
 					<h3>
-						<c:choose>
-							<c:when test="${not empty userInfo.businessnum}">
-								<strong>사업자 회원 정보</strong>
-							</c:when>
-							<c:otherwise>
-								<strong>회원 정보</strong>
-							</c:otherwise>
-						</c:choose>
-						
+						<strong>사장님 회원 정보</strong>
 					</h3>
 
 					<div class="tab-content">
@@ -89,30 +81,11 @@
 												class="form-control input-sm" name="userid" readonly>
 											</td>
 										</tr>
-										
-										<c:choose>
-											<c:when test="${not empty userInfo.businessnum}">
-												<tr>
-													<td>*카페 이름</td>
-													<td>
-													<input value="${login.username}" style="width: 180px; cursor: default;"
-														class="form-control input-sm" name="username" readonly>
-													</td>
-												</tr>
-											</c:when>
-											<c:otherwise>
-												<tr>
-													<td>*회원 이름</td>
-													<td>
-													<input value="${login.username}" style="width: 180px; cursor: default;"
-														class="form-control input-sm" name="username" readonly>
-													</td>
-												</tr>
-											</c:otherwise>
-										</c:choose>
-										
-										
-										
+										<tr>
+											<td>*카페이름</td>
+											<td><input value="${login.username}" style="width: 180px; cursor: default;"
+												class="form-control input-sm" name="username" readonly></td>
+										</tr>
 										<tr>
 											<td>*비밀번호</td>
 											<td>
@@ -143,50 +116,36 @@
 										</tr>
 										<tr>
 											<td>휴대폰</td>
-											<td>
-												<select style="width: 70px; dlsplay: inline-block;"
-													class="form-control input-sm sel" name="userphone1">
-														<option>010</option>
-														<option>011</option>
-														<option>017</option>
-														<option>018</option>
-												</select>
-												<input style="width: 120px; dlsplay: inline-block;" class="form-control input-sm"
-													id="userphone3" name="userphone3" maxlength="4"
-													placeholder="숫자 4자리 입력">
-												<input style="width: 120px; dlsplay: inline-block;" class="form-control input-sm"
-													id="userphone3" name="userphone3" maxlength="4"
-													placeholder="숫자 4자리 입력">
-												</td>
+											<td><select style="width: 70px;"
+												class="form-control input-sm sel" name="userphone1">
+													<option>010</option>
+													<option>011</option>
+													<option>017</option>
+													<option>018</option>
+											</select> <input style="width: 120px;" class="form-control input-sm"
+												id="userphone2" name="userphone2" maxlength="8"
+												placeholder="숫자 8자리 입력"></td>
 										</tr>
-										<c:if test="${empty userInfo.businessnum}">
-											<tr>
-												<td>MEMBERSHIP</td>
-												<td><a href="#">가입 링크</a></td>
-											</tr>
-										</c:if>
-										<c:if test="${not empty userInfo.businessnum}">
-											<tr>
-												<td>*우편번호</td>
-												<td><input style="width: 180px; cursor: auto;"
-													class="form-control input-sm" id="addrzipnum"
-													name="addrzipnum" readonly>
-													<button type="button" class="btn btn-primary" id="addrBtn">주소찾기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>*카페주소</td>
-												<td><input style="width: 500px; cursor: auto;"
-													class="form-control input-sm add" id="addrbasic"
-													name="addrbasic" readonly></td>
-											</tr>
-											<tr>
-												<td>*상세주소</td>
-												<td><input style="width: 500px; cursor: auto;"
-													class="form-control input-sm add" id="addrdetail"
-													name="addrdetail" readonly></td>
-											</tr>
-										</c:if>
+										<tr>
+											<td>*우편번호</td>
+											<td><input style="width: 180px; cursor: auto;"
+												class="form-control input-sm" id="addrzipnum"
+												name="addrzipnum" readonly>
+												<button type="button" class="btn btn-primary" id="addrBtn">주소찾기</button>
+											</td>
+										</tr>
+										<tr>
+											<td>*카페주소</td>
+											<td><input style="width: 500px; cursor: auto;"
+												class="form-control input-sm add" id="addrbasic"
+												name="addrbasic" readonly></td>
+										</tr>
+										<tr>
+											<td>*상세주소</td>
+											<td><input style="width: 500px; cursor: auto;"
+												class="form-control input-sm add" id="addrdetail"
+												name="addrdetail" readonly></td>
+										</tr>
 									</tbody>
 								</table>
 							</form>
