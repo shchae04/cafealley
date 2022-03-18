@@ -237,6 +237,7 @@ input {
 
 
 	<section>
+	<form action="productWrite" method="post" enctype="multipart/form-data">
 		<div class="container">
 			<p class="page-title">상품 등록</p>
 			<p class="page-desc">
@@ -257,32 +258,32 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="prod-category"><select name="" id="category">
+								<td class="prod-category"><select name="procategory" id="category">
 										<option value="non-selected">-</option>
-										<option value="">원두</option>
-										<option value="">티/액상차</option>
-										<option value="">유제품</option>
-										<option value="">시럽/소스</option>
-										<option value="">파우더/농축액</option>
-										<option value="">커피용품, 머신</option>
+										<option value="원두">원두</option>
+										<option value="티">티/액상차</option>
+										<option value="우유">유제품</option>
+										<option value="시럽">시럽/소스</option>
+										<option value="파우더">파우더/농축액</option>
+										<option value="커피용품">커피용품, 머신</option>
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
 										드롭하여<br>이미지를<br>업로드하세요
-								</label> <input type="file" name="" id="img" disabled></td>
+								</label> <input type="file" name="filename" id="img" disabled></td>
 								<td class="prod-info">옵션 존재시 상품명과 함께 괄호내에 옵션명 기재<br>
-									ex) 상품명(옵션명)<br> <input type="text" name="" placeholder=""
+									ex) 상품명(옵션명)<br> <input type="text" name="proname" placeholder=""
 									disabled>
 								</td>
-								<td class="prod-qty numeric"><input type="number" name=""
+								<td class="prod-qty numeric"><input type="number" name="prostock"
 									min="1" max="99999" disabled></td>
-								<td class="prod-normal-price numeric"><input type="text"
+								<td class="prod-normal-price numeric"><input name="proprice" type="text"
 									onkeyup="regex(this)" disabled> 원</td>
-								<td class="prod-discount-price numeric"><input type="text"
+								<td class="prod-discount-price numeric"><input name="prosellprice" type="text"
 									onkeyup="regex(this)" disabled>원</td>
 							</tr>
 							<tr>
 								<td class="prod-desc" colspan="7">
-									<p>상품 상세설명</p> <textarea name="" id="" disabled></textarea>
+									<p>상품 상세설명</p> <textarea name="prodetail" id="" disabled></textarea>
 								</td>
 							</tr>
 
@@ -307,7 +308,7 @@ input {
 		</div>
 
 
-
+	</form>
 	</section>
 
 
@@ -390,6 +391,9 @@ input {
         const $imgfile = document.querySelector('#img');
         $imgfile.addEventListener('change', e=>{
             readURL(e.target);
+            //파일 업로드시 DB에 업로드
+            /* form.action='upload';
+            form.submit(); */
         });
         
         function readURL(input){

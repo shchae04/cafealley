@@ -38,9 +38,8 @@ public class ProductTest {
 	
 	@Test
 	public void getList() {
-		//getList에 category 값을 주고 동적 sql문 작성하면 카테고리별로 불러오기.
-		List<ProductVO> list = mapper.getList("시럽");
-		
+		//getList에 category 값을 주고 동적 sql문 작성 카테고리별로 불러오기.
+		List<ProductVO> list = mapper.getList("시럽"); //카테고리명 작성
 		for(ProductVO vo :list) {
 			System.out.println(vo);
 		}

@@ -10,7 +10,7 @@ import com.spring.cafealley.command.ProductVO;
 public interface IProductMapper {
 
 	//상품 전체목록 가져오기 category 동적sql
-	List<ProductVO> getList(@Param("procategory") String category);
+	List<ProductVO> getList(@Param("procategory") String procategory);
 	
 	//상품 등록하기
 	void insertProduct(ProductVO vo);

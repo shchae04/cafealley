@@ -6,5 +6,10 @@ public interface IImgMapper {
 	
 	//파일 업로드
 	void upload(ImgVO vo);
-
+	
+	//파일 가져오기?
+	ImgVO select(int filenum);
+	
+	//파일 삭제
+	void delete(int filenum);
 }
