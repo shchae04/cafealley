@@ -35,9 +35,8 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public void modify(OrderingVO vo) {
-		// TODO Auto-generated method stub
-
-	}
+		mapper.modify(vo);
+	}	
 
 	@Override
 	public void delete(int ordernum) {

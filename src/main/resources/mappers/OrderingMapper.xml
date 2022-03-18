@@ -54,6 +54,14 @@
   	</resultMap>
   	
   
+  	<sql id="update">
+  		<if test="deliverytracknum != null and deliverytracknum != '' ">
+  			,deliverytracknum = #{deliverytracknum}
+  		</if>
+  	</sql>
+  
+  
+  
   
   	<insert id="order">
   	INSERT INTO ordering
@@ -70,31 +78,34 @@
   	</insert>
   	
   	<select id="getList" resultMap="orderInfo">
-  	SELECT 
-  		o.*,
-  		c.*
-  	FROM ordering o LEFT OUTER JOIN cart c
-  	ON o.userid = c.userid AND o.carttype = c.carttype
-  	WHERE o.userid = #{userid}
-  	ORDER BY o.ordernum DESC
+  	SELECT o.*,
+  		   c.*
+  	  FROM ordering o 
+  	  LEFT OUTER JOIN cart c
+  	    ON o.userid = c.userid 
+  	   AND o.carttype = c.carttype
+  	 WHERE o.userid = #{userid}
+  	 ORDER BY o.ordernum DESC
   	</select>
   	
   	
   	<select id="getOrder" resultType="com.spring.cafealley.command.OrderingVO">
-  	SELECT * FROM ordering
-  	WHERE ordernum = #{ordernum}
+  	SELECT * 
+  	  FROM ordering
+  	 WHERE ordernum = #{ordernum}
   	</select>
   	
   	
   	<update id="modify">
   	UPDATE ordering
-  	SET orderstatus = #{orderstatus}, deliverytracknum = #{deliverytracknum}
-  	WHERE ordernum = #{ordernum}
+  	   SET orderstatus = #{orderstatus}
+  		   <include refid="update"></include>
+  	 WHERE ordernum = #{ordernum}
   	</update>
   	
   	<delete id="delete">
-  	delete ordering
-  	WHERE ordernum = #{ordernum}
+  	DELETE ordering
+  	 WHERE ordernum = #{ordernum}
   	</delete>
   
   

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +44,15 @@ public class OrderingController {
 		List<OrderingVO> orderlist = service.getList(userid);
 		System.out.println(orderlist);
 		model.addAttribute("orderList" , orderlist);		
-	}	
+	}
+	@PostMapping("/orderModify/{ordernum}/{orderstatus}")
+	public String modify(@PathVariable int ordernum,
+						 @PathVariable String orderstatus) {
+		OrderingVO vo = new OrderingVO();
+		vo.setOrdernum(ordernum);
+		vo.setOrderstatus(orderstatus);
+		service.modify(vo);
+		return "redirect:/ordering/orderManagement";
+	}
 	
 }
