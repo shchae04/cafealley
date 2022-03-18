@@ -1,5 +1,7 @@
 package com.spring.cafealley.controller;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,10 @@ public class OrderingController {
 	@GetMapping("/orderManagement")
 	public void manage(Model model){
 		System.out.println("/ordering/orderManagement: GET");
-		model.addAttribute("orderlist" ,service.getList());		
+		String userid="abc1234";
+		List<OrderingVO> orderlist = service.getList(userid);
+		System.out.println(orderlist);
+		model.addAttribute("orderList" , orderlist);		
 	}	
 	
 }
