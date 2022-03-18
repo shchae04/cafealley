@@ -9,17 +9,9 @@ public interface IUserMapper {
 	// 아이디 중복 확인
 	int idCheck(String userId);
 	
-	
 	//회원 가입
 	void userJoin(UserVO vo);
-	
-	/*
-	// 일반회원 가입
-	void genUserJoin(UserVO vo);
 
-	// 사업자 회원가입
-	void bsnsUserJoin(UserVO vo);
-	*/
 	// 로그인
 	UserVO login(@Param("userid") String userId, @Param("userpw") String userPw);
 
@@ -28,8 +20,12 @@ public interface IUserMapper {
 
 	// 회원 정보 수정
 	void updateUser(UserVO vo);
+	
+	//비밀번호 확인
+	int checkPw(String userpw);
 
 	// 회원 탈퇴
-	void deleteUser(@Param("userid") String userId, @Param("userpw") String userPw);
+	void deleteUser(String userPw);
+	//void deleteUser(@Param("userid") String userId, @Param("userpw") String userPw);
 
 }
