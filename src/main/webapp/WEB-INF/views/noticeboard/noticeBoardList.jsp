@@ -2,21 +2,52 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
-    
+
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
+    <style>
+  
+  		.pagination {
+            margin-left: 430px;
+        }
+
+        .pagination .page-link {
+            color: #000;
+        }
+
+        .pagination .cur-page {
+            background: #000;
+            color: #fff;
+        }
+        .pagination .page-link:active,
+        .pagination .page-pre:active,
+        .pagination .page-link:focus,
+        .pagination .page-pre:focus,
+        .pagination .page-link:hover,
+        .pagination .page-pre:hover {
+            color: #000;
+        }
     
+    </style>
+
 </head>
 
 <body>
 
+
+
 <%@ include file="../include/header.jsp" %>
+
+
+
+
     <section>
 
         <div class="container" style="margin-top: 150px;">
@@ -42,7 +73,7 @@
                                     <option value="writer">작성자</option>
 
                                 </select>
-                                <button id="searchbtn" type="button" class="btn btn-info search-btn">검색</button>
+                                <button id="searchbtn" type="button" class="btn search-btn">검색</button>
                                 <input type="text" class="form-control search-input">
                             </div>
 
@@ -125,28 +156,52 @@
                     </tbody>
                 </table>
 
+                		<button style="float: right;" type="button" class="write btn"
+                		onclick="location.href='<c:url value="/noBoard/noWrite" />'"
+                		>글쓰기</button>
                 <hr>
-                <button type="button" class="write btn btn-info">글쓰기</button>
 
 
-                <div class="text-center">
-                    <ul class="pagination mypage">
-                        <li><a href="#">이전</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">다음</a></li>
-                    </ul>
-                </div>
+           		<!-- 페이징 처리 부분  -->
+           				<div style="text-align: center; margin-top:50px;">
+                        
+                        <ul class="pagination">
+                            <!-- 이전 버튼 -->
+                            <li class="page-pre">
+                                <a class="page-link" href="#">이전</a>
+                            </li>
 
+                            <!-- 페이지 번호 버튼 -->
+                            <li class="page-num">
+                                <a href="#" class="page-link cur-page">1</a>
+                            </li>
+                            <li class="page-num">
+                                <a href="#" class="page-link">2</a>
+                            </li>
+                            <li class="page-num">
+                                <a href="#" class="page-link">3</a>
+                            </li>
+                            <li class="page-num">
+                                <a href="#" class="page-link">4</a>
+                            </li>
+                            <li class="page-num">
+                                <a href="#" class="page-link">5</a>
+                            </li>
+
+                            <!-- 다음 버튼 -->
+                            <li class="page-next">
+                                <a class="page-link" href="#">다음</a>
+                            </li>
+                        </ul>
+                        <!-- 페이징 처리 끝 -->
+						</div>
 
 
             </div>
         </div>
         </div>
     </section>
+
 
 <%@ include file="../include/footer.jsp" %>
 
@@ -161,6 +216,8 @@
             location.href = "/project/list?keyword=" + keyword + "&condition=" + condition;
 
         });
+        
+       
     </script>
 
 

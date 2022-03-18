@@ -60,5 +60,6 @@
 	<mybatis-spring:scan base-package="com.spring.cafealley.membership.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.cafealley.product.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.cafealley.user.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.cafealley.reply.mapper"/>
 		
 </beans>

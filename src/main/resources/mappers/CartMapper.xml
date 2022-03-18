@@ -7,18 +7,20 @@
 
 <mapper namespace="com.spring.cafealley.cart.mapper.ICartMapper">
 
-<!-- 등록 하기 -->
+<!-- 장바구니 등록 하기 -->
 <insert id="insert">
-	INSERT INTO cart(cartno, prono, userid, countno, counttotal)
-	VALUES(cart_seq.NEXTVAL, #{prono}, #{userid}, #{countno}, #{counttotal})
+	INSERT INTO cart(cartno, carttype, prono, userid, countno, counttotal)
+	VALUES(cart_seq.NEXTVAL, carttype_seq.NEXTVAL, #{prono}, #{userid}, #{countno}, #{counttotal})
 </insert>
 
+<!--  장바구니 찾기 -->
 <select id="select" resultType="com.spring.cafealley.command.CartVO">
 	SELECT * FROM cart
 	WHERE userid = #{userid}
 </select>
 
 
+<!--  장바구니 삭제하기 -->
 <delete id="delete">
 	DELETE FROM cart
 	WHERE cartno = #{cartno}

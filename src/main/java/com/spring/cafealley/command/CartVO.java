@@ -4,20 +4,32 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 /*
+
 CREATE TABLE cart (
-	cartno	NUMBER(5,0)	NOT NULL,
+	cartno	NUMBER(10,0) PRIMARY KEY,
+    carttype NUMBER(10,0) NOT NULL,
 	prono	NUMBER(5,0) NOT NULL,
 	userid	VARCHAR2(50)	NOT NULL,
-	countno	NUMBER(5,0)	NOT NULL,
-	counttotal	NUMBER(5,0)	NOT NULL
+	cartamount NUMBER(5,0) NOT NULL,
+	carttotalprice NUMBER(10,0)	NOT NULL
 );
 
 CREATE SEQUENCE cart_seq
     START WITH 1
     INCREMENT BY 1
-    MAXVALUE 1000
+    MAXVALUE 10000
     NOCYCLE
-    NOCACHE;*/
+    NOCACHE;
+    
+    CREATE SEQUENCE carttype_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 10000
+    NOCYCLE
+    NOCACHE;
+    
+    
+    */
 
 @Getter
 @Setter
@@ -25,11 +37,10 @@ CREATE SEQUENCE cart_seq
 public class CartVO {
 	
 	private int cartno;
+	private int carttype;
 	private int prono;
 	private String userid;
-	private int countno;
-	private int counttotal;
-	
-	
+	private int cartamount;
+	private int carttotalprice;	
 
 }

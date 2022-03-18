@@ -7,9 +7,34 @@
   
   <mapper namespace="com.spring.cafealley.product.mapper.IProductMapper">
   
-  <select id="getList">
+  
+  
+  
+  <select id="getList" resultType="com.spring.cafealley.command.ProductVO">
   SELECT * FROM product
+  WHERE procategory = #{procategory}
   </select>
   
+  <insert id="insertProduct">
+  INSERT INTO product (prono,proname,proprice,prosellprice,procategory,prodetail,prostock,filenum)
+  VALUES (pro_seq.NEXTVAL,#{proname},#{proprice},#{prosellprice},#{procategory},#{prodetail},#{prostock},#{filenum})
+  </insert>
+  
+  <update id="updateProduct" >
+  UPDATE product
+  SET proname =#{proname}, proprice=#{proprice}, prosellprice= #{prosellprice},procategory= #{procategory}
+  ,prodetail=#{prodetail},prostock=#{prostock},filenum=#{filenum}
+  WHERE prono = #{prono}
+  </update>
+  
+  <delete id="deleteProduct">
+  DELETE FROM product
+  WHERE prono =#{prono}
+  </delete>
+  
+  <select id="getProduct" resultType="com.spring.cafealley.command.ProductVO">
+  SELECT * FROM product
+  WHERE prono =#{prono}
+  </select>
   
   </mapper>
