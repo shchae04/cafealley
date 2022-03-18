@@ -1,12 +1,18 @@
 package com.spring.cafealley.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.cafealley.product.service.IProductService;
+
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+	
+	@Autowired
+	private IProductService service;
 
 	//관리자 상품 목록 이동
 	@GetMapping("/productDetail")
