@@ -285,8 +285,7 @@ input {
 							</tr>
 							<tr>
 								<td class="prod-desc" colspan="7">
-									<p>상품 상세설명</p> <textarea name="" id="prod-desc" disabled></textarea>
-
+									<p>상품 상세설명</p> <textarea name="prodetail" id="prod-desc" disabled></textarea>
 								</td>
 							</tr>
 						</tbody>
