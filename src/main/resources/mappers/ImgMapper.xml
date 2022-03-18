@@ -6,24 +6,42 @@
 
 <mapper namespace="com.spring.cafealley.img.mapper.IImgMapper">
 
-<insert id="upload">
-INSERT INTO img
-(filenum, filename, filename2, filename3, filepath, foldername)
-VALUES(file_seq.NEXTVAL, #{filename}, #{filename2}, #{filename3}, #{filepath}, #{foldername})
+<sql id="uploadfiles">
+<if test="filename2 != null and filename2 != '' ">filename2,</if>
+<if test="filename3 != null and filename3 != '' ">filename2, filename3,</if>
+</sql>
 
+<sql id="uploadfiles2">
+<if test="filename2 != null and filename2 != '' ">#{filename2},</if>
+<if test="filename3 != null and filename3 != '' ">#{filename2}, #{filename3},</if>
+</sql>
+
+
+<insert id="upload">
+INSERT
+  INTO img
+	   (filenum, filename, <include refid="uploadfiles"/> filepath, foldername)
+VALUES (file_seq.NEXTVAL, #{filename}, <include refid="uploadfiles2"/> #{filepath}, #{foldername})
 </insert>
 
+<select id="getLastUploaded" resultType="int">
+	SELECT MAX(filenum)
+	  FROM img
+</select>
+
 <select id="select" resultType="com.spring.cafealley.command.ImgVO">
-	SELECT * FROM img
-	WHERE filenum = #{filenum}
+	SELECT * 
+	  FROM img
+	 WHERE filenum = #{filenum}
 </select>
 
 <update id="">
 </update>
 
 <delete id="delete">
-	DELETE FROM img
-	WHERE filenum = #{filenum}
+	DELETE
+	  FROM img
+	 WHERE filenum = #{filenum}
 </delete>
 	
 	

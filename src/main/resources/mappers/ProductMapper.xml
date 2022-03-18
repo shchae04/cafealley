@@ -8,25 +8,11 @@
   <mapper namespace="com.spring.cafealley.product.mapper.IProductMapper">
   
   
-  <sql id="category">
-		<if test="procategory == '원두'">
-			WHERE procategory = '원두'
-		</if>
-		<if test="procategory == '시럽'">
-			WHERE procategory = '시럽'
-		</if>
-		<if test="procategory == '커피머신'">
-			WHERE procategory = '커피머신'
-		</if>
-		<if test="procategory == '캡슐'">
-			WHERE procategory = '캡슐'
-		</if>
-	</sql>
   
   
   <select id="getList" resultType="com.spring.cafealley.command.ProductVO">
   SELECT * FROM product
-  <include refid="category"/>
+  WHERE procategory = #{procategory}
   </select>
   
   <insert id="insertProduct">
