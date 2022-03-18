@@ -3,4 +3,4 @@
 .project
 .springBeans
 target
-src/main/resources/db-config/Hikari.properties
+Hikari.properties
