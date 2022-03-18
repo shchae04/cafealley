@@ -146,6 +146,20 @@ public class UserController {
 		*/
 		
 	}//end loginCheck()
+	
+	//마이페이지로 이동
+	@GetMapping("/businessUserInfo")
+	public void businessUserInfo(HttpSession session, Model model) {
+		
+
+		System.out.println("컨트롤러의 businessUserInfo 메서드 발동");
+		
+		String userid = ((UserVO)session.getAttribute("login")).getUserid();
+		
+		UserVO userInfo = service.getInfo(userid);
+		model.addAttribute("userInfo", userInfo);
+		
+	}
 
 	// 탈퇴페이지로 이동
 	@GetMapping("/memDelete")

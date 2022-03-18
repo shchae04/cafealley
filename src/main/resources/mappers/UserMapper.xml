@@ -50,15 +50,15 @@
 	<update id="updateUser">
 		UPDATE users
 		SET userpw = #{userpw},
-		userphone1 = #{userphone1},
-		userphone2 = #{userphone2},
-		userphone3 = #{userphone3},
-		useremail = #{useremail},
-		addrbasic = #{addrbasic},
-		addrdetail = #{addrdetail},
-		zipcode = #{zipcode},
-		businessnum = #{businessnum},
-		filenum = #{filenum}
+		userphone1 = #{userphone1, jdbcType=VARCHAR},
+		userphone2 = #{userphone2, jdbcType=VARCHAR},
+		userphone3 = #{userphone3, jdbcType=VARCHAR},
+		useremail = #{useremail, jdbcType=VARCHAR},
+		addrbasic = #{addrbasic, jdbcType=VARCHAR},
+		addrdetail = #{addrdetail, jdbcType=VARCHAR},
+		zipcode = #{zipcode, jdbcType=VARCHAR},
+		businessnum = #{businessnum, jdbcType=VARCHAR},
+		filenum = #{filenum, jdbcType=INTEGER}
 		WHERE userid = #{userid}
 	</update>
 	
