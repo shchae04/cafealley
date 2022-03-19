@@ -238,47 +238,6 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								</td>
 							</tr>
 
-							<tr>
-								<td class="prod-checkbox"><input type="checkbox"></td>
-								<td class="prod-number">
-									<p>1</p>
-								</td>
-								<td class="prod-info">
-									<p>폴 바셋 시그니처 블렌드 풀 포텐셜</p>
-									<p>(원두상태)</p>
-								</td>
-								<td class="prod-qty"><input type="number" name="" id=""
-									value="1" min="1"><br></td>
-								<td class="prod-price">
-									<p>24,700원</p>
-								</td>
-								<td>
-									<p class="btn-remove">
-										삭제<span class="glyphicon glyphicon-remove"> </span>
-									</p>
-								</td>
-							</tr>
-
-							<tr>
-								<td class="prod-checkbox"><input type="checkbox"></td>
-								<td class="prod-number">
-									<p>1</p>
-								</td>
-								<td class="prod-info">
-									<p>폴 바셋 시그니처 블렌드 풀 포텐셜</p>
-									<p>(프렌치 분쇄)</p>
-								</td>
-								<td class="prod-qty"><input type="number" name="" id=""
-									value="1" min="1"><br></td>
-								<td class="prod-price">
-									<p>24,700원</p>
-								</td>
-								<td>
-									<p class="btn-remove">
-										삭제<span class="glyphicon glyphicon-remove"> </span>
-									</p>
-								</td>
-							</tr>
 						</tbody>
 						<tfoot>
 							<tr>
@@ -295,7 +254,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					<button class="btn-sel-remove">선택상품삭제</button>
 					<button class="btn-all-order">전체상품 주문하기</button>
 					<button class="btn-sel-order">선택상품 주문하기</button>
-					<button class="btn-keepShopping">계속쇼핑하기</button>
+					<button class="btn-keepShopping" onclick="location.href='<c:url value="/shop/shopList"/>'">계속쇼핑하기</button>
 				</div>
 			</div>
 

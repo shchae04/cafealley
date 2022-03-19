@@ -435,6 +435,20 @@ tbody> tr> td> .topmargin{
         // 이미지 파일 업로드시 이미지 파일 띄우게끔
         const $imgfile = document.querySelector('#img');
         $imgfile.addEventListener('change', e=>{
+        	
+        	//작성시 이미지 유효성 검사
+    		let file = $('#img').val();
+    		console.log(file);
+    		file = file.slice(file.indexOf('.') + 1).toLowerCase();
+    		console.log(file);
+    		if(file !== 'jpg' && file !== 'png' && file !== 'jpeg' && file !== 'bmp') {
+    			alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다.');
+    			$('#img').val('');
+    			return;
+    		} 
+        	
+        	
+        	
             readURL(e.target);
             //파일 업로드시 DB에 업로드
             /* form.action='upload';
@@ -454,6 +468,8 @@ tbody> tr> td> .topmargin{
                     $('#fileImg').css('margin-top', '-30px');
                 }
         }
+        
+     
 
     </script>
 </body>
