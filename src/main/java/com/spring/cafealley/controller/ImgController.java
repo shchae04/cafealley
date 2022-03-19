@@ -11,21 +11,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.img.service.IImgService;
 
 @Controller
-@RequestMapping("/img")
+@RequestMapping("/loadimg")
 public class ImgController {
 	
 	@Autowired
 	IImgService service;
 	
-	@GetMapping("/display")
+	@GetMapping("/display/{fileNum}/{order}")
 	// ResponseEntity : 응답으로 변활될 정보를 모두 담은 요소들을 객체로 만들어서 반환해줍니다.
-	public ResponseEntity<byte[]> getFile(int fileNum, int order){
+	public ResponseEntity<byte[]> getFile(@PathVariable int fileNum,
+										  @PathVariable int order){
 		ImgVO img = service.select(fileNum);
 		String fileName = "";
 		if(order == 1)
