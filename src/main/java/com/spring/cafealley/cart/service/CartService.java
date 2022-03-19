@@ -34,12 +34,6 @@ public class CartService implements ICartService {
 		mapper.delete(cartno);
 	}
 	
-	//SEQ 둘다 증가
-	@Override
-	public void insertCart(CartVO vo) {
-		mapper.insertCart(vo);
-	}
-	
-	//수정은없나.
+
 
 }

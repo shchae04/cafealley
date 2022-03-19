@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
 
 
+
 <style>
 body {
 	width: 100%;
@@ -336,7 +337,7 @@ tfoot tr td {
 					</div>
 
 
-					<table class="table w-auto text-center align-middle cart-table">
+					<table class="table w-auto text-center align-middle cart-table" id="proContent">
 						<thead>				
 							<tr>
 								<td>상품 카테고리</td>
@@ -411,7 +412,7 @@ tfoot tr td {
 								str+="<td class='prod-discount-price'>";
 								str+="<p>"+productList[i].prosellprice+"</p>";
 								str+="</td>";
-								str+="<td>";
+								str+="<td class=link-inner>";
 								str+="<p style='width: fit-content; height: fit-content;'>";
 								str+="<span class='glyphicon glyphicon-erase btn-modify' id='"+productList[i].prono+"'>수정</span>";
 								str+="</p>";
@@ -428,6 +429,44 @@ tfoot tr td {
         	}
         	
         });
+        
+        //onclick이 안먹어서 상품등록하기 페이지이동.
+        $('.btn-all-order').click(function(){
+        	location.href= "<c:url value='/product/productWrite'/>";
+        });
+
+        //삭제 처리
+		//삭제하기 링크를 클릭했을 때 이벤트를 발생 시켜서
+		// 성공하면 "delSuccess" 리턴.
+		// url: /product/delete, method: post
+		
+		console.log($('.link-inner p span[class="btn-remove"]'));
+        console.log($('tbody')[0])
+		$('tbody').on('click', '.link-inner p >.btn-remove', function(e) {
+			e.preventDefault();
+			
+			const prono = $(this).attr('id');
+			console.log(prono);
+			
+			$.ajax({
+				type: "post",
+				url: "<c:url value='/product/delete' />",
+				data: prono,
+				contentType: 'application/json',
+				success: function(result) {
+					if(result === 'delSuccess') {
+						alert('게시물이 정상적으로 삭제되었습니다.');
+						getList(true); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
+						//자동으로 목록으로 가지는 않음,
+					}
+				},
+				error: function() {
+					alert('삭제에 실패했습니다. 다시 시도하세요.');
+				}
+			});
+			
+		});
+        
         
         
 

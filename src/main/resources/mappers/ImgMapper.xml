@@ -24,6 +24,7 @@ INSERT
 VALUES (file_seq.NEXTVAL, #{filename}, <include refid="uploadfiles2"/> #{filepath}, #{foldername})
 </insert>
 
+<!-- 가져다 줄 파일번호 가장최근 seq  -->
 <select id="getLastUploaded" resultType="int">
 	SELECT MAX(filenum)
 	  FROM img

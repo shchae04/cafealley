@@ -15,6 +15,5 @@ public interface ICartService {
 	// 장바구니 삭제
 	void delete(int cartno);
 	
-	//장바구니 추가 카트타입까지 o
-	void insertCart(CartVO vo);
+	
 }
