@@ -141,18 +141,8 @@ section {
 	line-height: 1px;
 }
 
-.cart-table>tbody>tr>td>img{
-	margin-top: 20px;
-}
-
-
 .cart-table>tbody>tr>td>p {
-	display: block;
-	padding: 5px;
-	margin-top: 50px;
-	padding: 5px;
-	width: auto;
-	height: 20px;
+	margin: 0;
 }
 
 input[type="number"] {
@@ -182,10 +172,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: relative;
 }
 
-.cart-table>thead>tr>td, 
-.cart-table>tbody>tr>td, 
-.cart-table>tfoot>tr>td
-{
+.cart-table>thead>tr>td, .cart-table>tbody>tr>td, .cart-table>tfoot>tr>td
+	{
 	margin: 0;
 	vertical-align: middle;
 }
@@ -202,27 +190,27 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: absolute;
 }
 
+.cart-table button {
+	width: auto;
+	height: 20px;
+}
+
 .cart-table tr {
 	border-top: 1px solid #ddd;
-	
 }
 
 tfoot tr td {
 	border-top: none;
 }
 
+.cart-table .btn-direct-order .btn-remove {
+	margin: 7px;
+}
 
-.cart-table tr td p > .btn-remove,
-.cart-table tr td p > .btn-modify {
+.btn-remove, .btn-modify {
 	display: block;
+	padding: 5px;
 	cursor: pointer;
-	margin-left: 70px;
-}
-.cart-table>tbody>tr>td:last-child>p:first-child{
-	margin-top: 40px;
-}
-.cart-table>tbody>tr>td:last-child>p:last-child{
-	margin-top: 0;
 }
 
 .btn-remove:hover, .btn-modify:hover {
@@ -350,7 +338,39 @@ tfoot tr td {
 							</tr>
 						</thead>
 						<tbody>
-							
+							<c:forEach var="product" items="${productList}">
+								<tr>
+									<td class="prod-category">
+										<p>${product.procategory}</p>
+									</td>
+									<td class="prod-img"><img src="<c:url value='/loadimg/display/${product.filenum}/1'/>"
+										alt="" width="100px" height="100px"></td>
+									<td class="prod-number">
+										<p>${product.prono}</p>
+									</td>
+									<td class="prod-info">
+										<p>${product.proname}</p>
+										<p></p> 
+									</td>
+									<td class="prod-qty">
+										<p>${product.prostock}</p>
+									</td>
+									<td class="prod-normal-price">
+										<p>${product.proprice}</p>
+									</td>
+									<td class="prod-discount-price">
+										<p>${product.prosellprice}</p>
+									</td>
+									<td>
+										<p class="btn-modify">
+											수정<span class="glyphicon glyphicon-erase"></span>
+										</p>
+										<p class="btn-remove">
+											삭제<span class="glyphicon glyphicon-remove"> </span>
+										</p>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 
 						<tfoot>
@@ -372,65 +392,26 @@ tfoot tr td {
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
+        const $table = document.querySelector('.table');
 
-        
-        $(function(){
-            let str = '';
-            // let page = 1; 나중에 페이지 적용되면..
-            getList(true);
+        // 삭제버튼 누르면 tr삭제하는 로직
+        $table.addEventListener('click', e => {
+            if (!(e.target.matches('.btn-remove') || e.target.matches('.glyphicon-remove'))) {
+                return;
+            }
 
-        	// 목록을 불러오는 함수
-        	function getList(reset){
-        		if(reset===true){
-        			str='';
-        		}
-        	
-	        	$.getJSON(
-	        			'<c:url value="/product/getList"/>',
-	        			function(productList){
-	        				console.log(productList);
-							for(let i=0; i<productList.length; i++){
-								str+="<tr>";
-								str+="<td class='+ prod-category'>";
-								str+="<p>" + productList[i].procategory + "</p>";
-								str+="</td>";
-								str+="<td class='prod-img'><img src='/cafealley/loadimg/display/"+ productList[i].filenum+ "/1'";
-								str+="alt='상품이미지'" + " width='100px'" + " height='100px'"+ "></td>";
-								str+="<td class='prod-number'>";
-								str+="<p>"+productList[i].prono+"</p>";
-								str+="</td>";
-								str+="<td class='prod-info'>";
-								str+="<p>"+productList[i].proname+"</p>";
-								str+="</td>";
-								str+="<td class='prod-qty'>";
-								str+="<p>"+productList[i].prostock+"</p>";
-								str+="</td>";
-								str+="<td class='prod-normal-price'>";
-								str+="<p>"+productList[i].proprice+"</p>";
-								str+="</td>";
-								str+="<td class='prod-discount-price'>";
-								str+="<p>"+productList[i].prosellprice+"</p>";
-								str+="</td>";
-								str+="<td>";
-								str+="<p style='width: fit-content; height: fit-content;'>";
-								str+="<span class='glyphicon glyphicon-erase btn-modify' id='"+productList[i].prono+"'>수정</span>";
-								str+="</p>";
-								str+="<p style='width: fit-content; height: fit-content;'>";
-								str+="<span class='glyphicon glyphicon-remove btn-remove' id='"+productList[i].prono + "'>삭제</span>";
-								str+="</p>";
-								str+="</td>";
-								str+="</tr>";
-								
-								$('tbody').html(str);
-							}
-	        			}// end function
-				); // end get JSON
-        	}
-        	
-        });
-        
-        
+            // 여기에 상품이 등록된 판매게시글이 있는지 여부 확인해서 돌려보내거나
+            // 아니면 삭제를 진행하고 아래의 tr삭제를 진행하도록 하자.
 
+
+            // 해당 tr삭제
+            if (e.target.matches('.btn-remove')) {
+                e.preventDefault();
+                e.target.parentNode.parentNode.remove();
+            } else {
+                e.target.parentNode.parentNode.parentNode.remove();
+            }
+        })
     </script>
 
 

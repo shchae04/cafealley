@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cafealley.command.ProductVO;
@@ -34,12 +33,10 @@ public class ProductController {
 	@GetMapping("/productList")
 	public void getlist(Model model){
 		System.out.println("관리자 상품목록페이지 이동");
+		List<ProductVO> productList =  service.getList(null);
+		model.addAttribute("productList", productList);
 	}
-	@GetMapping("/getList")
-	@ResponseBody
-	public List<ProductVO> list() {
-		return service.getList(null);
-	}
+	
 	
 	//관리자 상품 수정 이동
 	@GetMapping("/productModify")
@@ -75,8 +72,8 @@ public class ProductController {
 	
 	@PostMapping("/productModify")
 	public String modify(ProductVO vo,HttpSession session) {
-		System.out.println("productModify: Post요청");
 		service.updateProduct(vo);
-		return "redirect:/product/productList";
+		System.out.println("productModify: Post요청");
+		return "redirec:/product/productList";
 	}
 }
