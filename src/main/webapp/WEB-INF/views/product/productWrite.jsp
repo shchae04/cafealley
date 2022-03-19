@@ -299,7 +299,7 @@ tbody> tr> td> .topmargin{
 					<br>
 					<div class="lower-bar clearfix">
 						<div class="divforright">
-							<button class="btn-all-order">
+							<button class="btn-all-order" type="submit">
 								<span class="glyphicon glyphicon-ok"></span> 상품 등록완료
 							</button>
 						</div>

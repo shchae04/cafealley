@@ -199,5 +199,14 @@ li {
 	
 	<%@ include file="../include/footer.jsp" %>
 	
+	<script>
+	let msg = '${msg}';
+	if(msg !== null){
+		alert(msg);
+	}
+	
+	</script>
+	
+	
 </body>
 </html>

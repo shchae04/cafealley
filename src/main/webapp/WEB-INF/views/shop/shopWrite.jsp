@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
 
  <style>
+ 		*,
+ 		*:focus{
+ 			outline:none;
+ 		}
         body {
             width: 100%;
         }
@@ -21,7 +25,7 @@
             width: 90%;
             margin: 50px auto;
             padding-left: 120px;
-            min-height: 2900px;
+            min-height: 3100px;
         }
 
         .container {
@@ -112,12 +116,13 @@
             border-top: 2px solid black;
             margin: 50px 0;
             padding-top: 50px;
-            min-height: 2000px;
+            min-height: 2300px;
         }
 
         .product {
             width: 600px;
         }
+        
 
         .product tr td img {
             display: inline;
@@ -128,8 +133,9 @@
             border-bottom: 1px solid black;
             text-align: center;
             margin-bottom: 20px;
-            height: 60px;
             line-height: 60px;
+            min-height: 61px;
+        	max-height: 61px !important;
             padding: 0 10px;
             font-size: 12px;
         }
@@ -152,7 +158,6 @@
             color: transparent;
             z-index: 999;
             outline: none;
-
         }
 
         .prod-img input[type="file"]::-webkit-file-upload-button,
@@ -170,10 +175,16 @@
             font-size: 10px;
             text-align: center;
             pointer-events: none;
-            padding-top: 50px;
-            font-size: 50px;
+            padding-top: 100px;
+            font-size: 30px;
             margin-right:100px;
-
+			outline: none;
+        }
+        .prod-img input[type="file"]:focus,
+        .prod-detail input[type="file"]:focus,
+        .prod-img label:focus,
+        .prod-detail label:focus{
+        	outline: none;
         }
 
         .prod-detail input[type="file"]{
@@ -212,6 +223,7 @@
             left: 150px;
             width: 800px;
             height: 600px;
+            padding: 10px;
         }
 
         .upper-bar,
@@ -225,7 +237,7 @@
         .lower-bar {
             position: absolute;
             width: 1100px;
-            top: 2950px;
+            top: 3150px;
         }
 
         .divforright {
@@ -262,11 +274,18 @@
         
         .largefont{
             font-weight: 900;
-            font-size: 25px;
+            font-size: 20px;
         }    
         
 		.center{
-		margin-left: -100px;
+			margin-left: -100px;
+		}
+		.div-min-height{
+			min-height:825px;
+			max-height:825px;
+		}
+		.title::placeholder{
+			
 		}
         /* --------------------------------- */
     </style>
@@ -281,41 +300,42 @@
         <div class="container">
             
             <div class="row">
-                <div class="upper-bar clearfix">
-                    <div class="divforright">
-                        <button class="btn-cancel"> <span class="glyphicon glyphicon-remove"></span> 취소 </button>
-                        <button class="btn-regist"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
-                    </div>
-                </div>
-                <div class="col-xs-6 prod-img">
-
-                    <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-                    <input type="file" name="" class="img" id="img">
-
-                </div>
-                <div class="col-xs-6">
-                    <div class="detail-info">
-                        <p class="largefont">
-                            판매 게시글 제목 입력<br>
-                            <input type="text" class="title">
-                        </p>
-                        <p class="price">
-                            <p class="org-price">
-                                <span class="prod-text">정가</span> <span>0</span>원
-                            </p>
-                            <p class="sell-price">
-                                <span class="prod-text">판매가</span> <strong><span>0</span>원</strong>
-                            </p>
-                        </p>
-                        <p class="quantity">
-                            <!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
-                        </p>
-                        <p class="delivery">
-                            <span class="prod-text">배송비</span> <strong>3000원</strong>
-                        </p>
-                        <p class="prod-sel">
-                            <span class="prod-text">판매할 상품 목록</span>
-
+            	<form action="#" method="post" enctype="multipart/form-data">
+	                <div class="upper-bar clearfix">
+	                    <div class="divforright">
+	                        <button class="btn-cancel"> <span class="glyphicon glyphicon-remove"></span> 취소 </button>
+	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                    </div>
+	                </div>
+	                <div class="col-xs-6 prod-img">
+	
+	                    <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+	                    <input type="file" name="file" class="img" id="img">
+	
+	                </div>
+	                <div class="col-xs-6 div-min-height">
+	                    <div class="detail-info">
+	                        <p style="font-weight: 700;">
+	                            판매 게시글 제목<br>
+	                            <input type="text" name="title" class="title" placeholder="150자 이내로 판매게시글의 제목을 입력해주세요.">
+	                        </p>
+	                        <p class="price">
+	                            <p class="org-price">
+	                                <span class="prod-text">정가</span> <span id="prorice">0</span>원
+	                            </p>
+	                            <p class="sell-price">
+	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">0</span>원</strong>
+	                            </p>
+	                        </p>
+	                        <p class="quantity">
+	                            <!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
+	                        </p>
+	                        <p class="delivery">
+	                            <span class="prod-text">배송비</span> <strong>3000원</strong>
+	                        </p>
+	                        <p class="prod-sel">
+	                            <span class="prod-text">판매할 상품 목록</span>
+							</p>
                             <table class="product">
                                 <thead>
                                     <tr>
@@ -329,44 +349,42 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><img src="../img/blog1.png" alt="상품이미지" style="width: 50px; height: 50px;">
-                                        </td>
-                                        <td>카테고리1</td>
-                                        <td>상품번호1</td>
-                                        <td class="large-cell">상품명1</td>
-                                        <td>정상가1</td>
-                                        <td>판매가1</td>
-                                        <td>재고1</td>
-                                    </tr>
+                                	<c:forEach var="product" items="${proList}" varStatus="status">
+	                                    <tr>
+	                                        <td><img src="${pageContext.request.contextPath}/loadimg/display/${product.filenum}/1" alt="상품이미지" style="width: 50px; height: 50px;">
+	                                        </td>
+	                                        <td>${product.procategory}</td>
+	                                        <td>${product.prono}</td>
+	                                        <td class="large-cell">${product.proname }</td>
+	                                        <td>${product.proprice}</td>
+	                                        <td>${product.prosellprice}</td>
+	                                        <td>${product.prostock}</td>
+	                                    </tr>
+	                                    <input type="hidden" name="prono${status.first?'':'status.count'}" value="${product.prono}" />
+                                	</c:forEach>
                                 </tbody>
                             </table>
-
-                            <div class="productList">
-
-                            </div>
-
-                        </p>
-                    </div>
-
-                    <p class="largefont center" style="margin-top: 100px;">판매 게시글 내용 입력</p>
-                </div>
-
-                <div class="col-xs-12 prod-detail">
-                    <label for="img2">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-                    <input type="file" name="" class="img" id="img2">
-                    <label for="img3">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-                    <input type="file" name="" class="img" id="img3">
-
-                    <textarea name="" id="" class="prod-detail-textarea"></textarea>
-
-                </div>
-                <div class="lower-bar clearfix">
-                    <div class="divforright">
-                        <button class="btn-cancel"> <span class="glyphicon glyphicon-remove"></span> 취소 </button>
-                        <button class="btn-regist"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
-                    </div>
-                </div>
+	                    </div>
+	
+	                    <p class="largefont center" style="margin-top: 100px;">판매 게시글 내용 입력</p>
+	                </div>
+	
+	                <div class="col-xs-12 prod-detail">
+	                    <label for="img2">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+	                    <input type="file" name="file" class="img" id="img2">
+	                    <label for="img3">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+	                    <input type="file" name="file" class="img" id="img3">
+	
+	                    <textarea name="content" class="prod-detail-textarea" placeholder="1000자 이내로 판매게시글 설명을 입력해주세요."></textarea>
+	
+	                </div>
+	                <div class="lower-bar clearfix">
+	                    <div class="divforright">
+	                        <button class="btn-cancel"> <span class="glyphicon glyphicon-remove"></span> 취소 </button>
+	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                    </div>
+	                </div>
+                </form> <!-- end form  --> 
             </div>
         </div>
 
@@ -378,6 +396,11 @@
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
+	
+		// 상품관리페이지에서 등록할 상품 안가져오면 돌려보냄
+		
+	
+	
         // 이미지 파일 업로드시 이미지 파일 띄우게끔
 
         const $container = document.querySelector('.container');

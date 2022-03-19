@@ -218,6 +218,11 @@ tfoot tr td {
 	cursor: pointer;
 	margin-left: 70px;
 }
+
+.cart-table tr td .chk-shop-regist{
+	margin-top: 45px;
+}
+
 .cart-table>tbody>tr>td:last-child>p:first-child{
 	margin-top: 40px;
 }
@@ -243,7 +248,9 @@ tfoot tr td {
 	padding: 10px 0;
 }
 
-.select-category, .btn-all-order {
+.select-category,
+.btn-regist,
+.btn-shop-regist {
 	width: fit-content;
 	height: 50px;
 	margin: 0 0 10px 10px;
@@ -271,13 +278,15 @@ tfoot tr td {
 	font-style: italic;
 }
 
-.btn-all-order {
+.btn-regist,
+.btn-shop-regist {
 	background: black;
 	color: white;
 	font-size: 18px;
 }
 
-.btn-all-order:hover {
+.btn-regist:hover,
+.btn-shop-regist:hover {
 	font-style: italic;
 }
 
@@ -307,7 +316,8 @@ tfoot tr td {
 			<p class="page-title">상품 관리</p>
 			<p class="page-desc">
 				<strong style="color: red;">*</strong> 상품을 삭제하시려면 상품페이지에 등록되어있는 판매
-				게시글부터 삭제해주셔야 합니다.
+				게시글부터 삭제해주셔야 합니다.<br>
+				<strong style="color: red;">*</strong> 상품 판매글에 등록할 수 있는 최대 상품수는 4개입니다.
 			</p>
 			<div class="row">
 				<div class="col-xs-12 cart-list clearfix">
@@ -324,6 +334,7 @@ tfoot tr td {
 								<li><a href="<c:url value='product/productList/coffeemachine'/>">커피용품, 머신</a></li>
 							</ul>
 						</div>
+						<button class="btn-shop-regist">선택상품 판매글에 등록하기</button>
 						<div class="divforright">
 							<form action="#">
 								<input type="text" placeholder="상품명 검색">
@@ -331,7 +342,7 @@ tfoot tr td {
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
 							</form>
-							<button class="btn-all-order">상품 등록하기</button>
+							<button class="btn-regist" onclick="location.href='${pageContext.request.contextPath}/product/productWrite'">상품 등록하기</button>
 						</div>
 					</div>
 
@@ -339,6 +350,7 @@ tfoot tr td {
 					<table class="table w-auto text-center align-middle cart-table">
 						<thead>				
 							<tr>
+								<td>선택</td>
 								<td>상품 카테고리</td>
 								<td>상품 이미지</td>
 								<td>상품번호</td>
@@ -391,10 +403,13 @@ tfoot tr td {
 	        				console.log(productList);
 							for(let i=0; i<productList.length; i++){
 								str+="<tr>";
+								str+="<td>";
+								str+="<input type='checkbox' class='chk-shop-regist' id='"+ productList[i].prono +"'/>";
+								str+="</td>";
 								str+="<td class='+ prod-category'>";
 								str+="<p>" + productList[i].procategory + "</p>";
 								str+="</td>";
-								str+="<td class='prod-img'><img src='/cafealley/loadimg/display/"+ productList[i].filenum+ "/1'";
+								str+="<td class='prod-img'><img src='${pageContext.request.contextPath}/loadimg/display/"+ productList[i].filenum+ "/1'";
 								str+="alt='상품이미지'" + " width='100px'" + " height='100px'"+ "></td>";
 								str+="<td class='prod-number'>";
 								str+="<p>"+productList[i].prono+"</p>";
@@ -413,19 +428,53 @@ tfoot tr td {
 								str+="</td>";
 								str+="<td>";
 								str+="<p style='width: fit-content; height: fit-content;'>";
-								str+="<span class='glyphicon glyphicon-erase btn-modify' id='"+productList[i].prono+"'>수정</span>";
+								str+="<span class='glyphicon glyphicon-erase btn-modify' href='"+productList[i].prono+"'>수정</span>";
 								str+="</p>";
 								str+="<p style='width: fit-content; height: fit-content;'>";
-								str+="<span class='glyphicon glyphicon-remove btn-remove' id='"+productList[i].prono + "'>삭제</span>";
+								str+="<span class='glyphicon glyphicon-remove btn-remove' href='"+productList[i].prono + "'>삭제</span>";
 								str+="</p>";
 								str+="</td>";
 								str+="</tr>";
 								
 								$('tbody').html(str);
 							}
-	        			}// end function
+	        			}// end getJSON function
 				); // end get JSON
-        	}
+        	}// end getList()
+        	
+        	
+        	$('.btn-shop-regist').on('click', function(e){
+        		let str =''; // 체크된거 url의 매개변수로 담아주기위해 저장.
+        		let count = 0;
+        		for(let checkbox of $('.chk-shop-regist')){
+        			console.log(checkbox);
+        			
+	        		if(checkbox.checked){
+	        			count = count + 1;
+	        			let namecheck = (count==1? "":count); // 1은 db에 숫자가 기입되어있지 않아서.. 매개변수에 안붙여야함.
+	        			let ampersand = (count==1? "":"&");
+	        			str+= ampersand + "prono"+ namecheck  + "=" + checkbox.getAttribute('id');
+	        		}
+	        	}
+        		if(count==0){ // 선택된거 하나도 없으면
+        			alert('판매게시글로 등록할 상품을 하나 이상 선택해주세요.');
+        			return;
+        		}
+        		if(count>4){ // 선택된거 4개 넘으면 거름
+        			alert('판매게시글로 등록할 상품은 4개 이하로만 등록할 수 있습니다.');
+        			return;
+        		}
+        		
+        		// 남은 url 완성시키기.
+        		// 선택된게 2개라 하더라도 url을 넘겨줄때 prono3, prono4는 0으로 기입해줘야한다.
+        		for(let num = count+1; num<=4; num++){
+        			str+= "&prono"+ num + "=" + 0;
+        		}
+        		
+        		location.href="${pageContext.request.contextPath}/shop/shopWrite?" + str;
+        		
+        	});
+        	
         	
         });
         
