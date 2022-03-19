@@ -62,7 +62,7 @@ public class UserController {
 
 	// 회원가입 처리
 	@PostMapping("/joinFinish")
-	public void joinFinish(@ModelAttribute("userVO") UserVO vo) {
+	public void joinFinish(@ModelAttribute("info") UserVO vo) {
 		System.out.println("컨트롤러의 joinFinish 메서드 발동");
 		System.out.println("param: " + vo);
 		service.userJoin(vo);

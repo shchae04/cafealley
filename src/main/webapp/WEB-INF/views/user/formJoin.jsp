@@ -506,20 +506,34 @@
 							</label>
 						</div>
 
-
 						<div class="lowrow">
-							<div class="form-inline form-group">
-								<label for="name"><span class="redstar">* &nbsp;</span>이름</label>
-								&emsp;&emsp;&emsp;&emsp;&nbsp; <input type="text" name="username"
-									id="username" class="nameinput" placeholder="이름을 입력하세요.">
-							</div>
+						
+							
+							<c:choose>
+								<c:when test="${userType == 'business'}">
+									<div class="form-inline form-group">
+										<label for="name"><span class="redstar">* &nbsp;</span>카페 이름</label>
+										&nbsp;&emsp;&emsp;<input type="text" name="username"
+											id="username" class="nameinput" placeholder="이름을 입력하세요.">
+									</div>
+								
+								</c:when>
+								<c:otherwise>
+									<div class="form-inline form-group">
+										<label for="name"><span class="redstar">* &nbsp;</span>이름</label>
+										&emsp;&emsp;&emsp;&emsp;&nbsp; <input type="text" name="username"
+											id="username" class="nameinput" placeholder="이름을 입력하세요.">
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
 							<br>
 
 
 							<div class="form-inline form-group">
 								<label for="id"><span class="redstar">* &nbsp;</span>아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
 								<div class="input-group">
-									<input type="text" id="userid" class="idinput" name="userid"
+									<input type="text" id="userId" class="idinput" name="userid"
 										placeholder="아이디(영문 포함 4~12자 이상)">
 									<div class="input-group-addon">
 										<button id="idCheckBtn" class="btn btn-primary"
@@ -533,7 +547,7 @@
 							<div class="form-inline form-group">
 								<label for="password"><span class="redstar">*
 										&nbsp;</span>비밀번호</label>&emsp;&emsp;&nbsp;&nbsp; <input type="password"
-									id="userpw" class="pwinput" name="userpw"
+									id="userPw" class="pwinput" name="userpw"
 									placeholder="비밀번호 (영 대/소문자, 숫자조합 8~16자)"> <span
 									id="msgPw"></span>
 								<!-- 비밀번호 유효성 메세지 공간 -->
@@ -566,10 +580,10 @@
 											&nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
 									<div class="input-group">
 										<input type="text" name="zipcode" id="postnum" class="postnum"
-											placeholder="우편번호를 검색하세요." readonly>
+											placeholder="우편번호를 검색하세요.">
 										<div class="input-group-addon">
-											<button id="btnZipCode" class="btn btn-primary"
-												style="background-color: lightgray; color: black; border: 0px;"  onclick="searchAddress()">우편번호검색</button>
+											<button type="button" id="btnZipCode" class="btn btn-primary"
+												style="background-color: lightgray; color: black; border: 0px;" onclick="searchAddress()">우편번호검색</button>
 										</div>
 									</div>
 								</div>
@@ -616,7 +630,7 @@
 									<button type="button" class="btn-lg">취소</button>
 									<button type="button" id="regist" class="btn-lg btn-success"
 										style="background-color: black; margin-bottom: 30px;">회원가입</button>
-									<br> <br>
+									<br><br>
 								</div>
 							</div>
 
@@ -650,18 +664,18 @@
 				
 				$(this).attr('type', 'button');
 				$('.btn-success').attr('type', 'button');//회원가입 버튼 기능 없애기
-				const userid = $('#userid').val();//아이디 값
+				const userId = $('#userId').val();//아이디 값
 
 				//비동기 통신 시작
 				$.ajax({
 					type : 'post',
 					url : '<c:url value="/user/idCheck" />',
-					data : userid,
+					data : userId,
 					contentType : 'application/json',
 					success : function(data) {
 						if (data === 'available') {
 							console.log('비동기 success');
-							$('#userid').attr('readonly', true);
+							$('#userId').attr('readonly', true);
 							$('#msgid').html('사용 가능한 아이디입니다.');
 						} else {
 							console.log('비동기 fail');
@@ -681,7 +695,7 @@
 			
 		});//end jQuery
 		
-		/*
+		
 		//다음 주소 api 사용해보기
 		function searchAddress() {
 			document.getElementById('regist').setAttribute('type', 'button');
@@ -709,7 +723,6 @@
 	            }
 	        }).open();
 	    }
-		*/
 
 		
 		
