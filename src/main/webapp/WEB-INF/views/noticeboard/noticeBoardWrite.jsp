@@ -150,7 +150,7 @@
                         </div>
                             
                     </div>
-                    <form name="writeform">
+                    <form name="writeform" method="post" action="write">
                         <!-- 
 
                         <div class="row col-xs-12">
@@ -182,7 +182,7 @@
 
                         <textarea name="content" id="summernote" class="summernote"></textarea>
 
-                        <button class="detailbtn btn btn-dark" id="listbtn"
+                        <button type="button" class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
 
@@ -290,8 +290,15 @@
 
 
         $(document).ready(function () {
-            $('#summernote').summernote();
-        });
+        	
+        	
+            $(".summernote").on('drop',function(e){
+                for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
+                	sendFile(e.originalEvent.dataTransfer.files[i],$("#summernote")[0]);
+                }
+               e.preventDefault();
+          });
+        
         $('.summernote').summernote({
             height: 300,
             minHeight: null,
@@ -300,12 +307,59 @@
             lang: 'ko-KR',
             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
             disableResizeEditor: true,
+            callbacks: {
+            	
             onImageUpload: function (files, editor, welEditable) {
-                sendFile(files[0], editor, welEditable);
+                	for (var i = files.length - 1; i >= 0; i--){
+                		sendFile(files[i], this);
+                	}
+	
+    	        }
             }
         });
+        
+        });
+        function sendFile(file, el) {
+    		var form_data = new FormData();
+          	form_data.append('file', file);
+          	$.ajax({
+            	data: form_data,
+            	type: "POST",
+            	url: '<c:url value="/noBoard/upload"/>',
+            	cache: false,
+            	contentType: false,
+            	enctype: 'multipart/form-data',
+            	processData: false,
+            	success: function(img_name) {
+              		$(el).summernote('editor.insertImage', img_name);
+              		console.log(img_name);	
+            	}
+          	}); //end Ajax
+        } //end sendFile
+        
+  
+        
+        
+        
         $('.note-statusbar').hide();
 
+        
+        //작성자 지목
+        var writer = $('#writer').val();
+        console.log(writer);
+        
+        //서머노트 내용까지 끌고곰 태그도 가져온다
+        var sHTML = $('#summernote').summernote('code');
+        //console.log(sHTML);
+
+        //제목
+        var wtitle = $('#title').val();
+        console.log(wtitle);
+		
+        //내용
+        var contented = $('#summernote').val();
+        
+        //file
     </script>
     
 
