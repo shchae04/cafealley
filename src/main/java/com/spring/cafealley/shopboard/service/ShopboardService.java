@@ -22,8 +22,7 @@ public class ShopboardService implements IShopboardService {
 
 	@Override
 	public List<ShopboardVO> getList() {
-
-		return null;
+		return mapper.getList();
 	}
 
 	@Override

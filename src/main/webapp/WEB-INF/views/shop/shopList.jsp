@@ -36,6 +36,7 @@ section {
 	display: block;
 	width: 90%;
 	margin: 50px auto;
+	min-height: 800px;
 }
 
 .row>span, .row>span>a {
@@ -85,23 +86,27 @@ li {
 
 	<section class="container">
 		<ul class="row">
-			<span> <a href="#">Home</a> &#707; <a href="#">쇼핑몰(사업자전용)</a>
-				&#707; <a href="#" class="crt-page">원두</a>
+			<span>
+				<a href="#">Home</a> &#707; 
+				<a href="#">쇼핑몰(사업자전용)</a>&#707; 
+				<a href="#" class="crt-page">원두</a>
 			</span>
 			<hr>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
+			<c:forEach var="shop" items="${shopList}" varStatus="status">				
+				<li class="col-xs-3">
+					<div class="prod-list-inner">
+						<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="상품 게시글 이미지">
+						<div class="prod-content clearfix">
+							<div class="info">
+								<span>${shop.title}</span>
+							</div>
+							<div class="price">
+								<strong>${sellPriceList[status.index]}원</strong>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
+				</li>
+			</c:forEach>				
 		</ul>
 	</section>
 	
@@ -109,7 +114,7 @@ li {
 	
 	<script>
 	let msg = '${msg}';
-	if(msg !== null){
+	if(msg !== ''){
 		alert(msg);
 	}
 	

@@ -34,7 +34,28 @@ public class ShopboardController {
 	IImgService imgService;
 	
 	@GetMapping("/shopList")
-	public void shopList() {}
+	public void shopList(Model model) {
+		System.out.println("/shop/shopList: GET");
+		List<ShopboardVO> shopList = service.getList();
+		
+		// 해당 판매 게시글에 등록된 상품중 최저가를 같이 뿌려주기 위함.
+		List<Integer> sellPriceList = new ArrayList<>();
+		for(ShopboardVO vo :shopList) {
+			int min=0;
+			for(ProductVO provo :vo.getProList()) {
+				if(min==0) // 첫빠따가 일단 min
+					min = provo.getProsellprice();
+				else { // 그 이후는 제일 작은게 min
+					if(min >= provo.getProsellprice())
+						min = provo.getProsellprice();
+				}
+			}
+			// 해당 게시글의 최저가 또한 shopList와 같은 순서로 저장됨.  
+			sellPriceList.add(min);
+		}
+		model.addAttribute("shopList",shopList);
+		model.addAttribute("sellPriceList",sellPriceList);
+	}
 	
 	
 	@GetMapping("/shopWrite")
@@ -67,5 +88,6 @@ public class ShopboardController {
 		ra.addFlashAttribute("msg", "상품 등록이 완료되었습니다.");
 		return "redirect:/shop/shopList";
 	}
+	
 	
 }

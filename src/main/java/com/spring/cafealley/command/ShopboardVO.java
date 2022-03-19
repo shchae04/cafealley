@@ -1,6 +1,7 @@
 package com.spring.cafealley.command;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,8 @@ public class ShopboardVO {
 	private int prono2;
 	private int prono3;
 	private int prono4;
-	private int procount;
 	private int filenum;
+	
+	
+	private List<ProductVO> proList;
 }
