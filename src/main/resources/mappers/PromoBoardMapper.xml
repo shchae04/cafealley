@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.cafealley.promoboard.mapper.IPromoBoardMapper">
+
+	<!-- 글등록 -->
+	<insert id="regist">
+		INSERT INTO Promoboard(bno, writer, key, content, area)
+		VALUES(promoboard_seq.NEXTVAL, #{writer},1, #{content}, #{area})
+	</insert>
+
+	<!-- 목록 -->
+	<select id="getList"
+		resultType="com.spring.cafealley.command.PromoBoardVO">
+		SELECT * FROM promoboard
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="getContent"
+		resultType="com.spring.cafealley.command.PromoBoardVO">
+		SELECT * FROM promoboard
+		WHERE bno = #{bno}
+	</select>
+
+	<!-- 수정 -->
+	<update id="update">
+		UPDATE promoboard
+		SET content = #{content}, place =
+		#{place}, regdate = sysdate, ismod ='1'
+		WHERE bno = #{bno}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="delete">
+		DELETE FROM promoboard
+		WHERE bno = #{bno}
+	</delete>
+
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
