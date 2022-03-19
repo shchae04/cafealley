@@ -25,8 +25,7 @@
 		<div class="finor-wrapper2" style="width: 850px;">
 			<div>
 				<h2
-					style="font-weight: 900; margin-bottom: 10px; padding-left: 20px;">회원
-					탈퇴</h2>
+					style="font-weight: 900; margin-bottom: 10px; padding-left: 20px;">회원 탈퇴</h2>
 				<hr>
 			</div>
 			<div class=""
@@ -47,14 +46,14 @@
 				<div class="mw-tablediv">
 					<div>
 						<span style="margin-right: 100px;">이름</span> <input type="text"
-							value="홍길동" disabled>
+							value="${login.username}" disabled>
 					</div>
 					<div>
 						<span style="margin-right: 85px;">아이디</span> <input type="text"
-							value="hong1234" disabled>
+							value="${login.userid}" disabled>
 					</div>
 					<div>
-						<span>비밀번호 확인</span> &nbsp; <input type="password" id="userpw">
+						<span>비밀번호 확인</span> &nbsp; <input type="password" id="userPw">
 					</div>
 				</div>
 				<div class="mw-button">
@@ -77,48 +76,68 @@
 
 	<script>
 	
-		/*
+		
 		//제이쿼리 시작
 		$(function() {
-
-			const userpw = $('#userpw').val();
 			
+			let chk = false;
+			
+			//탈퇴버튼 클릭 이벤트
 			$('#btnDel').click(function() {
 				
 				console.log('탈퇴하기 버튼 클릭됨');
 				
-				if(userpw === '') {// 공백 체크
+				if(userPw === '') {// 공백 체크
 					alert('비밀번호를 입력해 주세요.');
+					chk = false;
 				}
 				
-				//비동기 통신 시작
-				$.ajax({
-					type = 'post',
-					url = '<c:url value="/user/memDelete" />',
-					data = userpw,
-					contentType : 'application/json',
-					success : function(data) {
-						if (data == 'match') {
-							console.log('비동기 success');
-							$('#userpw').attr('readonly', true);
-							alert('탈퇴되었습니다.');
-							location.href = "<c:url value='/' />";
-						} else {
-							console.log('비동기 fail');
-							alert('비밀번호를 확인해 주세요.');
+				chk = true;
+				
+				//비밀번호가 공백이 아니라면
+				if(chk) {
+					const userPw = $('#userPw').val();
+					const userId = '${login.userid}';
+
+					console.log(userPw);//비밀번호 값 확인
+					console.log(userId);//비밀번호 값 확인
+					
+					
+					const userInfo = {
+							"userid" : userId,
+							"userpw" : userPw
+					};
+					
+					//비동기 통신 시작
+					$.ajax({
+						type : 'post',
+						url : '<c:url value="/user/memDelete" />',
+						data : JSON.stringify(userInfo),
+						contentType : 'application/json',
+						success : function(data) {
+							if (data === 'match') {
+								console.log('비동기 success');
+								$('#userPw').attr('readonly', true);
+								alert('탈퇴되었습니다.');
+								location.href = 'http://localhost/cafealley/';
+							} else {
+								console.log('비동기 fail');
+								alert('비밀번호를 확인해 주세요.');
+							}
+						},
+						error : function() {
+							console.log('비동기 error');
+							alert('서버 에러입니다. 관리자에게 문의하세요.');
 						}
-					},
-					error : function() {
-						console.log('비동기 error');
-						alert('서버 에러입니다. 관리자에게 문의하세요.');
-					}
-				});//end ajax
+					});//end ajax
+					
+				}
+				
 				
 
 			});//탈퇴버튼 이벤트 끝
 
 		});//end jQuery
-		*/
 	</script>
 
 </body>

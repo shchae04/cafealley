@@ -59,9 +59,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public void deleteUser(String userPw) {
-		mapper.deleteUser(userPw);
-
+	public void deleteUser(String userId) {
+		mapper.deleteUser(userId);
+		
 	}
 
 }

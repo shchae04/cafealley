@@ -91,7 +91,7 @@
 							<br>
 							<p>*표시는 필수 입력 표시입니다</p>
 
-							<form action="<c:url value='/user/userUpdate' />" method="post">
+							<form id="infoForm" action="<c:url value='/user/userUpdate' />" method="post">
 								<table class="table">
 									<tbody class="m-control">
 										<tr>
@@ -202,7 +202,7 @@
 
 								<div class="titlefoot">
 									<button type="button" class="btn" id="updateBtn">수정</button>
-									<button type="button" class="btn">탈퇴</button>
+									<button type="button" class="btn" id="deleteBtn">탈퇴</button>
 								</div>
 							</form>
 						</div>
@@ -299,9 +299,16 @@
 				if(chk1 && chk2 && chk3 && chk4) {
 						console.log('수정 처리');
 						$('#updateBtn').attr('type', 'submit');
-					}//end ajax(수정 처리)
+					}
 				
 			}); //수정버튼 클릭 입력값 검증 끝
+			
+			//탈퇴버튼 클릭 시 탈퇴 페이지로 이동
+			$('#deleteBtn').click(function() {
+				console.log('탈퇴버튼 클릭');
+				$('#updateBtn').attr('type', 'button');
+				location.herf='<c:url value="/user/memDelete" />';
+			});//탈퇴버튼 클릭 시 이동 끝
 			
 			
 

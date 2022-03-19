@@ -22,11 +22,9 @@ public interface IUserService {
 	
 	//비밀번호 확인
 	int checkPw(String userpw);
-
 	
 	//회원 정보 삭제
-	void deleteUser(String userPw);
-	//void deleteUser(String userId, String userPw);
+	void deleteUser(String userId);
 	
 	
 }

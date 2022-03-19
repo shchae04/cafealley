@@ -157,16 +157,23 @@ public class UserController {
 	// 탈퇴페이지로 이동
 	@GetMapping("/memDelete")
 	public void memDelete() {
+		
 	}
-
+	
+	
 	// 탈퇴 처리
 	@ResponseBody
 	@PostMapping("/memDelete")
-	public String memDelete(@RequestBody String userpw) {
+	public String memDelete(@RequestBody UserVO vo, HttpSession session) {
 		System.out.println("컨트롤러의 memDelete 메서드 발동");
+		
+		String userid = vo.getUserid();
+		String userpw = vo.getUserpw();
+		
 		int result = service.checkPw(userpw);
 		if (result == 1) {
-			service.deleteUser(userpw);
+			session.removeAttribute("login");
+			service.deleteUser(userid);
 			return "match";
 		} else {
 			return "none";

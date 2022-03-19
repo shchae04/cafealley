@@ -25,7 +25,6 @@ public interface IUserMapper {
 	int checkPw(String userpw);
 
 	// 회원 탈퇴
-	void deleteUser(String userPw);
-	//void deleteUser(@Param("userid") String userId, @Param("userpw") String userPw);
+	void deleteUser(String userid);
 
 }
