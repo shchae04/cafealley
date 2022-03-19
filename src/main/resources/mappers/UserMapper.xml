@@ -94,12 +94,12 @@
 	</update>
 	
 	<!-- 자동 로그인을 신청했던 회원이 다시 사이트에 방문 시
-		 로컬에 저장된 쿠키값(세션Id)과 일치하는 회원의 모든 정보를 조회하는 SQL문
+		 로컬에 저장된 쿠키값(세션Id)과 일치하는 회원의 모든 정보를 조회하는 SQL문 -->
 	<select id="getUserWithSessionId" resultMap="UserMap">
 		SELECT * FROM users
 		WHERE sessionid = #{sessionid}
 	</select>
-	 -->
+	 
 </mapper>
 
 
