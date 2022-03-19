@@ -102,7 +102,7 @@ public class UserController {
 					
 					//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
 					Cookie loginCookie = new Cookie("loginCookie", session.getId());
-					loginCookie.setPath("http://localhost/cafealley/");//쿠키가 동작할 수 있는 유효한 url 설정
+					loginCookie.setPath("/");//쿠키가 동작할 수 있는 유효한 url 설정
 					loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
 					
 					response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
