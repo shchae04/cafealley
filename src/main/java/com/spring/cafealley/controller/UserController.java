@@ -22,7 +22,7 @@ import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.user.service.IUserService;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -145,10 +145,10 @@ public class UserController {
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
-	public String userUpdate(UserVO vo, RedirectAttributes ra) {
+	public String userUpdate(UserVO vo) {
 		System.out.println("컨트롤러의 userUpdate 메서드 발동");
-		
 		System.out.println("param: " + vo);
+		
 		service.updateUser(vo);
 
 		return "redirect:/";

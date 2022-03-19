@@ -53,7 +53,7 @@
 		userphone1 = #{userphone1, jdbcType=VARCHAR},
 		userphone2 = #{userphone2, jdbcType=VARCHAR},
 		userphone3 = #{userphone3, jdbcType=VARCHAR},
-		useremail = #{useremail, jdbcType=VARCHAR},
+		useremail = #{useremail},
 		addrbasic = #{addrbasic, jdbcType=VARCHAR},
 		addrdetail = #{addrdetail, jdbcType=VARCHAR},
 		zipcode = #{zipcode, jdbcType=VARCHAR},
