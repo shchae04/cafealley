@@ -80,53 +80,98 @@ public class UserController {
 		String userpw = vo.getUserpw();
 
 		UserVO userInfo = service.getInfo(vo.getUserid());
-
-		if (userInfo.getUserid().equals(userid)) {// 아이디가 존재함
-			if (userInfo.getUserpw().equals(userpw)) {
+		
+		if(userInfo.getUserpw().equals(userpw)) {// 비밀번호가 db에 존재한다면
+			if(userInfo.getUserid().equals(userid)) {// id가 db에 존재한다면
 				System.out.println("loginSuccess");
-				session.setAttribute("login", userInfo);// 로그인 한 회원만 세션 생성
+				
+				// 로그인 한 회원만 세션 생성
+				session.setAttribute("login", userInfo);
+				
+				// 자동로그인 유지 시간
+				// 자동로그인 유지시간을 long타입으로 지정
+				// -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기 때문에(currentTimeMillis은 밀리초로 계산됨)
+				long limitTime = 60 * 60 * 24 * 90;//90일
+				
+				// 자동 로그인 체크 시 처리해야 할 내용
+				if(vo.isAutoLogin()) {
+					
+					// 자동 로그인을 희망하는 경우
+					// 쿠키를 이용하여 자동 로그인 정보를 저장.
+					System.out.println("자동 로그인 쿠키 생성 중...");
+					
+					//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setPath("http://localhost/cafealley/");//쿠키가 동작할 수 있는 유효한 url 설정
+					loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
+					
+					response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
+					
+					//자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초)
+					long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
+					//Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달하면 날자 형태로 변경해 줌
+					Date limitDate = new Date(expiredDate);
+					
+					System.out.println("자동 로그인 만료 시간: " + limitDate);
+					
+					service.keepLogin(session.getId(), limitDate, vo.getUserid());
+					
+				}
+				return "loginSuccess";
+			}
+			return "idFail";
+		}
+		return "pwFail";
+
+		/*
+		 //암호화 한 비밀번호를 응답받은 비밀번호와 equal로 바로 비교하지 않고
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		UserVO dbData =  service.selectOne(vo.getAccount());
+		
+		if(dbData != null) {
+			//원본비밀번호와 dbData의 비밀번호를 비교하는 메서드matches 사용
+			//암호화 되지 않은 계정은 이제 로그인하지 못함
+			if(encoder.matches(vo.getPassword(), dbData.getPassword())) {
+				//로그인 성공 회원을 대상으로 세션 정보를 생성
+				session.setAttribute("login", dbData);
+				
+				//자동로그인 유지 시간
+				//자동로그인 유지시간을 long타입으로 지정
+				// -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기 때문에(currentTimeMillis은 밀리초로 계산됨)
+				long limitTime = 60 * 60 * 24 * 90;//90일
+				
+				//자동 로그인 체크 시 처리해야 할 내용
+				if(vo.isAutoLogin()) {
+					
+					//자동 로그인을 희망하는 경우
+					//쿠키를 이용하여 자동 로그인 정보를 저장.
+					System.out.println("자동 로그인 쿠키 생성 중...");
+					
+					//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setPath("/");//쿠키가 동작할 수 있는 유효한 url 설정
+					loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
+					
+					response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
+					
+					//자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초)
+					long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
+					//Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달하면 날자 형태로 변경해 줌
+					Date limitDate = new Date(expiredDate);
+					
+					System.out.println("자동 로그인 만료 시간: " + limitDate);
+					
+					service.keepLogin(session.getId(), limitDate, vo.getAccount());
+					
+				}
+				
 				return "loginSuccess";
 			} else {
 				return "pwFail";
 			}
-
+		} else {
+			return "idFail";
 		}
-
-		return "idFail";
-
-		/*
-		 * //암호화 한 비밀번호를 응답받은 비밀번호와 equal로 바로 비교하지 않고 BCryptPasswordEncoder encoder =
-		 * new BCryptPasswordEncoder(); UserVO dbData = service.getInfo(vo.getUserid());
-		 * 
-		 * if(dbData != null) { //원본비밀번호와 dbData의 비밀번호를 비교하는 메서드matches 사용 //암호화 되지 않은
-		 * 계정은 이제 로그인하지 못함 if(encoder.matches(vo.getUserpw(), dbData.getUserpw())) {
-		 * //로그인 성공 회원을 대상으로 세션 정보를 생성 session.setAttribute("login", dbData);
-		 * 
-		 * //자동로그인 유지 시간 //자동로그인 유지시간을 long타입으로 지정 // -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기
-		 * 때문에(currentTimeMillis은 밀리초로 계산됨) long limitTime = 60 * 60 * 24 * 90;//90일
-		 * 
-		 * 
-		 * //자동 로그인 체크 시 처리해야 할 내용 if(vo.isAutoLogin()) {
-		 * 
-		 * //자동 로그인을 희망하는 경우 //쿠키를 이용하여 자동 로그인 정보를 저장.
-		 * System.out.println("자동 로그인 쿠키 생성 중...");
-		 * 
-		 * //세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서) Cookie loginCookie = new
-		 * Cookie("loginCookie", session.getId()); loginCookie.setPath("/");//쿠키가 동작할 수
-		 * 있는 유효한 url 설정 loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
-		 * 
-		 * response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
-		 * 
-		 * //자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초) long expiredDate =
-		 * System.currentTimeMillis() + (limitTime * 1000); //Date 객체의 생성자에 매개값으로 밀리초의
-		 * 정수를 전달하면 날자 형태로 변경해 줌 Date limitDate = new Date(expiredDate);
-		 * 
-		 * System.out.println("자동 로그인 만료 시간: " + limitDate);
-		 * 
-		 * service.keepLogin(session.getId(), limitDate, vo.getAccount()); }
-		 * 
-		 * return "loginSuccess"; } else { return "pwFail"; } } else { return "idFail";
-		 * }
 		 */
 
 	}// end loginCheck()

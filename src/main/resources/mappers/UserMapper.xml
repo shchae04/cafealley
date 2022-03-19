@@ -5,6 +5,12 @@
 
 <mapper namespace="com.spring.cafealley.user.mapper.IUserMapper">
 	
+	<resultMap type="com.spring.cafealley.command.UserVO" id="UserMap">
+		<result property="sessionid" column="sessionid" />
+		<result property="limittime" column="limittime" />
+	</resultMap>
+	
+	
 	
 	<!-- 회원가입 -->
 	<insert id="userJoin">
@@ -76,7 +82,24 @@
 		DELETE FROM users
 		WHERE userid = #{userid}
 	</delete>
-
+	
+	<!-- 자동 로그인을 체크한 경우 쿠키값(세션 아이디)과 유효시간을 갱신 -->
+	<!-- SQL -> INSERT(x) UPDATE(o)
+		기존에 존재하는 회원의 특정 컬럼값을 수정하는 것이기 때문에.(session id의 기본값이 'none') -->
+	<update id="keepLogin">
+		UPDATE users
+		SET sessionid = #{sessionid},
+		limittime = #{limittime}
+		WHERE userid = #{userid}
+	</update>
+	
+	<!-- 자동 로그인을 신청했던 회원이 다시 사이트에 방문 시
+		 로컬에 저장된 쿠키값(세션Id)과 일치하는 회원의 모든 정보를 조회하는 SQL문
+	<select id="getUserWithSessionId" resultMap="UserMap">
+		SELECT * FROM users
+		WHERE sessionid = #{sessionid}
+	</select>
+	 -->
 </mapper>
 
 
