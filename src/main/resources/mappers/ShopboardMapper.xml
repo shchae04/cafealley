@@ -21,14 +21,14 @@
   </resultMap>
   
   <resultMap type="com.spring.cafealley.command.ProductVO" id="product">
-  	<id property="prono" column="prono"/>
+  	<id property="prono" column="productprono"/>
   	<result property="proname" column="proname"/>
   	<result property="proprice" column="proprice"/>
   	<result property="prosellprice" column="prosellprice"/>
   	<result property="procategory" column="procategory"/>
   	<result property="prodetail" column="prodetail"/>
   	<result property="prostock" column="prostock"/>
-  	<result property="filenum" column="filenum"/>
+  	<result property="filenum" column="productfilenum"/>
   </resultMap>
   
   
@@ -43,9 +43,7 @@
   	<if test=" prono3 != null and prono2 != '' ">#{prono3}, </if>
   	<if test=" prono4 != null and prono2 != '' ">#{prono4}, </if>
   </sql>
-  <sql id="list">
-  	<if test=""></if>
-  </sql>
+
   
   <insert id="regist">
   INSERT 
@@ -62,27 +60,60 @@
   </select>
    -->
   <select id="getList" resultMap="shopInfo">
-  SELECT s.*,
-  		 p.*
-  	FROM shopboard s
-  	LEFT OUTER JOIN product p
-  	  ON s.prono = p.prono
-  	  OR s.prono2 = p.prono
-  	  OR s.prono3 = p.prono
-  	  OR s.prono4 = p.prono
-   ORDER BY regdate DESC
-  </select>
-  
-  <select id="getContent" resultMap="shopInfo">
-  SELECT *
+  SELECT s.bno,
+         s.title,
+         s.content,
+         s.regdate,
+         s.hit,
+         s.prono, 
+         s.prono2, 
+         s.prono3, 
+         s.prono4, 
+         s.filenum,
+  		 p.prono as productprono,
+         p.proname,
+         p.proprice,
+         p.prosellprice,
+         p.procategory,
+         p.prodetail,
+         p.prostock,
+         p.filenum as productfilenum
     FROM shopboard s
     LEFT OUTER JOIN product p
       ON s.prono = p.prono
-  	  OR s.prono2 = p.prono
-  	  OR s.prono3 = p.prono
-  	  OR s.prono4 = p.prono
+      OR s.prono2 = p.prono
+      OR s.prono3 = p.prono
+      OR s.prono4 = p.prono
+   ORDER BY s.regdate DESC
+  </select>
+  
+  <select id="getContent" resultMap="shopInfo">
+  SELECT s.bno,
+         s.title,
+         s.content,
+         s.regdate,
+         s.hit,
+         s.prono, 
+         s.prono2, 
+         s.prono3, 
+         s.prono4, 
+         s.filenum,
+  		 p.prono as productprono,
+         p.proname,
+         p.proprice,
+         p.prosellprice,
+         p.procategory,
+         p.prodetail,
+         p.prostock,
+         p.filenum as productfilenum
+    FROM shopboard s
+    LEFT OUTER JOIN product p
+      ON s.prono = p.prono
+      OR s.prono2 = p.prono
+      OR s.prono3 = p.prono
+      OR s.prono4 = p.prono
   WHERE bno = #{bno}
-  ORDER BY regdate DESC
+  ORDER BY s.regdate DESC
   </select>
   
   <!-- shopboard의 게시글 수정페이지 안만들어서 어떻게 해야할지 고민중..

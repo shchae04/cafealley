@@ -305,17 +305,17 @@ button.btn-cart, button.btn-order {
 						<p class="prod-sel">
 							<span class="prod-text">옵션선택</span> <select id="sel-option">
 								<option value="not-selected">선택</option>
-								<c:if test="${shop.pronum==null?}">
-									<option value="${shop.pronum}">${shop.proList[0]}</option>
+								<c:if test="${shop.prono!=null}">
+									<option value="${shop.prono}">${shop.proList[0].proname}</option>
 								</c:if>
-								<c:if test="${shop.pronum2==null?}">
-									<option value="${shop.pronum}">${shop.proList[1]}</option>
+								<c:if test="${shop.prono2!=null}">
+									<option value="${shop.prono}">${shop.proList[1].proname}</option>
 								</c:if>
-								<c:if test="${shop.pronum3==null?}">
-									<option value="${shop.pronum}">${shop.proList[2]}</option>
+								<c:if test="${shop.prono3!=null}">
+									<option value="${shop.prono}">${shop.proList[2].proname}</option>
 								</c:if>
-								<c:if test="${shop.pronum4==null?}">
-									<option value="${shop.pronum}">${shop.proList[3]}</option>
+								<c:if test="${shop.prono4!=null}">
+									<option value="${shop.prono}">${shop.proList[3].proname}</option>
 								</c:if>
 							</select>
 

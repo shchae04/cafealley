@@ -26,7 +26,6 @@ import com.spring.cafealley.shopboard.service.IShopboardService;
 @RequestMapping("/shop")
 public class ShopboardController {
 
-	
 	@Autowired
 	IShopboardService service;
 	@Autowired
@@ -90,26 +89,30 @@ public class ShopboardController {
 		return "redirect:/shop/shopList";
 	}
 	
-	@GetMapping("/shopDetail/${bno}")
-	public void shopDetail(@PathVariable int bno,
+	@GetMapping("/shopDetail/{bno}")
+	public String shopDetail(@PathVariable int bno,
 						   Model model) {
 		System.out.println("/shop/shopDetail: GET");
 		
 		ShopboardVO vo =  service.getContent(bno);
+		
 		ProductVO leastSellPricePro = new ProductVO();
-		for(ProductVO provo :vo.getProList()) {
 		int min=0;
+		for(ProductVO provo :vo.getProList()) {
 			if(min==0) // 첫빠따가 일단 min
 				min = provo.getProsellprice();
 			else { // 그 이후는 제일 작은게 min
-				if(min >= provo.getProsellprice())
+				if(min >= provo.getProsellprice()) {
 					min = provo.getProsellprice();
-					leastSellPricePro = provo;
+					leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+					leastSellPricePro.setProprice(provo.getProprice()) ;
+				}
 			}
 		}
-		
+		System.out.println(leastSellPricePro);
 		model.addAttribute("leastPro", leastSellPricePro);
 		model.addAttribute("shop",vo);
+		return "/shop/shopDetail";
 	}
 	
 }
