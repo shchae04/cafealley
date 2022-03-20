@@ -32,13 +32,14 @@
 
 			<form class="" name="qnaform">
 				<div class="form-group  col-xs-12">
-					<label for="writer">문의자</label> <input type="text"
-						class="form-control" value="writer" id="writer" readonly
+					<label for="writer">문의자</label>
+					<input type="text"
+						class="form-control" value="${login.userid}" id="writer" readonly
 						style="background: transparent; cursor: auto;">
 				</div>
 				<div class="form-group col-xs-12">
 
-					<label for="email">Email</label> <input type="email"
+					<label for="email">Email</label><input type="email"
 						class="form-control" id="email" placeholder="Email"
 						style="background: transparent;"> <br> <label
 						for="qnacontent"> 내용 </label> <input type="file" value="파일첨부"

@@ -152,7 +152,7 @@ public class UserController {
 	}// end loginCheck()
 
 	// 마이페이지로 이동
-	@GetMapping("/businessUserInfo")
+	@GetMapping("/userInfo")
 	public void businessUserInfo(HttpSession session, Model model) {
 		System.out.println("컨트롤러의 businessUserInfo 메서드 발동");
 
@@ -191,6 +191,32 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	
+	// 자유게시판 작성 글 보기로 이동
+	@GetMapping("/cmnBoardChk")
+	public void CmnBoardChk() {}
+	
+	// 자유게시판 작성 댓글 보기로 이동
+	@GetMapping("/cmnReplyChk")
+	public void CmnReplyChk() {}
+	
+	//email QnA로 이동
+	@GetMapping("/emailQnA")
+	public void emailQnA() {}
+		
+	//주문내역/배송내역 조회로 이동
+	@GetMapping("/orderDelHistory")
+	public void orderDelHistory() {}
+	
+	// 홍보게시판 작성 글 보기로 이동
+	@GetMapping("/promoBoardChk")
+	public void PromoBoardChk() {}
+	
+	// 홍보게시판 작성 글 보기로 이동
+	@GetMapping("/promoReplyChk")
+	public void PromoReplyChk() {}
+	
 	
 	// 로그아웃
 	@GetMapping("/logout")

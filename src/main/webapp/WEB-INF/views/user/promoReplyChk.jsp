@@ -60,9 +60,11 @@
 						<!--테이블 자동 크기 조절-->
 						<table class="table table-hover w-auto">
 							<thead>
-								<th>댓글</th>
-								<th>작성게시글</th>
-								<th>작성일</th>
+								<tr>
+									<th>댓글</th>
+									<th>작성게시글</th>
+									<th>작성일</th>
+								</tr>
 							</thead>
 
 							<tbody>
@@ -83,6 +85,7 @@
 								</tr>
 							</tbody>
 						</table>
+					</form>
 
 
 						<div class="text-center">

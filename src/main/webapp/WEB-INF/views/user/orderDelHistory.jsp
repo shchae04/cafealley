@@ -111,12 +111,14 @@
                         <!--테이블 자동 크기 조절-->
                         <table class="table table-hover w-auto">
                             <thead>
-                                <th>주문번호</th>
-                                <th>주문일자</th>
-                                <th>주문상품</th>
-                                <th>총 구매금액</th>
-                                <th>주문상태</th>
-                                <th>환불/반품</th>
+                            	<tr>
+	                                <th>주문번호</th>
+	                                <th>주문일자</th>
+	                                <th>주문상품</th>
+	                                <th>총 구매금액</th>
+	                                <th>주문상태</th>
+	                                <th>환불/반품</th>
+	                             <tr>
                             </thead>
 
                             <tbody>
@@ -139,7 +141,7 @@
 
                             </tbody>
                         </table>
-
+					</form>
 
                         <div class="text-center">
                             <ul class="pagination">

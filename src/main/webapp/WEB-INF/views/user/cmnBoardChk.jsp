@@ -7,7 +7,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>promoboardChk</title>
+    <title>cmnboardChk</title>
+
+
 
     <style>
         .clearfix::after {
@@ -27,8 +29,9 @@
 
 <body>
 
-	<%@ include file="../include/header.jsp" %>
-
+    <%@ include file="../include/header.jsp" %>
+    
+    
     <section>
         <div class="container">
             <div class="row">
@@ -36,17 +39,17 @@
                     <!--카테고리 메뉴-->
                     <ul class="nav nav-tabs">
                         <li><a href="#">회원정보</a></li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">작성글보기</a></li>
+                                <li class="active"><a href="#">작성글보기</a></li>
                                 <li><a href="#">작성댓글보기</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown active">
+                        <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">홍보게시판<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="#">작성글보기</a></li>
+                                <li><a href="#">작성글보기</a></li>
                                 <li><a href="#">작성댓글보기</a></li>
                             </ul>
                         </li>
@@ -55,7 +58,7 @@
 
                     <br>
                     <h3>
-                        <strong>홍보 작성글 보기</strong>
+                        <strong>커뮤니티 작성글 보기</strong>
                     </h3>
                     <br>
 
@@ -63,10 +66,12 @@
                         <!--테이블 자동 크기 조절-->
                         <table class="table table-hover w-auto">
                             <thead>
-                                <th>번호</th>
-                                <th>제목</th>
-                                <th>작성일</th>
-                                <th>조회수</th>
+                            	<tr>
+	                                <th>번호</th>
+	                                <th>제목</th>
+	                                <th>작성일</th>
+	                                <th>조회수</th>
+	                            </tr>
                             </thead>
 
                             <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
@@ -92,7 +97,7 @@
 
                             </tbody>
                         </table>
-
+					</form>
 
                         <div class="text-center">
                             <ul class="pagination">
@@ -104,13 +109,13 @@
                                 <li><a href="#">5</a></li>
                                 <li><a href="#">다음</a></li>
                             </ul>
-                        </div>
+                        </div>d
                 </div>
             </div>
         </div>
 
     </section>
-
+    
     <%@ include file="../include/footer.jsp" %>
     
 </body>
