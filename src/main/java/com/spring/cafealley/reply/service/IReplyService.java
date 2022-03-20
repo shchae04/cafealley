@@ -18,5 +18,7 @@ public interface IReplyService {
 		
 		//댓글 삭제 rno,bno.조인.
 		void replyDelete(int rno);
+		
+		
 	
 }
