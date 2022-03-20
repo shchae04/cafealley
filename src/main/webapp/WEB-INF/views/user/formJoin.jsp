@@ -10,7 +10,17 @@
 <title>로그인 폼</title>
 
 <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
-
+	
+	<style>
+		.btn-zip-code,
+		.btn-id-check,
+		.btn-check-email {
+			margin-left : 5px;
+		}
+		#regForm label {
+			margin-right : 8px;
+		}
+	</style>
 
 
 
@@ -535,10 +545,8 @@
 								<div class="input-group">
 									<input type="text" id="userId" class="idinput" name="userid"
 										placeholder="아이디(영문 포함 4~12자 이상)">
-									<div class="input-group-addon">
-										<button id="idCheckBtn" class="btn btn-primary"
-											style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
-									</div>
+									<button type="button" id="idCheckBtn" class="btn-id-check btn btn-primary"
+										style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
 								</div>
 								<span id="msgid">*필수 사항입니다.</span>
 								<!-- 아이디 중복 여부 메세지 공간 -->
@@ -564,13 +572,19 @@
 							<div class="form-inline form-group">
 								<label for="hp"><span class="redstar">* &nbsp;</span>이메일</label>&emsp;&emsp;&emsp;&nbsp;
 								<div class="input-group">
-									<input type="text" name="useremail" id="useremail" class="email" style="width: 350px;"
+									<input type="text" name="useremail" id="useremail" class="email" style="width: 180px;"
 										placeholder="이메일을 입력하세요.">
-									<div class="input-group-addon">
-										<button class="btn btn-primary"
+									<button type="button" class="btn-check-email btn btn-primary" id="btnEmail"
 											style="background-color: lightgray; color: black; border: 0px;">이메일인증</button>
-									</div>
 								</div>
+							</div>
+							<div class="form-inline form-group mail-check-box">
+								<label for="hp"><span class="redstar">* &nbsp;</span>이메일인증 키</label>&nbsp;
+								<div class="input-group">
+									<input type="text" id="checkEmail" class="email" style="width: 180px;" disabled="disabled"
+										placeholder="인증 키를 입력하세요.">
+								</div>
+						  		<span id="mail-check-warn"></span>
 							</div>
 
 							<!-- 사업자 회원에게만 보여짐 -->
@@ -581,10 +595,8 @@
 									<div class="input-group">
 										<input type="text" name="zipcode" id="postnum" class="postnum"
 											placeholder="우편번호를 검색하세요.">
-										<div class="input-group-addon">
-											<button type="button" id="btnZipCode" class="btn btn-primary"
+										<button type="button" id="btnZipCode" class="btn-zip-code btn btn-primary"
 												style="background-color: lightgray; color: black; border: 0px;" onclick="searchAddress()">우편번호검색</button>
-										</div>
 									</div>
 								</div>
 
@@ -651,8 +663,8 @@
 	<script>
 		//제이쿼리 시작
 		$(function() {
+			let code = ''; //이메일 전송 인증 번호 저장을 위한 변수
 
-			// id idCheckBtn msgid
 			//아이디 중복체크 검증
 			$('#idCheckBtn').click(function() {
 				console.log('아이디 중복체크 버튼 클릭');
@@ -663,7 +675,7 @@
 				}
 				
 				$(this).attr('type', 'button');
-				$('.btn-success').attr('type', 'button');//회원가입 버튼 기능 없애기
+				//$('.btn-success').attr('type', 'button');//회원가입 버튼 기능 없애기
 				const userId = $('#userId').val();//아이디 값
 
 				//비동기 통신 시작
@@ -691,9 +703,47 @@
 
 			});//아이디 중복 체크 끝
 			
+			// 인증 이메일 전송 이벤트
+			$('#btnEmail').click(function() {
+				const email = $('#useremail').val(); //이메일 입력 값
+				console.log('입력 받은 이메일: ' + email);
+				
+				$.ajax({
+					type : 'post',
+					url : '<c:url value="/user/emailCheck" />',
+					data : email,
+					contentType : 'application/json',
+					success : function(data) {
+						console.log('비동기 success');
+						console.log('data: ' + data);
+						$('#checkEmail').attr('disabled', false);
+						code = data;//전역변수 code에 data의 값을 넣음.
+						alert('인증 번호가 전송되었습니다. 확인 후 입력란에 정확히 입력해 주세요.');
+					}
+				});// 인증 이메일 전송 비동기 끝
+				
+			});// 인증 이메일 전송 이벤트 끝
 			
+			//인증 번호 비교
+			$('#checkEmail').blur(function() {
+				const inputCode = $(this).val();//사용자가 입력한 인증번호
+				const $resultMsg = $('#mail-check-warn');//인증번호 검사 결과를 띄울 span
+				
+				if(code === inputCode){
+					$resultMsg.html('인증번호가 일치합니다.');
+					$resultMsg.css('color', 'green');
+					$('#checkEmail').attr('disabled', true);
+					//disabled는 값이 서버로 전송이 안됨.
+					//회원정보를 DB로 넣어야 하기 때문에 readonly로 설정.
+					$('#useremail').attr('readonly', true);
+					
+				} else {
+					$resultMsg.html('인증번호를 다시 확인해주세요.');
+					$resultMsg.css('color', 'red');
+				}
+			});//인증 번호 비교 이벤트 끝
 			
-		});//end jQuery
+		});//end jQuery	
 		
 		
 		//다음 주소 api 사용해보기
@@ -742,6 +792,8 @@
 		const $agree = document.querySelector('.agree');
 		const $busnumdiv = document.querySelector('.busnum');
 		const $busnuminput = document.querySelector('.busnuminput');
+		
+		
 
 		//const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value;
 
@@ -776,10 +828,15 @@
                 $pw.focus();
                 return;
             } else if (!emailtest.test($email.value)) {
-                alert('이메일 양식이 올바르지 않습니다 예)aaa@aaa.aaa');
+                alert('이메일 양식이 올바르지 않습니다. 예)aaa@aaa.aaa');
                 $email.focus();
                 return;
-            } else if ($addr1.value === '') {
+            } if($email.getAttribute('readonly') === false) {
+                alert('이메일 인증을 완료해 주세요.');
+                $email.focus();
+                return;
+            } 
+            else if ($addr1.value === '') {
                 alert('기본 주소를 입력하세요');
                 $addr1.focus();
                 return;
@@ -837,7 +894,11 @@
 				alert('이메일 양식이 올바르지 않습니다 예)aaa@aaa.aaa');
 				$email.focus();
 				return;
-			}
+			} if(!chkMail) {
+                alert('이메일 인증을 완료해 주세요.');
+                $email.focus();
+                return;
+            } 
 			if (!$agree.checked) {
 				alert('이용 약관을 동의해 주세요');
 				$agree.focus();
