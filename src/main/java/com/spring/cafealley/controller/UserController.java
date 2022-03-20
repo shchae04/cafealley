@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.user.service.IUserService;
+import com.spring.cafealley.util.MailSendService;
 
 @Controller
 @RequestMapping("/user")
@@ -28,7 +29,10 @@ public class UserController {
 
 	@Autowired
 	private IUserService service;
-
+	@Autowired
+	private MailSendService mailService;
+	
+	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	// 회원가입 버튼을 누르면 회원유형 선택 페이지로 이동
@@ -63,7 +67,15 @@ public class UserController {
 		return "user/formJoin";
 	}
 	
-	
+	//이메일 인증(비동기)
+	@ResponseBody
+	@PostMapping("/emailCheck")
+	public String emailCheck(@RequestBody String email) {// url에 파라미터 값으로 이메일이 옴.(JSON 데이터X)
+		System.out.println("컨트롤러의 emailCheck 메서드 발동");
+		System.out.println("email: " + email);
+		
+		return mailService.joinEmail(email);
+	}
 	
 
 	// 회원가입 처리
@@ -74,7 +86,7 @@ public class UserController {
 		service.userJoin(vo);
 	}
 
-	// 로그인 요청 처리
+	// 로그인 요청 처리(비동기)
 	@ResponseBody
 	@PostMapping("/loginCheck")
 	public String loginCheck(@RequestBody UserVO vo, HttpSession session, HttpServletResponse response) {
@@ -169,7 +181,7 @@ public class UserController {
 	}
 	
 	
-	// 탈퇴 처리
+	// 탈퇴 처리(비동기)
 	@ResponseBody
 	@PostMapping("/memDelete")
 	public String memDelete(@RequestBody UserVO vo, HttpSession session) {
