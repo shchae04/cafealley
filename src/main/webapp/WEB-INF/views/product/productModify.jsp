@@ -255,12 +255,12 @@ input {
 							<tr>
 								<td class="prod-category"><select name="procategory" id="category">
 										<option value="non-selected">-</option>
-										<option value="">원두</option>
-										<option value="">티/액상차</option>
-										<option value="">유제품</option>
-										<option value="">시럽/소스</option>
-										<option value="">파우더/농축액</option>
-										<option value="">커피용품, 머신</option>
+										<option value="beans">원두</option>
+										<option value="tea">티/액상차</option>
+										<option value="milk">유제품</option>
+										<option value="syrup">시럽/소스</option>
+										<option value="powder">파우더/농축액</option>
+										<option value="coffemachine">커피용품, 머신</option>
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
 										드롭하여<br>이미지를<br>업로드하세요

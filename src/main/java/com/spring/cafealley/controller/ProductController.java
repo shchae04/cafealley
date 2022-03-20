@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cafealley.command.ProductVO;
@@ -33,10 +35,12 @@ public class ProductController {
 	@GetMapping("/productList")
 	public void getlist(Model model){
 		System.out.println("관리자 상품목록페이지 이동");
-		List<ProductVO> productList =  service.getList(null);
-		model.addAttribute("productList", productList);
 	}
-	
+	@GetMapping("/getList")
+	@ResponseBody
+	public List<ProductVO> list() {
+		return service.getList(null);
+	}
 	
 	//관리자 상품 수정 이동
 	@GetMapping("/productModify")
@@ -63,7 +67,7 @@ public class ProductController {
 		imgservice.upload(files);
 		
 		vo.setFilenum(imgservice.getLastUploaded());
-		
+		System.out.println("정보 "  +vo);
 		service.insertProduct(vo);
 		
 		
@@ -72,8 +76,29 @@ public class ProductController {
 	
 	@PostMapping("/productModify")
 	public String modify(ProductVO vo,HttpSession session) {
-		service.updateProduct(vo);
 		System.out.println("productModify: Post요청");
-		return "redirec:/product/productList";
+		System.out.println("productModify: 수정요청");
+		service.updateProduct(vo);
+		
+		return "redirect:/product/productList";
+	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public String delete(@RequestBody int prono) {
+		
+		//어차피 관리자만 보니깐 할필요없.세션검사 진행하고.
+		
+		service.deleteProduct(prono);
+		System.out.println("비동기 삭제 완료.");
+		
+		return "delSuccess";
+	}
+	
+	@PostMapping("/update")
+	@ResponseBody
+	public String update(@RequestBody int prono) {
+		return"";
+		//수정 까지 비동기로 진행하려면 List 프론트 변경해야함.차후 처리 일단 동기방식 업데이트.
 	}
 }

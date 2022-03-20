@@ -16,6 +16,7 @@
 	<select id="getList" resultType="com.spring.cafealley.command.ProductVO">
   		SELECT * 
   		  FROM product
+  	  ORDER BY prono DESC
 		<include refid="category"/>
 	</select>
 	  

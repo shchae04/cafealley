@@ -6,16 +6,22 @@
   
   <mapper namespace="com.spring.cafealley.shopboard.mapper.IShopboardMapper">
   
-  
-
-  
-  
+  <sql id="regist">
+  	<if test=" prono2 != null and prono2 != '' ">prono2, </if>
+  	<if test=" prono3 != null and prono2 != '' ">prono3, </if>
+  	<if test=" prono4 != null and prono2 != '' ">prono4, </if>
+  </sql>
+  <sql id="regist2">
+  	<if test=" prono2 != null and prono2 != '' ">#{prono2}, </if>
+  	<if test=" prono3 != null and prono2 != '' ">#{prono3}, </if>
+  	<if test=" prono4 != null and prono2 != '' ">#{prono4}, </if>
+  </sql>
   
   
   <insert id="regist">
   INSERT INTO shopboard
-  (bno, title, userid, content, prono, prono2, prono3, prono4) 
-  VALUES(shopbno_seq.NEXTVAL, #{title}, #{userid}, #{content}, #{prono}, #{prono2}, #{prono3}, #{prono4})
+  (bno, title, content, prono, <include refid="regist"/> filenum) 
+  VALUES(shopbno_seq.NEXTVAL, #{title}, #{content}, #{prono}, <include refid="regist2"/> #{filenum})
   </insert>
   
   <select id="getList" resultType="com.spring.cafealley.command.ShopboardVO">

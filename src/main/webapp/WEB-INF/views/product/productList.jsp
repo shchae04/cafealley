@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
 
 
+
 <style>
 body {
 	width: 100%;
@@ -141,8 +142,18 @@ section {
 	line-height: 1px;
 }
 
+.cart-table>tbody>tr>td>img{
+	margin-top: 20px;
+}
+
+
 .cart-table>tbody>tr>td>p {
-	margin: 0;
+	display: block;
+	padding: 5px;
+	margin-top: 50px;
+	padding: 5px;
+	width: auto;
+	height: 20px;
 }
 
 input[type="number"] {
@@ -172,8 +183,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: relative;
 }
 
-.cart-table>thead>tr>td, .cart-table>tbody>tr>td, .cart-table>tfoot>tr>td
-	{
+.cart-table>thead>tr>td, 
+.cart-table>tbody>tr>td, 
+.cart-table>tfoot>tr>td
+{
 	margin: 0;
 	vertical-align: middle;
 }
@@ -190,27 +203,32 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	position: absolute;
 }
 
-.cart-table button {
-	width: auto;
-	height: 20px;
-}
-
 .cart-table tr {
 	border-top: 1px solid #ddd;
+	
 }
 
 tfoot tr td {
 	border-top: none;
 }
 
-.cart-table .btn-direct-order .btn-remove {
-	margin: 7px;
+
+.cart-table tr td p > .btn-remove,
+.cart-table tr td p > .btn-modify {
+	display: block;
+	cursor: pointer;
+	margin-left: 70px;
 }
 
-.btn-remove, .btn-modify {
-	display: block;
-	padding: 5px;
-	cursor: pointer;
+.cart-table tr td .chk-shop-regist{
+	margin-top: 45px;
+}
+
+.cart-table>tbody>tr>td:last-child>p:first-child{
+	margin-top: 40px;
+}
+.cart-table>tbody>tr>td:last-child>p:last-child{
+	margin-top: 0;
 }
 
 .btn-remove:hover, .btn-modify:hover {
@@ -231,7 +249,9 @@ tfoot tr td {
 	padding: 10px 0;
 }
 
-.select-category, .btn-all-order {
+.select-category,
+.btn-regist,
+.btn-shop-regist {
 	width: fit-content;
 	height: 50px;
 	margin: 0 0 10px 10px;
@@ -259,13 +279,15 @@ tfoot tr td {
 	font-style: italic;
 }
 
-.btn-all-order {
+.btn-regist,
+.btn-shop-regist {
 	background: black;
 	color: white;
 	font-size: 18px;
 }
 
-.btn-all-order:hover {
+.btn-regist:hover,
+.btn-shop-regist:hover {
 	font-style: italic;
 }
 
@@ -295,7 +317,8 @@ tfoot tr td {
 			<p class="page-title">상품 관리</p>
 			<p class="page-desc">
 				<strong style="color: red;">*</strong> 상품을 삭제하시려면 상품페이지에 등록되어있는 판매
-				게시글부터 삭제해주셔야 합니다.
+				게시글부터 삭제해주셔야 합니다.<br>
+				<strong style="color: red;">*</strong> 상품 판매글에 등록할 수 있는 최대 상품수는 4개입니다.
 			</p>
 			<div class="row">
 				<div class="col-xs-12 cart-list clearfix">
@@ -312,6 +335,7 @@ tfoot tr td {
 								<li><a href="<c:url value='product/productList/coffeemachine'/>">커피용품, 머신</a></li>
 							</ul>
 						</div>
+						<button class="btn-shop-regist">선택상품 판매글에 등록하기</button>
 						<div class="divforright">
 							<form action="#">
 								<input type="text" placeholder="상품명 검색">
@@ -319,14 +343,15 @@ tfoot tr td {
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
 							</form>
-							<button class="btn-all-order">상품 등록하기</button>
+							<button class="btn-regist" onclick="location.href='${pageContext.request.contextPath}/product/productWrite'">상품 등록하기</button>
 						</div>
 					</div>
 
 
-					<table class="table w-auto text-center align-middle cart-table">
+					<table class="table w-auto text-center align-middle cart-table" id="proContent">
 						<thead>				
 							<tr>
+								<td>선택</td>
 								<td>상품 카테고리</td>
 								<td>상품 이미지</td>
 								<td>상품번호</td>
@@ -338,39 +363,7 @@ tfoot tr td {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="product" items="${productList}">
-								<tr>
-									<td class="prod-category">
-										<p>${product.procategory}</p>
-									</td>
-									<td class="prod-img"><img src="<c:url value='/loadimg/display/${product.filenum}/1'/>"
-										alt="" width="100px" height="100px"></td>
-									<td class="prod-number">
-										<p>${product.prono}</p>
-									</td>
-									<td class="prod-info">
-										<p>${product.proname}</p>
-										<p></p> 
-									</td>
-									<td class="prod-qty">
-										<p>${product.prostock}</p>
-									</td>
-									<td class="prod-normal-price">
-										<p>${product.proprice}</p>
-									</td>
-									<td class="prod-discount-price">
-										<p>${product.prosellprice}</p>
-									</td>
-									<td>
-										<p class="btn-modify">
-											수정<span class="glyphicon glyphicon-erase"></span>
-										</p>
-										<p class="btn-remove">
-											삭제<span class="glyphicon glyphicon-remove"> </span>
-										</p>
-									</td>
-								</tr>
-							</c:forEach>
+							
 						</tbody>
 
 						<tfoot>
@@ -392,26 +385,140 @@ tfoot tr td {
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
-        const $table = document.querySelector('.table');
 
-        // 삭제버튼 누르면 tr삭제하는 로직
-        $table.addEventListener('click', e => {
-            if (!(e.target.matches('.btn-remove') || e.target.matches('.glyphicon-remove'))) {
-                return;
-            }
+        
+        $(function(){
+            let str = '';
+            // let page = 1; 나중에 페이지 적용되면..
+            getList(true);
 
-            // 여기에 상품이 등록된 판매게시글이 있는지 여부 확인해서 돌려보내거나
-            // 아니면 삭제를 진행하고 아래의 tr삭제를 진행하도록 하자.
+        	// 목록을 불러오는 함수
+        	function getList(reset){
+        		if(reset===true){
+        			str='';
+        		}
+        	
+	        	$.getJSON(
+	        			'<c:url value="/product/getList"/>',
+	        			function(productList){
+	        				console.log(productList);
+							for(let i=0; i<productList.length; i++){
+								str+="<tr>";
+								str+="<td>";
+								str+="<input type='checkbox' class='chk-shop-regist' id='"+ productList[i].prono +"'/>";
+								str+="</td>";
+								str+="<td class='+ prod-category'>";
+								str+="<p>" + productList[i].procategory + "</p>";
+								str+="</td>";
+								str+="<td class='prod-img'><img src='${pageContext.request.contextPath}/loadimg/display/"+ productList[i].filenum+ "/1'";
+								str+="alt='상품이미지'" + " width='100px'" + " height='100px'"+ "></td>";
+								str+="<td class='prod-number'>";
+								str+="<p>"+productList[i].prono+"</p>";
+								str+="</td>";
+								str+="<td class='prod-info'>";
+								str+="<p>"+productList[i].proname+"</p>";
+								str+="</td>";
+								str+="<td class='prod-qty'>";
+								str+="<p>"+productList[i].prostock+"</p>";
+								str+="</td>";
+								str+="<td class='prod-normal-price'>";
+								str+="<p>"+productList[i].proprice+"</p>";
+								str+="</td>";
+								str+="<td class='prod-discount-price'>";
+								str+="<p>"+productList[i].prosellprice+"</p>";
+								str+="</td>";
+								str+="<td class=link-inner>";
+								str+="<p style='width: fit-content; height: fit-content;'>";
+								str+="<span class='glyphicon glyphicon-erase btn-modify' href='"+productList[i].prono+"'>수정</span>";
+								str+="</p>";
+								str+="<p style='width: fit-content; height: fit-content;'>";
+								str+="<span class='glyphicon glyphicon-remove btn-remove' href='"+productList[i].prono + "'>삭제</span>";
+								str+="</p>";
+								str+="</td>";
+								str+="</tr>";
+								
+								$('tbody').html(str);
+							}
+	        			}// end getJSON function
+				); // end get JSON
+        	}// end getList()
+        	
+        	
+        	$('.btn-shop-regist').on('click', function(e){
+        		let str =''; // 체크된거 url의 매개변수로 담아주기위해 저장.
+        		let count = 0;
+        		for(let checkbox of $('.chk-shop-regist')){
+        			console.log(checkbox);
+        			
+	        		if(checkbox.checked){
+	        			count = count + 1;
+	        			let namecheck = (count==1? "":count); // 1은 db에 숫자가 기입되어있지 않아서.. 매개변수에 안붙여야함.
+	        			let ampersand = (count==1? "":"&");
+	        			str+= ampersand + "prono"+ namecheck  + "=" + checkbox.getAttribute('id');
+	        		}
+	        	}
+        		if(count==0){ // 선택된거 하나도 없으면
+        			alert('판매게시글로 등록할 상품을 하나 이상 선택해주세요.');
+        			return;
+        		}
+        		if(count>4){ // 선택된거 4개 넘으면 거름
+        			alert('판매게시글로 등록할 상품은 4개 이하로만 등록할 수 있습니다.');
+        			return;
+        		}
+        		
+        		// 남은 url 완성시키기.
+        		// 선택된게 2개라 하더라도 url을 넘겨줄때 prono3, prono4는 0으로 기입해줘야한다.
+        		for(let num = count+1; num<=4; num++){
+        			str+= "&prono"+ num + "=" + 0;
+        		}
+        		
+        		location.href="${pageContext.request.contextPath}/shop/shopWrite?" + str;
+        		
+        	});
+        	
+        	
+        });
+        
+        //onclick이 안먹어서 상품등록하기 페이지이동.
+        $('.btn-all-order').click(function(){
+        	location.href= "<c:url value='/product/productWrite'/>";
+        });
 
+        //삭제 처리
+		//삭제하기 링크를 클릭했을 때 이벤트를 발생 시켜서
+		// 성공하면 "delSuccess" 리턴.
+		// url: /product/delete, method: post
+		
+		console.log($('.link-inner p span[class="btn-remove"]'));
+        console.log($('tbody')[0])
+		$('tbody').on('click', '.link-inner p >.btn-remove', function(e) {
+			e.preventDefault();
+			
+			const prono = $(this).attr('id');
+			console.log(prono);
+			
+			$.ajax({
+				type: "post",
+				url: "<c:url value='/product/delete' />",
+				data: prono,
+				contentType: 'application/json',
+				success: function(result) {
+					if(result === 'delSuccess') {
+						alert('게시물이 정상적으로 삭제되었습니다.');
+						getList(true); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
+						//자동으로 목록으로 가지는 않음,
+					}
+				},
+				error: function() {
+					alert('삭제에 실패했습니다. 다시 시도하세요.');
+				}
+			});
+			
+		});
+        
+        
+        
 
-            // 해당 tr삭제
-            if (e.target.matches('.btn-remove')) {
-                e.preventDefault();
-                e.target.parentNode.parentNode.remove();
-            } else {
-                e.target.parentNode.parentNode.parentNode.remove();
-            }
-        })
     </script>
 
 

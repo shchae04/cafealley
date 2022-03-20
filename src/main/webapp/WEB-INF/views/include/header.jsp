@@ -56,7 +56,7 @@
 					<li><a href="#">Coffee Talk</a></li>
 					<li><a href="#">카페 게시판</a></li>
 					<li><a href="#">이벤트</a></li>
-					<li class="dropdown"><a href="#">Owner Mall </span></a>
+					<li class="dropdown"><a href="#">Owner Mall </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">원두</a></li>
 							<li><a href="#">티 / 액상차</a></li>
@@ -92,7 +92,7 @@
 						<h5>비밀번호</h5>
 						<input type="password" id="userpw" class="form-control"
 							placeholder="password input"><span id="pwCheck"></span> <label>
-							<input id="autoLogin" type="checkbox"> <small>로그인 유지</small>
+							<input style="border:1px solid #ddd; width:8px; height:8px" id="autoLogin" type="checkbox"> <small>로그인 유지</small>
 						</label>
 						<div class="login-center">
 							<button type="button" id="btnLogin"
@@ -107,7 +107,7 @@
 							<div class="login-p-center">또는</div>
 							<button type="button" class="btn btn-block"
 								style="background-color: #04cf5c; color: white;">
-								<strong>N</strong></strong>
+								<strong>N</strong>
 							</button>
 						</div>
 					</form>
@@ -164,11 +164,11 @@
 						
 					const userid = $('#userid').val();
 					const userpw = $('#userpw').val();
+					const autoLogin = $('#autoLogin').is(':checked');
 					
 					/*
 					//자동로그인 체크박스 체크 되었는지 여부
 					//is() - 상태 여부를 판단하여 논리값을 리턴한다.
-					const autoLogin = $("#autoLogin").is(':checked');
 					*/
 					
 					//콘솔에서 한 번 확인해보기
@@ -177,10 +177,10 @@
 					
 					
 					//체크박스의 체크 여부를 확인하여 자동로그인을 구현할지를 정한다.
-					//"autoLogin" : autoLogin
 					const userInfo = {
 							"userid" : userid,
-							"userpw" : userpw
+							"userpw" : userpw,
+							"autoLogin" : autoLogin
 					};
 							
 					//비동기 통신 시작
@@ -210,7 +210,7 @@
 					            chk2 = false;
 							} else {
 								console.log('로그인 성공');
-								location.href='http://localhost/cafealley/';
+								location.href='http://localhost/cafealley';
 							}
 						},
 						error : function() {
@@ -218,9 +218,7 @@
 						}
 					});//end ajax(로그인 비동기 처리)
 							
-				} else {
-					alert('입력 정보를 다시 확인하세요.');
-				}
+				} 
 				
 				
 			});//로그인 검증

@@ -29,7 +29,7 @@ public class ProductTest {
 		vo.setProcategory("원두");
 		vo.setProname("콜롬비아 원두" + i);
 		vo.setProdetail("이원두는 ~~~" + i);
-		vo.setFilenum(11);
+		vo.setFilenum(i);
 		vo.setProstock(100);
 		mapper.insertProduct(vo);
 		}
