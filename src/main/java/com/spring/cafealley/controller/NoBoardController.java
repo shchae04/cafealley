@@ -3,6 +3,8 @@ package com.spring.cafealley.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.Multipart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,10 +55,20 @@ public class NoBoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write(BoardVO vo) {
+	public String write(BoardVO vo,MultipartFile file) {
 		System.out.println("작성요청이 들어옴");
 		System.out.println("작성내용"+vo);
 		service.regist(vo);
+
+		List<MultipartFile> files = new ArrayList<MultipartFile>();
+		files.add(file);
+		System.out.println("file: " + files);
+		imgservice.upload(files);
+
+		//key를 가장최근 업로드된 번호로 
+		vo.setKey(imgservice.getLastUploaded()); 
+		
+		
 		return "redirect:/noticeBoard/noticeBoardList";
 	}
 	
