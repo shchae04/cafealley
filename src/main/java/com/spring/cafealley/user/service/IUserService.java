@@ -22,7 +22,7 @@ public interface IUserService {
 	void updateUser(UserVO vo);
 
 	// 비밀번호 확인
-	int checkPw(String userpw);
+	String checkPw(String userId);
 
 	// 회원 정보 삭제
 	void deleteUser(String userId);

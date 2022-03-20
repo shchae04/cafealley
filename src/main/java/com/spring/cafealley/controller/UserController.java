@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ public class UserController {
 
 	@Autowired
 	private IUserService service;
+
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	// 회원가입 버튼을 누르면 회원유형 선택 페이지로 이동
 	@GetMapping("/joinSelect")
@@ -59,6 +62,9 @@ public class UserController {
 		model.addAttribute("userType", "business");
 		return "user/formJoin";
 	}
+	
+	
+	
 
 	// 회원가입 처리
 	@PostMapping("/joinFinish")
@@ -76,103 +82,58 @@ public class UserController {
 		System.out.println("컨트롤러의 loginCheck 메서드 발동");
 		System.out.println("param: " + vo);
 
-		String userid = vo.getUserid();
-		String userpw = vo.getUserpw();
+		// 암호화 한 비밀번호를 응답받은 비밀번호와 equal로 바로 비교하지 않고
+		// BCryptPasswordEncoder에게 암호화된 비밀번호화 원본 비밀번호 비교를 요청
 
-		UserVO userInfo = service.getInfo(vo.getUserid());
+		UserVO dbData = service.getInfo(vo.getUserid());
 		
-		if(userInfo.getUserpw().equals(userpw)) {// 비밀번호가 db에 존재한다면
-			if(userInfo.getUserid().equals(userid)) {// id가 db에 존재한다면
-				System.out.println("loginSuccess");
-				
-				// 로그인 한 회원만 세션 생성
-				session.setAttribute("login", userInfo);
-				
-				// 자동로그인 유지 시간
-				// 자동로그인 유지시간을 long타입으로 지정
-				// -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기 때문에(currentTimeMillis은 밀리초로 계산됨)
-				long limitTime = 60 * 60 * 24 * 90;//90일
-				
-				// 자동 로그인 체크 시 처리해야 할 내용
-				if(vo.isAutoLogin()) {
+		if(dbData != null) { // 입력 받은 아이디로 db데이터가 조회된다면
+			
+			// 입력 받은 원본 비밀번호와 DB에 저장된 암호화된 비밀번호를 비교해
+			if(encoder.matches(vo.getUserpw(), dbData.getUserpw())) {// 비밀번호가 db에 존재한다면
+					System.out.println("loginSuccess");
 					
-					// 자동 로그인을 희망하는 경우
-					// 쿠키를 이용하여 자동 로그인 정보를 저장.
-					System.out.println("자동 로그인 쿠키 생성 중...");
+					// 로그인 한 회원만 세션 생성
+					session.setAttribute("login", dbData);
 					
-					//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
-					Cookie loginCookie = new Cookie("loginCookie", session.getId());
-					loginCookie.setPath("/");//쿠키가 동작할 수 있는 유효한 url 설정
-					loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
+					// 자동로그인 유지 시간
+					// 자동로그인 유지시간을 long타입으로 지정
+					// -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기 때문에(currentTimeMillis은 밀리초로 계산됨)
+					long limitTime = 60 * 60 * 24 * 90;//90일
 					
-					response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
-					
-					//자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초)
-					long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
-					//Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달하면 날자 형태로 변경해 줌
-					Date limitDate = new Date(expiredDate);
-					
-					System.out.println("자동 로그인 만료 시간: " + limitDate);
-					
-					service.keepLogin(session.getId(), limitDate, vo.getUserid());
-					
-				}
-				return "loginSuccess";
-			}
-			return "idFail";
-		}
-		return "pwFail";
-
-		/*
-		 //암호화 한 비밀번호를 응답받은 비밀번호와 equal로 바로 비교하지 않고
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		UserVO dbData =  service.selectOne(vo.getAccount());
-		
-		if(dbData != null) {
-			//원본비밀번호와 dbData의 비밀번호를 비교하는 메서드matches 사용
-			//암호화 되지 않은 계정은 이제 로그인하지 못함
-			if(encoder.matches(vo.getPassword(), dbData.getPassword())) {
-				//로그인 성공 회원을 대상으로 세션 정보를 생성
-				session.setAttribute("login", dbData);
-				
-				//자동로그인 유지 시간
-				//자동로그인 유지시간을 long타입으로 지정
-				// -> 만료시간을 계산해서 DB와 연동해서 관리해야 하기 때문에(currentTimeMillis은 밀리초로 계산됨)
-				long limitTime = 60 * 60 * 24 * 90;//90일
-				
-				//자동 로그인 체크 시 처리해야 할 내용
-				if(vo.isAutoLogin()) {
-					
-					//자동 로그인을 희망하는 경우
-					//쿠키를 이용하여 자동 로그인 정보를 저장.
-					System.out.println("자동 로그인 쿠키 생성 중...");
-					
-					//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
-					Cookie loginCookie = new Cookie("loginCookie", session.getId());
-					loginCookie.setPath("/");//쿠키가 동작할 수 있는 유효한 url 설정
-					loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
-					
-					response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
-					
-					//자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초)
-					long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
-					//Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달하면 날자 형태로 변경해 줌
-					Date limitDate = new Date(expiredDate);
-					
-					System.out.println("자동 로그인 만료 시간: " + limitDate);
-					
-					service.keepLogin(session.getId(), limitDate, vo.getAccount());
-					
-				}
-				
-				return "loginSuccess";
-			} else {
+					// 자동 로그인 체크 시 처리해야 할 내용
+					if(vo.isAutoLogin()) {
+						
+						// 자동 로그인을 희망하는 경우
+						// 쿠키를 이용하여 자동 로그인 정보를 저장.
+						System.out.println("자동 로그인 쿠키 생성 중...");
+						
+						//세션아이디를 가져와 쿠키에 저장(고유한 값이 필요해서)
+						Cookie loginCookie = new Cookie("loginCookie", session.getId());
+						loginCookie.setPath("/");//쿠키가 동작할 수 있는 유효한 url 설정
+						loginCookie.setMaxAge((int) limitTime);//쿠키 만료시간 설정
+						
+						response.addCookie(loginCookie);//응답객체에 쿠키를 태워 보냄
+						
+						//자동 로그인 유지 시간을 날짜 객체로 변환(DB에 삽입하기 위해, 밀리초)
+						long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
+						//Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달하면 날자 형태로 변경해 줌
+						Date limitDate = new Date(expiredDate);
+						
+						System.out.println("자동 로그인 만료 시간: " + limitDate);
+						
+						service.keepLogin(session.getId(), limitDate, vo.getUserid());
+						
+					}
+					return "loginSuccess";
+			} else { // 원본 비번과 암호화 된 비번이 일치하지 않는다면
+				SecurityContextHolder.clearContext();//SecurityContext 기존 정보 초기화
 				return "pwFail";
 			}
-		} else {
+		} else { // 입력 받은 아이디로 db데이터가 조회되지 않는다면
+			SecurityContextHolder.clearContext();//SecurityContext 기존 정보 초기화
 			return "idFail";
 		}
-		 */
 
 	}// end loginCheck()
 
@@ -195,7 +156,9 @@ public class UserController {
 		System.out.println("param: " + vo);
 		
 		service.updateUser(vo);
-
+		
+		// 정보 수정 후 로그아웃 처리 추가해야 함.
+		
 		return "redirect:/";
 	}
 
@@ -210,15 +173,18 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/memDelete")
 	public String memDelete(@RequestBody UserVO vo, HttpSession session) {
+		
 		System.out.println("컨트롤러의 memDelete 메서드 발동");
+
+		//memDelete의 매개변수 vo에 사용자가 입력한 비밀번호가 전달됨.
+		//checkPw()가 db데이터의 암호화된 비밀번호를 리턴
+		// -> 둘의 값을 비교. 일치하면 "match", 불일치 시 "none" 리턴
+		boolean result = encoder.matches(vo.getUserpw(), service.checkPw(vo.getUserid()));
 		
-		String userid = vo.getUserid();
-		String userpw = vo.getUserpw();
-		
-		int result = service.checkPw(userpw);
-		if (result == 1) {
-			session.removeAttribute("login");
-			service.deleteUser(userid);
+		if(result) {
+			session.removeAttribute("login");// 세션 삭제
+			SecurityContextHolder.clearContext();//SecurityContext 기존 정보 초기화
+			service.deleteUser(vo.getUserid());// 탈퇴
 			return "match";
 		} else {
 			return "none";
@@ -227,3 +193,14 @@ public class UserController {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

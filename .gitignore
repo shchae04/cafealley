@@ -4,3 +4,4 @@
 .springBeans
 target
 Hikari.properties
+email.properties
