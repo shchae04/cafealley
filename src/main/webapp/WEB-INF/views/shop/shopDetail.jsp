@@ -224,7 +224,7 @@ button.btn-cart, button.btn-order {
 }
 
 .select-list .selected-price {
-	width: 70px;
+	width: 100px;
 	height: 50px;
 	display: inline-block;
 }
@@ -306,7 +306,7 @@ button.btn-cart, button.btn-order {
 							<span class="prod-text">옵션선택</span> <select id="sel-option">
 								<option value="not-selected">선택</option>
 								<c:forEach var="pro" items="${shop.proList}" varStatus="status">
-									<option value="${pro.prosellprice}">${pro.proname}</option>
+									<option value="${pro.prono}" id="a${pro.prosellprice}" >${pro.proname}</option>
 								</c:forEach>
 							</select>
 
@@ -368,12 +368,14 @@ button.btn-cart, button.btn-order {
 
             // 선택한 옵션 이름 가져오기.
             let optiontext = '';
+            let sellprice = '';
             for (let $option of e.target.children) {
             	console.log('option의 밸류'+$option.value);
             	console.log('e.target 즉 select의 밸류'+ e.target.value);
             	console.log('option의 textContent' + $option.textContent);
                 if ($option.value === e.target.value) {
                     optiontext = $option.textContent;
+                    sellprice = $option.getAttribute('id').replace('a','');
                 }
                	
             }
@@ -403,16 +405,22 @@ button.btn-cart, button.btn-order {
             // 2. 선택한 옵션이 없으면 만들어서 easycart에 쑤셔넣어버리기~
             const $selectList = document.createElement('div');
             $selectList.classList.add('select-list');
+            
+            // 가격 이쁘게 표시
+            let sellprice2 = sellprice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
+            
             $selectList.innerHTML = `<span class="selected-prod">`+ optiontext +`</span>
                                     <span class="selected-qty">
-                                        <input type="number" name="" id=`+e.target.value+` value="1" min="1"><br>
+                                        <input type="number" name="" id=`+'b'+ sellprice +` value="1" min="1"><br>
                                     </span>
-                                    <span class="selected-price">`+e.target.value+`원</span>
+                                    <span class="selected-price">`+ sellprice2 +`</span>
                                     <span class="btn-remove">
                                         <i class="fa-solid fa-xmark"></i>
                                     </span>`;
             $easycart.insertBefore($selectList, document.querySelector('.total-price'));
             e.target.value = 'not-selected';
+			 
+            
             totalLoad()
         });
 
@@ -435,13 +443,13 @@ button.btn-cart, button.btn-order {
             console.log('input의 type이 number임');
             $selectprice = $input.parentNode.nextElementSibling;
 
-            let pricePerEach = $input.getAttribute('id'); //*************** 여기 우항이 페이지에 뿌려지는거 가져와야해서 EL태그로 아마 가져올거에요.
+            let pricePerEach = $input.getAttribute('id').replace('b',''); //*************** 여기 우항이 페이지에 뿌려지는거 가져와야해서 EL태그로 아마 가져올거에요.
             let quantity = parseInt($input.value);
             let productPriceTotal = pricePerEach * quantity;
             // 정규표현식으로 컴마 붙여주고 원도 친절히 붙여줌.
             productPriceTotal = productPriceTotal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             productPriceTotal = productPriceTotal + '원';
-            $input.parentNode.nextElementSibling.textContent = productPriceTotal;
+            $selectprice.textContent = productPriceTotal;
         }
 
         // 최종합계 갱신
@@ -449,8 +457,9 @@ button.btn-cart, button.btn-order {
             const $selectedprices = document.querySelectorAll('.selected-price');
             let total = 0;
             for ($price of $selectedprices) {
-                total += parseInt($price.textContent.replace(',', '').replace('원', ''));
+                total += parseInt($price.textContent.replaceAll(',', '').replace('원', ''));
             }
+            console.log('최종합계갱신시 정규표현식 적용안된 total' + total);
             total = total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원';
             document.querySelector('.sp-total-price').textContent = total;
         }
