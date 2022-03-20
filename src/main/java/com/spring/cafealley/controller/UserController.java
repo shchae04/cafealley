@@ -62,6 +62,9 @@ public class UserController {
 		model.addAttribute("userType", "business");
 		return "user/formJoin";
 	}
+	
+	
+	
 
 	// 회원가입 처리
 	@PostMapping("/joinFinish")
