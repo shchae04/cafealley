@@ -44,6 +44,7 @@ public class MailSendService {
 		
 	}
 	
+	
 	// 이메일 전송 메서드
 	public void mailSend(String setFrom, String toMail, String title, String content)  {
 		
