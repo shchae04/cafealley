@@ -102,102 +102,19 @@ li {
 					</div>
 				</div>
 			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<!-- 그리드 한줄 끝-->
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="col-xs-3">
-				<div class="prod-list-inner">
-					<img src="../img/coffee1.jpg" alt="일리 미디움 원두 클래식 로스트">
-					<div class="prod-content clearfix">
-						<div class="info">
-							<span>일리 원두 클래식 로스트</span>
-						</div>
-						<div class="price">
-							<strong>199,000원</strong>
-						</div>
-					</div>
-				</div>
-			</li>
 		</ul>
 	</section>
 	
 	<%@ include file="../include/footer.jsp" %>
+	
+	<script>
+	let msg = '${msg}';
+	if(msg !== null){
+		alert(msg);
+	}
+	
+	</script>
+	
 	
 </body>
 </html>

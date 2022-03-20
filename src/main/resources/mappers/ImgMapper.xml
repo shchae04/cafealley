@@ -8,12 +8,12 @@
 
 <sql id="uploadfiles">
 <if test="filename2 != null and filename2 != '' ">filename2,</if>
-<if test="filename3 != null and filename3 != '' ">filename2, filename3,</if>
+<if test="filename3 != null and filename3 != '' ">filename3,</if>
 </sql>
 
 <sql id="uploadfiles2">
 <if test="filename2 != null and filename2 != '' ">#{filename2},</if>
-<if test="filename3 != null and filename3 != '' ">#{filename2}, #{filename3},</if>
+<if test="filename3 != null and filename3 != '' ">#{filename3},</if>
 </sql>
 
 

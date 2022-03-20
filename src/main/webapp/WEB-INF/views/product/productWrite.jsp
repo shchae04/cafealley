@@ -125,7 +125,6 @@ input {
 
 .prod-qty input[type="number"] {
 	width: 70px;
-	height: 20px;
 	padding: 5px;
 	border: 1px solid #ddd;
 	display: inline-block;
@@ -186,6 +185,8 @@ input {
 	resize: none;
 	border: 1px solid #ddd;
 	height: 500px;
+	padding: 20px;
+	line-height: 300%;
 }
 
 .btn-all-order {
@@ -221,7 +222,12 @@ input {
 	font-size: 10px;
 	text-align: center;
 	pointer-events: none;
-	padding-top: 20px;
+	padding-top: 30px;
+}
+
+tbody> tr> td> .topmargin{
+	margin-top:45px;
+	height: 25px;
 }
 
 .clearfix::after {
@@ -259,7 +265,7 @@ input {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="prod-category"><select name="procategory" id="category">
+								<td class="prod-category"><select name="procategory" id="category" class="topmargin">
 										<option value="non-selected">-</option>
 										<option value="beans">원두</option>
 										<option value="tea">티/액상차</option>
@@ -270,17 +276,17 @@ input {
 
 								</select></td>
 								<td class="prod-img"><label for="img">클릭하거나<br>드래그
-										드롭하여<br>이미지를<br>업로드하세요
+										드롭하여<br>업로드
 								</label> <input type="file" name="file" id="img" disabled></td>
 								<td class="prod-info">옵션 존재시 상품명과 함께 괄호내에 옵션명 기재<br>
 									ex) 상품명(옵션명)<br> <input type="text" name="proname" placeholder=""
 									disabled>
 								</td>
-								<td class="prod-qty numeric"><input type="number" name="prostock"
+								<td class="prod-qty numeric"><input type="number" class="topmargin" name="prostock"
 									min="1" max="99999" disabled></td>
-								<td class="prod-normal-price numeric"><input name="proprice" type="text"
+								<td class="prod-normal-price numeric"><input name="proprice" class="topmargin" type="text"
 									onkeyup="regex(this)" disabled> 원</td>
-								<td class="prod-discount-price numeric"><input name="prosellprice" type="text"
+								<td class="prod-discount-price numeric"><input name="prosellprice" class="topmargin" type="text"
 									onkeyup="regex(this)" disabled>원</td>
 							</tr>
 							<tr>
@@ -293,7 +299,7 @@ input {
 					<br>
 					<div class="lower-bar clearfix">
 						<div class="divforright">
-							<button class="btn-all-order">
+							<button class="btn-all-order" type="submit">
 								<span class="glyphicon glyphicon-ok"></span> 상품 등록완료
 							</button>
 						</div>

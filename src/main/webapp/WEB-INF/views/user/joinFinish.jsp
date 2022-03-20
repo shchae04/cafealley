@@ -35,11 +35,11 @@
                 <tbody>
                     <tr>
                         <td>이름</td>
-                        <td>{홍길동}</td>
+                        <td>${info.username}</td>
                     </tr>
                     <tr>
                         <td>아이디</td>
-                        <td>{honggil1234}</td>
+                        <td>${info.userid}</td>
                     </tr>
                 </tbody>
             </table>

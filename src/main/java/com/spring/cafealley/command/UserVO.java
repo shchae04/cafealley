@@ -1,6 +1,8 @@
 package com.spring.cafealley.command;
 
 
+import java.sql.Timestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +23,15 @@ import lombok.ToString;
 	    filenum NUMBER(10,0),
 	    admin VARCHAR2(50) DEFAULT NULL
 		);
+		
+	
+	-- 자동 로그인 관련 컬럼 추가    
+	ALTER TABLE users
+		ADD sessionid VARCHAR2(80)
+		DEFAULT 'none' NOT NULL;
+		
+	ALTER TABLE users
+		ADD limittime DATE;
 	 */
 @Getter
 @Setter
@@ -40,5 +51,11 @@ public class UserVO {
 	private String businessnum;
 	private long filenum;
 	private String admin;
+	
+	private String sessionid;
+	private Timestamp limittime;//자동로그인 유지 시간
+	
+	//자동로그인 체크 여부
+	private boolean autoLogin;
 	
 }
