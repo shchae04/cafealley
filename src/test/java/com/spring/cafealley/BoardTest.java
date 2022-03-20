@@ -26,6 +26,8 @@ public class BoardTest {
 			vo.setTitle("게시판 테스트 " + i);
 			vo.setWriter("chae"+i);
 			vo.setContent(" 글쓰기 내용입니다 test . " + i);
+			vo.setKey(i);
+			System.out.println("작성된 vo" + vo);
 			mapper.regist(vo);
 		}
 	}

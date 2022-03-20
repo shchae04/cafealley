@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -87,72 +89,25 @@
                         <th style="width: 75%; color: black; text-align: center;">제목</th>
                         <th style="width: 12%;">작성자</th>
                         <th style="width: 10%;">작성일</th>
-
                     </thead>
                     <!-- 게시글 가져오기 반복문-->
                     <!-- dummy 데이터 입니다 -->
                     <tbody>
+                    
+                    <c:forEach var="no" items="${noList}">
                         <tr>
-                            <td>1</td>
-                            <td><a href="https://www.naver.com">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
+                            <td>${no.bno }</td>
+                            <td><a href="<c:url value='/noBoard/noDetail?bno=${no.bno}'/>">${no.title }</a></td>
+                            <td>${no.writer}</td>
+                            <td> <fmt:formatDate value="${no.regdate}" pattern="MM-dd"/>
+                            <c:if test="${no.ismod = '0'}"></c:if>
+                            <c:if test="${no.ismod = '1'}"> <small>수정됨</small> </c:if>
+                            </td>
+                            
 
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
+                    </c:forEach>
+                       
                     </tbody>
                 </table>
 

@@ -6,9 +6,10 @@
   
   <mapper namespace="com.spring.cafealley.board.mapper.INoBoardMapper">
   
+
   <insert id="regist">
-  	INSERT INTO noboard(bno, title, writer, content)
-	VALUES(noboard_seq.NEXTVAL, #{title}, #{writer}, #{content})
+	INSERT INTO noboard(bno, title, writer, content,key)
+		VALUES(noboard_seq.NEXTVAL, #{title}, #{writer}, #{content},#{key})
   </insert>
   
   <select id="getContent" resultType="com.spring.cafealley.command.BoardVO">
@@ -27,6 +28,7 @@
 		WHERE bno = #{bno}
 	</delete>
   
+  <!--전부 가져오는 sql  -->
   <select id="getList" resultType="com.spring.cafealley.command.BoardVO">
   			SELECT * FROM	
 			(

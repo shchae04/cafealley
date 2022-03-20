@@ -67,7 +67,7 @@ public class ProductController {
 		imgservice.upload(files);
 		
 		vo.setFilenum(imgservice.getLastUploaded());
-		
+		System.out.println("정보 "  +vo);
 		service.insertProduct(vo);
 		
 		
