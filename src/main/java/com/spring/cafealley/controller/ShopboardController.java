@@ -116,18 +116,19 @@ public class ShopboardController {
 		System.out.println("/shop/shopDetail: GET");
 		
 		ShopboardVO vo =  service.getContent(bno);
-		
+		System.out.println("getContent에서 불러온 판매게시글 vo : "+vo);
+		System.out.println("그 판매게시글의 상품들 proList: "+vo.getProList());
 		ProductVO leastSellPricePro = new ProductVO();
 		int min=0;
 		for(ProductVO provo :vo.getProList()) {
-			if(min==0) // 첫빠따가 일단 min
+			if(min==0) { // 첫빠따가 일단 min
 				min = provo.getProsellprice();
-			else { // 그 이후는 제일 작은게 min
-				if(min >= provo.getProsellprice()) {
-					min = provo.getProsellprice();
-					leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
-					leastSellPricePro.setProprice(provo.getProprice()) ;
-				}
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;
+			}else if(min >= provo.getProsellprice()) {
+				min = provo.getProsellprice();
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;		
 			}
 		}
 		System.out.println(leastSellPricePro);

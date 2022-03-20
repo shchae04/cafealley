@@ -283,7 +283,7 @@ button.btn-cart, button.btn-order {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 prod-img">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail" onerror="deleteimg(this)">
 				</div>
 				<div class="col-xs-6">
 					<div class="detail-info">
@@ -305,18 +305,9 @@ button.btn-cart, button.btn-order {
 						<p class="prod-sel">
 							<span class="prod-text">옵션선택</span> <select id="sel-option">
 								<option value="not-selected">선택</option>
-								<c:if test="${shop.prono!=null}">
-									<option value="${shop.prono}">${shop.proList[0].proname}</option>
-								</c:if>
-								<c:if test="${shop.prono2!=null}">
-									<option value="${shop.prono}">${shop.proList[1].proname}</option>
-								</c:if>
-								<c:if test="${shop.prono3!=null}">
-									<option value="${shop.prono}">${shop.proList[2].proname}</option>
-								</c:if>
-								<c:if test="${shop.prono4!=null}">
-									<option value="${shop.prono}">${shop.proList[3].proname}</option>
-								</c:if>
+								<c:forEach var="pro" items="${shop.proList}" varStatus="status">
+									<option value="${pro.prosellprice}">${pro.proname}</option>
+								</c:forEach>
 							</select>
 
 							<!-- 간편선택 바구니 -->
@@ -343,8 +334,8 @@ button.btn-cart, button.btn-order {
 				</div>
 
 				<div class="col-xs-12 prod-detail">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="deleteimg(this)">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail" onerror="deleteimg(this)">					
 					<p style="text-align: center; margin-top: 50px;">${shop.content}</p>
 				</div>
 
@@ -359,6 +350,12 @@ button.btn-cart, button.btn-order {
         const $seloption = document.querySelector('#sel-option');
         const $easycart = document.querySelector('.easy-cart');
 
+        // 이미지 로드 실패시 이미지태그 삭제
+		function deleteimg($input){
+			$input.remove();
+		}
+        
+        
         // 옵션선택하면 easycart에 해당 옵션 띄우게~
         $seloption.addEventListener('change', e => {
             // "선택" 옵션 선택하면 암것두 안해용~
@@ -372,9 +369,13 @@ button.btn-cart, button.btn-order {
             // 선택한 옵션 이름 가져오기.
             let optiontext = '';
             for (let $option of e.target.children) {
+            	console.log('option의 밸류'+$option.value);
+            	console.log('e.target 즉 select의 밸류'+ e.target.value);
+            	console.log('option의 textContent' + $option.textContent);
                 if ($option.value === e.target.value) {
                     optiontext = $option.textContent;
                 }
+               	
             }
 
             // 가져온 선택한 옵션 이름을 이용해서 판별 시작.
@@ -402,11 +403,11 @@ button.btn-cart, button.btn-order {
             // 2. 선택한 옵션이 없으면 만들어서 easycart에 쑤셔넣어버리기~
             const $selectList = document.createElement('div');
             $selectList.classList.add('select-list');
-            $selectList.innerHTML = `<span class="selected-prod">${optiontext}</span>
+            $selectList.innerHTML = `<span class="selected-prod">`+ optiontext +`</span>
                                     <span class="selected-qty">
-                                        <input type="number" name="" id="" value="1" min="1"><br>
+                                        <input type="number" name="" id=`+e.target.value+` value="1" min="1"><br>
                                     </span>
-                                    <span class="selected-price">24,700원</span>
+                                    <span class="selected-price">`+e.target.value+`원</span>
                                     <span class="btn-remove">
                                         <i class="fa-solid fa-xmark"></i>
                                     </span>`;
@@ -434,7 +435,7 @@ button.btn-cart, button.btn-order {
             console.log('input의 type이 number임');
             $selectprice = $input.parentNode.nextElementSibling;
 
-            let pricePerEach = 24700; //*************** 여기 우항이 페이지에 뿌려지는거 가져와야해서 EL태그로 아마 가져올거에요.
+            let pricePerEach = $input.getAttribute('id'); //*************** 여기 우항이 페이지에 뿌려지는거 가져와야해서 EL태그로 아마 가져올거에요.
             let quantity = parseInt($input.value);
             let productPriceTotal = pricePerEach * quantity;
             // 정규표현식으로 컴마 붙여주고 원도 친절히 붙여줌.

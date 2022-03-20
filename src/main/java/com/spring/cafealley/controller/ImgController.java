@@ -36,7 +36,9 @@ public class ImgController {
 			fileName += img.getFilename2();
 		else
 			fileName += img.getFilename3();
-			
+
+		
+		
 		String filePath = img.getFilepath();
 		System.out.println("fileName : " + fileName);
 		System.out.println("filePath : " + filePath);
