@@ -73,9 +73,16 @@
    ORDER BY regdate DESC
   </select>
   
-  <select id="getContent" resultType="com.spring.cafealley.command.ShopboardVO">
-  SELECT * FROM shopboard
+  <select id="getContent" resultMap="shopInfo">
+  SELECT *
+    FROM shopboard s
+    LEFT OUTER JOIN product p
+      ON s.prono = p.prono
+  	  OR s.prono2 = p.prono
+  	  OR s.prono3 = p.prono
+  	  OR s.prono4 = p.prono
   WHERE bno = #{bno}
+  ORDER BY regdate DESC
   </select>
   
   <!-- shopboard의 게시글 수정페이지 안만들어서 어떻게 해야할지 고민중..

@@ -95,7 +95,7 @@ li {
 			<c:forEach var="shop" items="${shopList}" varStatus="status">				
 				<li class="col-xs-3">
 					<div class="prod-list-inner">
-						<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="상품 게시글 이미지">
+						<a href="<c:url value='/shop/shopDetail/${shop.bno}'/>"><img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="상품 게시글 이미지"></a>
 						<div class="prod-content clearfix">
 							<div class="info">
 								<span>${shop.title}</span>

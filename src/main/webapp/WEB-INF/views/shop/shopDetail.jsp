@@ -283,17 +283,17 @@ button.btn-cart, button.btn-order {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 prod-img">
-					<img src="<c:url value='/img/paul bassett.jpg'/>" alt="paul bassett coffee">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail">
 				</div>
 				<div class="col-xs-6">
 					<div class="detail-info">
-						<p class="title">폴 바셋 시그니처 블렌드 풀 포텐셜 1.01kg</p>
+						<p class="title">${shop.title}</p>
 						<p class="price">
 						<p class="org-price">
-							<span class="prod-text">정가</span> <s>45,000원</s>
+							<span class="prod-text">정가</span> <s>${leastPro.proprice}</s>원
 						</p>
 						<p class="sell-price">
-							<span class="prod-text">판매가</span> <strong>24,700원</strong>
+							<span class="prod-text">판매가</span> <strong>${leastPro.prosellprice}</strong>원
 						</p>
 						</p>
 						<p class="quantity">
@@ -305,10 +305,18 @@ button.btn-cart, button.btn-order {
 						<p class="prod-sel">
 							<span class="prod-text">옵션선택</span> <select id="sel-option">
 								<option value="not-selected">선택</option>
-								<option value="whole-beans">원두상태</option>
-								<option value="prench">프렌치분쇄</option>
-								<option value="drip">드립분쇄</option>
-								<option value="espresso">에스프레소분쇄</option>
+								<c:if test="${shop.pronum==null?}">
+									<option value="${shop.pronum}">${shop.proList[0]}</option>
+								</c:if>
+								<c:if test="${shop.pronum2==null?}">
+									<option value="${shop.pronum}">${shop.proList[1]}</option>
+								</c:if>
+								<c:if test="${shop.pronum3==null?}">
+									<option value="${shop.pronum}">${shop.proList[2]}</option>
+								</c:if>
+								<c:if test="${shop.pronum4==null?}">
+									<option value="${shop.pronum}">${shop.proList[3]}</option>
+								</c:if>
 							</select>
 
 							<!-- 간편선택 바구니 -->
@@ -335,19 +343,9 @@ button.btn-cart, button.btn-order {
 				</div>
 
 				<div class="col-xs-12 prod-detail">
-					<img src="<c:url value='/img/paul_bassett_detail.jpg'/>" alt="prod-detail">
-					<p style="text-align: center; margin-top: 50px;">Lorem ipsum
-						dolor sit amet consectetur adipisicing elit. Sequi blanditiis
-						aliquam quam necessitatibus, voluptatibus dolorum consequatur
-						obcaecati quidem ea, veritatis commodi sit, vel deserunt placeat
-						est error accusantium praesentium quia. Lorem ipsum dolor sit amet
-						consectetur, adipisicing elit. Amet, et. Animi, non. Veritatis
-						nulla ratione soluta, cumque libero fuga voluptatem assumenda
-						dolore illum maxime saepe harum atque alias deleniti quo? Lorem
-						ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-						incidunt fugiat officia tempore possimus ullam, cum doloremque
-						error pariatur itaque alias repellendus dignissimos maxime,
-						voluptatem temporibus esse eligendi soluta expedita.</p>
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail">
+					<p style="text-align: center; margin-top: 50px;">${shop.content}</p>
 				</div>
 
 			</div>

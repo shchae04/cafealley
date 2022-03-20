@@ -27,8 +27,7 @@ public class ShopboardService implements IShopboardService {
 
 	@Override
 	public ShopboardVO getContent(int bno) {
-
-		return null;
+		return mapper.getContent(bno);
 	}
 
 	@Override

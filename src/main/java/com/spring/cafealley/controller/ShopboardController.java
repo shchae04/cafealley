@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,5 +90,26 @@ public class ShopboardController {
 		return "redirect:/shop/shopList";
 	}
 	
+	@GetMapping("/shopDetail/${bno}")
+	public void shopDetail(@PathVariable int bno,
+						   Model model) {
+		System.out.println("/shop/shopDetail: GET");
+		
+		ShopboardVO vo =  service.getContent(bno);
+		ProductVO leastSellPricePro = new ProductVO();
+		for(ProductVO provo :vo.getProList()) {
+		int min=0;
+			if(min==0) // 첫빠따가 일단 min
+				min = provo.getProsellprice();
+			else { // 그 이후는 제일 작은게 min
+				if(min >= provo.getProsellprice())
+					min = provo.getProsellprice();
+					leastSellPricePro = provo;
+			}
+		}
+		
+		model.addAttribute("leastPro", leastSellPricePro);
+		model.addAttribute("shop",vo);
+	}
 	
 }
