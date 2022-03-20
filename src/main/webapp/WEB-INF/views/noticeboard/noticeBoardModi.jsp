@@ -56,7 +56,7 @@
                         </div>
                             
                     </div>
-                    <form name="writeform">
+                    <form name="modifyform" action="<c:url value='/noBoard/modify'/>" method="post">
                         <!-- 
 
                         <div class="row col-xs-12">
@@ -68,13 +68,18 @@
                           </select>
                         </div>
                       -->
+						                      
+   						<div class="form-group">
+                            <label>번호</label>
+                            <input class="form-control" name='bno' value="${article.bno}" readonly>
+                        </div>
                         <div class="form-group" 
                         style="border-top:3px solid black; border-bottom:3px solid black; padding-bottom: 20px; padding-top: 20px;">
 
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="writer" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">
@@ -82,12 +87,18 @@
                             <label for="title">
                                 제목
                             </label>
-                            <input type="text" class="form-control" id="title" name="title"
+                            <input type="text" class="form-control" id="title" name="title" value="${article.title }"
                                 style="width: 300px; background-color: transparent;" />
                         </div>
 
-                        <textarea name="content" id="summernote" class="summernote"></textarea>
-
+							
+						<div class="form-group">
+							<label for="content" class="col-xs-12">
+								내용
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10">${article.content}</textarea>
+							</label>
+                        </div>
+						
                         <button class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
@@ -119,6 +130,18 @@
   	
 
     <script>
+    
+		$('#delbtn').click(function() {
+			if(confirm('정말 삭제하시겠습니까?')) {
+				$('form[name=modifyform]').attr('action', '<c:url value="/noBoard/delete" />');
+				$('form[name=modifyform]').submit();
+			} else return;
+		});
+	
+    
+    
+    
+    
         // 제목 
         const title = document.getElementById('title')
         console.log(title)
@@ -136,38 +159,15 @@
                 return;
             }
 
-            document.writeform.submit();
+            document.modifyform.submit();
 
 
         });
 
-        // 삭제버튼
-        document.querySelector('#delbtn').addEventListener('click', function (e) {
-            if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
-
-                location.href = 'https://www.google.com';
-            }
-            return;
-        });
+     
 
 
 
-        $(document).ready(function () {
-            $('#summernote').summernote();
-        });
-        $('.summernote').summernote({
-            height: 300,
-            minHeight: null,
-            maxHeight: null,
-            focus: true,
-            lang: 'ko-KR',
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-            disableResizeEditor: true,
-            onImageUpload: function (files, editor, welEditable) {
-                sendFile(files[0], editor, welEditable);
-            }
-        });
-        $('.note-statusbar').hide();
 
     </script>
     
