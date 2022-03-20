@@ -65,8 +65,10 @@
                             <label for="content clearfix">내용</label>
                             <div class="form-row">
                             <!-- key 값이랑 연동. -->
-                                <div class="img-wrapper" name="" style="margin: 40px 0; width: 33%; float: left;">
-                                    <img src="../img/prod1.jpg" alt="내용1">
+                                <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
+                                   
+                                    <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
+                                    <img name="key" src="/upload/${img.foldername}/${img.filename}" alt="내용1">
                                 </div>
                              
                               

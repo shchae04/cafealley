@@ -3,6 +3,7 @@ package com.spring.cafealley.board.service;
 import java.util.List;
 
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.util.PageVO;
 
 
@@ -25,4 +26,7 @@ public interface IBoardService {
 	
 	//삭제
 	void delete(int bno);
+	
+	//파일 가져오기
+	ImgVO getFile(int key);
 }
