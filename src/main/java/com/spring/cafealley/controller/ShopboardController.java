@@ -78,8 +78,29 @@ public class ShopboardController {
 	@PostMapping("/shopWrite")
 	public String shopRegist(@RequestParam("file") List<MultipartFile> list,
 			ShopboardVO vo, HttpSession session, RedirectAttributes ra) {
+		
+		
 		System.out.println("/shop/shopWrite: POST");
-		System.out.println("페이지에서 들어온 vo : " + vo);
+		System.out.println("shopWrite 페이지에서 들어온 vo : " + vo);
+		System.out.println("shopWrite 페이지에서 들어온 파일list " + list);
+		
+		// 페이지에서 파일을 2개 등록하더라도 일단 페이지에 input file태그가 3개존재함.
+		// 따라서 2개등록해도 저 list에는 쓰레기값파일까지 포함해서 3개들어있음.
+		// 실제 쓰레기파일을 걸러줘야함. 
+		int index = 0; // 걸러줄때 for문안에서 remove때리면 concurrentmodification오류남. 따라서 index이용
+		List<Integer> forDelete = new ArrayList<>();
+		for(MultipartFile file : list) {
+			if(file.isEmpty()) {
+				System.out.println("파일 빈것 확인함.");
+				forDelete.add(index);
+			}
+			index++;
+		}
+		// 삭제할 인덱스를 담아뒀던 forDelete 이용해서 삭제  
+		for(int a :forDelete) {
+			list.remove(a);
+		}
+		System.out.println("거르고난 후의 list " + list);
 		imgService.upload(list);
 		System.out.println("마지막 업로드된 filenum: "+ imgService.getLastUploaded());
 		vo.setFilenum(imgService.getLastUploaded());

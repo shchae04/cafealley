@@ -36,6 +36,7 @@ public class ProductController {
 	public void getlist(Model model){
 		System.out.println("관리자 상품목록페이지 이동");
 	}
+	
 	@GetMapping("/getList")
 	@ResponseBody
 	public List<ProductVO> list() {

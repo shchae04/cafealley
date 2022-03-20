@@ -43,7 +43,10 @@ public class ImgService implements IImgService {
 			// 파일이 몇개 업로드 됐느냐도 알 수 있으며 해당 파일들의 이름도 저장.
 			List<String> filesStrings = new ArrayList<>();
 			
+			System.out.println(fileList);
+			
 			for(MultipartFile file : fileList) {
+				System.out.println("for문들어옴");
 				//확장자를 추출합니다.
 				String fileRealName = file.getOriginalFilename();
 				String fileExtension = fileRealName.substring(fileRealName.indexOf("."), fileRealName.length());
@@ -51,7 +54,7 @@ public class ImgService implements IImgService {
 				//파일명을 고유한 랜덤 문자로 생성.
 				UUID uuid = UUID.randomUUID();
 				String uuids = uuid.toString().replaceAll("-", "");
-				
+				System.out.println("-----------------------------------");
 				System.out.println("저장할 폴더 경로: " + filepath);
 				System.out.println("실제 파일명: " + fileRealName);
 				System.out.println("폴더명: " + foldername);
@@ -61,9 +64,11 @@ public class ImgService implements IImgService {
 				
 				//업로드한 파일을 서버 컴퓨터의 지정한 경로 내에 실제로 저장.
 				File saveFile = new File(filepath + "\\" + filename);
+				System.out.println("저장전");
 				file.transferTo(saveFile);
-				
+				System.out.println("transferTo 완료");
 				filesStrings.add(filename);
+				System.out.println("-----------------------------------");
 			}
 			// DB에 insert 작업을 진행.
 			// 파일 개수에따라 다른 생성자로 VO 생성 
