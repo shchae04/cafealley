@@ -137,7 +137,8 @@ button.btn-cart, button.btn-order {
 	height: 50px;
 }
 
-.btn-cart {
+.btn-cart,
+.btn-list {
 	background: black;
 	color: white;
 	border: 1px solid black;
@@ -269,6 +270,11 @@ button.btn-cart, button.btn-order {
 .prod-detail>img {
 	min-width: 80%;
 }
+.shop-modify{
+	position:absolute;
+	top:15px;
+	right:25px;
+}
 
 /* --------------------------------- */
 </style>
@@ -288,6 +294,8 @@ button.btn-cart, button.btn-order {
 				<div class="col-xs-6">
 					<div class="detail-info">
 						<p class="title">${shop.title}</p>
+						<a class = "shop-modify" href="<c:url value='/shop/shopModify/${shop.bno}'/>"><span class="glyphicon glyphicon-erase">수정</span></a>
+						
 						<p class="price">
 						<p class="org-price">
 							<span class="prod-text">정가</span> <s>${leastPro.proprice}</s>원

@@ -87,26 +87,22 @@ public class ShopboardController {
 		// 페이지에서 파일을 2개 등록하더라도 일단 페이지에 input file태그가 3개존재함.
 		// 따라서 2개등록해도 저 list에는 쓰레기값파일까지 포함해서 3개들어있음.
 		// 실제 쓰레기파일을 걸러줘야함. 
-		int index = 0; // 걸러줄때 for문안에서 remove때리면 concurrentmodification오류남. 따라서 index이용
-		List<Integer> forDelete = new ArrayList<>();
-		for(MultipartFile file : list) {
-			if(file.isEmpty()) {
-				System.out.println("파일 빈것 확인함.");
-				forDelete.add(index);
+		
+		// ArrayList의 컨커런트 모디피케이션 막기위해 뒤에서부터 삭제함.
+		int a = list.size();
+		for(int num= a-1; num>=0; num--) {
+			if(list.get(num).isEmpty()) {
+				list.remove(num);
 			}
-			index++;
 		}
-		// 삭제할 인덱스를 담아뒀던 forDelete 이용해서 삭제  
-		for(int a :forDelete) {
-			list.remove(a);
-		}
+		
 		System.out.println("거르고난 후의 list " + list);
 		imgService.upload(list);
 		System.out.println("마지막 업로드된 filenum: "+ imgService.getLastUploaded());
 		vo.setFilenum(imgService.getLastUploaded());
 		System.out.println("vo에 filenu 세팅한 후의 vo : " + vo);
 		service.regist(vo);
-		ra.addFlashAttribute("msg", "상품 등록이 완료되었습니다.");
+		ra.addFlashAttribute("msg", "판매 게시글 등록이 완료되었습니다.");
 		return "redirect:/shop/shopList";
 	}
 	
@@ -136,5 +132,46 @@ public class ShopboardController {
 		model.addAttribute("shop",vo);
 		return "/shop/shopDetail";
 	}
+	
+	@GetMapping("/shopModify/{bno}")
+	public String shopModify(@PathVariable int bno, Model model) {
+		System.out.println("/shop/shopModify: GET");
+		
+		ShopboardVO vo = service.getContent(bno);
+		
+		ProductVO leastSellPricePro = new ProductVO();
+		int min=0;
+		for(ProductVO provo :vo.getProList()) {
+			if(min==0) { // 첫빠따가 일단 min
+				min = provo.getProsellprice();
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;
+			}else if(min >= provo.getProsellprice()) {
+				min = provo.getProsellprice();
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;		
+			}
+		}
+		System.out.println(leastSellPricePro);
+		model.addAttribute("leastPro", leastSellPricePro);		
+		model.addAttribute("shop",vo);
+		model.addAttribute("proList",vo.getProList());
+		return "/shop/shopModify";
+	}
+	
+	@PostMapping("/shopModify")
+	public String shopUpdate(ShopboardVO vo ,RedirectAttributes ra) {
+		System.out.println("/shop/shopModify: POST");
+		service.modify(vo);
+		ra.addFlashAttribute("msg", "판매 게시글 수정이 완료되었습니다.");
+		return "redirect:/shop/shopDetail/" + vo.getBno();
+	}
+	@PostMapping("/shopDelete")
+	public String shopDelete(int bno) {	
+		service.delete(bno);
+		return "redirect:/shop/shopList";
+	}
+	
+	
 	
 }

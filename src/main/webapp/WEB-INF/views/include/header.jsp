@@ -46,7 +46,7 @@
 						</ul></li>
 					<li><a href="#">마이페이지</a></li>
 					<li><a href="#">회원가입</a></li>
-					<li><a href="#">고객문의</a></li>
+					<li><a href="mailto:coffeealley.gmail.com">고객문의</a></li>
 				</ul>
 
 				<ul class="header-nav header-nav-dropdown clearfix">
@@ -56,7 +56,7 @@
 					<li><a href="#">Coffee Talk</a></li>
 					<li><a href="#">카페 게시판</a></li>
 					<li><a href="#">이벤트</a></li>
-					<li class="dropdown"><a href="#">Owner Mall </a>
+					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">원두</a></li>
 							<li><a href="#">티 / 액상차</a></li>

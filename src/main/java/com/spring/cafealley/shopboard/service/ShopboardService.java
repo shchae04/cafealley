@@ -32,14 +32,12 @@ public class ShopboardService implements IShopboardService {
 
 	@Override
 	public void modify(ShopboardVO vo) {
-
-
+		mapper.modify(vo);
 	}
 
 	@Override
 	public void delete(int bno) {
-
-
+		mapper.delete(bno);
 	}
 
 }

@@ -49,9 +49,14 @@
             margin-top: 30px;
             width: 450px;
         }
+        .prod-img img{
+            max-width: 420px;
+            min-width: 420px;
+        }
 
-        .container img {
+        .prod-detail img {
             max-width: 600px;
+            min-width: 600px;
             display: block;
             margin: 0 auto;
         }
@@ -250,7 +255,8 @@
         }
 
         .btn-regist,
-        .btn-cancel {
+        .btn-cancel,
+        .btn-remove {
             width: fit-content;
             height: 50px;
             margin: 0 0 10px 10px;
@@ -261,17 +267,22 @@
             font-size: 20px;
         }
         .btn-regist,
-        .btn-cancel {
+        .btn-cancel,
+        .btn-remove {
             background: black;
             color: white;
             font-size: 18px;
         }
 
         .btn-regist:hover,
-        .btn-cancel:hover {
+        .btn-cancel:hover,
+        .btn-remove:hover {
             font-style: italic;
         }
-        
+        .btn-cancel{
+        	position:relative;
+        	right:830px;
+        }
         .largefont{
             font-weight: 900;
             font-size: 20px;
@@ -287,6 +298,7 @@
 		.title::placeholder{
 			
 		}
+		
         /* --------------------------------- */
     </style>
 
@@ -300,31 +312,30 @@
         <div class="container">
             
             <div class="row">
-            	<form action="#" method="post" enctype="multipart/form-data">
+            	<form action="<c:url value='/shop/shopModify'/>" name="updateForm" method="post">
 	                <div class="upper-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class ="btn-remove" type="button"><span class="glyphicon glyphicon-remove"></span>삭제</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span>수정</button>
 	                    </div>
 	                </div>
+	                <input type="hidden" name="bno" value="${shop.bno}">
 	                <div class="col-xs-6 prod-img">
-	
-	                    <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-	                    <input type="file" name="file" class="img" id="img">
-	
+	                    <img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail" onerror="deleteimg(this)">
 	                </div>
 	                <div class="col-xs-6 div-min-height">
 	                    <div class="detail-info">
 	                        <p style="font-weight: 700;">
 	                            판매 게시글 제목<br>
-	                            <input type="text" name="title" class="title" placeholder="150자 이내로 판매게시글의 제목을 입력해주세요.">
+	                            <input type="text" name="title" class="title" placeholder="150자 이내로 판매게시글의 제목을 입력해주세요." value="${shop.title}">
 	                        </p>
 	                        <p class="price">
 	                            <p class="org-price">
-	                                <span class="prod-text">정가</span> <span id="prorice">0</span>원
+	                                <span class="prod-text">정가</span> <span id="prorice"><s>${leastPro.proprice}</s></span>원
 	                            </p>
 	                            <p class="sell-price">
-	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">0</span>원</strong>
+	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">${leastPro.prosellprice}</span>원</strong>
 	                            </p>
 	                        </p>
 	                        <p class="quantity">
@@ -370,18 +381,15 @@
 	                </div>
 	
 	                <div class="col-xs-12 prod-detail">
-	                    <label for="img2">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-	                    <input type="file" name="file" class="img" id="img2">
-	                    <label for="img3">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-	                    <input type="file" name="file" class="img" id="img3">
+	                   <img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="deleteimg(this)">
+						<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail" onerror="deleteimg(this)">
 	
-	                    <textarea name="content" class="prod-detail-textarea" placeholder="1000자 이내로 판매게시글 설명을 입력해주세요."></textarea>
+	                    <textarea name="content" class="prod-detail-textarea" placeholder="1000자 이내로 판매게시글 설명을 입력해주세요." >${shop.content}</textarea>
 	
 	                </div>
 	                <div class="lower-bar clearfix">
 	                    <div class="divforright">
-	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span>수정</button>
 	                    </div>
 	                </div>
                 </form> <!-- end form  --> 
@@ -396,44 +404,20 @@
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
-	
-		// 상품관리페이지에서 등록할 상품 안가져오면 돌려보냄
+		// 이미지 로드 실패시 이미지태그 삭제
+		function deleteimg($input){
+			$input.remove();
+		}
+		const $delBtn = document.querySelector('.btn-remove');
 		
+		$delBtn.onclick = function() {
+				console.log('누름');
+				document.updateForm.setAttribute('action', '<c:url value="/shop/shopDelete"/>');
+				document.updateForm.submit();	
+
+		};
 	
-	
-        // 이미지 파일 업로드시 이미지 파일 띄우게끔
-
-        const $container = document.querySelector('.container');
-        $container.addEventListener('change', e => {
-            if (!e.target.matches('.img')) {
-                return;
-            }
-            readURL(e.target);
-        });
-
-        function readURL(input) {
-            var reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
-            //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
-            reader.readAsDataURL(input.files[0]);
-            console.log()
-
-            let id = input.getAttribute('id');
-            // FileReader 객체가 생성되서 동작을 한다면,
-            reader.onload = function (event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
-                if (id === 'img') {
-                    $('label[for="' + id + '"]').html('<img id="fileImg' + id + '" src="' + event.target.result +
-                        '" alt="upload" style="width:420px; height:420px;"/>');
-                    $('#fileImg' + id).css('margin-top', '0px');
-                    $('label[for="' + id + '"').css('padding', '0px');
-                } else {
-                    $('label[for="' + id + '"]').html('<img id="fileImg' + id + '" src="' + event.target.result +
-                        '" alt="upload" style="width:600px; height:600px;"/>');
-                    $('#fileImg' + id).css('margin-top', '0px');
-                    $('label[for="' + id + '"').css('padding', '0px');
-                }
-
-            }
-        }
+    
     </script>
 </body>
 

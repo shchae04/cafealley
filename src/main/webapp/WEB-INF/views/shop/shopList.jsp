@@ -87,8 +87,8 @@ li {
 	<section class="container">
 		<ul class="row">
 			<span>
-				<a href="#">Home</a> &#707; 
-				<a href="#">쇼핑몰(사업자전용)</a>&#707; 
+				<a href="<c:url value='/'/>">Home</a> &#707; 
+				<a href="<c:url value='/shop/shopList'/>">Owner Mall</a>&#707; 
 				<a href="#" class="crt-page">원두</a>
 			</span>
 			<hr>
@@ -101,7 +101,7 @@ li {
 								<span>${shop.title}</span>
 							</div>
 							<div class="price">
-								<strong>${sellPriceList[status.index]}원</strong>
+								<strong>${sellPriceList[status.index]}</strong>
 							</div>
 						</div>
 					</div>
@@ -117,6 +117,14 @@ li {
 	if(msg !== ''){
 		alert(msg);
 	}
+	
+	window.onload = function(){
+		for(let div of document.querySelectorAll('.price')){
+			console.log(div);
+			div.children[0].textContent = div.children[0].textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원';
+		}
+	};
+	
 	
 	</script>
 	
