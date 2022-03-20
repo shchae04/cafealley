@@ -33,16 +33,7 @@
 		display: inline-block;
 	}
 	
-	<!--
-	.userphone2,
-	.userphone3 {
-		float: left;
-	}
 	
-	.addr-btn {
-		float: left;
-	}
-	-->
 </style>
 
 </head>
@@ -61,16 +52,24 @@
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">작성글보기</a></li>
-								<li><a href="#">작성댓글보기</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">작성글보기</a></li>
-								<li><a href="#">작성댓글보기</a></li>
-							</ul></li>
-						<li><a href="#">주문내역/배송조회</a></li>
+								<li><a href="<c:url value='/user/cmnBoardChk' />">작성글보기</a></li>
+								<li><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<c:if test="${not empty login.businessnum}">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#">홍보 게시판<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="<c:url value='/user/promoBoardChk' />">작성글보기</a></li>
+									<li><a href="<c:url value='/user/promoReplyChk' />">작성댓글보기</a></li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="<c:url value='/user/orderDelHistory' />">주문내역/배송조회</a>
+							</li>
+						</c:if>
+						
 					</ul>
 
 					<br>
@@ -139,26 +138,26 @@
 											</td>
 										</tr>
 										<tr>
-											<td>E-mail</td>
+											<td>*E-mail</td>
 											<td>
 												<input style="width: 180px;" class="form-control input-sm" id="useremail" name="useremail">
 												<span id="emailChk"></span>
 											</td>
 										</tr>
-										<tr >
+										<tr>
 											<td>휴대폰</td>
-											<td class="clearfix">
-												<select style="width: 70px;"
+											<td>
+												<select style="width: 70px; display: inline-block"
 													class="userphone1 form-control input-sm sel" id="userphone1" name="userphone1">
 														<option>010</option>
 														<option>011</option>
 														<option>017</option>
 														<option>018</option>
 												</select>
-												<input style="width: 120px;" class="form-control input-sm"
+												<input style="width: 120px; display: inline-block" class="form-control input-sm"
 													class="userphone2" id="userphone2" name="userphone2" maxlength="4"
 													placeholder="숫자 4자리 입력">
-												<input style="width: 120px;" class="form-control input-sm"
+												<input style="width: 120px; display: inline-block" class="form-control input-sm"
 													 class="userphone3" id="userphone3" name="userphone3" maxlength="4"
 													placeholder="숫자 4자리 입력"><span id="phoneChk"></span>
 											</td>
@@ -168,10 +167,10 @@
 											<tr>
 												<td>*우편번호</td>
 												<td class="clearfix">
-													<input style="width: 180px; cursor: auto;"
+													<input style="width: 180px; display: inline-block; cursor: auto;"
 													class="form-control input-sm" id="addrzipnum"
 													name="zipcode">
-													<button type="button" class="addr-btn btn btn-primary" id="addrBtn">주소찾기</button>
+													<button style="display: inline-block;" type="button" class="addr-btn btn btn-primary" id="addrBtn">주소찾기</button>
 												</td>
 											</tr>
 											<tr>
@@ -344,7 +343,9 @@
 			$('#deleteBtn').click(function() {
 				console.log('탈퇴버튼 클릭');
 				$('#updateBtn').attr('type', 'button');
-				location.herf='<c:url value="/user/memDelete" />';
+				location.href='<c:url value="/user/memDelete" />';
+				//$('#infoForm').attr('method', 'get');
+				//$('#infoForm').attr('action', '<c:url value="/user/memDelete" />');
 			});//탈퇴버튼 클릭 시 이동 끝
 			
 			

@@ -10,7 +10,17 @@
 <title>로그인 폼</title>
 
 <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
-
+	
+	<style>
+		.btn-zip-code,
+		.btn-id-check,
+		.btn-check-email {
+			margin-left : 5px;
+		}
+		#regForm label {
+			margin-right : 8px;
+		}
+	</style>
 
 
 
@@ -535,10 +545,8 @@
 								<div class="input-group">
 									<input type="text" id="userId" class="idinput" name="userid"
 										placeholder="아이디(영문 포함 4~12자 이상)">
-									<div class="input-group-addon">
-										<button type="button" id="idCheckBtn" class="btn btn-primary"
-											style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
-									</div>
+									<button type="button" id="idCheckBtn" class="btn-id-check btn btn-primary"
+										style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
 								</div>
 								<span id="msgid">*필수 사항입니다.</span>
 								<!-- 아이디 중복 여부 메세지 공간 -->
@@ -566,14 +574,12 @@
 								<div class="input-group">
 									<input type="text" name="useremail" id="useremail" class="email" style="width: 180px;"
 										placeholder="이메일을 입력하세요.">
-									<div class="input-group-addon">
-										<button type="button" class="btn btn-primary" id="btnEmail"
+									<button type="button" class="btn-check-email btn btn-primary" id="btnEmail"
 											style="background-color: lightgray; color: black; border: 0px;">이메일인증</button>
-									</div>
 								</div>
 							</div>
 							<div class="form-inline form-group mail-check-box">
-								<label for="hp"><span class="redstar">* &nbsp;</span>이메일인증 키</label>&emsp;&nbsp;
+								<label for="hp"><span class="redstar">* &nbsp;</span>이메일인증 키</label>&nbsp;
 								<div class="input-group">
 									<input type="text" id="checkEmail" class="email" style="width: 180px;" disabled="disabled"
 										placeholder="인증 키를 입력하세요.">
@@ -589,10 +595,8 @@
 									<div class="input-group">
 										<input type="text" name="zipcode" id="postnum" class="postnum"
 											placeholder="우편번호를 검색하세요.">
-										<div class="input-group-addon">
-											<button type="button" id="btnZipCode" class="btn btn-primary"
+										<button type="button" id="btnZipCode" class="btn-zip-code btn btn-primary"
 												style="background-color: lightgray; color: black; border: 0px;" onclick="searchAddress()">우편번호검색</button>
-										</div>
 									</div>
 								</div>
 
