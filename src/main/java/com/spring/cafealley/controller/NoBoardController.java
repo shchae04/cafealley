@@ -1,6 +1,7 @@
 package com.spring.cafealley.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.Multipart;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.command.BoardVO;
@@ -57,16 +59,31 @@ public class NoBoardController {
 	@PostMapping("/write")
 	public String write(BoardVO vo,MultipartFile file) {
 		System.out.println("작성요청이 들어옴");
+
+		
+		List<MultipartFile> files =  new ArrayList<MultipartFile>();
+		files.add(file);
+			
+			
+		
+		imgservice.upload(files);
+		System.out.println("file: " + files);
+		
+
+		//key를 가장최근 업로드된 번호로 가져온다
+		vo.setKey(imgservice.getLastUploaded());
+		
+		//key값.
+		System.out.println("key값"+vo.getKey());
 		System.out.println("작성내용"+vo);
 		service.regist(vo);
-
-		List<MultipartFile> files = new ArrayList<MultipartFile>();
-		files.add(file);
-		System.out.println("file: " + files);
-		imgservice.upload(files);
-
-		//key를 가장최근 업로드된 번호로 
-		vo.setKey(imgservice.getLastUploaded()); 
+		
+		
+		
+		
+		
+		
+		 
 		
 		
 		return "redirect:/noticeBoard/noticeBoardList";

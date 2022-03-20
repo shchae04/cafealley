@@ -57,7 +57,7 @@
                         </div>
                             
                     </div>
-                    <form name="writeform" method="post" action="write">
+                    <form name="writeform" method="post" action="write" enctype="multipart/form-data">
                         <!-- 
 
                         <div class="row col-xs-12">
@@ -86,8 +86,22 @@
                             <input type="text" class="form-control" id="title" name="title"
                                 style="width: 300px; background-color: transparent;" />
                         </div>
-
-                        <textarea name="content" id="summernote" class="summernote"></textarea>
+                        
+                        <!-- 파일 전송. -->
+                        <div class="form-group">
+   	                     <p>3개 까지 등록가능</p>
+   	                     <input type="file" multiple="multiple" id="file" name="file">
+                        
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group">
+							<label for="content" class="col-xs-12">
+								내용
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10"></textarea>
+							</label>
+                        </div>
 
                         <button type="button" class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
@@ -149,10 +163,31 @@
             }
             return;
         });
+        
+        
+        
+        
+        const $imgfile = document.querySelector('#file');
+        console.log($imgfile);
+        $imgfile.addEventListener('change', e=>{
+        	
+        	//작성시 이미지 유효성 검사
+    		let file = $('#file').val();
+    		console.log(file);
+    		file = file.slice(file.indexOf('.') + 1).toLowerCase();
+    		console.log(file);
+    		if(file !== 'jpg' && file !== 'png' && file !== 'jpeg' && file !== 'bmp') {
+    			alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다.');
+    			$('#file').val('');
+    			return;
+    		} 
+        	
+            
+        });
 
 
 
-        $(document).ready(function () {
+       /*  $(document).ready(function () {
         	
         	
             $(".summernote").on('drop',function(e){
@@ -206,8 +241,8 @@
         
         $('.note-statusbar').hide();
 
-        
-        //작성자 지목
+         */
+     /*    //작성자 지목
         var writer = $('#writer').val();
         console.log(writer);
         
@@ -220,7 +255,7 @@
 		
         //내용
         var contented = $('#summernote').val();
-        console.log(sHTML);
+        console.log(sHTML); */
         
         //file
     </script>
