@@ -24,7 +24,7 @@ public interface IUserMapper {
 	void updateUser(UserVO vo);
 
 	// 비밀번호 확인
-	int checkPw(String userpw);
+	String checkPw(String userId);
 
 	// 회원 탈퇴
 	void deleteUser(String userid);
