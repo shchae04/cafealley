@@ -3,6 +3,7 @@ package com.spring.cafealley.controller;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.user.service.IUserService;
@@ -163,13 +165,55 @@ public class UserController {
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
-	public String userUpdate(UserVO vo) {
+	public String userUpdate(UserVO vo, HttpSession session
+			, HttpServletRequest request
+			, HttpServletResponse response) {
+		
 		System.out.println("컨트롤러의 userUpdate 메서드 발동");
 		System.out.println("param: " + vo);
 		
 		service.updateUser(vo);
+
+		System.out.println("정보 수정 후 세션 삭제 중...");
+		// 정보 수정 후 세션과 로그인 쿠키 삭제 후 메인으로 이동
+		session.removeAttribute("login");
 		
-		// 정보 수정 후 로그아웃 처리 추가해야 함.
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		
+		if(loginCookie != null) {
+			System.out.println("로그인 쿠키 존재. 삭제 진행 중...");
+			loginCookie.setMaxAge(0);
+			loginCookie.setPath("/");
+			response.addCookie(loginCookie);
+			service.keepLogin("none", new Date(), vo.getUserid());
+		}
+		
+		
+		return "redirect:/";
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session, HttpServletRequest request
+			, HttpServletResponse response) {
+
+		System.out.println("컨트롤러의 logout 메서드 발동");
+		UserVO vo = (UserVO)session.getAttribute("login");
+		session.removeAttribute("login");
+		
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		
+		if(loginCookie != null) {
+			loginCookie.setMaxAge(0);
+			//쿠키를 생성할 때 유효uri를 지정할 경우, 쿠키를 삭제할 때도 똑같이 지정해야 함.
+			loginCookie.setPath("/");
+			//쿠키는 클라이언트쪽에 저장되기 때문에
+			//반드시 응답객체에 태워보내야 쿠키설정이 전달됨.
+			response.addCookie(loginCookie);
+			service.keepLogin("none", new Date(), vo.getUserid());
+			
+		}
+		
 		
 		return "redirect:/";
 	}
