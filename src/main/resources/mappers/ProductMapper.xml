@@ -29,7 +29,7 @@
 	  <update id="updateProduct" >
 		UPDATE product
 	 	   SET proname =#{proname}, proprice=#{proprice}, prosellprice= #{prosellprice},procategory= #{procategory}
-	 		  ,prodetail=#{prodetail},prostock=#{prostock},filenum=#{filenum}
+	 		  ,prodetail=#{prodetail},prostock=#{prostock}
 	  	 WHERE prono = #{prono}
 	  </update>
 	  

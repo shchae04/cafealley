@@ -43,14 +43,6 @@ public class ProductController {
 		return service.getList(null);
 	}
 	
-	//관리자 상품 수정 이동
-	@GetMapping("/productModify")
-	public void modify() {
-		System.out.println("관리자 상품수정페이지 이동");
-		
-	}
-	
-	
 	//관리자 상품 등록 이동
 	@GetMapping("/productWrite")
 	public void writepage() {
@@ -75,31 +67,20 @@ public class ProductController {
 		return "redirect:/product/productList";
 	}
 	
-	@PostMapping("/productModify")
-	public String modify(ProductVO vo,HttpSession session) {
-		System.out.println("productModify: Post요청");
-		System.out.println("productModify: 수정요청");
-		service.updateProduct(vo);
-		
-		return "redirect:/product/productList";
-	}
-	
-	@PostMapping("/delete")
+	@PostMapping("/productDelete")
 	@ResponseBody
 	public String delete(@RequestBody int prono) {
-		
-		//어차피 관리자만 보니깐 할필요없.세션검사 진행하고.
-		
+		System.out.println("/product/productDelete: POST");
 		service.deleteProduct(prono);
 		System.out.println("비동기 삭제 완료.");
-		
 		return "delSuccess";
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/productModify")
 	@ResponseBody
-	public String update(@RequestBody int prono) {
-		return"";
-		//수정 까지 비동기로 진행하려면 List 프론트 변경해야함.차후 처리 일단 동기방식 업데이트.
+	public String update(@RequestBody ProductVO vo) {
+		System.out.println("/product/productModify: POST");
+		service.updateProduct(vo);
+		return "modSuccess";
 	}
 }

@@ -26,7 +26,6 @@ public class ProductService implements IProductService {
 	
 	@Override
 	public void updateProduct(ProductVO vo) {
-		
 		mapper.updateProduct(vo);
 	}
 
