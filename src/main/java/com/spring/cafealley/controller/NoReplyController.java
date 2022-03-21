@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.cafealley.command.ReplyVO;
@@ -30,13 +31,13 @@ public class NoReplyController {
 	private IReplyService service;
 	
 	//댓글 등록
+	@ResponseBody
 	@PostMapping("/replyRegist")
-	public String replyRegist(@RequestBody ReplyVO vo,HttpServletRequest request) {
+	public String replyRegist(@RequestBody ReplyVO vo, HttpSession session) {
 		System.out.println("댓글 등록 : POST요청");
 		System.out.println("댓글 값:" + vo);
 		service.replyRegist(vo);
-		HttpSession session = request.getSession();
-		session.getAttribute("login");
+		 ((UserVO)session.getAttribute("login")).getUserid();
 		
 		return "regSuccess";
 	}
@@ -55,7 +56,7 @@ public class NoReplyController {
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestBody ReplyVO rvo,HttpSession session) {
+	public String update(@RequestBody ReplyVO rvo, HttpSession session) {
 	
 		//user 작성자 검증  
 		UserVO uvo = (UserVO) session.getAttribute("login");

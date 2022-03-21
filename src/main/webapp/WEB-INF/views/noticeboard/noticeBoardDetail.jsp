@@ -185,7 +185,7 @@ $(document).ready(function() {
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const writer = '${user.userid}'; //세션에서 가져온 userid
+			const writer = '${login.userid}'; //세션에서 가져온 userid
 			const reply = $('#reply').val(); //댓글 내용
 			
 			
@@ -194,17 +194,16 @@ $(document).ready(function() {
 				return;
 			}
 			
+			const replyInfo = {
+					"bno":bno,
+					"writer":writer,
+					"content":reply
+					}	
+			
 			$.ajax({
 				type: 'post',
 				url: '<c:url value="/noReply/replyRegist" />',
-				data: JSON.stringify(
-					{
-						"bno":bno,
-						"writer":userid,
-						"content":reply
-					}		
-				),
-				dataType: 'text', //서버로부터 어떤 형식으로 받을지(생략 가능)
+				data: JSON.stringify(replyInfo), 
 				contentType: 'application/json',
 				success: function(data) {
 					console.log('통신 성공! ' + data);
