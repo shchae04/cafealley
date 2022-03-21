@@ -894,7 +894,7 @@
 				alert('이메일 양식이 올바르지 않습니다 예)aaa@aaa.aaa');
 				$email.focus();
 				return;
-			} if(!chkMail) {
+			} if($email.getAttribute('readonly') === false) {
                 alert('이메일 인증을 완료해 주세요.');
                 $email.focus();
                 return;

@@ -36,16 +36,41 @@
 
 
 				<ul class="header-nav header-nav-upper clearfix">
-					<li><a data-toggle="modal" href="#myModal">로그인</a></li>
-					<li class="dropdown"><a href="#">#님<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li id="header-name">#님(일반회원)</li>
-							<li>cafealley123@gmail.com</li>
-							<li>마이페이지</li>
-							<li id="header-barcode">barcode here</li>
-						</ul></li>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">회원가입</a></li>
+					<c:choose>
+						<c:when test="${empty login}">
+							<li><a data-toggle="modal" href="#myModal">로그인</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
+							
+							<c:choose>
+								<c:when test="${empty login.businessnum}">
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(일반회원)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li id="header-barcode">barcode here</li>
+										</ul>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(사업자회원)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+										</ul>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					
+					<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+					<li><a href="<c:url value='/user/joinSelect' />">회원가입</a></li>
 					<li><a href="mailto:coffeealley.gmail.com">고객문의</a></li>
 				</ul>
 
