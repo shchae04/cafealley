@@ -75,7 +75,7 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="${sessionScope.login.userid }" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="작성자" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">

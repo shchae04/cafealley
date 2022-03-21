@@ -68,13 +68,12 @@
                                 <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
-                                    <img name="key" src="/upload/${img.foldername}/${img.filename}" alt="내용1">
-                                    <c:if test="${img.filename2} != '' ">
-                                    <img alt="내용2" src="/upload/${img.foldername}/${img.filename2}">
-                                    </c:if>
-                                    <c:if test="${img.filename3} != '' ">
-                                    <img alt="내용2" src="/upload/${img.foldername}/${img.filename3}">
-                                    </c:if>
+                                    <div style="text-align: center;">
+	                                    <img alt="pic1" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
+	                                    <img alt="pic2" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
+	                                    <img alt="pic3" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                    </div>
+                                    
                                 </div>
                              
                               
@@ -165,6 +164,11 @@
   <%@ include file="../include/footer.jsp" %>
 
     <script>
+    
+    // img load실패시 이미지태그 삭제
+    function deleteimg($input){
+    	$input.remove();
+    }
         
 $(document).ready(function() {
 		

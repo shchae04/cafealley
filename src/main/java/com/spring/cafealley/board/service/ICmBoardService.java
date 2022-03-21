@@ -27,6 +27,5 @@ public interface ICmBoardService {
 	//삭제
 	void delete(int bno);
 	
-	//파일 가져오기
-	ImgVO getFile(int key);
+
 }

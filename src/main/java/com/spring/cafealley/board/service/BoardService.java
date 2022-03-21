@@ -48,11 +48,6 @@ public class BoardService implements IBoardService {
 		mapper.delete(bno);
 	}
 
-	@Override
-	public ImgVO getFile(int key) {
-		
-		return mapper.getFile(key);
-	
-	}
+
 
 }

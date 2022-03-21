@@ -44,11 +44,7 @@
 		
   </select>
   
-    <select id="getFile" resultType="com.spring.cafealley.command.ImgVO">
-  	select * FROM img i 
-  	INNER JOIN evboard n ON i.filenum = n.key
-  	WHERE i.filenum = #{key}
-  </select>
+ 
   
   <select id="getTotal" resultType="int">
   	SELECT COUNT(*)

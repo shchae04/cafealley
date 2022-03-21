@@ -41,13 +41,9 @@ public class NoBoardController {
 		System.out.println("공지 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
-//		tomcat -> server.xml 에 추가해야 img 가져옴/
-//		<Context docBase="C:/test/upload/" path="/upload" reloadable="true" />
-		model.addAttribute("img",service.getFile(bo.getKey()));
-		ImgVO img = service.getFile(bo.getKey());
-		System.out.println("파일 이름");
-		System.out.println("파일정보 : " + service.getFile(bo.getKey()));
+
 		model.addAttribute("article",service.getContent(bno));
+
 		
 		return "noticeboard/noticeBoardDetail";
 		

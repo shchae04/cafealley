@@ -47,10 +47,6 @@ public class CmBoardService implements ICmBoardService {
 		mapper.delete(bno);
 	}
 
-	@Override
-	public ImgVO getFile(int key) {
-		
-		return mapper.getFile(key);
-	}
+
 
 }

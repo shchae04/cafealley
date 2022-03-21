@@ -47,10 +47,6 @@ public class EvBoardService implements IEvBoardService {
 		mapper.delete(bno);
 	}
 
-	@Override
-	public ImgVO getFile(int key) {
-		
-		return mapper.getFile(key);
-	}
+
 
 }
