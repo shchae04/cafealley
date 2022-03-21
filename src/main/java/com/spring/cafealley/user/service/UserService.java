@@ -57,7 +57,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public void updateUser(UserVO vo) {
-
+		
 		// 회원 비밀번호를 암호화 인코딩
 		// Spring Security Web 모듈을 사용해서 암호화 진행
 		System.out.println("암호화 하기 전 비밀번호: " + vo.getUserpw());
@@ -69,7 +69,7 @@ public class UserService implements IUserService {
 
 		// vo 객체에 다시 비밀번호 세팅
 		vo.setUserpw(securePw);
-
+	
 		// 매퍼에게 securePw로 변경된 객체를 전달
 		mapper.updateUser(vo);
 

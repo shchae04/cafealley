@@ -1,6 +1,8 @@
 package com.spring.cafealley.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +19,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
+import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.command.UserVO;
+import com.spring.cafealley.img.service.ImgService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
 
@@ -33,6 +39,8 @@ public class UserController {
 	private IUserService service;
 	@Autowired
 	private MailSendService mailService;
+	@Autowired
+	private ImgService imgService;
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -153,27 +161,45 @@ public class UserController {
 
 	// 마이페이지로 이동
 	@GetMapping("/userInfo")
-	public void businessUserInfo(HttpSession session, Model model) {
-		System.out.println("컨트롤러의 businessUserInfo 메서드 발동");
+	public void UserInfo(HttpSession session, Model model) {
+		System.out.println("컨트롤러의 UserInfo 메서드 발동");
 
 		String userid = ((UserVO) session.getAttribute("login")).getUserid();
-
+		int filenum = (int) ((UserVO) session.getAttribute("login")).getFilenum();
 		UserVO userInfo = service.getInfo(userid);
+		ImgVO imgInfo = imgService.select(filenum);
+		
 		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("imgInfo", imgInfo);
 
 	}
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
-	public String userUpdate(UserVO vo, HttpSession session
+	public String userUpdate(@RequestParam("file") MultipartFile file, UserVO vo, HttpSession session
 			, HttpServletRequest request
 			, HttpServletResponse response) {
 		
 		System.out.println("컨트롤러의 userUpdate 메서드 발동");
 		System.out.println("param: " + vo);
+		System.out.println("file: " + file);
 		
+		List<MultipartFile> fileList = new ArrayList<>();
+		fileList.add(file);
+		
+		
+		if(file.getSize() == 0) {
+			System.out.println("파일정보가 존재하지 않음. " + file);
+			vo.setFilenum(0);
+		} else {
+			System.out.println("파일정보가 존재함. imgService 호출. " + file);
+			System.out.println(imgService.getLastUploaded());
+			imgService.upload(fileList);
+			vo.setFilenum(imgService.getLastUploaded());
+		}
 		service.updateUser(vo);
-
+		
+		
 		System.out.println("정보 수정 후 세션 삭제 중...");
 		// 정보 수정 후 세션과 로그인 쿠키 삭제 후 메인으로 이동
 		session.removeAttribute("login");
@@ -187,7 +213,6 @@ public class UserController {
 			response.addCookie(loginCookie);
 			service.keepLogin("none", new Date(), vo.getUserid());
 		}
-		
 		
 		return "redirect:/";
 	}

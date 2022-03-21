@@ -42,30 +42,32 @@
 						</c:when>
 						<c:otherwise>
 							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
+							
+							<c:choose>
+								<c:when test="${empty login.businessnum}">
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(일반회원)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li id="header-barcode">barcode here</li>
+										</ul>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(사업자회원)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+										</ul>
+									</li>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 					
-					<c:choose>
-						<c:when test="${empty login.businessnum}">
-							<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li id="header-name">${login.username}님(일반회원)</li>
-									<li>${login.useremail}</li>
-									<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
-									<li id="header-barcode">barcode here</li>
-								</ul>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li id="header-name">${login.username}님(사업자회원)</li>
-									<li>${login.useremail}</li>
-									<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
-								</ul>
-							</li>
-						</c:otherwise>
-					</c:choose>
+					
 					
 					<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
 					<li><a href="<c:url value='/user/joinSelect' />">회원가입</a></li>

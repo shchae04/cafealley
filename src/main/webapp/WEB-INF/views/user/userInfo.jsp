@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bsuserInfo</title>
+<title>userInfo</title>
 
 
 <style>
@@ -90,14 +90,26 @@
 							<br>
 							<p>*표시는 필수 입력 표시입니다</p>
 
-							<form id="infoForm" action="<c:url value='/user/userUpdate' />" method="post">
+							<form id="infoForm" action="<c:url value='/user/userUpdate' />" method="post" enctype="multipart/form-data">
 								<table class="table">
 									<tbody class="m-control">
 										<tr>
+											<td>
+												프로필 사진
+											</td>
+											<td>
+												<input type="file" id="file" name ="file">	
+												<div class="fileDiv">
+								                	<img id="fileImg" style="width: 60px;" src="<c:out value='${imgInfo.filepath}\\${imgInfo.filename}' />" />
+												</div>
+											</td>
+											
+										</tr>
+										<tr>
 											<td class="col-sm-2">*아이디</td>
 											<td class="col-sm-8">
-											<input value="${login.userid}" style="width: 180px; cursor: default;"
-												id="userid" class="form-control input-sm" name="userid" readonly>
+												<input value="${login.userid}" style="width: 180px; cursor: default;"
+													id="userid" class="form-control input-sm" name="userid" readonly>
 											</td>
 										</tr>
 										
@@ -181,18 +193,30 @@
 											</tr>
 											<tr>
 												<td>*상세주소</td>
-												<td><input style="width: 500px; cursor: auto;"
+												<td><input style="width: 300px; cursor: auto;"
 													class="form-control input-sm add" id="addrdetail"
 													name="addrdetail"></td>
 											</tr>
 										</c:if>
-										<c:if test="${empty login.businessnum}">
-											<tr>
-												<td>MEMBERSHIP</td>
-												<td><a href="#">가입 링크</a></td>
-											</tr>
-										</c:if>
 										
+										<c:choose>
+											<c:when test="${empty login.businessnum}">
+												<tr>
+													<td>MEMBERSHIP</td>
+													<td><a href="#">가입 링크</a></td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<tr>
+													<td>*사업자 번호</td>
+													<td>
+														<input style="width: 300px; cursor: auto;"
+														class="form-control input-sm add" id="businessnum"
+														name="businessnum"><span id="bsnsNumCheck"></span>
+													</td>
+												</tr>
+											</c:otherwise>
+										</c:choose>
 										
 										
 									</tbody>
@@ -250,19 +274,16 @@
 		
 		
 		$(function() {
-			
-			
-			
-
-			//비밀번호 유효성 검증 정규표현식
+			// 유효성 검증 정규표현식
 			const getPwCheck = RegExp(/^.*(?=.*\d)(?=.*[a-zA-Z])/);
 			const getEmailCheck =  RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
 			const getPhoneCheck = RegExp( /[^0-9]/g);
+			const getBsnsNumCheck = RegExp(/([0-9]{3})-?([0-9]{2})-?([0-9]{5})/);
 			
 			//핸드폰 값
 			const userphone = $('#userphone1').val() + $('#userphone1').val() + $('#userphone1').val();
 			
-			let chk1 = false, chk2 = false, chk3 = false, chk4 = false;
+			let chk1 = false, chk2 = false, chk3 = false, chk4 = false, chk5 = false;
 
 			//수정버튼 클릭 시 사용자의 입력값 검증!
 			$('#updateBtn').click(function() {
@@ -323,7 +344,7 @@
 				// 전화번호란 입력 검증
 				if(getPhoneCheck.test(userphone)) {
 					console.log('전화번호 양식에 맞지 않음');
-					$('#phoneChk').html('<b style="font-size: 12px; color: red;">숫자만 입력 가능합니다</b>');
+					$('#phoneChk').html('<b style="font-size: 12px; color: red;">숫자만 입력 가능합니다.</b>');
 					chk4 = false;
 				} else {
 					console.log('전화번호 값 검증 완료');
@@ -331,11 +352,24 @@
 					chk4 = true;
 				}
 				
+				// 사업자번호란 입력 검증
+				
+				if(!getBsnsNumCheck.test($('#businessnum').val())) {
+					console.log('사업자번호 양식에 맞지 않음');
+					$('#bsnsNumCheck').html('<b style="font-size: 12px; color: red;">양식에 맞게 작성해 주세요.</b>');
+					chk5 = false;
+				} else {
+					console.log('사업자번호 값 검증 완료');
+					$('#bsnsNumCheck').html('');
+					chk5 = true;
+				}
+				
 				//전부 통과됐다면 수정 처리
-				if(chk1 && chk2 && chk3 && chk4) {
-						console.log('수정 처리');
-						$('#updateBtn').attr('type', 'submit');
-					}
+				if(chk1 && chk2 && chk3 && chk4 && chk5) {
+					confirm('수정하시겠습니까?');
+					console.log('수정 처리');
+					$('#updateBtn').attr('type', 'submit');
+				}
 				
 			}); //수정버튼 클릭 입력값 검증 끝
 			
@@ -344,14 +378,33 @@
 				console.log('탈퇴버튼 클릭');
 				$('#updateBtn').attr('type', 'button');
 				location.href='<c:url value="/user/memDelete" />';
-				//$('#infoForm').attr('method', 'get');
-				//$('#infoForm').attr('action', '<c:url value="/user/memDelete" />');
 			});//탈퇴버튼 클릭 시 이동 끝
 			
 			
 
 		}); //end jQuery
 		
+		//자바 스크립트 파일 미리보기 기능
+	      function readURL(input) {
+	           if (input.files && input.files[0]) {
+	               const reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
+	               //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
+	              	reader.readAsDataURL(input.files[0]); 
+	               //파일업로드시 화면에 숨겨져있는 클래스fileDiv를 보이게한다
+	               $(".fileDiv").css("display", "block");
+	               
+	               reader.onload = function(event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
+	                   $('#fileImg').attr("src", event.target.result); 
+	                   console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
+	              }
+	           }
+	       }
+	      //file업로드 인풋창에 변화 발생했다면
+	      //readURL에 file업로드 창 데이터를 전달함.
+	      $("#file").change(function() {
+	           readURL(this); //this는 #file자신 태그를 의미
+	           
+	       });
 		
 	</script>
 
