@@ -97,12 +97,25 @@
 											<td>
 												프로필 사진
 											</td>
-											<td>
-												<input type="file" id="file" name ="file">	
-												<div class="fileDiv">
-								                	<img id="fileImg" style="width: 60px;" src="<c:out value='${imgInfo.filepath}\\${imgInfo.filename}' />" />
-												</div>
-											</td>
+											<c:choose>
+												<c:when test="${not empty login.filenum}">
+													<td>
+														<input type="file" id="file" name ="file">	
+														<div class="fileDiv">
+										                	<img id="fileImg" style="width: 60px;" src="<c:url value='/loadimg/display/${login.filenum}/1'/>" />
+														</div>
+													</td>
+												</c:when>
+												<c:otherwise>
+													<td>
+														<input type="file" id="file" name ="file">	
+														<div class="fileDiv">
+										                	<img id="fileImg" src="<c:url value='/img/img_ready.png' />" />
+														</div>
+													</td>
+												</c:otherwise>
+											</c:choose>
+											
 											
 										</tr>
 										<tr>
@@ -274,6 +287,19 @@
 		
 		
 		$(function() {
+			const fileImgSrc = $('#fileImg').attr('src');
+			window.onload = function(
+				$.ajax({
+					type : 'get',
+					url : '<c:url value="/user/display" />',
+					data : fileImgSrc,
+					contentType : 'application/json',
+					success : function(data) {
+						console.log('비동기 success');
+						console.log('fileImgSrc: ' + data);
+					}
+				});// 인증 이메일 전송 비동기 끝 
+			
 			// 유효성 검증 정규표현식
 			const getPwCheck = RegExp(/^.*(?=.*\d)(?=.*[a-zA-Z])/);
 			const getEmailCheck =  RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);

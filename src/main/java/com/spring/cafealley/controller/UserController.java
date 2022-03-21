@@ -1,5 +1,7 @@
 package com.spring.cafealley.controller;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -165,14 +171,49 @@ public class UserController {
 		System.out.println("컨트롤러의 UserInfo 메서드 발동");
 
 		String userid = ((UserVO) session.getAttribute("login")).getUserid();
-		int filenum = (int) ((UserVO) session.getAttribute("login")).getFilenum();
 		UserVO userInfo = service.getInfo(userid);
-		ImgVO imgInfo = imgService.select(filenum);
 		
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("imgInfo", imgInfo);
 
 	}
+	
+	//이미지 파일 전송 요청
+	@ResponseBody
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> getFile (@RequestBody String filepath, String filename) {
+		System.out.println("filename: " + filename);
+		System.out.println("filepath: " + filepath);
+		
+		//날짜폴더, 파일명은 따로 전달해준다.
+		File file = new File(filepath + "\\" + filename);
+		System.out.println(file);
+		
+		ResponseEntity<byte[]> result = null;
+		try {
+			//추가적으로 필요한 정보 전달.
+			//org.springframework.http.HttpHeaders
+			HttpHeaders headers = new HttpHeaders();
+			//probeContentType: 파라미터로 전달받은 파일의 타입을 문자열로 변환해 주는 메서드
+			//사용자에게 보여주고자 하는 데이터가 어떤 파일인지를 검사해서 응답 상태 코드를 다르게 리턴할 수도 있습니다.
+			headers.add("Cotent-Type", Files.probeContentType(file.toPath()));
+			
+			/*
+			ResponseEntity<>(응답 객체에 답을 내용, 헤더에 답을 내용, 상태메세지)
+			FileCopyUtils: 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드의 집합체
+			file객체 안에 있는 내용을 복사하고 byte배열로 변환해서 바디에 담아 화면에 전달.
+			
+			copyToByteArray는 필수!
+			 */
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
