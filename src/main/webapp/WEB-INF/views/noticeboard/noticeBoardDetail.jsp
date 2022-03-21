@@ -69,6 +69,12 @@
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
                                     <img name="key" src="/upload/${img.foldername}/${img.filename}" alt="내용1">
+                                    <c:if test="${img.filename2} != '' ">
+                                    <img alt="내용2" src="/upload/${img.foldername}/${img.filename2}">
+                                    </c:if>
+                                    <c:if test="${img.filename3} != '' ">
+                                    <img alt="내용2" src="/upload/${img.foldername}/${img.filename3}">
+                                    </c:if>
                                 </div>
                              
                               

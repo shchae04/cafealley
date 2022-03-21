@@ -90,7 +90,7 @@
                         <!-- 파일 전송. -->
                         <div class="form-group">
    	                     <p>3개 까지 등록가능</p>
-   	                     <input type="file" multiple="multiple" id="file" name="file">
+   	                     <input type="file" multiple="multiple" id="file" name="files">
                         
                         </div>
                         
