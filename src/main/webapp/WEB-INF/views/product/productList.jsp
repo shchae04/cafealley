@@ -30,6 +30,7 @@ body {
 section {
 	margin-top: 150px;
 	min-height: 488px;
+
 }
 
 .container {
@@ -60,6 +61,7 @@ section {
 	width: 100%;
 	height: 70px;
 	border-bottom: 2px solid white;
+	background: black;
 }
 
 .divforleft {
@@ -132,9 +134,11 @@ section {
 }
 
 .cart-list {
-	background: black;
+	background: white;
 	width: 90%;
 	padding: 0 !important;
+	border: 30px solid black;
+	max-height: 800px;
 }
 
 .cart-table {
@@ -354,6 +358,16 @@ tbody> tr> td> input{
 tbody> tr> td> select{
 	border: 1px solid #ddd;
 }
+.overflow{
+	max-height: 500px;
+	min-height:500px;
+	overflow: auto;
+}
+thead{
+	position:sticky;
+	top:0;
+	background:white;
+}
 </style>
 </head>
 
@@ -375,53 +389,55 @@ tbody> tr> td> select{
 						<div class="divforleft">
 							<p>종류</p>
 							<ul class="select-category">
-								<li><a href="<c:url value='product/productList'/>">전체</a></li>
-								<li><a href="<c:url value='product/productList/beans'/>">원두</a></li>
-								<li><a href="<c:url value='product/productList/tea'/>">티/액상차</a></li>
-								<li><a href="<c:url value='product/productList/milk'/>">유제품</a></li>
-								<li><a href="<c:url value='product/productList/syrup'/>">시럽/소스</a></li>
-								<li><a href="<c:url value='product/productList/powder'/>">파우더/농축액</a></li>
-								<li><a href="<c:url value='product/productList/coffeemachine'/>">커피용품, 머신</a></li>
+								<li><a href="all">전체</a></li>
+								<li><a href="beans">원두</a></li>
+								<li><a href="tea">티/액상차</a></li>
+								<li><a href="milk">유제품</a></li>
+								<li><a href="syrup">시럽/소스</a></li>
+								<li><a href="powder">파우더/농축액</a></li>
+								<li><a href="coffeemachine">커피용품, 머신</a></li>
 							</ul>
 						</div>
 						<button class="btn-shop-regist">선택상품 판매글에 등록하기</button>
 						<div class="divforright">
-							<form action="#">
-								<input type="text" placeholder="상품명 검색">
+								<input type="text" id='keyword' placeholder="상품명 검색">
 								<button class="btn-search" type="submit">
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
-							</form>
 							<button class="btn-regist" onclick="location.href='${pageContext.request.contextPath}/product/productWrite'">상품 등록하기</button>
 						</div>
 					</div>
 
-
-					<table class="table w-auto text-center align-middle cart-table" id="proContent">
-						<thead>				
-							<tr>
-								<td>선택</td>
-								<td>상품 카테고리</td>
-								<td>상품 이미지</td>
-								<td>상품번호</td>
-								<td>상품명</td>
-								<td>재고</td>
-								<td>상품정상가격</td>
-								<td>상품판매가격</td>
-								<td>상품 관리</td>
-							</tr>
-						</thead>
-						<tbody>
+					<div class="overflow">
+						<table class="table w-auto text-center align-middle cart-table" id="proContent">
+							<thead>				
+								<tr>
+									<td>선택</td>
+									<td>상품 카테고리</td>
+									<td>상품 이미지</td>
+									<td>상품번호</td>
+									<td>상품명</td>
+									<td>재고</td>
+									<td>상품정상가격</td>
+									<td>상품판매가격</td>
+									<td>상품 관리</td>
+								</tr>
+							</thead>
 							
-						</tbody>
-
-						<tfoot>
-
-						</tfoot>
-					</table>
+							<tbody>
+								
+							</tbody>
+							
+	
+							<tfoot>
+	
+							</tfoot>
+						</table>
+					</div>
 					<br>
 
 				</div>
+
 			</div>
 
 		</div>
@@ -439,16 +455,14 @@ tbody> tr> td> select{
         $(function(){
             let str = '';
             // let page = 1; 나중에 페이지 적용되면..
-            getList(true);
-
+            getList(true,'all','none');
         	// 목록을 불러오는 함수
-        	function getList(reset){
+        	function getList(reset, procategory, keyword){
         		if(reset===true){
         			str='';
         		}
-        	
 	        	$.getJSON(
-	        			'<c:url value="/product/getList"/>',
+	        			'<c:url value="/product/getList/'+procategory+'/'+ keyword + '"/>',
 	        			function(productList){
 	        				console.log(productList);
 							for(let i=0; i<productList.length; i++){
@@ -515,14 +529,21 @@ tbody> tr> td> select{
 								str+="</td>";
 								str+="</tr>";
 								
-								$('tbody').html(str);
 							}
+							$('tbody').html(str);
+							isTbodyEmpty();
 	        			}// end getJSON function
+	        			
 				); // end get JSON
+	        	
         	}// end getList()
         	
         	
-        	
+        	function isTbodyEmpty(){
+        		if($('tbody').html() === ''){
+        			$('tbody').html(`<tr><td colspan='9'><p style='font-weight: 700; textalign: center; font-size:25px;'> 해당하는 결과가<br> 없습니다.</p></td></tr>`);
+        		}
+        	}
         	
         	
         	// 상품 등록
@@ -568,7 +589,20 @@ tbody> tr> td> select{
         	});
         	
         	
+        	// getlist의 procategory와 keyword가 동시에전달되는 일이 없다.
         	
+        	// 종류누르면 procategory getlist에 전달. 
+        	$('.select-category').on('click', 'a', function(e){
+        		e.preventDefault();
+        		let procategory = $(this).attr('href');
+        		getList(true,procategory,'none');
+        	});
+        	
+        	// 검색어 검색하면 keyword getlist에 전달.
+        	$('.btn-search').on('click', function(e){
+        		let keyword = $('#keyword').val();
+        		getList(true,'all',keyword);
+        	});
         	
         	
         	// 수정버튼 누르면 
@@ -643,7 +677,7 @@ tbody> tr> td> select{
         				success: function(result) {
         					if(result === 'modSuccess') {
         						alert('상품이 정상적으로 수정되었습니다.');
-        						getList(true); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
+        						getList(true,'all','none'); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
         						//자동으로 목록으로 가지는 않음,
         					}
         				},
@@ -669,7 +703,7 @@ tbody> tr> td> select{
     				success: function(result) {
     					if(result === 'delSuccess') {
     						alert('상품이 정상적으로 삭제되었습니다.');
-    						getList(true); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
+    						getList(true,'all','none'); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
     						//자동으로 목록으로 가지는 않음,
     					}
     				},
