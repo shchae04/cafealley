@@ -1,10 +1,6 @@
 package com.spring.cafealley.controller;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,30 +9,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.cafealley.board.service.IBoardService;
+import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.img.service.IImgService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
 
-
 @Controller
-@RequestMapping("/noBoard")
-public class NoBoardController {
+@RequestMapping("/cmBoard")
+public class CmBoardController {
 
-	@Autowired
-	private IBoardService service;
-	
 	@Autowired
 	private IImgService imgservice;
 	
+	@Autowired
+	private ICmBoardService service;
+	
 	//상세보기 이동처리
-	@GetMapping("/noDetail")
+	@GetMapping("/cmDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
 		System.out.println("공지 상세보기 페이지로 이동");
 	
@@ -49,13 +43,13 @@ public class NoBoardController {
 		System.out.println("파일정보 : " + service.getFile(bo.getKey()));
 		model.addAttribute("article",service.getContent(bno));
 		
-		return "noticeboard/noticeBoardDetail";
+		return "communityboard/comBoardDetail";
 		
 		
 	}
 	
 	//목록 이동처리
-	@GetMapping("/noList")
+	@GetMapping("/cmList")
 	public String nolist(PageVO vo, Model model) {
 		System.out.println("공지 리스트 페이지로 이동");
 		
@@ -71,23 +65,23 @@ public class NoBoardController {
 //		페이징처리
 		model.addAttribute("pc",pc); 
 		
-		return "noticeboard/noticeBoardList";
+		return "communityboard/comBoardList";
 	}
 	
 	//작성 이동처리
-	@GetMapping("/noWrite")
+	@GetMapping("/cmWrite")
 	public String noWrite() {
 		System.out.println("공지 작성 페이지로 이동");
-		return "noticeboard/noticeBoardWrite";
+		return "communityboard/comBoardWrite";
 	}
 	
 	
 	//수정 페이지 이동.
-	@GetMapping("/noModi")
+	@GetMapping("/cmModi")
 	public String noModi(int bno,Model model) {
 		model.addAttribute("article",service.getContent(bno));
 		System.out.println("공지 수정 페이지로 이동");
-		return "noticeboard/noticeBoardModi";
+		return "communityboard/comBoardModi";
 	}
 	
 	//글 등록 처리
@@ -124,7 +118,7 @@ public class NoBoardController {
 		 
 		
 		
-		return "redirect:/noBoard/noList";
+		return "redirect:/cmBoard/cmList";
 	}
 	
 	//수정 처리
@@ -134,7 +128,7 @@ public class NoBoardController {
 		service.update(vo);
 		
 		
-		return "redirect:/noBoard/noDetail?bno=" + vo.getBno();
+		return "redirect:/cmBoard/cmDetail?bno=" + vo.getBno();
 	}
 	
 	
@@ -143,25 +137,7 @@ public class NoBoardController {
 	public String freeDelete(BoardVO vo) {
 		service.delete(vo.getBno());
 		System.out.println("삭제완료");
-		return "redirect:/noBoard/noList";
+		return "redirect:/cmBoard/cmList";
 		}
-	
-	
-		
-	
-//	@ResponseBody
-//	@PostMapping("/upload")
-//	public String upload(MultipartFile file) {
-//		
-//		List<MultipartFile> files = new ArrayList<>();
-//		files.add(file);
-//		
-//		imgservice.upload(files);
-//		System.out.println("DB파일업로드");
-//		//ajax응답.
-//		return "noList";
-//	}
-//	
-	
 	
 }

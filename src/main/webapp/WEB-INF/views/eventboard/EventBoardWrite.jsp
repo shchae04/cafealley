@@ -41,100 +41,7 @@
 <body>
 
 
-    <header>
-
-        <div class="header">
-            <nav class="header-container">
-                <div class="header-logo">
-                    <a href="#"><img width="150px" src="../img/logo.png" alt="logo"></a>
-                </div>
-
-
-                <ul class="header-nav header-nav-upper clearfix">
-                    <li><a data-toggle="modal" href="#myModal">로그인</a></li>
-                    <li><a href="#">#님<span class="caret"></span></a></li>
-                    <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">회원가입</a></li>
-                </ul>
-
-                <ul class="header-nav header-nav-dropdown clearfix">
-                    <li><a href="#">사이트 소개</a></li>
-                    <li><a href="#">Alley 위치</a></li>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">Coffee Talk</a></li>
-                    <li><a href="#">카페 게시판</a></li>
-                    <li class="dropdown">
-                        <a href="#">이벤트</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">이벤트 요약</a></li>
-                            <li><a href="#">이벤트 공지</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Owner Mall </span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">원두</a></li>
-                            <li><a href="#">티 / 액상차</a></li>
-                            <li><a href="#">유제품</a></li>
-                            <li><a href="#">시럽 / 소스</a></li>
-                            <li><a href="#">파우더 / 농축액</a></li>
-                            <li><a href="#">커피용품, 머신</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!----------------------------------------------------------로그인  Modal ---------------------------------------------------------->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-
-            <!-- Modal Content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">로그인</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="#">
-                        <h5>아이디</h5>
-                        <input type="text" class="form-control" placeholder="Text input">
-                        <h5>비밀번호</h5>
-                        <input type="password" class="form-control" placeholder="password input">
-                        <label>
-                            <input type="checkbox">
-                            <small>로그인 유지</small>
-                        </label>
-                        <div class="login-center">
-                            <button type="button" class="btn btn-primary btn-block">Log In</button>
-                            <div class="login-center2 clearfix">
-                                <div style="float:left;">
-                                    아직 회원이 아니신가요?
-                                </div>
-                                <div style="float: right;">
-                                    <a href="#">일반회원 가입</a><br>
-                                    <a href="#">카페회원 가입</a>
-                                </div>
-                            </div>
-
-                            <div class="login-p-center">또는</div>
-                            <button type="button" class="btn btn-block"
-                                style="background-color: #04cf5c; color: white;"><strong>N</strong></strong></button>
-                        </div>
-                    </form>
-                    <br>
-                    <div class="login-p-center">네이버 가입은 일반 회원만 가능합니다.</div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
+  <%@ include file="../include/header.jsp" %>
 
 
     <section>
@@ -150,7 +57,7 @@
                         </div>
                             
                     </div>
-                    <form name="writeform">
+                    <form name="writeform" method="post" action="<c:url value='/noBoard/write' />" enctype="multipart/form-data">
                         <!-- 
 
                         <div class="row col-xs-12">
@@ -179,10 +86,24 @@
                             <input type="text" class="form-control" id="title" name="title"
                                 style="width: 300px; background-color: transparent;" />
                         </div>
+                        
+                        <!-- 파일 전송. -->
+                        <div class="form-group">
+   	                     <p>3개 까지 등록가능</p>
+   	                     <input type="file" multiple="multiple" id="file" name="files">
+                        
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group">
+							<label for="content" class="col-xs-12">
+								내용
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10"></textarea>
+							</label>
+                        </div>
 
-                        <textarea name="content" id="summernote" class="summernote"></textarea>
-
-                        <button class="detailbtn btn btn-dark" id="listbtn"
+                        <button type="button" class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
 
@@ -198,61 +119,17 @@
                             </button>
                         </div>
 
-                </div>
                 </form>
+                </div>
 
             </div>
         </div>
-        </div>
+       
     </section>
 
 
+<%@ include file="../include/footer.jsp" %>
 
-
-
-    <footer>
-
-        <div class="footer-container clearfix">
-
-            <div class="footer-left">
-                <div class="footer-logo">
-                    <a href="#"><img width="150px" src="../img/logo2.png" alt="logo"></a>
-                    <span class="footer-name">Cafe Alley</span><br><br>
-                    <span class="footer-desc">논 브랜디드 카페의 활성화, 커피 문화를 선도합니다.</span>
-                </div>
-                <hr>
-                <p class="footer-business">
-                    대표자 : 김골목 | E-MAIL : info@info.com<br>
-                    사업자번호 : 123-45-67890 | 개인정보보호책임자 : 김골목 | 통신판매업 : 2019-서울마포-0001<br>
-                    주소 : 서울특별시 마포구 대흥동
-                </p>
-                <p class="footer-copyright">
-                    Copyright © 2022 COFFEE ALLEY (c). All Rights Reserved E-mail : <a
-                        href="mailto:coffeealley.gmail.com">coffeealley.gmail.com</a>
-                </p>
-            </div>
-
-            <div class="footer-right clearfix">
-                <ul class="footer-nav clearfix">
-                    <li><a href="#">사이트 소개</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보 처리방침</a></li>
-                </ul>
-                <div class="footer-sns">
-                    <a href="#"><span class="fa-brands fa-facebook-square"></span></a>
-
-                    <a href="#"><span class="fa fa-instagram"></span></a>
-
-                    <a href="#"><span class="fa-brands fa-youtube"></span></a>
-                </div>
-
-
-
-            </div>
-
-        </div>
-
-    </footer>
 
 
     <script>
@@ -282,29 +159,32 @@
         document.querySelector('#delbtn').addEventListener('click', function (e) {
             if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
-                location.href = 'https://www.google.com';
-            }
-            return;
+                location.href = '<c:url value="/evBoard/evList"/>';
+            
+        });
+        
+        
+        
+        
+        const $imgfile = document.querySelector('#file');
+        console.log($imgfile);
+        $imgfile.addEventListener('change', e=>{
+        	
+        	//작성시 이미지 유효성 검사
+    		let file = $('#file').val();
+    		console.log(file);
+    		file = file.slice(file.indexOf('.') + 1).toLowerCase();
+    		console.log(file);
+    		if(file !== 'jpg' && file !== 'png' && file !== 'jpeg' && file !== 'bmp') {
+    			alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다.');
+    			$('#file').val('');
+    			return;
+    		} 
+        	
+            
         });
 
 
-
-        $(document).ready(function () {
-            $('#summernote').summernote();
-        });
-        $('.summernote').summernote({
-            height: 300,
-            minHeight: null,
-            maxHeight: null,
-            focus: true,
-            lang: 'ko-KR',
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-            disableResizeEditor: true,
-            onImageUpload: function (files, editor, welEditable) {
-                sendFile(files[0], editor, welEditable);
-            }
-        });
-        $('.note-statusbar').hide();
 
     </script>
     

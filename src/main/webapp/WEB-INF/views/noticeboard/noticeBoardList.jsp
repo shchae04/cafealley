@@ -115,40 +115,34 @@
                 		onclick="location.href='<c:url value="/noBoard/noWrite" />'"
                 		>글쓰기</button>
                 <hr>
-
-
-           		<!-- 페이징 처리 부분  -->
-           				<div style="text-align: center; margin-top:50px;">
+						<!-- 페이징 처리 -->
+						<form action="<c:url value='/noBoard/noList' />" name="pageForm">
+	                        <div class="text-center clearfix">
+	                            <hr>
+	                            <ul class="pagination" id="pagination">
+	                            	<c:if test="${pc.prev}">
+	                                	<li><a href="#" data-pageNum="${pc.beginPage-1}">이전</a></li>
+	                                </c:if>
+	                                
+	                                <c:forEach var="num" begin="${pc.beginPage}" end="${pc.endPage}">
+	                                	<li class="${pc.paging.pageNum == num ? 'active' : ''}"><a href="#" data-pageNum="${num}">${num}</a></li>
+	                                </c:forEach>
+	                                
+	                                <c:if test="${pc.next}">
+	                               		<li><a href="#" data-pageNum="${pc.endPage+1}">다음</a></li>
+	                                </c:if>
+	                            </ul>
+	                            
+	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
+	                            <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
+	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
+	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
+	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
+	                            
+	                            
+	                        </div>
+                        </form>
                         
-                        <ul class="pagination">
-                            <!-- 이전 버튼 -->
-                            <li class="page-pre">
-                                <a class="page-link" href="#">이전</a>
-                            </li>
-
-                            <!-- 페이지 번호 버튼 -->
-                            <li class="page-num">
-                                <a href="#" class="page-link cur-page">1</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">3</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">4</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">5</a>
-                            </li>
-
-                            <!-- 다음 버튼 -->
-                            <li class="page-next">
-                                <a class="page-link" href="#">다음</a>
-                            </li>
-                        </ul>
-                        <!-- 페이징 처리 끝 -->
 						</div>
 
 
@@ -161,17 +155,19 @@
 <%@ include file="../include/footer.jsp" %>
 
     <script>
-        //검색
-        const $searchbtn = document.querySelector('#searchbtn');
-
-        $searchbtn.addEventListener('click', function (e) {
-            const keyword = document.querySelector('#searchbtn').value;
-            const condition = document.querySelector('#condition').value;
-
-            location.href = "/project/list?keyword=" + keyword + "&condition=" + condition;
-
-        });
+      
         
+    	$(function() {
+    		$('#pagination').on('click', 'a', function(e) {
+    			e.preventDefault();
+    			console.log($(this));
+    			const value = $(this).data('pagenum');
+    			console.log(value);
+    			document.pageForm.pageNum.value = value;
+    			document.pageForm.submit();
+    		});
+    	});
+
        
     </script>
 

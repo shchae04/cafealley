@@ -2,6 +2,7 @@ package com.spring.cafealley.board.mapper;
 
 import java.util.List;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.util.PageVO;
 
 public interface IEvBoardMapper {
@@ -25,4 +26,7 @@ public interface IEvBoardMapper {
 	//삭제
 	void delete(int bno);
 	
+	
+	//파일
+		ImgVO getFile(int key);
 }

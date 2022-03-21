@@ -38,6 +38,10 @@
 				ORDER BY bno DESC
 				) tbl
 			)
+		<![CDATA[
+		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
+		AND rn <= #{pageNum} * #{countPerPage}
+		]]>
 		
   </select>
   
@@ -45,6 +49,11 @@
   	select * FROM img i 
   	INNER JOIN noboard n ON i.filenum = n.key
   	WHERE i.filenum = #{key}
+  </select>
+  
+  <select id="getTotal" resultType="int">
+  	SELECT COUNT(*)
+  	FROM noboard
   </select>
   
   

@@ -75,7 +75,7 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="writer" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="${sessionScope.login.userid }" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">
@@ -103,7 +103,9 @@
 							</label>
                         </div>
 
-                        <button type="button" class="detailbtn btn btn-dark" id="listbtn"
+                        <button type="button"
+                        	onclick="location.href='<c:url value='/noBoard/noList'/>'"
+                         class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
 
@@ -148,6 +150,10 @@
                 event.preventDefault();
                 alert('제목과 내용을 확인해주세요.')
                 return;
+            } else if($('#file').val() === ''||$('#file').val() === null){
+            	event.preventDefault();
+            	alert('첨부 이미지는 필수입니다.');
+            	return;
             }
 
             document.writeform.submit();
@@ -184,6 +190,8 @@
         	
             
         });
+        
+      
 
 
 
