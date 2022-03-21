@@ -43,7 +43,7 @@
 								
                                 <label class="modifycheck" style="float:inherit; font-size: 8px;">
                                 
-                                <c:if test="${article.ismod ='1'}">
+                                <c:if test="${article.ismod} = '1'">
                                 <small>수정됨</small>
                                 </c:if>
                                 
@@ -113,7 +113,7 @@
                         <!-- 현재 로그인 한 사용자의 정보를 토대로 댓글 -->
                         <div class="reply-content" style="margin-top: 20px;">
 
-                            <textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
+                            <textarea id="reply" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
                             <div class="reply-group clearfix">
                                 <div class="reply-input">
 
@@ -129,22 +129,20 @@
 
                         <div class="reply-content">
                             <hr>
-                            <div class="reply-group">
+                            <div class="reply-group" id="replyList">
                                 <!-- 댓글이 반복적으로 달릴 공간! -->
-                                <div
-                                    style="padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;">
+                              <%--   
+                              <div style="padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;">
                                     <strong class="left">${writer}</strong>
                                     <small class="left">2022/01/06</small>
                                     <!-- 수정이 한번이라도 일어났으면 수정됨! -->
                                     <small class="left">수정됨</small>
                                     <!-- 댓글을 작성한 회원에게만 보여짐. -->
-                                    <a id="replymodbtn" class="modify" href="#"><span
-                                            class="glyphicon glyphicon-pencil"></span>수정</a>
-                                    <a id="replydelbtn" class="delete" href="#"><span
-                                            class="glyphicon glyphicon-remove"></span>삭제</a>
+                                    <a id="replymodbtn" class="modify" href="#"><span class="glyphicon glyphicon-pencil"></span>수정</a>
+                                    <a id="replydelbtn" class="delete" href="#"><span class="glyphicon glyphicon-remove"></span>삭제</a>
                                     <p>여기는 댓글</p>
                                 </div>
-
+							 --%>
 
                             </div>
 
@@ -162,8 +160,7 @@
 
     <script>
         
-
-	$(document).ready(function() {
+$(document).ready(function() {
 		
 		$('#registbtn').click(function() {
 			
@@ -178,11 +175,11 @@
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const content = $('#reply').val(); //댓글 내용
-			const writer = $('#replyId').val(); //작성자
+			const writer = '${user.userid}'; //세션에서 가져온 userid
+			const reply = $('#reply').val(); //댓글 내용
 			
 			
-			if(content === '') {
+			if(reply === '') {
 				alert('내용을 입력하세요!');
 				return;
 			}
@@ -193,8 +190,8 @@
 				data: JSON.stringify(
 					{
 						"bno":bno,
-						"writer":writer,
-						"content":content
+						"writer":userid,
+						"content":reply
 					}		
 				),
 				dataType: 'text', //서버로부터 어떤 형식으로 받을지(생략 가능)
@@ -202,9 +199,8 @@
 				success: function(data) {
 					console.log('통신 성공! ' + data);
 					$('#reply').val('');
-					$('#replyId').val('');
-					$('#replyPw').val('');
-					getList(1, true); //등록 성공 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현.
+					
+					getList(true); //등록 성공 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현.
 				},
 				error: function() {
 					alert('등록에 실패했습니다. 관리자에게 문의하세요!');
@@ -212,26 +208,18 @@
 			}); //댓글 등록 비동기 통신 끝.
 		}); //댓글 등록 이벤트 끝.
 		
-		//더보기 버튼 처리(클릭 시 전역변수 페이지번호에 +1값을 전달)
-		$('#moreList').click(function() {
-			//더보기잖아요. 누적해야 되지 않을까요?
-			//1페이지의 댓글 내용 밑에다가 2페이지를 줘야지
-			//1페이지를 없애고 2페이지를 보여주는 게 아니라는 거죠.
-			getList(++page, false);
-		});
-		
+	
 		
 		//목록 요청
-		let page = 1; //페이지 번호
 		let strAdd = ''; //화면에 그려넣을 태그를 문자열의 형태로 추가할 변수.
 		
-		getList(1, true); //상세보기 화면에 처음 진입 시 댓글 리스트를 불러옴.
+		getList(true); //상세보기 화면에 처음 진입 시 댓글 리스트를 불러옴.
 		
 		//getList 매개값으로 요청된 페이지 번호와
 		//화면을 리셋할 것인지의 여부를 bool타입의 reset이름의 변수로 받겠습니다.
 		//(페이지가 그대로 머물면서 댓글이 밑에 계속 쌓이기 때문에, 상황에 따라서
 		//페이지를 리셋해서 새롭게 가져올 것인지, 누적해서 쌓을 것인지의 여부를 확인)
-		function getList(pageNum, reset) {
+		function getList(reset) {
 			
 			const bno = '${article.bno}'; //게시글 번호
 			
@@ -242,7 +230,6 @@
 				"<c:url value='/noReply/getList/' />" + bno,
 				function(data) {
 					console.log(data);
-					//data로 list가 들어온다 replyvo타입의 리스트
 					
 					let total = data.total; //총 댓글수
 					console.log('총 댓글수: ' + total);
@@ -253,33 +240,25 @@
 					//화면이 리셋된 거처럼 보여줘야 합니다.
 					if(reset === true) {
 						strAdd = '';
-						page = 1;
 					}
 					
-				
-					
-					
 					//응답 데이터의 길이가 0보다 작으면 함수를 종료하자.
-					if(replyList.size() <= 0) {
+					if(replyList.length <= 0) {
 						return; //함수 종료.
 					}
 					
 					for(let i=0; i<replyList.length; i++) {
 						
-						strAdd += "<div class='reply-wrap' style='display:none;'>";
-                        strAdd += "<div class='reply-image'>";
-                        strAdd += "<img src='../resources/img/profile.png'>";
-                        strAdd += "</div>";
-                        strAdd += "<div class='reply-content'>";
-                        strAdd += "<div class='reply-group'>";
-                        strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>"; 
-						strAdd += "<small class='left'>"+ timeStamp(replyList[i].regdate) +"</small>";
-                        strAdd += "<a href='" + replyList[i].rno + "' class='right replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>";
-                        strAdd += "<a href='" + replyList[i].rno + "' class='right replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
-                        strAdd += "</div>";
-                        strAdd += "<p class='clearfix'>"+ replyList[i].content +"</p>";
-                        strAdd += "</div>";
-                    	strAdd += "</div>";
+						strAdd += "<div style='padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;''>";
+                        strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>";
+                        strAdd += "<small class='left'>"+replyList[i].regdate +"</small>";
+                        strAdd += "<c:if test='"+ replyList[i].ismod = 1 +"'>";
+                        strAdd += "<small class='left'>수정됨</small>";
+                        strAdd += "</c:if>";
+                        strAdd += "<a id='replymodbtn' class='modify' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>";
+                        strAdd += "<a id='replydelbtn' class='delete' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        strAdd += "<p>"+replyList[i].content+"</p>"; 
+						strAdd += "</div>";
 						
 					}
 					$('#replyList').html(strAdd); //replyList영역에 문자열 형식으로 모든 댓글을 추가.
@@ -306,37 +285,16 @@
 		사용하는 제이쿼리의 이벤트 위임 함수를 반드시 사용해야 합니다.
 		*/
 		
-		$('#replyList').on('click', 'a', function(e) {
+		//수정버튼 클릭시
+		$('#replyList').on('click', 'a[id="replymodbtn"]', function(e) {
 			e.preventDefault(); //태그의 고유 기능을 중지.
 			//1. a태그가 두 개(수정, 삭제)이므로 버튼부터 확인.
 			//수정, 삭제가 발생하는 댓글 번호가 몇 번인지의 여부도 확인.
 			
 			const rno = $(this).attr('href');
-			$('#modalRno').val(rno);
+			//인풋태그를 집어넣어줘야함.
 			
-			//2. 모달 창 하나를 이용해서 상황에 따라 수정 / 삭제 모달을 구분하기 위해
-			//조건문 작성.
 			
-			//hasClass()는 클래스 이름에 매개값이 포함되어 있다면 true, 없으면 false.
-			if($(this).hasClass('replyModify')) {
-				//수정 버튼을 눌렀으므로 수정 모달 형식으로 변경.
-				$('.modal-title').html('댓글 수정');
-				$('#modalReply').css('display', 'inline');
-				$('#modalModBtn').css('display', 'inline');
-				$('#modalDelBtn').css('display', 'none'); //수정이므로 삭제버튼은 숨기자.
-				//jQuery를 이용한 모달 창 열기/닫기 ('show' / 'hide')
-				//BootStrap에서는 trigger를 통해서 모달을 열고 닫았지만, 지금은 그런 게 없기 때문에
-				//제이쿼리를 이용하여 직접 모달을 열어줍니다.
-				$('#replyModal').modal('show');	
-			} else {
-				//삭제 버튼을 눌렀으므로 삭제 모달 형식으로 변경.
-				$('.modal-title').html('댓글 삭제');
-				$('#modalReply').css('display', 'none');
-				$('#modalModBtn').css('display', 'none');
-				$('#modalDelBtn').css('display', 'inline');
-				$('#replyModal').modal('show');	
-			}
-		
 		}); //수정 or 삭제 버튼 클릭 이벤트 처리 끝.
 		
 		
@@ -472,8 +430,6 @@
 		
 		
 	}); //end jQuery
-	
-        
 
     </script>
 
