@@ -8,14 +8,25 @@
 
 	<!-- 글등록 -->
 	<insert id="regist">
-		INSERT INTO Promoboard(bno, writer, key, content, area)
-		VALUES(promoboard_seq.NEXTVAL, #{writer},1, #{content}, #{area})
+		INSERT INTO Promoboard(bno, writer, key, content, area, place, regdate, limitation1, limitation2, limitation3, filecnt)
+		VALUES(promoboard_seq.NEXTVAL, #{writer}, #{key}, #{content}, #{area}, #{place}, sysdate, #{limitation1}, #{limitation2}, #{limitation3}, #{filecnt})
 	</insert>
 
 	<!-- 목록 -->
 	<select id="getList"
 		resultType="com.spring.cafealley.command.PromoBoardVO">
-		SELECT * FROM promoboard
+		SELECT * FROM
+			(
+			SELECT ROWNUM as rn, tbl.* FROM
+				(
+				SELECT * FROM promoboard
+				ORDER BY bno DESC
+				) tbl
+			)
+		<![CDATA[
+		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
+		AND rn <= #{pageNum} * #{countPerPage}
+		]]>
 	</select>
 
 	<!-- 상세보기 -->
@@ -28,8 +39,9 @@
 	<!-- 수정 -->
 	<update id="update">
 		UPDATE promoboard
-		SET content = #{content}, place =
-		#{place}, regdate = sysdate, ismod ='1'
+		SET content = #{content}, area = #{area}, place =
+		#{place}, limitation1 = #{limitation1}, limitation2 = #{limitation2}, limitation3 = #{limitation3},
+		regdate = sysdate, ismod ='1'
 		WHERE bno = #{bno}
 	</update>
 
@@ -38,6 +50,45 @@
 		DELETE FROM promoboard
 		WHERE bno = #{bno}
 	</delete>
+	
+	
+	
+	<!-- //////////////////////////////////////////////////////////////// -->
+	
+	<!-- 좋아요 등록 -->
+	<insert id="createLike">
+		INSERT INTO promoboardlike
+		(bno, userid, lno)
+		VALUES(#{bno}, #{userid}, promoboardlike_seq.NEXTVAL)
+	</insert>
+	
+	<!-- 좋아요 검색 -->
+	<select id="searchLike" resultType="com.spring.cafealley.command.PromoLikeVO">
+		SELECT * FROM promoboardlike
+		WHERE bno=#{bno} AND userid=#{userid}
+	</select>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLike">
+		DELETE FROM promoboardlike
+		WHERE bno=#{bno} AND userid=#{userid}
+	</delete>
+	
+	<!-- 리스트 진입 시 좋아요 -->
+	<select id="listLike" resultType="int">
+		SELECT bno FROM promoboardlike
+		WHERE userid=#{userid}
+	</select>
+	
+	<!-- 게시물 당 좋아요 수 확인 -->
+	<select id="likeCnt" resultType="int">
+		SELECT COUNT(*) FROM
+		promoboardlike 
+		WHERE bno = #{bno}
+	</select>
+	
+	
+	
 
 
 </mapper>

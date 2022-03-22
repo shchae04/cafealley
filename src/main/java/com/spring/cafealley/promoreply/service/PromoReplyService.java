@@ -3,10 +3,12 @@ package com.spring.cafealley.promoreply.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.PromoReplyVO;
 import com.spring.cafealley.promoreply.mapper.IPromoReplyMapper;
 
+@Service
 public class PromoReplyService implements IPromoReplyService{
 
 	@Autowired

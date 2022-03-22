@@ -8,7 +8,7 @@
 	<!-- 댓글 등록 -->
 	<insert id="replyRegist">
 	INSERT INTO promoreply (rno, bno, writer,content)
-	VALUES (noreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
+	VALUES (promoreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
 	</insert>
 	
 	<!-- 댓글수정 -->

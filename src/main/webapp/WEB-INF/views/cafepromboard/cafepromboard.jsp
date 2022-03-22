@@ -10,6 +10,27 @@
     <title>Document</title>
 
     <style>
+    	.blinking{ 
+	    	-webkit-animation:blink 1.2s ease-in-out  alternate; 
+	    	-moz-animation:blink 1.2s ease-in-out  alternate; 
+	    	animation:blink 1.2s ease-in-out  alternate; 
+    	}
+    	@-webkit-keyframes blink{ 
+    		0% {opacity:0;} 
+    		100% {opacity:1;} 
+    	} 
+    	@-moz-keyframes blink{ 
+    		0% {opacity:0;} 
+    		100% {opacity:1;} 
+    	} 
+    	@keyframes blink{ 
+    		0% {opacity:0;} 
+    		100% {opacity:1;} 
+    	}
+    
+    	.modal-content {
+    		height: 680px;
+    	}
         .promboard {
             display: block;
             margin-top: 150px;
@@ -166,8 +187,17 @@
         }
 
         .like-inner .hashtag {
+        	margin-top: 30px;
             position: absolute;
             top: 10px;
+            right: 15px;
+            padding: 0;
+        }
+        
+        .like-inner .main {
+        	margin-top: 5px;
+            position: absolute;
+            top: 0px;
             right: 15px;
             padding: 0;
         }
@@ -289,8 +319,8 @@
         }
 
         .modal-promcontent .reply-inner {
-            padding: 25px 0 15px;
-            margin-top: 15px;
+            padding: 30px 0 15px;
+            margin-top: 50px;
             border-bottom: 1px solid #ddd;
             min-height: 325px;
             max-height: 325px;
@@ -454,7 +484,7 @@
     
     
     <!---------------------------------------------------------- 글 상세  Modal ---------------------------------------------------------->
-    <div class="modal fade" id="myModal2">
+    <div class="modal fade" id="modalContent">
         <div class="modal-dialog" style="width: 1200px;">
 
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -466,160 +496,47 @@
 
                     <div class="modal-promimg">
                         <div id="myCarousel2" class="carousel" data-ride="carousel" data-interval="false">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel2" data-slide-to="1"></li>
-                                <li data-target="#myCarousel2" data-slide-to="2"></li>
-                            </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                    <!-- 첫번째 순번이라 active -->
-                                    <img src="<c:url value='/img/carousel1.jpg'/>" alt="슬라이드1">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel2.jpg'/>" alt="슬라이드2">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel3.jpg'/>" alt="슬라이드3">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel4.jpg'/>" alt="슬라이드4">
-                                </div>
-                            </div>
-
-                            <!-- Controls (좌, 우 화살표 없애고싶으면 지워도 됩니다.)-->
-                            <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-
+							
+							<!-- 비동기 방식으로 캐러셀 추가 -->
+							
                         </div> <!-- carousel-->
                     </div> <!-- modal-promimg -->
 
 
 
                     <div class="modal-promcontent">
-                        <div class="title-inner">
+                        <div id="addProf" class="title-inner">
 
-                            <!--제목영역-->
-                            <div class="profile">
-                                <img src="<c:url value='/img/profile.png'/>">
-                            </div>
-                            <div class="title">
-                                <p>coffeelover123</p>
-                            </div>
-                            <div class="cafeowner-menu">
-                                <a href="#"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
-                                <a data-toggle="modal" href="#myModal3"><span
-                                        class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-                            </div>
+							<!-- 비동기 내에서 완성됨. -->
+							
                         </div>
                         <!--내용영역 70자 내로 작성하게 할 것.-->
                         <div class="content-inner">
-                            <p>영일이삼사오육칠팔구영일이삼사오육칠팔구영일이삼사오육칠팔구영일이삼사오육칠팔구영일이삼사오육칠팔구영일이삼사오육칠팔구영일이삼사오육칠팔구</p>
-                            <small>21시간</small>
+                            <p id="con-content"></p>
+                            <small id="con-regdate"></small>
                         </div>
 
                         <!-- 좋아요 및 해쉬태그 영역-->
                         <div class="like-inner">
                             <!--좋아요-->
-                            <img src="<c:url value='/img/like2.png'/>"> <span>522</span>
+                            <img src="<c:url value='/img/like2.png'/>"> <span id="like-cnt">522</span>
                             <!-- 해쉬태그 -->
                             <ul class="hashtag clearfix">
-                                <li><a href="#">#서울</a></li>
-                                <li><a href="#">#Morden / Neat</a></li>
-                                <li><a href="#">#No Kids</a></li>
+                                <li><a id="con-area" href="#">#서울</a></li>
+                                <li><a id="con-place" href="#">#Morden / Neat</a></li>
+                                <li><a id="con-limit" href="#">#No Kids</a></li>
                             </ul>
                         </div>
 
                         <!-- 댓글 영역 -->
-                        <div class="reply-inner">
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-                            <div class="reply-content">
-                                <div class="profile">
-                                    <img src="<c:url value='/img/profile.png'/>">
-                                    <p>coffeehater321</p>
-                                </div>
-                                <div class="content">
-                                    보니깐 배고프다
-                                </div>
-                                <small>20시간</small>
-                            </div>
-
-
-
+                        <div id="replyContentDiv" class="reply-inner">
+							
+							<!-- 비동기 방식으로 불러오고 있습니다. -->
+							
                         </div>
                         <div class="reply-form">
-                            <form action="#">
-                                <textarea name="" id="" placeholder="댓글 입력"></textarea>
-                                <input type="button" value="게시"></input>
-                            </form>
+                                <textarea name="content" id="modal-reply-content" placeholder="댓글 입력"></textarea>
+                                <input type="button" value="게시" id="replyRegBtn"></input>
                         </div>
 
 
@@ -634,7 +551,7 @@
 
 
     <!---------------------------------------------------------- 수정 Modal ---------------------------------------------------------->
-    <div class="modal fade" id="myModal3">
+    <div class="modal fade" id="modifyModal">
         <div class="modal-dialog" style="width: 1200px;">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <!-- Modal Content -->
@@ -644,43 +561,11 @@
 
                     <div class="modal-promimg">
                         <div id="myCarousel3" class="carousel" data-ride="carousel" data-interval="false">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel3" data-slide-to="1"></li>
-                                <li data-target="#myCarousel3" data-slide-to="2"></li>
-                            </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                    <!-- 첫번째 순번이라 active -->
-                                    <img src="<c:url value='/img/carousel1.jpg'/>" alt="슬라이드1">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel2.jpg'/>" alt="슬라이드2">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel3.jpg'/>" alt="슬라이드3">
-                                </div>
-                                <div class="item">
-                                    <img src="<c:url value='/img/carousel4.jpg'/>" alt="슬라이드4">
-                                </div>
-                            </div>
-
-                            <!-- Controls (좌, 우 화살표 없애고싶으면 지워도 됩니다.)-->
-                            <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            
+                            <!-- 비동기 처리~ -->
 
                         </div> <!-- carousel-->
                     </div> <!-- modal-promimg -->
-
 
 
                     <div class="modal-promcontent">
@@ -691,15 +576,15 @@
                                 <img src="<c:url value='/img/profile.png'/>">
                             </div>
                             <div class="title">
-                                <p>coffeelover123</p>
+                                <p id="mod-writer">coffeelover123</p>
                             </div>
                             <div class="cafeowner-menu">
-                                <a href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;Complete</a>
+                                <a id="mod-complete" href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;Complete</a>
                             </div>
                         </div>
                         <!--내용영역 70자 내로 작성하게 할 것.-->
                         <div class="content-inner">
-                            <textarea name="" id="writingmodal-content"></textarea>
+                            <textarea name="content" id="modifymodal-content"></textarea>
                         </div>
 
                         <!-- 좋아요 및 해쉬태그 영역-->
@@ -708,39 +593,39 @@
                             <ul class="hashtag clearfix">
                                 <p>Area</p>
                                 <span>#</span>
-                                <select name="" id="">
-                                    <option value="" selected>서울</option>
-                                    <option value="">경기/인천</option>
-                                    <option value="">강원</option>
-                                    <option value="">충북</option>
-                                    <option value="">충남/대전</option>
-                                    <option value="">경북/대구</option>
-                                    <option value="">경남/부산</option>
-                                    <option value="">전북</option>
-                                    <option value="">전남/광주</option>
-                                    <option value="">제주</option>
+                                <select name="area" id="mod-area">
+                                    <option value="서울">서울</option>
+                                    <option value="경기/인천">경기/인천</option>
+                                    <option value="강원">강원</option>
+                                    <option value="충북">충북</option>
+                                    <option value="충남/대전">충남/대전</option>
+                                    <option value="경북/대구">경북/대구</option>
+                                    <option value="경남/부산">경남/부산</option>
+                                    <option value="전북">전북</option>
+                                    <option value="전남/광주">전남/광주</option>
+                                    <option value="제주">제주</option>
                                 </select>
 
 
                                 <div style="margin-top: 25px;"></div>
                                 <p>Place</p>
                                 <span>#</span>
-                                <select name="" id="">
-                                    <option value="" selected> - </option>
-                                    <option value="">Nature / Wooden</option>
-                                    <option value="">Concrete / Industrial</option>
-                                    <option value="">Morden / Neat</option>
-                                    <option value="">Retro / Vintage</option>
-                                    <option value="">Cozy / Comfort</option>
+                                <select name="" id="mod-place">
+                                    <option value="-"> - </option>
+                                    <option value="Nature / Wooden">Nature / Wooden</option>
+                                    <option value="Concrete / Industrial">Concrete / Industrial</option>
+                                    <option value="Morden / Neat">Morden / Neat</option>
+                                    <option value="Retro / Vintage">Retro / Vintage</option>
+                                    <option value="Cozy / Comfort">Cozy / Comfort</option>
                                 </select>
 
 
                                 <div style="margin-top: 25px;"></div>
                                 <p>Restrictions</p>
                                 <ul>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Kids</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Pet</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Study</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" name="limitation1" value="No Kids">No Kids</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" name="limitation2" value="No Pets">No Pet</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" name="limitation3" value="No Study">No Study</label></li>
                                 </ul>
 
                         </div>
@@ -810,7 +695,7 @@
                                 <img src="<c:url value='/img/profile.png'/>">
                             </div>
                             <div class="title">
-                                <p>coffeelover123</p>
+                                <p id="writer">${login.username}</p>
                             </div>
                             <div class="cafeowner-menu">
                                 <a href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;Complete</a>
@@ -818,7 +703,7 @@
                         </div>
                         <!--내용영역 70자 내로 작성하게 할 것.-->
                         <div class="content-inner">
-                            <textarea name="" id="writingmodal-content"></textarea>
+                            <textarea name="content" id="writingmodal-content"></textarea>
                         </div>
 
                         <!-- 좋아요 및 해쉬태그 영역-->
@@ -827,39 +712,39 @@
                             <ul class="hashtag clearfix">
                                 <p>Area</p>
                                 <span>#</span>
-                                <select name="" id="">
-                                    <option value="" selected>서울</option>
-                                    <option value="">경기/인천</option>
-                                    <option value="">강원</option>
-                                    <option value="">충북</option>
-                                    <option value="">충남/대전</option>
-                                    <option value="">경북/대구</option>
-                                    <option value="">경남/부산</option>
-                                    <option value="">전북</option>
-                                    <option value="">전남/광주</option>
-                                    <option value="">제주</option>
+                                <select name="area" id="write-area">
+                                    <option value="서울" selected>서울</option>
+                                    <option value="경기/인천">경기/인천</option>
+                                    <option value="강원">강원</option>
+                                    <option value="충북">충북</option>
+                                    <option value="충남/대전">충남/대전</option>
+                                    <option value="경북/대구">경북/대구</option>
+                                    <option value="경남/부산">경남/부산</option>
+                                    <option value="전북">전북</option>
+                                    <option value="전남/광주">전남/광주</option>
+                                    <option value="제주">제주</option>
                                 </select>
 
 
                                 <div style="margin-top: 25px;"></div>
                                 <p>Place</p>
                                 <span>#</span>
-                                <select name="" id="">
-                                    <option value="" selected> - </option>
-                                    <option value="">Nature / Wooden</option>
-                                    <option value="">Concrete / Industrial</option>
-                                    <option value="">Morden / Neat</option>
-                                    <option value="">Retro / Vintage</option>
-                                    <option value="">Cozy / Comfort</option>
+                                <select name="place" id="write-place">
+                                    <option value="none" selected> - </option>
+                                    <option value="Nature / Wooden">Nature / Wooden</option>
+                                    <option value="Concrete / Industrial">Concrete / Industrial</option>
+                                    <option value="Modern / Neat">Modern / Neat</option>
+                                    <option value="Retro / Vintage">Retro / Vintage</option>
+                                    <option value="Cozy / Comfort">Cozy / Comfort</option>
                                 </select>
 
 
                                 <div style="margin-top: 25px;"></div>
                                 <p>Restrictions</p>
                                 <ul>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Kids</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Pet</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox">No Study</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit1" name="limitation1" value="No Kids">No Kids</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit2" name="limitation2" value="No Pet">No Pet</label></li>
+                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit3" name="limitation3" value="No Study">No Study</label></li>
                                 </ul>
                                 <p class="warn">카페 사장님께서는 연관 없는 내용을 작성시 제재를 받으실 수 있습니다.</p>
                         </div>
@@ -926,93 +811,10 @@
         <!-- 글 영역 -->
         <section>
 
-
             <div id="contentDiv">
-                <div class="cafeowner-menu">
-                    <a class="glyphicon glyphicon-user" href="#"> My Posts</a>
-                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" href="#myModal4"> Write</a>
-                </div>
-                <div class="content-wrapper">
-                    <div class="title-inner">
-                        <!--제목영역-->
-                        <div class="profile">
-                            <img src="<c:url value='/img/profile.png'/>">
-                        </div>
-                        <div class="title">
-                            <p>coffeelover123</p>
-                            <small>21시간</small>
-                        </div>
-                    </div>
-                    <div class="content-inner">
-                        <!--내용영역-->
-                        <p>카페 홍보 게시물 내용 여기 입력</p>
-                    </div>
-                    <div class="image-inner">
-                        <!-- 이미지영역 -->
-
-
-                        <!-- 캐러셀 구현 시작-->
-                        <div id="myCarousel" style="width: 900px; height: 600px;" class="carousel" data-ride="carousel"
-                            data-interval="false">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                    <!-- 첫번째 순번이라 active -->
-                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel1.jpg'/>"
-                                            alt="슬라이드1"></a>
-                                </div>
-                                <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel2.jpg'/>"
-                                            alt="슬라이드2"></a>
-                                </div>
-                                <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel3.jpg'/>"
-                                            alt="슬라이드3"></a>
-                                </div>
-                                <div class="item">
-                                    <a data-toggle="modal" href="#myModal2"><img src="<c:url value='/img/carousel4.jpg'/>"
-                                            alt="슬라이드4"></a>
-                                </div>
-                            </div>
-
-                            <!-- Controls (좌, 우 화살표 없애고싶으면 지워도 됩니다.)-->
-                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-
-                        </div> <!-- carousel-->
-
-
-
-                    </div>
-                    <div class="like-inner">
-                        <!--좋아요-->
-                        <img src="<c:url value='/img/like2.png'/>"> <span>522</span>
-                        <!-- 해쉬태그 -->
-                        <ul class="hashtag clearfix">
-                            <li><a href="#">#서울</a></li>
-                            <li><a href="#">#Morden / Neat</a></li>
-                            <li><a href="#">#No Kids</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-inner">
-                        <a href="##"><img src="<c:url value='/img/like1.png'/>" alt="like1">&nbsp;좋아요</a>
-                        <a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
-                        <a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
-                    </div>
-                </div>
+                        
+				<!-- getJSON이 영역을 채우고 있어용 -->
+				                
             </div>
         </section>
 
@@ -1022,7 +824,459 @@
 <%@include file="../include/footer.jsp"%>
 
     <script>
-        const $area = document.getElementById('area');
+    	
+    	//글 목록 작업
+    	let str = '';
+		let page = 1;
+		
+    	getListLike(function(data) {
+			getList(data, true, page);
+		});
+    	
+    	function getListLike(callbackFunc) {
+			
+    		const userid = '${login.userid}';
+			console.log(userid);
+			
+			if(userid !== '') {
+				$.ajax({
+					type: 'post',
+					url: '<c:url value="/promo/listLike" />',
+					contentType: 'application/json',
+					data: userid,
+					success: function(data) {
+						console.log(data);
+						
+						callbackFunc(data);
+					},
+					error: function() {
+						alert('처리 안됨!');	
+					}
+				});
+			} else {
+				callbackFunc(null);
+			}		
+			
+		} //end getList
+		
+		function getList(data, reset, page) {
+			
+			console.log(data);
+			if(reset == true) {
+				str = '';
+			}
+
+			$.getJSON(
+				'<c:url value="/promo/getList?pageNum=" />' + page,
+				function(list) {
+					console.log(JSON.stringify(list));					
+					
+					if(reset != false) {
+			            str += `<c:if test="${login.businessnum != null}">
+			                <div class="cafeowner-menu">
+			                    <a class="glyphicon glyphicon-user" href="#"> My Posts</a>
+			                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" href="#myModal4"> Write</a>
+			                </div>
+		                </c:if>`;
+					}
+					
+					for(let i=0; i<list.length; i++) {
+						str += '<div class="content-wrapper">';
+	                    str += '<div class="title-inner">';
+	                    str += '<div class="profile">';
+	                    str += '<img src="<c:url value='/img/profile.png'/>">';    
+	                    str += '</div>';
+	                    str += '<div class="title">';
+	                    str += '<p>' + list[i].writer + '</p>';
+	                    str += '<small>' + timeStamp(list[i].regdate) + '</small>';
+	                    str += '</div>';
+	                    str += '</div>';
+	                    str += '<div class="content-inner">';
+	                    str += '<p>' + list[i].content + '</p>';
+	                    str += '</div>';
+	                    str += '<div class="image-inner">';
+
+	                    str += '<div id="carousel-carou' + i + '" style="width: 900px; height: 600px;" class="carousel" data-ride="carousel" data-interval="false">';
+	                    str += '<ol class="carousel-indicators">';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="0" class="active"></li>';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    str += '</ol>';
+	                    str += '<div class="carousel-inner" role="listbox">';
+	                    str += '<div class="item active">';
+	                    str += '<a data-toggle="modal" href="' + list[i].bno + '">'
+	                    str += `<img src="<c:url value='/loadimg/display/` + list[i].key + `/1'/>" alt="슬라이드1"></a>`;
+	                    str += '</div>';
+						if(list[i].filecnt === 2) {
+		                    str += '<div class="item">';
+		                   	str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/2'/>" alt="슬라이드2"></a>`;
+		                    str += '</div>';
+	                    } else if(list[i].filecnt === 3) {
+		                    str += '<div class="item">';
+		                   	str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/2'/>" alt="슬라이드2"></a>`;
+		                    str += '</div>';
+
+	                    	str += '<div class="item">';
+		                    str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/3'/>" alt="슬라이드3"></a>`;
+		                    str += '</div>';
+	                    }
+	                    
+	                    str += '</div>';
+	                    str += '<a class="left carousel-control" href="#carousel-carou' + i + '" role="button" data-slide="prev">';
+	                    str += '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>';
+	                    str += '</a>';
+	                    str += '<a class="right carousel-control" href="#carousel-carou' + i + '" role="button" data-slide="next">';
+	                    str += '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
+	                    str += '<span class="sr-only">Next</span>';
+	                    str += '</a>';
+	                    str += '</div>';
+	                    str += '</div>';
+	                    str += `<div class="like-inner">
+	                        <!--좋아요-->
+	                        <img src="<c:url value='/img/like2.png'/>"> <span>` + list[i].likeCnt + `</span>
+	                        <!-- 해쉬태그 -->
+	                        <ul class="hashtag main clearfix">
+	                            <li><a href="#">#` + list[i].area  + `</a></li>
+	                            <li><a href="#">#` + list[i].place + `</a></li>
+	                            <li><a href="#">` + (list[i].limitation1 === 'true' ? '#No Kids ' : '#Kids Free ') + (list[i].limitation2 === 'true' ? '#No Pets ' : '#Pets Free ') + (list[i].limitation3 === 'true' ? '#No Study' : '#Study Free') +
+	                            `</a></li>
+	                        </ul>
+	                    </div>
+	                    <div class="link-inner">
+	                        <a id="likeBtn" href="` + list[i].bno + `">`;
+	                        
+	                        if(data !== null) {
+		                        if(data.includes(list[i].bno)) {
+		                        	str += `<img src="<c:url value='/img/like2.png' />" alt="like2">&nbsp;좋아요</a>`;
+		                        } else {
+		                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+		                        }
+	                        } else {
+	                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+	                        }
+	                        
+	                    str += ` 
+	                        <a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
+	                        <a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
+	                    </div>
+	                </div>`;
+	                
+					}
+	                $('#contentDiv').html(str);
+				}
+			); //end getJSON
+			
+		};
+		
+		
+		//상세보기 처리
+		$('#contentDiv').on('click', '.carousel-inner a', function(e) {
+			e.preventDefault();
+			const bno = $(this).attr('href');
+			console.log('상세보기 글번호: ' + bno);
+			modalContent(bno);
+		}); //end 모달 상세보기.
+		
+		function modalContent(bno) {
+			console.log('모달 상세처리 진행.');
+			let str = '';
+			
+			$.getJSON(
+				'<c:url value="/promo/getContent/" />' + bno,
+				function(data) {
+					console.log(data);
+					
+					str += '<ol class="carousel-indicators">';
+                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+                    if(data.filecnt === 2) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    } else if(data.filecnt === 3) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+                    }
+                    str += '</ol>';     
+                    
+                    str += '<div class="carousel-inner" role="listbox">';
+                    str += `<div class="item active">
+                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
+                    	</div>`;
+                   	if(data.filecnt === 2) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   	} else if(data.filecnt === 3) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+                        	</div>`;
+                   	}
+                   	
+                   	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>`;
+                $('#myCarousel2').html(str);
+                
+                str = '';
+                
+                str += 
+                	
+				`<input type="hidden" id="con-bno" name="bno" value="` + data.bno + `">
+
+                <div class="profile">
+                    <img src="<c:url value='/img/profile.png'/>">
+                </div>
+                <div class="title">
+                    <p id="con-writer">` + data.writer + `</p>
+                </div>`;
+                if(data.writer === '${login.username}') {
+                	str += `<div class="cafeowner-menu">
+                        <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
+                        <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
+                                class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
+                    </div>;`
+                }
+                $('#addProf').html(str);
+                
+                //$('#con-bno').val(data.bno);
+                //$('#con-writer').html(data.writer);
+                $('#like-cnt').html(data.likeCnt);
+                $('#con-content').html(data.content);
+                $('#con-regdate').html(timeStamp(data.regdate));
+                $('#con-area').html(data.area);
+                $('#con-place').html(data.place);
+                $('#con-limit').html(
+                	(data.limitation1 === 'true' ? '#No Kids' : '#Kids Free') + 
+                	(data.limitation2 === 'true' ? '#No Pets' : '#Pets Free') + 
+                	(data.limitation3 === 'true' ? '#No Study' : '#Study Free')
+                );
+                $('#modalContent').modal('show');
+                    
+				}
+			); //end getJSON
+		}	
+		
+		
+		//모달이 열리는 순간 댓글 목록 불러오기
+		$('#modalContent').on('shown.bs.modal', function(e) {
+			const bno = $('#con-bno').val();
+			modalReplyList(bno);
+		});
+		
+		function modalReplyList(bno) {
+			let str = '';
+			
+			$.getJSON(
+				'<c:url value="/promoReply/replyList/" />' + bno,
+				function(list) {
+					console.log(list);
+					for(let i=0; i<list.length; i++) {
+						if(i === 0) {
+							str += '<div class="reply-content blinking">';
+						} else {
+							str += '<div class="reply-content">';
+						}
+	                    str += `<div class="profile">
+	                            <img src="<c:url value='/img/profile.png'/>">
+	                            <p>` + list[i].writer + `</p>
+	                        </div>
+	                        <div class="content">` + 
+	                        	list[i].content + `
+	                        </div>
+	                        <small>` + timeStamp(list[i].regdate) + `</small>
+	                    </div>`;
+					}
+					$('#replyContentDiv').html(str);
+				}
+			); //end getJSON	
+		} //end 댓글 목록 불러오기
+		
+		//상세보기에서 댓글을 달았을 때의 등록 처리
+		$('#replyRegBtn').click(function() {
+			const content = $('#modal-reply-content').val();
+			const writer = '${login.userid}';
+			const bno = $('#con-bno').val();
+			console.log(bno + writer + content);
+			
+			if(writer === '') {
+				alert('로그인 후 댓글 쓰기가 가능합니다.');
+				return;
+			} else if(content.trim() === '') {
+				alert('댓글 내용이 있어야 등록이 가능합니다.');
+				return;
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/promoReply/regist" />',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					'bno' : bno,
+					'writer' : writer,
+					'content' : content
+				}),
+				success: function(result) {
+					console.log('댓글 등록 완료!');
+					$('#modal-reply-content').val('');
+					modalReplyList(bno);
+				},
+				error: function() {
+					alert('댓글 등록 실패! 관리자에게 문의.');
+				}
+			}); //end ajax
+			
+		}); // end 댓글등록
+		
+		
+		//수정버튼을 눌렀을 때의 이벤트 처리.
+		$('#addProf').on('click', 'a', function(e) {
+			e.preventDefault();
+			if($(this).attr('id') === 'removeModalBtn') {
+				return;
+			}
+			const bno = $(this).attr('href');
+			console.log(bno);
+			
+			let str = '';
+			
+			$.getJSON(
+				'<c:url value="/promo/getContent/" />' + bno,
+				function(data) {
+					console.log(data);
+					
+					str += '<ol class="carousel-indicators">';
+                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+                    if(data.filecnt === 2) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    } else if(data.filecnt === 3) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+                    }
+                    str += '</ol>';     
+                    
+                    str += '<div class="carousel-inner" role="listbox">';
+                    str += `<div class="item active">
+                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
+                    	</div>`;
+                   	if(data.filecnt === 2) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   	} else if(data.filecnt === 3) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+                        	</div>`;
+                   	}
+                   	
+                   	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+	                </a>
+	                <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+	                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	                    <span class="sr-only">Next</span>
+	                </a>`;
+	                $('#myCarousel3').html(str);
+	                
+					
+					$('#mod-writer').html(data.writer);
+					$('#mod-complete').attr('href', data.bno);
+					$('#modifymodal-content').html(data.content);
+					$('#mod-area').val(data.area).prop('selected', true);
+					$('#mod-place').val(data.place).prop('selected', true);
+					data.limitation1 === 'true' ? $('input[name=limitation1]').prop('checked', true) : $('input[name=limitation1]').prop('checked', false);
+					data.limitation2 === 'true' ? $('input[name=limitation2]').prop('checked', true) : $('input[name=limitation2]').prop('checked', false);
+					data.limitation3 === 'true' ? $('input[name=limitation3]').prop('checked', true) : $('input[name=limitation3]').prop('checked', false);
+					
+					$('#modifyModal').modal('show');
+					
+				}
+			
+			);
+			
+		}); //end 수정 버튼처리.
+		
+		//수정 처리
+		$('#mod-complete').click(function(e) {
+			const bno = $(this).attr('href');
+			console.log(bno);
+			const writer = $('#mod-writer').text();
+			console.log(writer);
+			const content = $('#modifymodal-content').val();
+			console.log(content);
+			const area = $('#mod-area option:selected').val();
+			console.log(area);
+			const place = $('#mod-place option:selected').val();
+			console.log(place);
+			const limit1 = $('input[name=limitation1]').is(':checked');
+			console.log(limit1);
+			const limit2 = $('input[name=limitation2]').is(':checked');
+			console.log(limit2);
+			const limit3 = $('input[name=limitation3]').is(':checked');
+			console.log(limit3);
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/promo/update" />',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					'bno' : bno, 'content' : content,
+					'area' : area, 'place' : place, 'limitation1' : limit1,
+					'limitation2' : limit2, 'limitation3' : limit3
+				}),
+				success: function(result) {
+					console.log('수정 완료!');
+					modalContent(bno);
+				},
+				error: function() {
+					alert('댓글 등록 실패! 관리자에게 문의.');
+				}
+			});
+		});
+		
+		//삭제버튼~
+		$('#addProf').on('click', 'a', function(e) {
+			e.preventDefault();
+			
+			if($(this).attr('id') === 'modifyModalBtn') {
+				return;
+			}
+			console.log('삭제 버튼 눌리니?');
+			
+			if(!confirm('정말 삭제하시겠습니까?')) return;
+			
+			const bno = $(this).attr('href');
+			console.log(bno);
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/promo/delete" />',
+				data: bno,
+				contentType: 'application/json',
+				success: function(result) {
+					location.href='<c:url value="/promo/list" />';
+				},
+				error: function() {
+					alert('삭제 실패! 관리자에게 문의!');
+				}
+			});
+			
+
+		});
+		
+    
+    
+    
+		const $area = document.getElementById('area');
         const $place = document.getElementById('place');
         const $restrict = document.getElementById('restrict');
 
@@ -1078,6 +1332,9 @@
         function readURL(input) {
             if (input.files && input.files[0]) {
 
+            	console.log(input);
+            	console.log(input.files);
+            	
                 var reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
                 //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
                 reader.readAsDataURL(input.files[0]);
@@ -1086,11 +1343,15 @@
                 input.parentNode.children[0].style.display = "none";
                 // fileDiv내의 img태그 아이디 가져오기
                 let fileImg = "#" + input.parentNode.children[1].getAttribute('id');
+                console.log(fileImg);
+                console.log(reader);
 
                 // FileReader 객체가 생성되서 동작을 한다면,
                 reader.onload = function (event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
                     // 위에서 얻어온 img태그 아이디를 통해 img src 바꿔줌.
+                    console.log(event.target);
                     $(fileImg).attr("src", event.target.result);
+                	console.log($(fileImg).attr('src'));
                     filecount++;
                     makeImgWindow(filecount);
                 }
@@ -1101,6 +1362,7 @@
 
         ///// 작성모달에서 이미지 로직
         function makeImgWindow(filecount) {
+        	console.log('이미지 등록 로직 시작.');
             if (filecount >= 3) return;
 
             $("a[data-slide='prev']").css('display', 'inline');
@@ -1113,10 +1375,10 @@
 
             const $itemdiv = document.createElement('div');
             $itemdiv.classList.add('item');
-            $itemdiv.innerHTML = `<label for="file${filecount}" class="fileDiv">
+            $itemdiv.innerHTML = `<label for="file` + filecount + `" class="fileDiv">
                                         <p>클릭해서 업로드할 이미지를 선택해주세요.</p>
-                                        <img id="fileImg${filecount}" src="<c:url value='/img/upload.png'/>" alt="upload" />
-                                        <input type="file" name="file" id="file${filecount}" onchange="readURL(this)"
+                                        <img id="fileImg` + filecount + `" src="<c:url value='/img/upload.png'/>" alt="upload" />
+                                        <input type="file" name="file" id="file` + filecount + `" onchange="readURL(this)"
                                         style="display: none;">
                                     </label>`;
             document.querySelector('#myCarousel4>.carousel-inner').appendChild($itemdiv)
@@ -1130,24 +1392,124 @@
 
 
         const $completebtn = document.querySelectorAll('.glyphicon-ok');
+        console.log($completebtn);
         // 수정창 모달 Complete버튼 누르면 
         $completebtn[0].parentNode.addEventListener('click', e => {
             e.preventDefault();
+            console.log('메롱');
             e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].click();
             // 수정창은 어차피 해당 글 다시 가져올 것이기 때문에 비워줄 필요가 없음.
         });
         // 작성창 모달 Complete버튼 누르면
         $completebtn[1].parentNode.addEventListener('click', e => {
             e.preventDefault();
-            e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].click();
+            //console.log(e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.children[0]);
+            //e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].click();
             // 작성모달창 클린하게.
-            cleaningModalWrite();
+            //cleaningModalWrite();
+            regist();
+            //location.href='<c:url value="/promo/list" />';
         });
 
         const $writingDismiss = document.querySelector('#writing-dismiss');
         $writingDismiss.addEventListener('click', e => {
             cleaningModalWrite();
         })
+        
+        
+        //글 등록을 담당하는 함수
+        function regist() {
+			//작성자 얻어오기
+        	const user_id = '${login.username}';
+			console.log(user_id);
+			//글 내용 얻어오기
+			const content = $('#writingmodal-content').val();
+			console.log('content: ' + content);
+
+			//지역 얻어오기
+			let area = document.querySelector('#write-area');
+			console.log(area.options[area.selectedIndex].value);
+			area = area.options[area.selectedIndex].value;
+			//장소 컨셉 얻어오기
+			let place = document.querySelector('#write-place');
+			console.log(place.options[place.selectedIndex].value);
+			place = place.options[place.selectedIndex].value;
+			//제한사항 얻어오기
+			const limit1 = document.querySelector('#limit1').checked;
+			const limit2 = document.querySelector('#limit2').checked;
+			const limit3 = document.querySelector('#limit3').checked;
+			console.log(limit1);
+			console.log(limit2);
+			console.log(limit3);
+			
+			//파일 확장자 체크
+			let fileList = [
+				document.querySelector('#file'),
+				document.querySelector('#file1'),
+				document.querySelector('#file2')	
+			];
+ 			let confirmList = [];
+			for(let f of fileList) {
+				if(f !== null && f.files.length !== 0) {
+					confirmList.push(f);
+				}
+			}
+			console.log(confirmList);
+			
+			//유효성 검증(누락된 값이 있는지 검증.)
+			if(confirmList.length === 0) {
+				alert('이미지 파일은 무조건 한개 이상 등록하셔야 합니다.');
+				return;
+			} else if(content === '') {
+				alert('카페 상세 내용을 작성해 주세요.');
+				return;
+			} else if(place === 'none') {
+				alert('장소의 컨셉을 설정해 주세요.');
+				return;
+			} else if(!confirm('모든 설정을 완료하신게 확실하신가요?')) {
+				return;
+			}
+			
+			
+			for(let f of confirmList) {
+				const file = f.value.slice(f.value.indexOf('.') + 1).toLowerCase();
+				console.log(file);
+				if(file !== 'jpg' && file !== 'png' && file !== 'jpeg' && file !== 'bmp') {
+					alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다.');
+					return;
+				} 
+			}
+			console.log(confirmList);
+			
+			//ajax 비동기 전송을 위한 formData 객체 생성
+			const formData = new FormData();
+			for(let c of confirmList) {
+				formData.append('file', c.files[0]);
+			}
+			formData.append('content', content);
+			formData.append('writer', user_id);
+			formData.append('area', area);
+			formData.append('place', place);
+			formData.append('limitation1', limit1);
+			formData.append('limitation2', limit2);
+			formData.append('limitation3', limit3);
+			
+			
+			$.ajax({
+				url: '<c:url value="/promo/upload" />',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(result) {
+					console.log(result);
+					location.href='<c:url value="/promo/list" />';
+				},
+				error: function(request, status, error) {
+					console.log('code: ' + request + '\n' + 'message: ' + request.responseText + '\n' + 'error: ' + error);
+				}
+			});
+		} //end regist
 
 
 
@@ -1186,7 +1548,9 @@
                             </a>
 
                         </div>`;
-            document.getElementById('writingmodal-content').value = '';
+            document.querySelector('#writingmodal-content').value = '';
+            document.querySelectorAll('input[type=checkbox]').checked = false;
+            document.querySelector('#write-area').options.selectedIndex = 0;
             filecount = 0;
         }
 
@@ -1216,7 +1580,60 @@
                 }
             }
         }
+        
+      //날짜 처리 함수
+		function timeStamp(millis) {
+			
+			const date = new Date(); //현재 날짜
+			//현재 날짜를 밀리초로 변환 - 등록일 밀리초  -> 시간차
+			const gap = date.getTime() - millis;
+			
+			let time; //리턴할 시간
+			if(gap < 60 * 60 * 24 * 1000) { //1일 미만인 경우
+				if(gap < 60 * 60 * 1000) { //1시간 미만일 경우
+					time = '방금 전';
+				} else { //1시간 이상일 경우
+					time = parseInt(gap / (1000 * 60 * 60)) + '시간 전';
+				}
+			} else { //1일 이상일 경우
+				const today = new Date(millis);
+				const year = today.getFullYear(); //년
+				const month = today.getMonth() + 1; //월
+				const day = today.getDate(); //일
+				const hour = today.getHours(); //시
+				const minute = today.getMinutes(); //분
+				
+				time = year + '년 ' + month + '월 ' + day + '일 ' + hour + '시' + minute + '분';
+			}
+			
+			return time;
+			
+		}
 
+
+
+
+
+
+        ///////////////////////// 자동스크롤 및 옆에 aside바 걸리게하는 로직
+        /*
+       $(window).scroll(function(){
+      	// 윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같아지면 로직을 수행
+      	// 문서 높이 - 브라우저창 높이 = 스크롤 창의 끝 높이와 같다면 -> 새로운 내용을 불러오자.
+      	if(Math.round($(window).scrollTop()) === $(document).height()-$(window).height()){
+      		//console.log(++page);
+      		//$('#contentDiv').append("<h1> Page: " + page + "</h1>");
+              //$('#contentDiv').append("<br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br>");
+              
+              // 목록 불러오기의 sql문을 페이징 쿼리를 사용해서 작성을 해 주시는 겁니다.
+              // 사용자의 스크롤이 바닥에 닿았을 때, 페ㅔ이지 변수의 값을 하나 올리고
+              // getList(false)를 주셔서 누적해서 계쏙 열어주시면 됩니다. -> 마치 getList(++page, false);
+              // 게시글을 몇개씩 불러올 지는 페이징 알고리즘에서 알아서 정해주시면 됩니다.             
+      	}
+      	 
+      	 
+       });
+       */
         $(window).scroll(function () {
             let minheightval = $(document).height() - vh(70);
             $('.aside-wrapper').css('min-height', minheightval)
@@ -1231,6 +1648,93 @@
             var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
             return (v * w) / 100;
         }
+        
+        //좋아요 기능 구현을 하자.
+        $('#contentDiv').on('click', 'a', function(e) {
+        	e.preventDefault();
+        	console.log($(this).attr('id'));
+        	if(!($(this).attr('id') === 'likeBtn')) {
+        		console.log('좋아요 버튼이 아님!');
+        		return;
+        	}
+			console.log('좋아요 버튼 클릭!');
+			const $btn = e.target;
+			const bno = $(this).attr('href');
+			const id = '${login.userid}';
+			if(id === '') {
+				alert('로그인 안했구나?');
+				return;
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/promo/like" />',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					'bno' : bno,
+					'userid' : id
+				}),
+				success: function(result) {
+					console.log(result);
+					if(result === 'like') {
+						e.target.firstChild.setAttribute('src', '/cafealley/img/like2.png');
+						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
+						console.log($likeCnt);
+						$likeCnt.textContent = Number($likeCnt.textContent) + 1;
+						
+					} else {
+						e.target.firstChild.setAttribute('src', '/cafealley/img/like1.png');
+						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
+						console.log($likeCnt);
+						$likeCnt.textContent = Number($likeCnt.textContent) - 1;
+
+					}
+				},
+				error: function() {
+					alert('좋아요 진행 에러!');
+				}
+			});
+		}); //end 좋아요 처리.
+        
+		
+		//무한 스크롤
+		$(window).scroll(function() {
+			//윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같다면 로직을 수행.
+			//문서높이 - 브라우저 창 높이 = 스크롤 창의 끝 높이와 같다면 -> 새로운 내용을 불러오기
+			if($(window).scrollTop() === $(document).height() - $(window).height()) {
+							
+				//목록 불러오기 페이징을 완료를 하셨다면
+				//페이지 값 하나 올리고, getList(false) 주셔서 누적해서 계속 열어주면 됩니다.
+				//게시글을 몇 개씩 불러 올지는 페이징 알고리즘에서 알아서 정해 주시면 됩니다.
+				//getList(++page, false);
+				++page;
+				console.log(page);
+				getListLike(function(data) {
+					getList(data, false, page);
+				});
+			
+			}
+		});
+	
+        
+        /*
+        //사업자가 아닌 회원이 글쓰기 버튼을 클릭했을 경우. (사업자가 아니면 글쓰기 버튼을 숨겨주어서 필요가 없어짐.)
+        $('#myModal4').on('show.bs.modal', function(e) {
+			console.log('모달이 열릴 때 이벤트 발생!');
+			console.log('target: ' + e.target);
+			const busiNum = '${login.businessnum}';
+        	console.log(busiNum);
+        	if(busiNum === '') {
+				e.preventDefault();
+        		console.log('사업자 번호 공백 확인!');
+        		alert('사업자 회원만 작성이 가능한 게시판입니다. 권한이 없습니다.');
+        		//$('#myModal4').modal('hide');
+        	}
+		});
+        */
+        
+        
+        
     </script>
 
 </body>
