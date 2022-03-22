@@ -319,7 +319,7 @@ $(document).ready(function() {
 				//수정완료버튼의 id를 comModi로변경.
 				$(this).parent().children('#replydelbtn').attr('id','comModi');
 				$(this).parent().children('#comModi').text('수정완료'); 
-			//$(this).parent('div').css('display','none');
+				//$(this).parent('div').css('display','none');
 			//수정창 생성
 			$(this).next().next().html('<textarea id="content" name="content"></textarea>');
 			
@@ -328,18 +328,18 @@ $(document).ready(function() {
 				
 
 				//$(this).attr('href','/noReply/update');
-					const content = '값을 못받아';
-						//$(this).parent().children('#content')[0].val();
+					var content = document.querySelector('#content').value;
 					console.log(content);
 					
-					
-				
 				//수정창 열고,닫아주기
 				$(this).css('display','block');
 				$(this).parent().children('textarea').css('display','none')
-					
-					const writer = 'chae';
-						//'${login.userid}';
+				
+				
+				//삭제 버튼 아이디 복구
+				$(this).parent().children('#comModi').attr('id','replydelbtn');
+				
+			
 					
 					$.ajax({
 						type : "post",
@@ -347,7 +347,6 @@ $(document).ready(function() {
 						contentType : 'application/json',
 						data : JSON.stringify({
 							'rno' : rno,
-							'writer' : writer,
 							'content' :content
 						}),
 						success : function(data) {
@@ -376,66 +375,64 @@ $(document).ready(function() {
 			 else if(e.target.className ==='del'){
 				//삭제버튼 클릭시
 				console.log(e);
-			}
-			//인풋태그를 집어넣어줘야함.
-			
-			
-			
-		}); //수정 버튼 클릭 이벤트 처리 끝.
-		
-		
-		//수정 처리 함수 (수정 모달을 열어서 수정 내용을 작성 후 수정 버튼을 클릭했을 시)
-		$('#modalModBtn').click(function() {
-			
-			/*
-			1. 모달창에 rno값, 수정한 댓글 내용(reply), replyPw값을 얻습니다.
-			2. ajax함수를 이용해서 post방식으로 reply/update 요청,
-			필요한 값은 JSON형식으로 처리해서 요청.
-			3. 서버에서는 요청받을 메서드 선언해서 비밀번호 확인하고, 비밀번호가 맞다면
-			 수정을 진행하세요. 만약 비밀번호가 틀렸다면 "pwFail"을 반환해서
-			 '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-			4. 업데이트가 진행된 다음에는 modal창의 모든 값을 ''로 처리해서 초기화 시키시고
-			 modal창을 닫으세요.
-			 수정된 댓글 내용이 반영될 수 있도록 댓글 목록을 다시 불러 오세요.
-			*/
-			
-			const reply = $('#modalReply').val();
-			const rno = $('#modalRno').val();
-			const replyPw = $('#modalPw').val();
-			
-			if(reply === '' || replyPw === '') {
-				alert('내용, 비밀번호를 확인하세요!');
-				return;
-			}
-			
-			$.ajax({
-				type : "post",
-				url : "<c:url value='/reply/update' />",
-				contentType : 'application/json',
-				data : JSON.stringify({
-					'reply' : reply,
-					'rno' : rno,
-					'replyPw' : replyPw
-				}),
-				success : function(data) {
-					if(data === 'modSuccess') {
-						alert('정상 수정되었습니다.');
-						$('#modalReply').val('');
-						$('#modalPw').val('');
-						$('#replyModal').modal('hide');
-						getList(1, true);
-					} else {
-						alert('비밀번호를 확인하세요.');
-						$('#modalPw').val('');
-					}
-				},
-				error : function() {
-					alert('수정에 실패했습니다. 관리자에게 문의하세요.');
-				}
 				
-			}); //end ajax(수정)
+				const writer = 'chae';
+				
+				//댓글 작성자와 세션 아이디가 같다면.
+				
+					
+					
+					if(confirm('삭제하시겠습니까?')){
+						
+						//삭제할경우 rno값을 가져온다
+						const rno = $(this).attr('href');
+						
+						$.ajax({
+							type: 'post',
+							url: "<c:url value='/noReply/delete' />",
+							data: JSON.stringify({
+								'rno' : rno,
+								'writer':writer
+							}),
+							headers : {
+								'Content-type' : 'application/json'
+							},
+							success : function(data) {
+								if(data === 'delSuccess') {
+									alert('댓글이 삭제되었습니다.');
+									
+									getList(true);
+								}
+							},
+							error : function() {
+								alert('삭제에 실패했습니다. 관리자에게 문의하세요.');
+							}
+						}); //삭제 비동기 통신 끝.
+						
+ 						
+						
+						
+						
+						
+					} // 삭제하지 않는경우
+					return;
+					
+				
+				
+				//권한이 없는경우.
+				alert('권한이 없습니다.');
+				return;
+				
+				
+				
+			}//삭제 처리 끝.
 			
-		}); //수정 처리 이벤트 끝.
+			
+			
+			
+		}); //삭제,수정 버튼 클릭 처리
+		
+		
 		
 		
 		//삭제함수

@@ -14,7 +14,7 @@ public interface IReplyService {
 		List<ReplyVO> getList(int bno);
 		
 		//댓글 수정
-		void replyUpdate(int rno);
+		void replyUpdate(ReplyVO vo);
 		
 		//댓글 삭제 rno,bno.조인.
 		void replyDelete(int rno);
