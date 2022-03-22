@@ -7,8 +7,8 @@
   <mapper namespace="com.spring.cafealley.board.mapper.IEvBoardMapper">
   
   <insert id="regist">
-  	INSERT INTO evboard(bno, title, writer, content)
-	VALUES(evboard_seq.NEXTVAL, #{title}, #{writer}, #{content})
+  	INSERT INTO evboard(bno, title, writer, content,key)
+	VALUES(evboard_seq.NEXTVAL, #{title}, #{writer}, #{content},#{key})
   </insert>
   
   <select id="getContent" resultType="com.spring.cafealley.command.BoardVO">
@@ -36,7 +36,19 @@
 				ORDER BY bno DESC
 				) tbl
 			)
+		<![CDATA[
+		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
+		AND rn <= #{pageNum} * #{countPerPage}
+		]]>
 		
+		
+  </select>
+  
+ 
+  
+  <select id="getTotal" resultType="int">
+  	SELECT COUNT(*)
+  	FROM evboard
   </select>
   
   

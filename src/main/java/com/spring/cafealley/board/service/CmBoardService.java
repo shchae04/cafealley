@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.cafealley.board.mapper.INoBoardMapper;
+import com.spring.cafealley.board.mapper.ICmBoardMapper;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.util.PageVO;
 
 @Service
-public class BoardService implements IBoardService {
+public class CmBoardService implements ICmBoardService {
 
 	@Autowired
-	private INoBoardMapper mapper;	
+	private ICmBoardMapper mapper;
 	
 	@Override
 	public void regist(BoardVO vo) {
@@ -24,7 +24,6 @@ public class BoardService implements IBoardService {
 	@Override
 	public List<BoardVO> getList(PageVO vo) {
 		List<BoardVO> list = mapper.getList(vo);
-		
 		return list;
 	}
 

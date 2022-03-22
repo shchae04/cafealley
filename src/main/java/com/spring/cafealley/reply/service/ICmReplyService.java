@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.spring.cafealley.command.ReplyVO;
 
-public interface IReplyService {
+public interface ICmReplyService {
 
 	
 		//등록

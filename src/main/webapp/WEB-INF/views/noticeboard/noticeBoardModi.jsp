@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boardmodi</title>
+    <title>noboardmodi</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- <link rel="stylesheet" href="../css/shstyle.css"> -->
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
@@ -50,7 +50,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>글 수정하기</strong>
+                                <strong>공지 게시글 수정하기</strong>
                             </h3>
                             
                         </div>
@@ -93,9 +93,9 @@
 
 							
 						<div class="form-group">
-							<label for="content" class="col-xs-12">
+							<label for="content" class="col-sm-14">
 								내용
-		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10">${article.content}</textarea>
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="180"></textarea>
 							</label>
                         </div>
 						

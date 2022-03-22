@@ -1,6 +1,10 @@
 package com.spring.cafealley.controller;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,51 +13,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cafealley.board.service.IBoardService;
+import com.spring.cafealley.board.service.IEvBoardService;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.img.service.IImgService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
 
 
 @Controller
-@RequestMapping("/noBoard")
-public class NoBoardController {
+@RequestMapping("/evBoard")
+public class EvBoardController {
 
 	@Autowired
-	private IBoardService service;
+	private IEvBoardService service;
 	
 	@Autowired
 	private IImgService imgservice;
 	
 	//상세보기 이동처리
-	@GetMapping("/noDetail")
+	@GetMapping("/evDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
-		System.out.println("공지 게시글 상세보기 페이지로 이동");
+		System.out.println("이벤트 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
 
 		model.addAttribute("article",service.getContent(bno));
-		System.out.println("key값."+service.getContent(bno).getKey());;
 
 		
-		return "noticeboard/noticeBoardDetail";
+		return "eventboard/EventBoardDetail";
 		
 		
 	}
 	
 	//목록 이동처리
-	@GetMapping("/noList")
-	public String nolist(PageVO vo, Model model) {
-		System.out.println("공지 게시글 리스트 페이지로 이동");
+	@GetMapping("/evList")
+	public String evlist(PageVO vo, Model model) {
+		System.out.println("이벤트 게시글 리스트 페이지로 이동");
 		
 		//목록 불러와라
 		service.getList(vo);
 		
-		model.addAttribute("noList",service.getList(vo));
+		model.addAttribute("evList",service.getList(vo));
 		
 		PageCreator pc = new PageCreator();
 		pc.setPaging(vo);
@@ -62,23 +68,23 @@ public class NoBoardController {
 //		페이징처리
 		model.addAttribute("pc",pc); 
 		
-		return "noticeboard/noticeBoardList";
+		return "eventboard/EventBoardList";
 	}
 	
 	//작성 이동처리
-	@GetMapping("/noWrite")
-	public String noWrite() {
-		System.out.println("공지 게시글 작성 페이지로 이동");
-		return "noticeboard/noticeBoardWrite";
+	@GetMapping("/evWrite")
+	public String evWrite() {
+		System.out.println("이벤트 게시글 작성 페이지로 이동");
+		return "eventboard/EventBoardWrite";
 	}
 	
 	
 	//수정 페이지 이동.
-	@GetMapping("/noModi")
-	public String noModi(int bno,Model model) {
+	@GetMapping("/evModi")
+	public String evModi(int bno,Model model) {
 		model.addAttribute("article",service.getContent(bno));
-		System.out.println("공지  수정 페이지로 이동");
-		return "noticeboard/noticeBoardModi";
+		System.out.println("이벤트 게시글 수정 페이지로 이동");
+		return "eventboard/EventBoardModi";
 	}
 	
 	//글 등록 처리
@@ -115,7 +121,7 @@ public class NoBoardController {
 		 
 		
 		
-		return "redirect:/noBoard/noList";
+		return "redirect:/evBoard/evList";
 	}
 	
 	//수정 처리
@@ -125,7 +131,7 @@ public class NoBoardController {
 		service.update(vo);
 		
 		
-		return "redirect:/noBoard/noDetail?bno=" + vo.getBno();
+		return "redirect:/evBoard/evDetail?bno=" + vo.getBno();
 	}
 	
 	
@@ -134,7 +140,7 @@ public class NoBoardController {
 	public String freeDelete(BoardVO vo) {
 		service.delete(vo.getBno());
 		System.out.println("삭제완료");
-		return "redirect:/noBoard/noList";
+		return "redirect:/evBoard/evList";
 		}
 	
 	
@@ -150,7 +156,7 @@ public class NoBoardController {
 //		imgservice.upload(files);
 //		System.out.println("DB파일업로드");
 //		//ajax응답.
-//		return "noList";
+//		return "evList";
 //	}
 //	
 	

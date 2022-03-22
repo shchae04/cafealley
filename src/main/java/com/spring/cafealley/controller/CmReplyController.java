@@ -21,8 +21,8 @@ import com.spring.cafealley.reply.service.IReplyService;
 
 
 @RestController
-@RequestMapping("/noReply")
-public class NoReplyController {
+@RequestMapping("/cmReply")
+public class CmReplyController {
 	
 	@Autowired
 	private IReplyService service;
@@ -67,23 +67,16 @@ public class NoReplyController {
 			return "fail";
 		}
 		 */
-		//가져온 값이 null이면
-		if(rno.getContent() == null) {
-			return"fail";
-		} else {
-			System.out.println("수정 요청값:" + rno);
-			service.replyUpdate(rno); //rno만 가지고있을텐데? 메서드 수정함.
-			return "modSuccess";
-			
-		}
+		System.out.println("수정 요청값:" + rno);
 		
-		
+		service.replyUpdate(rno); //rno만 가지고있을텐데?
+		return "modSuccess";
 	
 		
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestBody ReplyVO rvo) {
+	public String delete(@RequestBody ReplyVO rvo, UserVO uvo) {
 	
 //		//user 작성자 검증  
 //		String uwriter =uvo.getUserid();

@@ -7,7 +7,7 @@ import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.util.PageVO;
 
 
-public interface IBoardService {
+public interface IEvBoardService {
 
 	//글 등록
 	void regist(BoardVO vo);
@@ -27,5 +27,5 @@ public interface IBoardService {
 	//삭제
 	void delete(int bno);
 	
-	
+
 }

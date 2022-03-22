@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boardwrite</title>
+    <title>noboardwrite</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- <link rel="stylesheet" href="../css/shstyle.css"> -->
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
@@ -18,9 +18,7 @@
     <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"> -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
-    <!-- include summernote css/js-->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+    
 
     <style>
         .container {
@@ -51,7 +49,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>글 작성하기</strong>
+                                <strong>공지 게시글 작성하기</strong>
                             </h3>
                             
                         </div>
@@ -75,7 +73,7 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="writer" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="작성자" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">
@@ -90,20 +88,22 @@
                         <!-- 파일 전송. -->
                         <div class="form-group">
    	                     <p>3개 까지 등록가능</p>
-   	                     <input type="file" multiple="multiple" id="file" name="file">
+   	                     <input type="file" multiple="multiple" id="file" name="files">
                         
                         </div>
                         
                         
                         
                         <div class="form-group">
-							<label for="content" class="col-xs-12">
+							<label for="content" class="col-sm-14">
 								내용
-		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10"></textarea>
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="180"></textarea>
 							</label>
                         </div>
 
-                        <button type="button" class="detailbtn btn btn-dark" id="listbtn"
+                        <button type="button"
+                        	onclick="location.href='<c:url value='/noBoard/noList'/>'"
+                         class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
 
@@ -148,6 +148,10 @@
                 event.preventDefault();
                 alert('제목과 내용을 확인해주세요.')
                 return;
+            } else if($('#file').val() === ''||$('#file').val() === null){
+            	event.preventDefault();
+            	alert('첨부 이미지는 필수입니다.');
+            	return;
             }
 
             document.writeform.submit();
@@ -159,7 +163,7 @@
         document.querySelector('#delbtn').addEventListener('click', function (e) {
             if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
-                location.href = 'https://www.google.com';
+                location.href = '/noBoard/noList';
             }
             return;
         });
@@ -184,6 +188,8 @@
         	
             
         });
+        
+      
 
 
 

@@ -7,8 +7,8 @@
   <mapper namespace="com.spring.cafealley.board.mapper.ICmBoardMapper">
   
   <insert id="regist">
-  	INSERT INTO cmboard(bno, title, writer, content)
-	VALUES(cmboard_seq.NEXTVAL, #{title}, #{writer}, #{content})
+  	INSERT INTO cmboard(bno, title, writer, content,key)
+	VALUES(cmboard_seq.NEXTVAL, #{title}, #{writer}, #{content},#{key})
   </insert>
   
   <select id="getContent" resultType="com.spring.cafealley.command.BoardVO">
@@ -36,7 +36,18 @@
 				ORDER BY bno DESC
 				) tbl
 			)
+				<![CDATA[
+		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
+		AND rn <= #{pageNum} * #{countPerPage}
+		]]>
 		
+  </select>
+  
+
+  
+  <select id="getTotal" resultType="int">
+  	SELECT COUNT(*)
+  	FROM cmboard
   </select>
   
   

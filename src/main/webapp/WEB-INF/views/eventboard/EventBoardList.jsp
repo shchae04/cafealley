@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -8,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유 게시판</title>
+    <title>이벤트 게시판</title>
 
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
@@ -62,7 +64,7 @@
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div
                         style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
-                        <strong>게시판</strong>
+                        <strong>이벤트 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
@@ -87,111 +89,60 @@
                         <th style="width: 75%; color: black; text-align: center;">제목</th>
                         <th style="width: 12%;">작성자</th>
                         <th style="width: 10%;">작성일</th>
-
                     </thead>
                     <!-- 게시글 가져오기 반복문-->
                     <!-- dummy 데이터 입니다 -->
                     <tbody>
+                    
+                    <c:forEach var="ev" items="${evList}">
                         <tr>
-                            <td>1</td>
-                            <td><a href="https://www.naver.com">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
+                            <td>${ev.bno}</td>
+                            <td><a href="<c:url value='/evBoard/evDetail?bno=${ev.bno}'/>">${ev.title }</a></td>
+                            <td>${ev.writer}</td>
+                            <td> <fmt:formatDate value="${ev.regdate}" pattern="MM-dd"/>
+                            <c:if test="${ev.ismod = '0'}"></c:if>
+                            <c:if test="${ev.ismod = '0'}"> <small>수정됨</small> </c:if>
+                            </td>
+                            
 
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td><a href="#">첫글</a></td>
-                            <td>홍길동</td>
-                            <td>~~~~~~~</td>
-                        </tr>
+                    </c:forEach>
+                       
                     </tbody>
                 </table>
 
-                		<button style="float: right;" type="button" class="write btn">글쓰기</button>
+                		<button style="float: right;" type="button" class="write btn"
+                		onclick="location.href='<c:url value="/evBoard/evWrite" />'"
+                		>글쓰기</button>
                 <hr>
-
-
-           		<!-- 페이징 처리 부분  -->
-           				<div style="text-align: center; margin-top:50px;">
+						<!-- 페이징 처리 -->
+						<form action="<c:url value='/evBoard/evList' />" name="pageForm">
+	                        <div class="text-center clearfix">
+	                            <hr>
+	                            <ul class="pagination" id="pagination">
+	                            	<c:if test="${pc.prev}">
+	                                	<li><a href="#" data-pageNum="${pc.beginPage-1}">이전</a></li>
+	                                </c:if>
+	                                
+	                                <c:forEach var="num" begin="${pc.beginPage}" end="${pc.endPage}">
+	                                	<li class="${pc.paging.pageNum == num ? 'active' : ''}"><a href="#" data-pageNum="${num}">${num}</a></li>
+	                                </c:forEach>
+	                                
+	                                <c:if test="${pc.next}">
+	                               		<li><a href="#" data-pageNum="${pc.endPage+1}">다음</a></li>
+	                                </c:if>
+	                            </ul>
+	                            
+	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
+	                            <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
+	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
+	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
+	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
+	                            
+	                            
+	                        </div>
+                        </form>
                         
-                        <ul class="pagination">
-                            <!-- 이전 버튼 -->
-                            <li class="page-pre">
-                                <a class="page-link" href="#">이전</a>
-                            </li>
-
-                            <!-- 페이지 번호 버튼 -->
-                            <li class="page-num">
-                                <a href="#" class="page-link cur-page">1</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">3</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">4</a>
-                            </li>
-                            <li class="page-num">
-                                <a href="#" class="page-link">5</a>
-                            </li>
-
-                            <!-- 다음 버튼 -->
-                            <li class="page-next">
-                                <a class="page-link" href="#">다음</a>
-                            </li>
-                        </ul>
-                        <!-- 페이징 처리 끝 -->
 						</div>
 
 
@@ -204,16 +155,20 @@
 <%@ include file="../include/footer.jsp" %>
 
     <script>
-        //검색
-        const $searchbtn = document.querySelector('#searchbtn');
+      
+        
+    	$(function() {
+    		$('#pagination').on('click', 'a', function(e) {
+    			e.preventDefault();
+    			console.log($(this));
+    			const value = $(this).data('pagenum');
+    			console.log(value);
+    			document.pageForm.pageNum.value = value;
+    			document.pageForm.submit();
+    		});
+    	});
 
-        $searchbtn.addEventListener('click', function (e) {
-            const keyword = document.querySelector('#searchbtn').value;
-            const condition = document.querySelector('#condition').value;
-
-            location.href = "/project/list?keyword=" + keyword + "&condition=" + condition;
-
-        });
+       
     </script>
 
 

@@ -6,32 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.ReplyVO;
-import com.spring.cafealley.reply.mapper.INoReplyMapper;
+import com.spring.cafealley.reply.mapper.ICmReplyMapper;
 
 @Service
-public class ReplyService implements IReplyService {
+public class CmReplyService implements ICmReplyService {
 
 	@Autowired
-	private INoReplyMapper nomapper;
+	private ICmReplyMapper cmmapper;
 	
 	@Override
 	public void replyRegist(ReplyVO vo) {
-		nomapper.replyRegist(vo);
+		cmmapper.replyRegist(vo);
 	}
 
 	@Override
 	public List<ReplyVO> getList(int bno) {
-		return nomapper.getList(bno);
+		return cmmapper.getList(bno);
 	}
 
 	@Override
 	public void replyUpdate(ReplyVO vo) {
-		nomapper.replyUpdate(vo);
+		cmmapper.replyUpdate(vo);
 	}
 
 	@Override
 	public void replyDelete(int rno) {
-		nomapper.replyDelete(rno);
+		cmmapper.replyDelete(rno);
 	}
 
 

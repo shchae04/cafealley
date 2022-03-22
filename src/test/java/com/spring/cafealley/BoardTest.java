@@ -21,7 +21,7 @@ public class BoardTest {
 	
 	@Test
 	public void registTest() {
-		for(int i=1; i<=30; i++) {
+		for(int i=1; i<=100; i++) {
 			BoardVO vo = new BoardVO();
 			vo.setTitle("게시판 테스트 " + i);
 			vo.setWriter("chae"+i);

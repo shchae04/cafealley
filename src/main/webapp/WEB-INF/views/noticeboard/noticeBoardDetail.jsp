@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>noboarddetail</title>
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
 </head>
@@ -43,7 +43,8 @@
 								
                                 <label class="modifycheck" style="float:inherit; font-size: 8px;">
                                 
-                                <c:if test="${article.ismod ='1'}">
+
+                                <c:if test="${article.ismod!=0}">
                                 <small>수정됨</small>
                                 </c:if>
                                 
@@ -68,7 +69,12 @@
                                 <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
-                                    <img name="key" src="/upload/${img.foldername}/${img.filename}" alt="내용1">
+                                    <div style="text-align: center;">
+	                                    <img alt="pic1" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
+	                                    <img alt="pic2" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
+	                                    <img alt="pic3" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                    </div>
+                                    
                                 </div>
                              
                               
@@ -85,12 +91,13 @@
 
 
                     </form>
-                    <!-- 이전글 다음글 버튼 배치 -->
+                    
                     <br><br><br>
                     <br>
                     <!-- 작성한 회원만 수정가능 -->
                     <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/noBoard/noList"/>'">목록</button>
+                    <!-- 이전글 다음글 버튼 배치 -->
                     <div class="col-xs-3">
                         <input id="prev" type="button" onclick="location.href='<c:url value="/noBoard/noDetail?bno=${article.bno -1 }"/>'" class="btn" value="이전글">
                         <input id="next" type="button" onclick="location.href='<c:url value="/noBoard/noDetail?bno=${article.bno +1 }"/>'" class="btn btn" value="다음글">
@@ -113,7 +120,7 @@
                         <!-- 현재 로그인 한 사용자의 정보를 토대로 댓글 -->
                         <div class="reply-content" style="margin-top: 20px;">
 
-                            <textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
+                            <textarea id="reply" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
                             <div class="reply-group clearfix">
                                 <div class="reply-input">
 
@@ -129,22 +136,20 @@
 
                         <div class="reply-content">
                             <hr>
-                            <div class="reply-group">
+                            <div class="reply-group" id="replyList">
                                 <!-- 댓글이 반복적으로 달릴 공간! -->
-                                <div
-                                    style="padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;">
+                              <%--   
+                              <div style="padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;">
                                     <strong class="left">${writer}</strong>
                                     <small class="left">2022/01/06</small>
                                     <!-- 수정이 한번이라도 일어났으면 수정됨! -->
                                     <small class="left">수정됨</small>
                                     <!-- 댓글을 작성한 회원에게만 보여짐. -->
-                                    <a id="replymodbtn" class="modify" href="#"><span
-                                            class="glyphicon glyphicon-pencil"></span>수정</a>
-                                    <a id="replydelbtn" class="delete" href="#"><span
-                                            class="glyphicon glyphicon-remove"></span>삭제</a>
+                                    <a id="replymodbtn" class="modify" href="#"><span class="glyphicon glyphicon-pencil"></span>수정</a>
+                                    <a id="replydelbtn" class="delete" href="#"><span class="glyphicon glyphicon-remove"></span>삭제</a>
                                     <p>여기는 댓글</p>
                                 </div>
-
+							 --%>
 
                             </div>
 
@@ -161,9 +166,13 @@
   <%@ include file="../include/footer.jsp" %>
 
     <script>
+    
+    // img load실패시 이미지태그 삭제
+    function deleteimg($input){
+    	$input.remove();
+    }
         
-
-	$(document).ready(function() {
+$(document).ready(function() {
 		
 		$('#registbtn').click(function() {
 			
@@ -178,60 +187,57 @@
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const content = $('#reply').val(); //댓글 내용
-			const writer = $('#replyId').val(); //작성자
+			const writer = '${login.userid}'; //세션에서 가져온 userid
+			
+			const reply = $('#reply').val(); //댓글 내용
 			
 			
-			if(content === '') {
+			if(reply === '') {
 				alert('내용을 입력하세요!');
 				return;
 			}
 			
+			const replyInfo = {
+					"bno":bno,
+					"writer":writer,
+					"content":reply
+					}	
+			
 			$.ajax({
 				type: 'post',
-				url: '<c:url value="/noReply/replyRegist" />',
-				data: JSON.stringify(
-					{
-						"bno":bno,
-						"writer":writer,
-						"content":content
-					}		
-				),
-				dataType: 'text', //서버로부터 어떤 형식으로 받을지(생략 가능)
+				url: '<c:url value="/noReply/replyRegist"/>',
+				data: JSON.stringify(replyInfo), 
 				contentType: 'application/json',
-				success: function(data) {
-					console.log('통신 성공! ' + data);
+				success: function(result) {
+					if(result === 'regSuccess'){
+						
+					console.log('통신 성공! ' + result);
 					$('#reply').val('');
-					$('#replyId').val('');
-					$('#replyPw').val('');
-					getList(1, true); //등록 성공 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현.
+					}
+					
+					getList(true); //등록 성공 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현.
 				},
-				error: function() {
+				error: function(request,status,error) {
+					console.log(error);
+					console.log(request);
+					console.log(status);
 					alert('등록에 실패했습니다. 관리자에게 문의하세요!');
 				}
 			}); //댓글 등록 비동기 통신 끝.
 		}); //댓글 등록 이벤트 끝.
 		
-		//더보기 버튼 처리(클릭 시 전역변수 페이지번호에 +1값을 전달)
-		$('#moreList').click(function() {
-			//더보기잖아요. 누적해야 되지 않을까요?
-			//1페이지의 댓글 내용 밑에다가 2페이지를 줘야지
-			//1페이지를 없애고 2페이지를 보여주는 게 아니라는 거죠.
-			getList(++page, false);
-		});
-		
+	
 		
 		//목록 요청
-		let page = 1; //페이지 번호
 		let strAdd = ''; //화면에 그려넣을 태그를 문자열의 형태로 추가할 변수.
 		
-		getList(1, true); //상세보기 화면에 처음 진입 시 댓글 리스트를 불러옴.
+		getList(true); //상세보기 화면에 처음 진입 시 댓글 리스트를 불러옴.
 		
 		//getList 매개값으로 요청된 페이지 번호와
 		//화면을 리셋할 것인지의 여부를 bool타입의 reset이름의 변수로 받겠습니다.
 		//(페이지가 그대로 머물면서 댓글이 밑에 계속 쌓이기 때문에, 상황에 따라서
 		//페이지를 리셋해서 새롭게 가져올 것인지, 누적해서 쌓을 것인지의 여부를 확인)
-		function getList(pageNum, reset) {
+		function getList(reset) {
 			
 			const bno = '${article.bno}'; //게시글 번호
 			
@@ -242,44 +248,32 @@
 				"<c:url value='/noReply/getList/' />" + bno,
 				function(data) {
 					console.log(data);
-					//data로 list가 들어온다 replyvo타입의 리스트
 					
-					let total = data.total; //총 댓글수
-					console.log('총 댓글수: ' + total);
+					
 					let replyList = data.list; //댓글 리스트
 					
-					//insert, update, delete 작업 후에는
-					//댓글을 누적하고 있는 strAdd 변수를 초기화를 해서
-					//화면이 리셋된 거처럼 보여줘야 합니다.
-					if(reset === true) {
-						strAdd = '';
-						page = 1;
-					}
-					
-				
+						if(reset === true) {
+							strAdd = '';
+						}
 					
 					
 					//응답 데이터의 길이가 0보다 작으면 함수를 종료하자.
-					if(replyList.size() <= 0) {
+					if(replyList.length <= 0) {
 						return; //함수 종료.
 					}
 					
 					for(let i=0; i<replyList.length; i++) {
 						
-						strAdd += "<div class='reply-wrap' style='display:none;'>";
-                        strAdd += "<div class='reply-image'>";
-                        strAdd += "<img src='../resources/img/profile.png'>";
-                        strAdd += "</div>";
-                        strAdd += "<div class='reply-content'>";
-                        strAdd += "<div class='reply-group'>";
-                        strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>"; 
-						strAdd += "<small class='left'>"+ timeStamp(replyList[i].regdate) +"</small>";
-                        strAdd += "<a href='" + replyList[i].rno + "' class='right replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>";
-                        strAdd += "<a href='" + replyList[i].rno + "' class='right replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
-                        strAdd += "</div>";
-                        strAdd += "<p class='clearfix'>"+ replyList[i].content +"</p>";
-                        strAdd += "</div>";
-                    	strAdd += "</div>";
+						strAdd += "<div style='padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;''>";
+                        strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>";
+                        strAdd += "<small class='left'>"+timeStamp(replyList[i].regdate) +"</small>";
+                        strAdd += "<c:if test='"+ replyList[i].ismod = 1 +"'>";
+                        strAdd += "<small class='left'>수정됨</small>";
+                        strAdd += "</c:if>";
+                        strAdd += "<a id='replymodbtn' class='modi' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>&nbsp;&nbsp;";
+                        strAdd += "&nbsp;&nbsp;<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        strAdd += "<p>"+replyList[i].content+"</p>"; 
+						strAdd += "</div>";
 						
 					}
 					$('#replyList').html(strAdd); //replyList영역에 문자열 형식으로 모든 댓글을 추가.
@@ -306,139 +300,153 @@
 		사용하는 제이쿼리의 이벤트 위임 함수를 반드시 사용해야 합니다.
 		*/
 		
+		//수정버튼 클릭, 삭제버튼 클릭.
 		$('#replyList').on('click', 'a', function(e) {
 			e.preventDefault(); //태그의 고유 기능을 중지.
 			//1. a태그가 두 개(수정, 삭제)이므로 버튼부터 확인.
 			//수정, 삭제가 발생하는 댓글 번호가 몇 번인지의 여부도 확인.
+			//console.log(e);
 			
 			const rno = $(this).attr('href');
-			$('#modalRno').val(rno);
 			
-			//2. 모달 창 하나를 이용해서 상황에 따라 수정 / 삭제 모달을 구분하기 위해
-			//조건문 작성.
-			
-			//hasClass()는 클래스 이름에 매개값이 포함되어 있다면 true, 없으면 false.
-			if($(this).hasClass('replyModify')) {
-				//수정 버튼을 눌렀으므로 수정 모달 형식으로 변경.
-				$('.modal-title').html('댓글 수정');
-				$('#modalReply').css('display', 'inline');
-				$('#modalModBtn').css('display', 'inline');
-				$('#modalDelBtn').css('display', 'none'); //수정이므로 삭제버튼은 숨기자.
-				//jQuery를 이용한 모달 창 열기/닫기 ('show' / 'hide')
-				//BootStrap에서는 trigger를 통해서 모달을 열고 닫았지만, 지금은 그런 게 없기 때문에
-				//제이쿼리를 이용하여 직접 모달을 열어줍니다.
-				$('#replyModal').modal('show');	
-			} else {
-				//삭제 버튼을 눌렀으므로 삭제 모달 형식으로 변경.
-				$('.modal-title').html('댓글 삭제');
-				$('#modalReply').css('display', 'none');
-				$('#modalModBtn').css('display', 'none');
-				$('#modalDelBtn').css('display', 'inline');
-				$('#replyModal').modal('show');	
-			}
-		
-		}); //수정 or 삭제 버튼 클릭 이벤트 처리 끝.
-		
-		
-		//수정 처리 함수 (수정 모달을 열어서 수정 내용을 작성 후 수정 버튼을 클릭했을 시)
-		$('#modalModBtn').click(function() {
-			
-			/*
-			1. 모달창에 rno값, 수정한 댓글 내용(reply), replyPw값을 얻습니다.
-			2. ajax함수를 이용해서 post방식으로 reply/update 요청,
-			필요한 값은 JSON형식으로 처리해서 요청.
-			3. 서버에서는 요청받을 메서드 선언해서 비밀번호 확인하고, 비밀번호가 맞다면
-			 수정을 진행하세요. 만약 비밀번호가 틀렸다면 "pwFail"을 반환해서
-			 '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-			4. 업데이트가 진행된 다음에는 modal창의 모든 값을 ''로 처리해서 초기화 시키시고
-			 modal창을 닫으세요.
-			 수정된 댓글 내용이 반영될 수 있도록 댓글 목록을 다시 불러 오세요.
-			*/
-			
-			const reply = $('#modalReply').val();
-			const rno = $('#modalRno').val();
-			const replyPw = $('#modalPw').val();
-			
-			if(reply === '' || replyPw === '') {
-				alert('내용, 비밀번호를 확인하세요!');
-				return;
-			}
-			
-			$.ajax({
-				type : "post",
-				url : "<c:url value='/reply/update' />",
-				contentType : 'application/json',
-				data : JSON.stringify({
-					'reply' : reply,
-					'rno' : rno,
-					'replyPw' : replyPw
-				}),
-				success : function(data) {
-					if(data === 'modSuccess') {
-						alert('정상 수정되었습니다.');
-						$('#modalReply').val('');
-						$('#modalPw').val('');
-						$('#replyModal').modal('hide');
-						getList(1, true);
-					} else {
-						alert('비밀번호를 확인하세요.');
-						$('#modalPw').val('');
-					}
-				},
-				error : function() {
-					alert('수정에 실패했습니다. 관리자에게 문의하세요.');
-				}
+			if(e.target.className ==='modi' && e.target.id === 'replymodbtn'){
+				//수정버튼 클릭시
+				console.log(e);
+				//지워지기는 한다...
+				$(this).css('display','none');
+				//수정완료버튼의 id를 comModi로변경.
+				$(this).parent().children('#replydelbtn').attr('id','comModi');
+				//del class 삭제
+				$(this).parent().children('#comModi').attr('class','');
 				
-			}); //end ajax(수정)
+				
+				$(this).parent().children('#comModi').text('수정완료'); 
+				//$(this).parent('div').css('display','none');
+			//수정창 생성
+			$(this).next().next().html('<textarea id="content" name="content"></textarea>');
 			
-		}); //수정 처리 이벤트 끝.
+			//수정완료 버튼 클릭
+			$(this).parent().children('#comModi').on('click',$(this),function(){
+				
+
+				//$(this).attr('href','/noReply/update');
+					var content = document.querySelector('#content').value;
+					console.log(content);
+					
+				//수정창 열고,닫아주기
+				$(this).css('display','block');
+				$(this).parent().children('textarea').css('display','none')
+				
+				
+				//삭제 버튼 아이디 복구
+				$(this).parent().children('#comModi').attr('id','replydelbtn');
+				
+			
+				/* if(replyList.length = 0){
+						location.href ='<c:url value="/noBoard/noDetail?bno=${article.bno}"/>';
+				} */
+					
+					$.ajax({
+						type : "post",
+						url : "<c:url value='/noReply/update'/>",
+						contentType : 'application/json',
+						data : JSON.stringify({
+							'rno' : rno,
+							'content' :content
+						}),
+						success : function(data) {
+							if(data === 'modSuccess') {
+								alert('정상 수정되었습니다.');
+								//getList(true);
+							} else if(data === 'fail'){
+								alert('반드시 내용을 입력해야 합니다.');
+								
+								//성공하면 replydel에 del클래스이름 생성.
+							}
+						},
+						error : function(error) {
+							alert('수정에 실패했습니다. 관리자에게 문의하세요.');
+							console.log(error);
+						}
+						
+					}); //end ajax(수정)
+
+				
+			}); //수정 이벤트 끝
+			
+				
+		}//수정 버튼 클릭시 ! 끝
+				
+			
+			
+		}); //삭제,수정 버튼 클릭 처리
+		
+				
+				
 		
 		
-		//삭제함수
-		$('#modalDelBtn').click(function() {
-			/*
-			1. 모달창에 rno값, replyPw값을 얻습니다.
-			2. ajax함수를 이용해서 POST방식으로 /reply/delete 요청
-			 필요한 값은 JSON 형식으로 처리해서 요청
-			3. 서버에서는 요청을 받아서 비밀번호를 확인하고, 비밀번호가 맞으면
-			 삭제를 진행하시면 됩니다.
-			4. 만약 비밀번호가 틀렸다면, 문자열을 반환해서 
-			 '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-			*/
-			const rno = $('#modalRno').val();
-			const replyPw = $('#modalPw').val();
+		//삭제 처리 시작
+			$('#replyList').on('click', 'a', function(e){
+			 	e.preventDefault();
+				if(e.target.className ==='del'){
+					
+				
+				//삭제버튼 클릭시
+				console.log(e);
+				
+				
+				const writer = 'chae';
+				
+				//댓글 작성자와 세션 아이디가 같다면.
+				
+					
+					
+					if(confirm('삭제하시겠습니까?')){
+						
+						//삭제할경우 rno값을 가져온다
+						const rno = $(this).attr('href');
+						
+						$.ajax({
+							type: 'post',
+							url: "<c:url value='/noReply/delete' />",
+							data: JSON.stringify({
+								'rno' : rno,
+								'writer':writer
+							}),
+							headers : {
+								'Content-type' : 'application/json'
+							},
+							success : function(data) {
+								if(data === 'delSuccess') {
+									alert('댓글이 삭제되었습니다.');
+									console.log();
+									getList(true);
+								}
+							},
+							error : function() {
+								alert('삭제에 실패했습니다. 관리자에게 문의하세요.');
+							}
+						}); //삭제 비동기 통신 끝.
+						
+					
+					} else return;
+				
+				} else return;
+						
+						
+						
+				
+					
+				
+				
+			});//삭제 처리 끝.
+				
 			
-			if(replyPw === '') {
-				alert('비밀번호를 확인하세요.');
-				return;
-			}
 			
-			$.ajax({
-				type: 'post',
-				url: "<c:url value='/reply/delete' />",
-				data: JSON.stringify({
-					'rno' : rno,
-					'replyPw' : replyPw
-				}),
-				headers : {
-					'Content-type' : 'application/json'
-				},
-				success : function(data) {
-					if(data === 'delSuccess') {
-						alert('댓글이 삭제되었습니다.');
-						$('#modalPw').val(''); //비밀번호 초기화
-						$('#replyModal').modal('hide'); //모달 내리기
-						getList(1, true);
-					} else {
-						alert('비밀번호가 틀렸습니다.');
-					}
-				},
-				error : function() {
-					alert('삭제에 실패했습니다. 관리자에게 문의하세요.');
-				}
-			}); //삭제 비동기 통신 끝.
 		
-		}); //삭제 이벤트 끝.
+		
+		
+		
 		
 		
 		// 날짜 처리 함수
@@ -472,8 +480,6 @@
 		
 		
 	}); //end jQuery
-	
-        
 
     </script>
 

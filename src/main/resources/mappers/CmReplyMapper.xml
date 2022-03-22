@@ -31,6 +31,7 @@
 				ORDER BY rno DESC
 				) tbl
 			)
+			WHERE bno = #{bno}
 	</select>
 
 
