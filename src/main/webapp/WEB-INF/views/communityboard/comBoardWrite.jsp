@@ -70,7 +70,7 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="작성자" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="${login.userid }" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">

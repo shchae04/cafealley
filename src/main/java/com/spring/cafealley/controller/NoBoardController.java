@@ -68,6 +68,8 @@ public class NoBoardController {
 	//작성 이동처리
 	@GetMapping("/noWrite")
 	public String noWrite() {
+		
+		
 		System.out.println("공지 게시글 작성 페이지로 이동");
 		return "noticeboard/noticeBoardWrite";
 	}
