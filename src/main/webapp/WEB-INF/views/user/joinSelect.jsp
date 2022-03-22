@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/> ">
  
     
+    <style>
+    .fin-container{
+    min-width: 1100px;
+    max-width: 1100px;
+    margin: 400px auto;
+    }
+    .fin-wrapper{
+    width: 800px;
+    margin : 0 auto;
+    }
+    </style>
+    
+    
 </head>
 
 
@@ -19,8 +32,8 @@
 	
   	<%@ include file="../include/header.jsp" %>
   	
-    <div class="fin-container" style="margin-top: 200px;">
-        <div class="fin-wrapper" style="display: block; margin: auto;">
+    <div class="fin-container"">
+        <div class="fin-wrapper" style="display: block;">
         
             <div>
                 <h1>회원가입</h1>

@@ -10,7 +10,17 @@
     <title>회원가입 완료</title>
     
     <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
-    
+    <style>
+        .fin-container{
+    min-width: 1100px;
+    max-width: 1100px;
+    margin: 400px auto;
+    }
+    .fin-wrapper{
+    width: 800px;
+    margin : 0 auto;
+    }
+    </style>
     
 </head>
 
@@ -19,7 +29,7 @@
 
 	<%@ include file="../include/header.jsp" %>
 
-    <div class="fin-container" style="margin-top: 150px; margin-left: 250px;">
+    <div class="fin-container">
         <div class="fin-wrapper">
             <span class="fa-solid fa-circle-check fa-10x"></span>
         </div>

@@ -43,4 +43,6 @@ public class CartVO {
 	private int cartamount;
 	private int carttotalprice;	
 
+	private String proname;
+	
 }

@@ -30,7 +30,7 @@
 		<div class="header">
 			<nav class="header-container">
 				<div class="header-logo">
-					<a href="#"><img width="150px"
+					<a href="<c:url value='/'/>"><img width="150px"
 						src="<c:url value='/img/logo.png'/>" alt="logo"></a>
 				</div>
 
@@ -49,7 +49,7 @@
 										<ul class="dropdown-menu">
 											<li id="header-name">${login.username}님(일반회원)</li>
 											<li>${login.useremail}</li>
-											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
 											<li id="header-barcode">barcode here</li>
 										</ul>
 									</li>
@@ -60,6 +60,7 @@
 											<li id="header-name">${login.username}님(사업자회원)</li>
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li><a href="<c:url value='/cart/cartList' />">장바구니</a></li>
 										</ul>
 									</li>
 								</c:otherwise>

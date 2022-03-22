@@ -9,27 +9,42 @@
 
 <!-- 넣었을때는 가장최근값, 없었을때는 시퀀스다음값. -->
 <sql id="curr">
-<if test="carttype != null and carttype != ''">
+<if test="ct == 2"> <!-- 임시 장바구니 이어가기 -->
 	carttype_seq.CURRVAL,
 </if>
-<if test="carttype == null and carttype = ''">
+<if test="ct == 1"> <!-- 임시 장바구니 시작  -->
 	carttype_seq.NEXTVAL,
 </if> 
+<if test="ct == 0"> <!-- 실제 장바구니 -->
+	0,
+</if>
  
 </sql>
 
 <!-- 장바구니 등록 하기 -->
 <insert id="insert">
 	INSERT INTO cart(cartno, carttype, prono, userid, cartamount, carttotalprice)
-	VALUES(cart_seq.NEXTVAL, <include refid="curr"/> #{prono}, #{userid}, #{cartamount}, #{carttotalprice})
+	VALUES(cart_seq.NEXTVAL, <include refid="curr"/> #{vo.prono}, #{vo.userid}, #{vo.cartamount}, #{vo.carttotalprice})
 </insert>
 
 <!--  장바구니 찾기 -->
 <select id="select" resultType="com.spring.cafealley.command.CartVO">
-	SELECT * FROM cart
-	WHERE userid = #{userid}
-	AND carttype = #{carttype}
+	SELECT c.*,
+		   p.proname 
+	  FROM cart c
+	  LEFT OUTER JOIN product p
+	  ON c.prono = p.prono
+	 WHERE userid = #{userid}
+	   AND carttype = #{carttype}
 </select>
+
+<!-- 장바구니 수정하기(수량, 가격) -->
+<update id="update">
+	UPDATE cart
+	   SET carttotalprice = #{carttotalprice}, cartamount = #{cartamount} 
+	 WHERE cartno = #{cartno} 
+</update>
+
 
 
 <!--  장바구니 삭제하기 -->

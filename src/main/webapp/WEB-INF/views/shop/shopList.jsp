@@ -53,7 +53,7 @@ section {
 	height: 300px;
 }
 
-li {
+.row li {
 	margin: 20px 0;
 }
 

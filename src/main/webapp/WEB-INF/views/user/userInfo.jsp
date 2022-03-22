@@ -102,7 +102,7 @@
 													<td>
 														<input type="file" id="file" name ="file">	
 														<div class="fileDiv">
-										                	<img id="fileImg" style="width: 60px;" src="<c:url value='/loadimg/display/${login.filenum}/1'/>" />
+										                	<img id="fileImg" style="width: 60px;" src="<c:url value='/loadimg/display/${login.filenum}/1'/>" onerror="deleteimg(this)" />
 														</div>
 													</td>
 												</c:when>
@@ -253,6 +253,12 @@
 	<!-- 카카오 api를 이용하기 위한 코드 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+		
+		// 이미지 로드 실패시 이미지태그 삭제
+		function deleteimg($input){
+			$input.remove();
+		}
+	 
 	
 		//다음 주소 api 사용해보기
 		function searchAddress() {
@@ -288,7 +294,7 @@
 		
 		$(function() {
 			const fileImgSrc = $('#fileImg').attr('src');
-			window.onload = function(
+			
 				$.ajax({
 					type : 'get',
 					url : '<c:url value="/user/display" />',
@@ -406,7 +412,7 @@
 				location.href='<c:url value="/user/memDelete" />';
 			});//탈퇴버튼 클릭 시 이동 끝
 			
-			
+
 
 		}); //end jQuery
 		
