@@ -3,6 +3,7 @@ package com.spring.cafealley.user.service;
 import java.util.Date;
 
 import com.spring.cafealley.command.UserVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IUserService {
 
@@ -17,6 +18,9 @@ public interface IUserService {
 
 	// 회원 정보 얻어오기
 	UserVO getInfo(String userId);
+	
+	// 총 게시물 수
+	int getTotal(PageVO vo);
 
 	// 회원정보 수정
 	void updateUser(UserVO vo);

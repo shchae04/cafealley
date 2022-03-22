@@ -32,8 +32,43 @@
 	.form-control {
 		display: inline-block;
 	}
+	.profile-img{
+            width: 100px;
+		position: relative;
+    }
+
+    .profile-img input[type="file"] {
+        width: 100px;
+        height: 100px;
+        margin-right: -20px;
+        background: transparent;
+        color: transparent;
+        z-index: 999;
+        margin-left: -100px;
+        float: left;
+        border: 1px solid #ddd;
+    }
+
+    .profile-img input[type="file"]::-webkit-file-upload-button {
+        display: none;
+    }
+
+    .profile-img label {
+        width: 100px;
+        height: 100px;
+        margin-left: 0px;
+        float: left;
+        z-index: 1;
+        font-size: 10px;
+        text-align: center;
+        pointer-events: none;
+        padding-top: 20px;
+    }
 	
-	
+	.prifile-img .file {
+		positon: absolute;
+		left: -300px;
+	}
 </style>
 
 </head>
@@ -93,31 +128,39 @@
 							<form id="infoForm" action="<c:url value='/user/userUpdate' />" method="post" enctype="multipart/form-data">
 								<table class="table">
 									<tbody class="m-control">
-										<tr>
-											<td>
-												프로필 사진
-											</td>
-											<c:choose>
-												<c:when test="${not empty login.filenum}">
-													<td>
-														<input type="file" id="file" name ="file">	
-														<div class="fileDiv">
-										                	<img id="fileImg" style="width: 60px;" src="<c:url value='/loadimg/display/${login.filenum}/1'/>" onerror="deleteimg(this)" />
-														</div>
+
+										<c:choose>
+											<c:when test="${login.filenum == 0}">
+												<tr>
+													<td class="col-sm-2">
+														프로필 사진
 													</td>
-												</c:when>
-												<c:otherwise>
-													<td>
-														<input type="file" id="file" name ="file">	
-														<div class="fileDiv">
-										                	<img id="fileImg" src="<c:url value='/img/img_ready.png' />" />
-														</div>
+													<td class="profile-img col-sm-8">
+		                                                <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+		                                                <input type="file" name="file" id="img">
+		                                            </td>
+	                                            </tr>
+											</c:when>
+											<c:otherwise>
+												<tr>
+		                                            <td class="col-sm-2">
+		                                            	프로필 사진
+		                                            </td>
+													<td class="profile-img col-sm-8">
+		                                                <img style="width:100px; height:100px;" id="profileImg" src="${pageContext.request.contextPath}/loadimg/display/${login.filenum}/1" alt="upload"/>
+		                                            </td>
+												</tr>
+												<tr>
+													<td class="col-sm-2">
+														프로필 사진 수정
 													</td>
-												</c:otherwise>
-											</c:choose>
-											
-											
-										</tr>
+													<td class="profile-img col-sm-8">
+		                                                <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
+		                                                <input type="file" name="file" id="img">
+		                                            </td>
+	                                            </tr>
+											</c:otherwise>
+										</c:choose>
 										<tr>
 											<td class="col-sm-2">*아이디</td>
 											<td class="col-sm-8">
@@ -193,6 +236,7 @@
 												<td>*우편번호</td>
 												<td class="clearfix">
 													<input style="width: 180px; display: inline-block; cursor: auto;"
+													value="${login.zipcode}"
 													class="form-control input-sm" id="addrzipnum"
 													name="zipcode">
 													<button style="display: inline-block;" type="button" class="addr-btn btn btn-primary" id="addrBtn">주소찾기</button>
@@ -201,12 +245,14 @@
 											<tr>
 												<td>*카페주소</td>
 												<td><input style="width: 500px; cursor: auto;"
+													value="${login.addrbasic}"
 													class="form-control input-sm add" id="addrbasic"
 													name="addrbasic"></td>
 											</tr>
 											<tr>
 												<td>*상세주소</td>
 												<td><input style="width: 300px; cursor: auto;"
+													value="${login.addrdetail}"
 													class="form-control input-sm add" id="addrdetail"
 													name="addrdetail"></td>
 											</tr>
@@ -224,6 +270,7 @@
 													<td>*사업자 번호</td>
 													<td>
 														<input style="width: 300px; cursor: auto;"
+														value="${login.businessnum}"
 														class="form-control input-sm add" id="businessnum"
 														name="businessnum"><span id="bsnsNumCheck"></span>
 													</td>
@@ -254,12 +301,16 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		
+<<<<<<< HEAD
 		// 이미지 로드 실패시 이미지태그 삭제
 		function deleteimg($input){
 			$input.remove();
 		}
 	 
 	
+=======
+	$(function() {
+>>>>>>> origin/Minji
 		//다음 주소 api 사용해보기
 		function searchAddress() {
 	        new daum.Postcode({
@@ -292,6 +343,7 @@
 		});//주소 찾기 버튼 클릭 시 카카오 api 함수 발동
 		
 		
+<<<<<<< HEAD
 		$(function() {
 			const fileImgSrc = $('#fileImg').attr('src');
 			
@@ -305,12 +357,17 @@
 						console.log('fileImgSrc: ' + data);
 					}
 				});// 인증 이메일 전송 비동기 끝 
+=======
+
+		
+		
+>>>>>>> origin/Minji
 			
 			// 유효성 검증 정규표현식
 			const getPwCheck = RegExp(/^.*(?=.*\d)(?=.*[a-zA-Z])/);
 			const getEmailCheck =  RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
-			const getPhoneCheck = RegExp( /[^0-9]/g);
-			const getBsnsNumCheck = RegExp(/([0-9]{3})-?([0-9]{2})-?([0-9]{5})/);
+			const getPhoneCheck = RegExp(/[^0-9]/g);
+			const getBsnsNumCheck = RegExp(/([0-9]{10})/g);
 			
 			//핸드폰 값
 			const userphone = $('#userphone1').val() + $('#userphone1').val() + $('#userphone1').val();
@@ -385,9 +442,11 @@
 				}
 				
 				// 사업자번호란 입력 검증
-				
-				if(!getBsnsNumCheck.test($('#businessnum').val())) {
+				if($('#businessnum').val() === undefined) {
+					chk5 = true;
+				} else if(!getBsnsNumCheck.test($('#businessnum').val())) {
 					console.log('사업자번호 양식에 맞지 않음');
+					console.log($('#businessnum').val());
 					$('#bsnsNumCheck').html('<b style="font-size: 12px; color: red;">양식에 맞게 작성해 주세요.</b>');
 					chk5 = false;
 				} else {
@@ -416,27 +475,27 @@
 
 		}); //end jQuery
 		
-		//자바 스크립트 파일 미리보기 기능
-	      function readURL(input) {
-	           if (input.files && input.files[0]) {
-	               const reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
-	               //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
-	              	reader.readAsDataURL(input.files[0]); 
-	               //파일업로드시 화면에 숨겨져있는 클래스fileDiv를 보이게한다
-	               $(".fileDiv").css("display", "block");
-	               
-	               reader.onload = function(event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
-	                   $('#fileImg').attr("src", event.target.result); 
-	                   console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
-	              }
-	           }
-	       }
-	      //file업로드 인풋창에 변화 발생했다면
-	      //readURL에 file업로드 창 데이터를 전달함.
-	      $("#file").change(function() {
-	           readURL(this); //this는 #file자신 태그를 의미
-	           
-	       });
+		
+		// 이미지 파일 업로드시 이미지 파일 띄우게끔
+        const $imgfile = document.querySelector('#img');
+        $imgfile.addEventListener('change', e => {
+            readURL(e.target);
+        });
+
+        function readURL(input) {
+            var reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
+            //readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
+            reader.readAsDataURL(input.files[0]);
+            console.log()
+            // fileDiv내의 img태그 아이디 가져오기
+            // FileReader 객체가 생성되서 동작을 한다면,
+            reader.onload = function (event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
+                // 위에서 얻어온 img태그 아이디를 통해 img src 바꿔줌.
+                $('label[for="img"]').html('<img id="fileImg" src="' + event.target.result +
+                    '" alt="upload" style="width:100px; height:100px;"/>');
+                $('#fileImg').css('margin-top', '-20px');
+            }
+        }
 		
 	</script>
 
