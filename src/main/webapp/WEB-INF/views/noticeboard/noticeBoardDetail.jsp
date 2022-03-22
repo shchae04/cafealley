@@ -268,12 +268,12 @@ $(document).ready(function() {
 						
 						strAdd += "<div style='padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;''>";
                         strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>";
-                        strAdd += "<small class='left'>"+replyList[i].regdate +"</small>";
+                        strAdd += "<small class='left'>"+timeStamp(replyList[i].regdate) +"</small>";
                         strAdd += "<c:if test='"+ replyList[i].ismod = 1 +"'>";
                         strAdd += "<small class='left'>수정됨</small>";
                         strAdd += "</c:if>";
                         strAdd += "<a id='replymodbtn' class='modi' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>&nbsp;&nbsp;";
-                        strAdd += "<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        strAdd += "&nbsp;&nbsp;<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
                         strAdd += "<p>"+replyList[i].content+"</p>"; 
 						strAdd += "</div>";
 						
@@ -311,13 +311,17 @@ $(document).ready(function() {
 			e.preventDefault();
 			const rno = $(this).attr('href');
 			
-			if(e.target.className ==='modi'){
+			if(e.target.className ==='modi' && e.target.id === 'replymodbtn'){
 				//수정버튼 클릭시
 				console.log(e);
 				//지워지기는 한다...
 				$(this).css('display','none');
 				//수정완료버튼의 id를 comModi로변경.
 				$(this).parent().children('#replydelbtn').attr('id','comModi');
+				//del class 삭제
+				$(this).parent().children('#comModi').attr('class','');
+				
+				
 				$(this).parent().children('#comModi').text('수정완료'); 
 				//$(this).parent('div').css('display','none');
 			//수정창 생성
@@ -357,6 +361,7 @@ $(document).ready(function() {
 							} else {
 								alert('관리자 문의.');
 								$(this).parent().textarea.val('');
+								//성공하면 replydel에 del클래스이름 생성.
 							}
 						},
 						error : function(error) {
@@ -375,6 +380,7 @@ $(document).ready(function() {
 			 else if(e.target.className ==='del'){
 				//삭제버튼 클릭시
 				console.log(e);
+				
 				
 				const writer = 'chae';
 				
@@ -435,51 +441,7 @@ $(document).ready(function() {
 		
 		
 		
-		//삭제함수
-		$('#modalDelBtn').click(function() {
-			/*
-			1. 모달창에 rno값, replyPw값을 얻습니다.
-			2. ajax함수를 이용해서 POST방식으로 /reply/delete 요청
-			 필요한 값은 JSON 형식으로 처리해서 요청
-			3. 서버에서는 요청을 받아서 비밀번호를 확인하고, 비밀번호가 맞으면
-			 삭제를 진행하시면 됩니다.
-			4. 만약 비밀번호가 틀렸다면, 문자열을 반환해서 
-			 '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-			*/
-			const rno = $('#modalRno').val();
-			const replyPw = $('#modalPw').val();
-			
-			if(replyPw === '') {
-				alert('비밀번호를 확인하세요.');
-				return;
-			}
-			
-			$.ajax({
-				type: 'post',
-				url: "<c:url value='/reply/delete' />",
-				data: JSON.stringify({
-					'rno' : rno,
-					'replyPw' : replyPw
-				}),
-				headers : {
-					'Content-type' : 'application/json'
-				},
-				success : function(data) {
-					if(data === 'delSuccess') {
-						alert('댓글이 삭제되었습니다.');
-						$('#modalPw').val(''); //비밀번호 초기화
-						$('#replyModal').modal('hide'); //모달 내리기
-						getList(1, true);
-					} else {
-						alert('비밀번호가 틀렸습니다.');
-					}
-				},
-				error : function() {
-					alert('삭제에 실패했습니다. 관리자에게 문의하세요.');
-				}
-			}); //삭제 비동기 통신 끝.
 		
-		}); //삭제 이벤트 끝.
 		
 		
 		// 날짜 처리 함수
