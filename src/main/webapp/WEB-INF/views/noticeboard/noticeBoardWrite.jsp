@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boardwrite</title>
+    <title>noboardwrite</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- <link rel="stylesheet" href="../css/shstyle.css"> -->
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
@@ -18,9 +18,7 @@
     <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"> -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
-    <!-- include summernote css/js-->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+    
 
     <style>
         .container {
@@ -51,7 +49,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>글 작성하기</strong>
+                                <strong>공지 게시글 작성하기</strong>
                             </h3>
                             
                         </div>
@@ -97,9 +95,9 @@
                         
                         
                         <div class="form-group">
-							<label for="content" class="col-xs-12">
+							<label for="content" class="col-sm-14">
 								내용
-		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="10"></textarea>
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="180"></textarea>
 							</label>
                         </div>
 
@@ -165,7 +163,7 @@
         document.querySelector('#delbtn').addEventListener('click', function (e) {
             if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
-                location.href = 'https://www.google.com';
+                location.href = '/noBoard/noList';
             }
             return;
         });
