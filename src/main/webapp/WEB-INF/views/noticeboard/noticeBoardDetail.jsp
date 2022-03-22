@@ -357,9 +357,9 @@ $(document).ready(function() {
 							if(data === 'modSuccess') {
 								alert('정상 수정되었습니다.');
 								//getList(true);
-							} else {
-								alert('관리자 문의.');
-								$(this).parent().textarea.val('');
+							} else if(data === 'fail'){
+								alert('반드시 내용을 입력해야 합니다.');
+								
 								//성공하면 replydel에 del클래스이름 생성.
 							}
 						},

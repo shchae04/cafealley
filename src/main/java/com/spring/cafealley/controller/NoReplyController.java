@@ -67,16 +67,23 @@ public class NoReplyController {
 			return "fail";
 		}
 		 */
-		System.out.println("수정 요청값:" + rno);
+		//가져온 값이 null이면
+		if(rno.getContent() == null) {
+			return"fail";
+		} else {
+			System.out.println("수정 요청값:" + rno);
+			service.replyUpdate(rno); //rno만 가지고있을텐데? 메서드 수정함.
+			return "modSuccess";
+			
+		}
 		
-		service.replyUpdate(rno); //rno만 가지고있을텐데?
-		return "modSuccess";
+		
 	
 		
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestBody ReplyVO rvo, UserVO uvo) {
+	public String delete(@RequestBody ReplyVO rvo) {
 	
 //		//user 작성자 검증  
 //		String uwriter =uvo.getUserid();
