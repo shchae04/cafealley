@@ -6,7 +6,7 @@
 <mapper namespace="com.spring.cafealley.reply.mapper.INoReplyMapper">
 
 	<insert id="replyRegist">
-	INSERT INTO noreply (rno, bno, writer,content)
+	INSERT INTO noreply(rno, bno, writer,content)
 	VALUES (noreply_seq.NEXTVAL,#{bno},#{writer}, #{content})
 	</insert>
 	
@@ -31,6 +31,7 @@
 				ORDER BY rno DESC
 				) tbl
 			)
+			WHERE bno = #{bno}
 	</select>
 
 	

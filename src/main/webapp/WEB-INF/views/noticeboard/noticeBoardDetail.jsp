@@ -185,7 +185,9 @@ $(document).ready(function() {
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const writer = '${login.userid}'; //세션에서 가져온 userid
+			const writer = 'session_id!!'; 
+				//'${login.userid}'; //세션에서 가져온 userid
+			
 			const reply = $('#reply').val(); //댓글 내용
 			
 			
@@ -202,16 +204,22 @@ $(document).ready(function() {
 			
 			$.ajax({
 				type: 'post',
-				url: '<c:url value="/noReply/replyRegist" />',
+				url: '<c:url value="/noReply/replyRegist"/>',
 				data: JSON.stringify(replyInfo), 
 				contentType: 'application/json',
-				success: function(data) {
-					console.log('통신 성공! ' + data);
+				success: function(result) {
+					if(result === 'regSuccess'){
+						
+					console.log('통신 성공! ' + result);
 					$('#reply').val('');
+					}
 					
 					getList(true); //등록 성공 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현.
 				},
-				error: function() {
+				error: function(request,status,error) {
+					console.log(error);
+					console.log(request);
+					console.log(status);
 					alert('등록에 실패했습니다. 관리자에게 문의하세요!');
 				}
 			}); //댓글 등록 비동기 통신 끝.
@@ -264,8 +272,8 @@ $(document).ready(function() {
                         strAdd += "<c:if test='"+ replyList[i].ismod = 1 +"'>";
                         strAdd += "<small class='left'>수정됨</small>";
                         strAdd += "</c:if>";
-                        strAdd += "<a id='replymodbtn' class='modify' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>";
-                        strAdd += "<a id='replydelbtn' class='delete' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        strAdd += "<a id='replymodbtn' class='modi' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>&nbsp;&nbsp;";
+                        strAdd += "<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
                         strAdd += "<p>"+replyList[i].content+"</p>"; 
 						strAdd += "</div>";
 						
@@ -294,17 +302,86 @@ $(document).ready(function() {
 		사용하는 제이쿼리의 이벤트 위임 함수를 반드시 사용해야 합니다.
 		*/
 		
-		//수정버튼 클릭시
-		$('#replyList').on('click', 'a[id="replymodbtn"]', function(e) {
+		//수정버튼 클릭, 삭제버튼 클릭.
+		$('#replyList').on('click', 'a', function(e) {
 			e.preventDefault(); //태그의 고유 기능을 중지.
 			//1. a태그가 두 개(수정, 삭제)이므로 버튼부터 확인.
 			//수정, 삭제가 발생하는 댓글 번호가 몇 번인지의 여부도 확인.
-			
+			//console.log(e);
+			e.preventDefault();
 			const rno = $(this).attr('href');
+			
+			if(e.target.className ==='modi'){
+				//수정버튼 클릭시
+				console.log(e);
+				//지워지기는 한다...
+				$(this).css('display','none');
+				//수정완료버튼의 id를 comModi로변경.
+				$(this).parent().children('#replydelbtn').attr('id','comModi');
+				$(this).parent().children('#comModi').text('수정완료'); 
+			//$(this).parent('div').css('display','none');
+			//수정창 생성
+			$(this).next().next().html('<textarea id="content" name="content"></textarea>');
+			
+			//수정완료 버튼 클릭
+			$(this).parent().children('#comModi').on('click',$(this),function(){
+				
+
+				//$(this).attr('href','/noReply/update');
+					const content = '값을 못받아';
+						//$(this).parent().children('#content')[0].val();
+					console.log(content);
+					
+					
+				
+				//수정창 열고,닫아주기
+				$(this).css('display','block');
+				$(this).parent().children('textarea').css('display','none')
+					
+					const writer = 'chae';
+						//'${login.userid}';
+					
+					$.ajax({
+						type : "post",
+						url : "<c:url value='/noReply/update'/>",
+						contentType : 'application/json',
+						data : JSON.stringify({
+							'rno' : rno,
+							'writer' : writer,
+							'content' :content
+						}),
+						success : function(data) {
+							if(data === 'modSuccess') {
+								alert('정상 수정되었습니다.');
+								
+								getList(true);
+							} else {
+								alert('관리자 문의.');
+								$(this).parent().textarea.val('');
+							}
+						},
+						error : function(error) {
+							alert('수정에 실패했습니다. 관리자에게 문의하세요.');
+							console.log(error);
+						}
+						
+					}); //end ajax(수정)
+
+				
+			}); //수정 이벤트 끝
+			
+				
+		}//수정 버튼 클릭시 ! 끝
+				
+			 else if(e.target.className ==='del'){
+				//삭제버튼 클릭시
+				console.log(e);
+			}
 			//인풋태그를 집어넣어줘야함.
 			
 			
-		}); //수정 or 삭제 버튼 클릭 이벤트 처리 끝.
+			
+		}); //수정 버튼 클릭 이벤트 처리 끝.
 		
 		
 		//수정 처리 함수 (수정 모달을 열어서 수정 내용을 작성 후 수정 버튼을 클릭했을 시)

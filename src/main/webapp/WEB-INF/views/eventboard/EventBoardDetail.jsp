@@ -162,7 +162,10 @@
   <%@ include file="../include/footer.jsp" %>
 
     <script>
-        
+    // img load실패시 이미지태그 삭제
+    function deleteimg($input){
+    	$input.remove();
+    }
 
 
     </script>
