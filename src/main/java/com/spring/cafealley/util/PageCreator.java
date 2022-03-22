@@ -1,8 +1,10 @@
 package com.spring.cafealley.util;
 
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+>>>>>>> origin/Minji
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +20,7 @@ public class PageCreator {
 	private int beginPage;
 	private boolean prev;
 	private boolean next;
-
+	
 	private final int buttonNum = 5;
 
 	public String makeURI(int page) {
@@ -48,6 +50,7 @@ public class PageCreator {
 
 	// 컨트롤러가 총 게시물의 개수를 PageCreator에게 전달한 직후에
 	// 바로 페이징 버튼 알고리즘이 돌아갈 수 있도록 setter를 커스텀.
+
 	public void setArticleTotalCount(int articleTotalCount) {
 		this.articleTotalCount = articleTotalCount;
 		calcDataOfPage();

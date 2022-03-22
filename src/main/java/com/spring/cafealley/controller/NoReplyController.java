@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +29,12 @@ public class NoReplyController {
 	private IReplyService service;
 	
 	//댓글 등록
-	@ResponseBody
 	@PostMapping("/replyRegist")
 	public String replyRegist(@RequestBody ReplyVO vo, HttpSession session) {
 		System.out.println("댓글 등록 : POST요청");
 		System.out.println("댓글 값:" + vo);
 		service.replyRegist(vo);
-		 ((UserVO)session.getAttribute("login")).getUserid();
+		//nullpointerexception이 발생!
 		
 		return "regSuccess";
 	}
@@ -56,22 +53,24 @@ public class NoReplyController {
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestBody ReplyVO rvo, HttpSession session) {
+	public String update(@RequestBody ReplyVO rno, HttpSession session) {
 	
 		//user 작성자 검증  
-		UserVO uvo = (UserVO) session.getAttribute("login");
-		String uwriter =uvo.getUserid();
-		System.out.println("세션에서 가져온 write" + uwriter);
-		String rwriter = rvo.getWriter();
-		System.out.println("댓글 작성자" + rwriter);
+		/*
+		  UserVO uvo = (UserVO) session.getAttribute("login"); String uwriter
+		  =uvo.getUserid(); System.out.println("세션에서 가져온 write" + uwriter); String
+		 rwriter = rno.getWriter(); System.out.println("댓글 작성자" + rwriter);
 		
 		if(uwriter.equals(rwriter)) {
-			service.replyDelete(rvo.getRno());
+			service.replyDelete(rno.getRno());
 			return "modSuccess";
 		} else {
 			return "fail";
 		}
-		
+		 */
+		System.out.println("수정 요청값:" + rno);
+		service.replyUpdate(rno.getRno());
+		return "modSuccess";
 	
 		
 	}
