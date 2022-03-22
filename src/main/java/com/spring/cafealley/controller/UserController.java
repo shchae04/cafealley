@@ -31,11 +31,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
+import com.spring.cafealley.board.service.BoardService;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
+import com.spring.cafealley.util.PageCreator;
+import com.spring.cafealley.util.PageVO;
 
 @Controller
 @RequestMapping("/user")
@@ -47,6 +50,9 @@ public class UserController {
 	private MailSendService mailService;
 	@Autowired
 	private ImgService imgService;
+	@Autowired
+	private BoardService boardService;
+	
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -177,6 +183,7 @@ public class UserController {
 
 	}
 	
+	/*
 	//이미지 파일 전송 요청
 	@ResponseBody
 	@GetMapping("/display")
@@ -197,13 +204,12 @@ public class UserController {
 			//사용자에게 보여주고자 하는 데이터가 어떤 파일인지를 검사해서 응답 상태 코드를 다르게 리턴할 수도 있습니다.
 			headers.add("Cotent-Type", Files.probeContentType(file.toPath()));
 			
-			/*
+			
 			ResponseEntity<>(응답 객체에 답을 내용, 헤더에 답을 내용, 상태메세지)
 			FileCopyUtils: 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드의 집합체
 			file객체 안에 있는 내용을 복사하고 byte배열로 변환해서 바디에 담아 화면에 전달.
 			
 			copyToByteArray는 필수!
-			 */
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
 			
 		} catch (Exception e) {
@@ -212,8 +218,7 @@ public class UserController {
 		
 		return result;
 	}
-	
-	
+	*/
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
@@ -261,7 +266,26 @@ public class UserController {
 	
 	// 자유게시판 작성 글 보기로 이동
 	@GetMapping("/cmnBoardChk")
-	public void CmnBoardChk() {}
+	public void CmnBoardChk(PageVO vo, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 CmnBoardChk 메서드 발동");
+		
+		System.out.println("페이지 번호: " + vo.getPageNum());
+		System.out.println("검색어: " + vo.getKeyword());
+		System.out.println("검색 조건: " + vo.getCondition());
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		pc.setArticleTotalCount(boardService.getTotal(vo));
+		
+		System.out.println("pc: " + pc);
+		
+		model.addAttribute("boardList", boardService.getList(vo));
+		model.addAttribute("pc", pc);
+		
+		
+	}
 	
 	// 자유게시판 작성 댓글 보기로 이동
 	@GetMapping("/cmnReplyChk")
