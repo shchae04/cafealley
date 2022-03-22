@@ -37,7 +37,7 @@ public class ReplyTest {
 		vo.setRno(1);
 		vo.setContent("수정했습니다 댓글 1번");
 		vo.setIsmod("1");
-		mapper.replyUpdate(1);
+		mapper.replyUpdate(vo);
 		System.out.println();
 	}
 	

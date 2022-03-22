@@ -25,8 +25,8 @@ public class ReplyService implements IReplyService {
 	}
 
 	@Override
-	public void replyUpdate(int rno) {
-		nomapper.replyUpdate(rno);
+	public void replyUpdate(ReplyVO vo) {
+		nomapper.replyUpdate(vo);
 	}
 
 	@Override

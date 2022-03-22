@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.cafealley.command.ReplyVO;
@@ -69,7 +68,8 @@ public class NoReplyController {
 		}
 		 */
 		System.out.println("수정 요청값:" + rno);
-		service.replyUpdate(rno.getRno());
+		
+		service.replyUpdate(rno); //rno만 가지고있을텐데?
 		return "modSuccess";
 	
 		
@@ -78,17 +78,18 @@ public class NoReplyController {
 	@PostMapping("/delete")
 	public String delete(@RequestBody ReplyVO rvo, UserVO uvo) {
 	
-		//user 작성자 검증  
-		String uwriter =uvo.getUserid();
-		String rwriter = rvo.getWriter();
-		
-		if(uwriter.equals(rwriter)) {
-			service.replyDelete(rvo.getRno());
-			return "delSuccess";
-		} else {
-			return "fail";
-		}
-		
+//		//user 작성자 검증  
+//		String uwriter =uvo.getUserid();
+//		String rwriter = rvo.getWriter();
+//		
+//		if(uwriter.equals(rwriter)) {
+//			service.replyDelete(rvo.getRno());
+//			return "delSuccess";
+//		} else {
+//			return "fail";
+//		}
+		service.replyDelete(rvo.getRno());
+		return "delSuccess";
 	
 		
 	}
