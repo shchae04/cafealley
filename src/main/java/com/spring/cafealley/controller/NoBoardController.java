@@ -37,6 +37,7 @@ public class NoBoardController {
 		BoardVO bo = service.getContent(bno);
 
 		model.addAttribute("article",service.getContent(bno));
+		System.out.println("key값."+service.getContent(bno).getKey());;
 
 		
 		return "noticeboard/noticeBoardDetail";

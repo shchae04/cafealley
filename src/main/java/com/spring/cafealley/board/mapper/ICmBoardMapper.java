@@ -26,6 +26,5 @@ public interface ICmBoardMapper {
 	//삭제
 	void delete(int bno);
 	
-	//파일
-		ImgVO getFile(int key);
+	
 }

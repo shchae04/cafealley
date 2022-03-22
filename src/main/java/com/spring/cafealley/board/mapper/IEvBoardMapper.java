@@ -27,6 +27,4 @@ public interface IEvBoardMapper {
 	void delete(int bno);
 	
 	
-	//파일
-		ImgVO getFile(int key);
 }

@@ -34,8 +34,9 @@ public class CmBoardController {
 		System.out.println("커뮤니티 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
-		model.addAttribute("article",service.getContent(bno));
 		
+		model.addAttribute("article",service.getContent(bno));
+		System.out.println("key값."+service.getContent(bno).getKey());;
 		return "communityboard/comBoardDetail";
 		
 		
