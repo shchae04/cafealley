@@ -43,7 +43,7 @@
 								
                                 <label class="modifycheck" style="float:inherit; font-size: 8px;">
                                 
-                                <c:if test="${article.ismod} = '1'">
+                                <c:if test="${article.ismod != 0}">
                                 <small>수정됨</small>
                                 </c:if>
                                 
@@ -248,16 +248,13 @@ $(document).ready(function() {
 				function(data) {
 					console.log(data);
 					
-					let total = data.total; //총 댓글수
-					console.log('총 댓글수: ' + total);
+					
 					let replyList = data.list; //댓글 리스트
 					
-					//insert, update, delete 작업 후에는
-					//댓글을 누적하고 있는 strAdd 변수를 초기화를 해서
-					//화면이 리셋된 거처럼 보여줘야 합니다.
-					if(reset === true) {
-						strAdd = '';
-					}
+						if(reset === true) {
+							strAdd = '';
+						}
+					
 					
 					//응답 데이터의 길이가 0보다 작으면 함수를 종료하자.
 					if(replyList.length <= 0) {
@@ -308,7 +305,7 @@ $(document).ready(function() {
 			//1. a태그가 두 개(수정, 삭제)이므로 버튼부터 확인.
 			//수정, 삭제가 발생하는 댓글 번호가 몇 번인지의 여부도 확인.
 			//console.log(e);
-			e.preventDefault();
+			
 			const rno = $(this).attr('href');
 			
 			if(e.target.className ==='modi' && e.target.id === 'replymodbtn'){
@@ -344,6 +341,9 @@ $(document).ready(function() {
 				$(this).parent().children('#comModi').attr('id','replydelbtn');
 				
 			
+				/* if(replyList.length = 0){
+						location.href ='<c:url value="/noBoard/noDetail?bno=${article.bno}"/>';
+				} */
 					
 					$.ajax({
 						type : "post",
@@ -356,8 +356,7 @@ $(document).ready(function() {
 						success : function(data) {
 							if(data === 'modSuccess') {
 								alert('정상 수정되었습니다.');
-								
-								getList(true);
+								//getList(true);
 							} else {
 								alert('관리자 문의.');
 								$(this).parent().textarea.val('');
@@ -377,7 +376,20 @@ $(document).ready(function() {
 				
 		}//수정 버튼 클릭시 ! 끝
 				
-			 else if(e.target.className ==='del'){
+			
+			
+		}); //삭제,수정 버튼 클릭 처리
+		
+				
+				
+		
+		
+		//삭제 처리 시작
+			$('#replyList').on('click', 'a', function(e){
+			 	e.preventDefault();
+				if(e.target.className ==='del'){
+					
+				
 				//삭제버튼 클릭시
 				console.log(e);
 				
@@ -406,7 +418,7 @@ $(document).ready(function() {
 							success : function(data) {
 								if(data === 'delSuccess') {
 									alert('댓글이 삭제되었습니다.');
-									
+									console.log();
 									getList(true);
 								}
 							},
@@ -415,29 +427,21 @@ $(document).ready(function() {
 							}
 						}); //삭제 비동기 통신 끝.
 						
- 						
+					
+					} else return;
+				
+				} else return;
 						
 						
 						
-						
-					} // 삭제하지 않는경우
-					return;
+				
 					
 				
 				
-				//권한이 없는경우.
-				alert('권한이 없습니다.');
-				return;
+			});//삭제 처리 끝.
 				
-				
-				
-			}//삭제 처리 끝.
 			
 			
-			
-			
-		}); //삭제,수정 버튼 클릭 처리
-		
 		
 		
 		
