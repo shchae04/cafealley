@@ -165,6 +165,7 @@
   <%@ include file="../include/footer.jsp" %>
 
     <script>
+   
     
     // img load실패시 이미지태그 삭제
     function deleteimg($input){
@@ -186,7 +187,8 @@ $(document).ready(function() {
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const writer = '${login.userid}'; //세션에서 가져온 userid
+			const writer = '${login.userid}'; 
+				//; //세션에서 가져온 userid
 			
 			const reply = $('#reply').val(); //댓글 내용
 			
@@ -248,19 +250,17 @@ $(document).ready(function() {
 				function(data) {
 					console.log(data);
 					
-					let total = data.total; //총 댓글수
-					console.log('총 댓글수: ' + total);
+					
 					let replyList = data.list; //댓글 리스트
 					
-					//insert, update, delete 작업 후에는
-					//댓글을 누적하고 있는 strAdd 변수를 초기화를 해서
-					//화면이 리셋된 거처럼 보여줘야 합니다.
-					if(reset === true) {
-						strAdd = '';
-					}
+						if(reset === true) {
+							strAdd = '';
+						}
+					
 					
 					//응답 데이터의 길이가 0보다 작으면 함수를 종료하자.
 					if(replyList.length <= 0) {
+						
 						return; //함수 종료.
 					}
 					
@@ -279,6 +279,7 @@ $(document).ready(function() {
 						
 					}
 					$('#replyList').html(strAdd); //replyList영역에 문자열 형식으로 모든 댓글을 추가.
+					isReplyEmpty(); //비어있으면 처리!
 					//화면에 댓글을 표현할 때 reply-wrap이 display: none으로 선언되어 있는데,
 					//jQuery의 fadeIn 함수로 서서히 드러나도록 처리.
 					$('.reply-wrap').fadeIn(500);
@@ -288,6 +289,12 @@ $(document).ready(function() {
 			
 		} // end getList()
 		
+		function isReplyEmpty(){
+			if($('#replyList').html() ===''){
+				$('#replyList').html('<p>댓글을 입력해주세요.</p>');
+				getList(true);
+			}
+		}
 		
 		//수정, 삭제
 		/*
@@ -308,7 +315,7 @@ $(document).ready(function() {
 			//1. a태그가 두 개(수정, 삭제)이므로 버튼부터 확인.
 			//수정, 삭제가 발생하는 댓글 번호가 몇 번인지의 여부도 확인.
 			//console.log(e);
-			e.preventDefault();
+			
 			const rno = $(this).attr('href');
 			
 			if(e.target.className ==='modi' && e.target.id === 'replymodbtn'){
@@ -331,7 +338,7 @@ $(document).ready(function() {
 			$(this).parent().children('#comModi').on('click',$(this),function(){
 				
 
-				//$(this).attr('href','/cmReply/update');
+				//$(this).attr('href','/noReply/update');
 					var content = document.querySelector('#content').value;
 					console.log(content);
 					
@@ -344,6 +351,9 @@ $(document).ready(function() {
 				$(this).parent().children('#comModi').attr('id','replydelbtn');
 				
 			
+				/* if(replyList.length = 0){
+						location.href ='<c:url value="/noBoard/noDetail?bno=${article.bno}"/>';
+				} */
 					
 					$.ajax({
 						type : "post",
@@ -356,11 +366,10 @@ $(document).ready(function() {
 						success : function(data) {
 							if(data === 'modSuccess') {
 								alert('정상 수정되었습니다.');
-								
 								getList(true);
-							} else {
-								alert('관리자 문의.');
-								$(this).parent().textarea.val('');
+							} else if(data === 'fail'){
+								alert('반드시 내용을 입력해야 합니다.');
+								
 								//성공하면 replydel에 del클래스이름 생성.
 							}
 						},
@@ -377,12 +386,25 @@ $(document).ready(function() {
 				
 		}//수정 버튼 클릭시 ! 끝
 				
-			 else if(e.target.className ==='del'){
+			
+			
+		}); //삭제,수정 버튼 클릭 처리
+		
+				
+				
+		
+		
+		//삭제 처리 시작
+			$('#replyList').on('click', 'a', function(e){
+			 	e.preventDefault();
+				if(e.target.className ==='del'){
+					
+				
 				//삭제버튼 클릭시
 				console.log(e);
 				
 				
-				const writer = 'chae';
+				const writer = '${login.userid}';
 				
 				//댓글 작성자와 세션 아이디가 같다면.
 				
@@ -405,9 +427,9 @@ $(document).ready(function() {
 							},
 							success : function(data) {
 								if(data === 'delSuccess') {
-									alert('댓글이 삭제되었습니다.');
-									
 									getList(true);
+									alert('댓글이 삭제되었습니다.');
+									console.log();
 								}
 							},
 							error : function() {
@@ -415,29 +437,21 @@ $(document).ready(function() {
 							}
 						}); //삭제 비동기 통신 끝.
 						
- 						
+					
+					} else return;
+				
+				} else return;
 						
 						
 						
-						
-					} // 삭제하지 않는경우
-					return;
+				
 					
 				
 				
-				//권한이 없는경우.
-				alert('권한이 없습니다.');
-				return;
+			});//삭제 처리 끝.
 				
-				
-				
-			}//삭제 처리 끝.
 			
 			
-			
-			
-		}); //삭제,수정 버튼 클릭 처리
-		
 		
 		
 		
@@ -476,6 +490,7 @@ $(document).ready(function() {
 		
 	}); //end jQuery
 
+    
     </script>
 
 

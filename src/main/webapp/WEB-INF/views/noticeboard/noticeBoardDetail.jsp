@@ -187,7 +187,8 @@ $(document).ready(function() {
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const writer = '${login.userid}'; //세션에서 가져온 userid
+			const writer = '${login.userid}'; 
+				//; //세션에서 가져온 userid
 			
 			const reply = $('#reply').val(); //댓글 내용
 			
@@ -259,6 +260,7 @@ $(document).ready(function() {
 					
 					//응답 데이터의 길이가 0보다 작으면 함수를 종료하자.
 					if(replyList.length <= 0) {
+						
 						return; //함수 종료.
 					}
 					
@@ -277,6 +279,7 @@ $(document).ready(function() {
 						
 					}
 					$('#replyList').html(strAdd); //replyList영역에 문자열 형식으로 모든 댓글을 추가.
+					isReplyEmpty(); //비어있으면 처리!
 					//화면에 댓글을 표현할 때 reply-wrap이 display: none으로 선언되어 있는데,
 					//jQuery의 fadeIn 함수로 서서히 드러나도록 처리.
 					$('.reply-wrap').fadeIn(500);
@@ -286,6 +289,12 @@ $(document).ready(function() {
 			
 		} // end getList()
 		
+		function isReplyEmpty(){
+			if($('#replyList').html() ===''){
+				$('#replyList').html('<p>댓글을 입력해주세요.</p>');
+				getList(true);
+			}
+		}
 		
 		//수정, 삭제
 		/*
@@ -357,7 +366,7 @@ $(document).ready(function() {
 						success : function(data) {
 							if(data === 'modSuccess') {
 								alert('정상 수정되었습니다.');
-								//getList(true);
+								getList(true);
 							} else if(data === 'fail'){
 								alert('반드시 내용을 입력해야 합니다.');
 								
@@ -395,7 +404,7 @@ $(document).ready(function() {
 				console.log(e);
 				
 				
-				const writer = 'chae';
+				const writer = '${login.userid}';
 				
 				//댓글 작성자와 세션 아이디가 같다면.
 				
@@ -418,9 +427,9 @@ $(document).ready(function() {
 							},
 							success : function(data) {
 								if(data === 'delSuccess') {
+									getList(true);
 									alert('댓글이 삭제되었습니다.');
 									console.log();
-									getList(true);
 								}
 							},
 							error : function() {
