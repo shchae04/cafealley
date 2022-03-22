@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.BoardVO;
-import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.img.service.IImgService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
@@ -32,7 +31,7 @@ public class CmBoardController {
 	//상세보기 이동처리
 	@GetMapping("/cmDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
-		System.out.println("공지 상세보기 페이지로 이동");
+		System.out.println("커뮤니티 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
 		model.addAttribute("article",service.getContent(bno));
@@ -44,13 +43,13 @@ public class CmBoardController {
 	
 	//목록 이동처리
 	@GetMapping("/cmList")
-	public String nolist(PageVO vo, Model model) {
-		System.out.println("공지 리스트 페이지로 이동");
+	public String cmlist(PageVO vo, Model model) {
+		System.out.println("커뮤니티 게시글 리스트 페이지로 이동");
 		
 		//목록 불러와라
 		service.getList(vo);
 		
-		model.addAttribute("noList",service.getList(vo));
+		model.addAttribute("cmList",service.getList(vo));
 		
 		PageCreator pc = new PageCreator();
 		pc.setPaging(vo);
@@ -65,7 +64,7 @@ public class CmBoardController {
 	//작성 이동처리
 	@GetMapping("/cmWrite")
 	public String noWrite() {
-		System.out.println("공지 작성 페이지로 이동");
+		System.out.println("커뮤니티 게시글 작성 페이지로 이동");
 		return "communityboard/comBoardWrite";
 	}
 	
@@ -74,7 +73,7 @@ public class CmBoardController {
 	@GetMapping("/cmModi")
 	public String noModi(int bno,Model model) {
 		model.addAttribute("article",service.getContent(bno));
-		System.out.println("공지 수정 페이지로 이동");
+		System.out.println("공지 게시글 수정 페이지로 이동");
 		return "communityboard/comBoardModi";
 	}
 	

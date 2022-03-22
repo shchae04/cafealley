@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>noboarddetail</title>
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
 </head>
@@ -43,7 +43,8 @@
 								
                                 <label class="modifycheck" style="float:inherit; font-size: 8px;">
                                 
-                                <c:if test="${article.ismod != 0}">
+
+                                <c:if test="${article.ismod!=0}">
                                 <small>수정됨</small>
                                 </c:if>
                                 
@@ -90,12 +91,13 @@
 
 
                     </form>
-                    <!-- 이전글 다음글 버튼 배치 -->
+                    
                     <br><br><br>
                     <br>
                     <!-- 작성한 회원만 수정가능 -->
                     <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/noBoard/noList"/>'">목록</button>
+                    <!-- 이전글 다음글 버튼 배치 -->
                     <div class="col-xs-3">
                         <input id="prev" type="button" onclick="location.href='<c:url value="/noBoard/noDetail?bno=${article.bno -1 }"/>'" class="btn" value="이전글">
                         <input id="next" type="button" onclick="location.href='<c:url value="/noBoard/noDetail?bno=${article.bno +1 }"/>'" class="btn btn" value="다음글">
@@ -185,8 +187,7 @@ $(document).ready(function() {
 			*/
 			
 			const bno = '${article.bno}'; //컨트롤러에서 넘어온 게시글번호
-			const writer = 'session_id!!'; 
-				//'${login.userid}'; //세션에서 가져온 userid
+			const writer = '${login.userid}'; //세션에서 가져온 userid
 			
 			const reply = $('#reply').val(); //댓글 내용
 			

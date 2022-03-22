@@ -1,10 +1,6 @@
 package com.spring.cafealley.controller;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.command.BoardVO;
-import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.img.service.IImgService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
@@ -38,7 +32,7 @@ public class NoBoardController {
 	//상세보기 이동처리
 	@GetMapping("/noDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
-		System.out.println("공지 상세보기 페이지로 이동");
+		System.out.println("공지 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
 
@@ -53,7 +47,7 @@ public class NoBoardController {
 	//목록 이동처리
 	@GetMapping("/noList")
 	public String nolist(PageVO vo, Model model) {
-		System.out.println("공지 리스트 페이지로 이동");
+		System.out.println("공지 게시글 리스트 페이지로 이동");
 		
 		//목록 불러와라
 		service.getList(vo);
@@ -73,7 +67,7 @@ public class NoBoardController {
 	//작성 이동처리
 	@GetMapping("/noWrite")
 	public String noWrite() {
-		System.out.println("공지 작성 페이지로 이동");
+		System.out.println("공지 게시글 작성 페이지로 이동");
 		return "noticeboard/noticeBoardWrite";
 	}
 	
@@ -82,7 +76,7 @@ public class NoBoardController {
 	@GetMapping("/noModi")
 	public String noModi(int bno,Model model) {
 		model.addAttribute("article",service.getContent(bno));
-		System.out.println("공지 수정 페이지로 이동");
+		System.out.println("공지  수정 페이지로 이동");
 		return "noticeboard/noticeBoardModi";
 	}
 	

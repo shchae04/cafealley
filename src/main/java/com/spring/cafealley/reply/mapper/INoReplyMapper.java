@@ -6,8 +6,6 @@ import com.spring.cafealley.command.ReplyVO;
 
 public interface INoReplyMapper {
 
-	
-	
 	//등록
 	void replyRegist(ReplyVO vo);
 	

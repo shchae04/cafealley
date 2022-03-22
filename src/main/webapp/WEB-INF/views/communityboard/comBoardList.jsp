@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유 게시판</title>
+    <title>커뮤니티 게시판</title>
 
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
@@ -64,7 +64,7 @@
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div
                         style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
-                        <strong>게시판</strong>
+                        <strong>커뮤니티 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
@@ -94,14 +94,14 @@
                     <!-- dummy 데이터 입니다 -->
                     <tbody>
                     
-                    <c:forEach var="no" items="${noList}">
+                    <c:forEach var="cm" items="${cmList}">
                         <tr>
-                            <td>${no.bno }</td>
-                            <td><a href="<c:url value='/noBoard/noDetail?bno=${no.bno}'/>">${no.title }</a></td>
-                            <td>${no.writer}</td>
-                            <td> <fmt:formatDate value="${no.regdate}" pattern="MM-dd"/>
-                            <c:if test="${no.ismod = '0'}"></c:if>
-                            <c:if test="${no.ismod = '1'}"> <small>수정됨</small> </c:if>
+                            <td>${cm.bno }</td>
+                            <td><a href="<c:url value='/cmBoard/cmDetail?bno=${cm.bno}'/>">${cm.title }</a></td>
+                            <td>${cm.writer}</td>
+                            <td> <fmt:formatDate value="${cm.regdate}" pattern="MM-dd"/>
+                            <c:if test="${cm.ismod = '0'}"></c:if>
+                            <c:if test="${cm.ismod = '0'}"> <small>수정됨</small> </c:if>
                             </td>
                             
 
@@ -116,7 +116,7 @@
                 		>글쓰기</button>
                 <hr>
 						<!-- 페이징 처리 -->
-						<form action="<c:url value='/noBoard/noList' />" name="pageForm">
+						<form action="<c:url value='/cmBoard/cmList' />" name="pageForm">
 	                        <div class="text-center clearfix">
 	                            <hr>
 	                            <ul class="pagination" id="pagination">
