@@ -15,8 +15,10 @@ public class ProductService implements IProductService {
 	private IProductMapper mapper;
 	
 	@Override
-	public List<ProductVO> getList(String procategory) {
-		return mapper.getList(procategory);
+	public List<ProductVO> getList(String procategory, String keyword) {
+		System.out.println("service에서의 procategory : " + procategory);
+		System.out.println("service에서의 keyword : " + keyword);
+		return mapper.getList(procategory, keyword);
 	}
 
 	@Override
@@ -26,7 +28,6 @@ public class ProductService implements IProductService {
 	
 	@Override
 	public void updateProduct(ProductVO vo) {
-		
 		mapper.updateProduct(vo);
 	}
 

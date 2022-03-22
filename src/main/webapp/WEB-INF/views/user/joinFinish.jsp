@@ -46,9 +46,13 @@
         </div>
         <div>
             <div class="wrapper">
-                <button type="button" class="btn btn-lg" style="background-color: #ac7c7c; color: white;">로그인 화면으로 ></button>
+                <button type="button" id="btnLogin" class="btn btn-lg" style="background-color: #ac7c7c; color: white;">
+                	<a data-toggle="modal" data-target="#myModal">로그인 화면으로</a>
+                </button>
                 &emsp;&emsp;&emsp;&nbsp;
-                <button type="button" class="btn btn-lg">메인페이지 </button>
+                <button type="button" class="btn btn-lg">
+                	<a herf="http://localhost/cafealley/">메인페이지</a>
+                </button>
                 
 
             </div>
@@ -57,6 +61,7 @@
 
 
     <%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
 

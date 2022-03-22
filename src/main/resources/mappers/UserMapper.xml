@@ -64,7 +64,7 @@
 		addrdetail = #{addrdetail, jdbcType=VARCHAR},
 		zipcode = #{zipcode, jdbcType=VARCHAR},
 		businessnum = #{businessnum, jdbcType=VARCHAR},
-		filenum = #{filenum, jdbcType=INTEGER}
+		filenum = #{filenum}
 		WHERE userid = #{userid}
 	</update>
 	
