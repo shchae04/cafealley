@@ -7,7 +7,7 @@ import com.spring.cafealley.command.ProductVO;
 public interface IProductService {
 
 	//상품 전체목록 가져오기
-	List<ProductVO> getList(String procategory);
+	List<ProductVO> getList(String procategory, String keyword);
 	
 	//상품 등록하기
 	void insertProduct(ProductVO vo);

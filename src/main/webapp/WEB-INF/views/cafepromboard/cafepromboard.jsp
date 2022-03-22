@@ -1217,30 +1217,6 @@
             }
         }
 
-
-
-
-
-
-        ///////////////////////// 자동스크롤 및 옆에 aside바 걸리게하는 로직
-        /*
-       $(window).scroll(function(){
-      	// 윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같아지면 로직을 수행
-      	// 문서 높이 - 브라우저창 높이 = 스크롤 창의 끝 높이와 같다면 -> 새로운 내용을 불러오자.
-      	if(Math.round($(window).scrollTop()) === $(document).height()-$(window).height()){
-      		//console.log(++page);
-      		//$('#contentDiv').append("<h1> Page: " + page + "</h1>");
-              //$('#contentDiv').append("<br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br><br>무한<br>페이징<br>로드<br>중입니다~~~<br>");
-              
-              // 목록 불러오기의 sql문을 페이징 쿼리를 사용해서 작성을 해 주시는 겁니다.
-              // 사용자의 스크롤이 바닥에 닿았을 때, 페ㅔ이지 변수의 값을 하나 올리고
-              // getList(false)를 주셔서 누적해서 계쏙 열어주시면 됩니다. -> 마치 getList(++page, false);
-              // 게시글을 몇개씩 불러올 지는 페이징 알고리즘에서 알아서 정해주시면 됩니다.             
-      	}
-      	 
-      	 
-       });
-       */
         $(window).scroll(function () {
             let minheightval = $(document).height() - vh(70);
             $('.aside-wrapper').css('min-height', minheightval)
