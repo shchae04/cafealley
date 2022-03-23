@@ -64,27 +64,25 @@
                         </div>
                         <div class="form-group">
                             <label for="content clearfix">내용</label>
-                            <div class="form-row">
-                            <!-- key 값이랑 연동. -->
-                                <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
+                           	
+                           	 <div class="form-group">
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
+                                <div class="img-wrapper" style="margin: 100px auto;" >
                                     
-	                                    <img alt="pic1" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
-	                                    <img alt="pic2" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
-	                                    <img alt="pic3" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
-                                   
+	                                    <img alt="pic1" style="display:block; margin: 0 auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
+	                                    <img alt="pic2" style="display:block; margin: 30px auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
+	                                    <img alt="pic3" style="display:block; margin: 0 auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                    
+                                    </div>
                                     
                                 </div>
-                             
-                              
-                            </div>
-                                <div class="detailtext">
-             					 <p class="col-xs-12">
+                                <div class="form-group" style="float: left;">
+             					 <p>
              					 ${article.content}
              					 
              					 </p>	
-                                </div>
+                              </div>
                         </div>
 
 

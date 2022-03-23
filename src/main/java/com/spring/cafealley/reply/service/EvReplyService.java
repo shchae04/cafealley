@@ -9,7 +9,7 @@ import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.reply.mapper.IEvReplyMapper;
 
 @Service
-public class EvReplyService implements IEvReplyMapper {
+public class EvReplyService implements IEvReplyService {
 
 	@Autowired
 	private IEvReplyMapper evmapper;
