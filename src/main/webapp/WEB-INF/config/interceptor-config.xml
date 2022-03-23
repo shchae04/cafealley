@@ -10,13 +10,28 @@
 	
 	<!-- bean 등록 -->
 	<bean id="AutoLoginInterceptor" class="com.spring.cafealley.util.interceptor.AutoLoginInterceptor" />
+	<bean id="BoardHandler" class="com.spring.cafealley.util.interceptor.BoardHandler" />
 	
 	<mvc:interceptors>
+	
 		<mvc:interceptor>
 			<!-- path에 작성된 요청에 반응 -->
 			<mvc:mapping path="/"/>
 			<ref bean="AutoLoginInterceptor" />
 		</mvc:interceptor>
+		
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/noBoard/noWrite"/>
+			<mvc:mapping path="/noBoard/noModi"/>
+			<mvc:mapping path="/evBoard/evWrite"/>
+			<mvc:mapping path="/evBoard/evModi"/>
+			<mvc:mapping path="/cmBoard/cmWrite"/>
+			<mvc:mapping path="/cmBoard/cmModi"/>
+			
+			<ref bean="BoardHandler" />
+		</mvc:interceptor>
+	
 	</mvc:interceptors>
 
 </beans>
