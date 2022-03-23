@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.command.UserVO;
-import com.spring.cafealley.reply.service.IReplyService;
+import com.spring.cafealley.reply.service.IEvReplyService;
 
 
 @RestController
@@ -25,7 +25,7 @@ import com.spring.cafealley.reply.service.IReplyService;
 public class EvReplyController {
 	
 	@Autowired
-	private IReplyService service;
+	private IEvReplyService service;
 	
 	//댓글 등록
 	@PostMapping("/replyRegist")
