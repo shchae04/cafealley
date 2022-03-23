@@ -2,6 +2,8 @@ package com.spring.cafealley.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.cafealley.cart.service.ICartService;
+import com.spring.cafealley.command.CartVO;
 import com.spring.cafealley.command.OrderingVO;
+import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.ordering.service.IOrderingService;
 
 @Controller
@@ -20,10 +25,19 @@ public class OrderingController {
 	
 	@Autowired
 	IOrderingService service;
+	@Autowired
+	ICartService cartservice;
 	
-	
-	@GetMapping("/orderRegist")
-	public void regist() {}
+	@GetMapping("/orderRegist/{carttype}")
+	public String regist(@PathVariable int carttype, Model model, HttpSession session) {
+		System.out.println("order/orderRegist: GET");
+		String userid = ((UserVO) session.getAttribute("login")).getUserid();
+		List<CartVO> lastInsertedCartList = cartservice.select(userid, carttype);
+		System.out.println("ordercontroller에서 부른 lastInsertedCartList : ");
+		System.out.println(lastInsertedCartList);
+		model.addAttribute("cartList", lastInsertedCartList);
+		return "ordering/orderRegist";
+	}
 
 	@PostMapping("/orderRegist")
 	public String orderRegist(OrderingVO vo){

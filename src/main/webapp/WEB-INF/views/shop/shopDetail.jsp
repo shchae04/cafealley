@@ -289,7 +289,7 @@ button.btn-cart, button.btn-order {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 prod-img">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail" onerror="deleteimg(this)">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail" onerror="this.remove();">
 				</div>
 				<div class="col-xs-6">
 					<div class="detail-info">
@@ -342,8 +342,8 @@ button.btn-cart, button.btn-order {
 				</div>
 
 				<div class="col-xs-12 prod-detail">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="deleteimg(this)">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail" onerror="deleteimg(this)">					
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="this.remove();">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail" onerror="this.remove();">					
 					<p style="text-align: center; margin-top: 50px;">${shop.content}</p>
 				</div>
 
@@ -357,11 +357,6 @@ button.btn-cart, button.btn-order {
 	<script>
         const $seloption = document.querySelector('#sel-option');
         const $easycart = document.querySelector('.easy-cart');
-
-        // 이미지 로드 실패시 이미지태그 삭제
-		function deleteimg($input){
-			$input.remove();
-		}
         
         
         // 옵션선택하면 easycart에 해당 옵션 띄우게~
@@ -524,10 +519,44 @@ button.btn-cart, button.btn-order {
 					}
 				}); // end ajax
 
-			});// end bt-ncart click
+			});// end btn-cart click
+			
+			// 바로구매
+			$('.btn-order').on('click', function(e){
+				let arr = [];
+				const inputnumbers = document.querySelectorAll('input[type="number"]');
+				const selectedprices = document.querySelectorAll('.selected-price');
+				for(let n = 0; n<inputnumbers.length; n++){
+					let cartamount = inputnumbers[n].value; // 이게 cartamount
+					let prono = $('#a'+inputnumbers[n].getAttribute('id').replace('b','')).val(); // 이게 prono 
+					let carttotalprice = selectedprices[n].textContent.replaceAll(',','').replace('원',''); // 이게 cattotalprice
+					arr.push({
+						'prono' : prono,
+						'cartamount' : cartamount,
+						'carttotalprice' : carttotalprice
+					});
+				}
+				
+				$.ajax({
+					type: "post",
+					url: "<c:url value='/cart/cartOrder' />",
+					data: JSON.stringify(arr),
+					contentType : 'application/json',
+					success: function(result){
+						if(result !== ''){
+							location.href='${pageContext.request.contextPath}/ordering/orderRegist/'+result;
+						}
+					},
+					error : function(){
+						alert('바로구매에 실패했습니다. 다시 시도하세요.');
+					}
+				}); // end of ajax
+				
+			}); // end btn-order click
 			
 			
 		});// end $(function(){});
+		
     </script>
 </body>
 

@@ -19,7 +19,10 @@ public interface ICartMapper {
 	
 	// 장바구니 업데이트
 	void update(CartVO vo);
-
 	
+	// 장바구니의 가장 큰 carttype 번호 가져오기
+	int getMaxCarttype(String userid);
+	
+	int countCart(String userid);
 }
 

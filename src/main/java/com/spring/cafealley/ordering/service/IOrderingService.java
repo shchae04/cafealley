@@ -10,7 +10,7 @@ public interface IOrderingService {
 	
 	List<OrderingVO> getList(String userId);
 	
-	OrderingVO getOrder();
+	OrderingVO getOrder(String userid, int carttype);
 	
 	void modify(OrderingVO vo);
 	

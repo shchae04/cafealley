@@ -28,9 +28,8 @@ public class OrderingService implements IOrderingService {
 	}
 
 	@Override
-	public OrderingVO getOrder() {
-		// TODO Auto-generated method stub
-		return null;
+	public OrderingVO getOrder(String userid, int carttype) {
+		return mapper.getOrder(userid, carttype);
 	}
 
 	@Override

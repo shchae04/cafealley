@@ -30,7 +30,8 @@
 <!--  장바구니 찾기 -->
 <select id="select" resultType="com.spring.cafealley.command.CartVO">
 	SELECT c.*,
-		   p.proname 
+		   p.proname,
+		   p.filenum
 	  FROM cart c
 	  LEFT OUTER JOIN product p
 	  ON c.prono = p.prono
@@ -53,8 +54,18 @@
 	WHERE cartno = #{cartno}
 </delete>
 
+<!-- 유저의 가장 큰 carttype 가져오기 -->
+<select id="getMaxCarttype" resultType="int">
+	SELECT MAX(carttype)
+	  FROM cart
+	 WHERE userid = #{userid}
+</select>
 
-	
+<select id="countCart" resultType="int">
+	SELECT COUNT(*)
+	  FROM cart
+	 WHERE userid = #{userid}
+</select>
 	
 
 </mapper>

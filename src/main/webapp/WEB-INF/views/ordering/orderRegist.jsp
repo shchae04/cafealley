@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <!DOCTYPE html>
 
 <head>
@@ -34,44 +35,19 @@
 						<th>판매가</th>
 						<th>수량</th>
 						<th>합계</th>
-						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="finor-infobo">
-						<td><img src="../img/prod1.jpg" alt=""></td>
-						<td>베트남 커피</td>
-						<td><span class="itemprice">30000</span>원</td>
-						<td><input class="countnum" type="number" min="1"
-							style="width: 40px; border: 1px solid gray;" value="1">개
-
-						</td>
-						<td class="totalprice" style="font-size: 16px; font-weight: 900;"></td>
-						<td><a class="deletebtn">삭제</a></td>
-					</tr>
-					<tr class="finor-infobo">
-						<td><img src="../img/prod1.jpg" alt=""></td>
-						<td>베트남 커피</td>
-						<td><span class="itemprice">30000</span>원</td>
-						<td><input class="countnum" type="number" min="1"
-							style="width: 40px; border: 1px solid gray;" value="1">개
-
-						</td>
-						<td class="totalprice" style="font-size: 16px; font-weight: 900;"></td>
-						<td><a class="deletebtn">삭제</a></td>
-					</tr>
-					<tr class="finor-infobo">
-						<td><img src="../img/prod1.jpg" alt=""></td>
-						<td>베트남 커피</td>
-						<td><span class="itemprice">30000</span>원</td>
-						<td><input class="countnum" type="number" min="1"
-							style="width: 40px; border: 1px solid gray;" value="1">개
-
-						</td>
-						<td class="totalprice" style="font-size: 16px; font-weight: 900;"></td>
-						<td><a class="deletebtn">삭제</a></td>
-					</tr>
-
+					<c:forEach var = "cart" items="${cartList}" varStatus="status">
+						<tr class="finor-infobo">
+							<td><img src="<c:url value='/loadimg/display/${cart.filenum}/1'/>" style="margin-left: 50px;"></td>
+							<td>${cart.proname}</td>
+							<td><span class="itemprice"><fmt:formatNumber type="number" maxFractionDigits="0"  value="${cart.carttotalprice / cart.cartamount}" /></span>원</td>
+							<td><p class="countnum">${cart.cartamount}개</p>
+							</td>
+							<td class="totalprice" style="font-size: 16px; font-weight: 900;">${cart.carttotalprice}원</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<table class="finor-infota">
@@ -89,15 +65,15 @@
 		</div>
 		<form action="#" method="post">
 			<!-- 일단 임시로. -->
-			<input type="hidden" name="carttype" value="2">
+			<input type="hidden" name="carttype" value="${cartList[0].carttype}">
 			<!-- js에서 계산됨. -->
 			<input type="hidden" name="ordertotalprice">
 			<div class="finor-wrapper2" style="margin-top: 40px;">
 				<h4 style="margin-bottom: 15px; display: inline-block;">주문자정보</h4>
 				&nbsp; <input type="checkbox"><span>회원 정보와 동일</span>
 			</div>
-			<!-- 일단 임시로. -->
-			<input type="hidden" name="userid" value="abc1234">
+
+			<input type="hidden" name="userid" value="${cartList[0].carttype}">
 			<div class="finor-wrapper2">
 				<table class="finor-infota ">
 					<tbody class="finor-transinfota orderinfo-input"
@@ -245,37 +221,6 @@
 
 	<script>
 
-        
-        
-
-
-        /*금액 카운트 기능*/
-        const $table = document.querySelector('.finor-infota');
-        $table.addEventListener('change', e=>{
-            if(!e.target.matches('.countnum')){
-                return;
-            }
-            open();
-
-        });
-
-        /*리스트 삭제 기능*/
-        $table.addEventListener('click', e=> {
-            if(!e.target.matches('.deletebtn')) {
-                return;
-            }
-            console.log(e.target.parentNode.parentNode);
-            e.target.parentNode.parentNode.remove();
-            open();
-
-            
-
-        });
-
-
-
-
-
         window.onload = open();
 
 
@@ -293,7 +238,6 @@
 			document.querySelector('input[name="ordertotalprice"]').value = totalPrice;
 			document.querySelector('#product-total-price').innerHTML = productTotalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             document.querySelector('#total-price').innerHTML = totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") ;
-
         }
 
 

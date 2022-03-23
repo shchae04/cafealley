@@ -2,6 +2,8 @@ package com.spring.cafealley.ordering.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.cafealley.command.OrderingVO;
 
 public interface IOrderingMapper {
@@ -10,7 +12,8 @@ public interface IOrderingMapper {
 	
 	List<OrderingVO> getList(String userId);
 	
-	OrderingVO getOrder();
+	OrderingVO getOrder(@Param("userid") String userid, 
+						@Param("carttype") int carttype);
 	
 	void modify(OrderingVO vo);
 	

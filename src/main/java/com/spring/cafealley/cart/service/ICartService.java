@@ -20,5 +20,7 @@ public interface ICartService {
 	// 장바구니 수량 및 토탈가격 수정
 	void update(CartVO vo);
 	
+	// 장바구니의 가장 큰 carttype 번호 가져오기
+	int getMaxCarttype(String userid);
 	
 }
