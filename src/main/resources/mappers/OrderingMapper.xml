@@ -61,6 +61,11 @@
   	</sql>
   
   
+    <sql id="getListUserId">
+    	<if test="userId != null and userId != '' ">
+    		WHERE o.userid = #{userid}
+    	</if>
+    </sql>  
   
   
   	<insert id="order">
@@ -84,7 +89,7 @@
   	  LEFT OUTER JOIN cart c
   	    ON o.userid = c.userid 
   	   AND o.carttype = c.carttype
-  	 WHERE o.userid = #{userid}
+  	 <include refid="getListUserId"></include>
   	 ORDER BY o.ordernum DESC
   	</select>
   	

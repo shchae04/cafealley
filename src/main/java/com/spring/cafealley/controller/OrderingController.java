@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.cafealley.cart.service.ICartService;
 import com.spring.cafealley.command.CartVO;
@@ -40,12 +41,15 @@ public class OrderingController {
 	}
 
 	@PostMapping("/orderRegist")
-	public String orderRegist(OrderingVO vo){
+	public String orderRegist(OrderingVO vo, RedirectAttributes ra, HttpSession session){
 		System.out.println("/ordering/orderRegist: POST");
+		String userid = ((UserVO) session.getAttribute("login")).getUserid();
 		System.out.println(vo);
 		service.order(vo);
-		
-		return "ordering/orderFinish";
+		OrderingVO lastOrdered = service.getOrder(userid, vo.getCarttype());
+		ra.addFlashAttribute("lastOrdered",lastOrdered);
+		ra.addFlashAttribute("cartList",cartservice.select(userid, lastOrdered.getCarttype()));
+		return "redirect:/ordering/orderFinish";
 	}
 	
 	@GetMapping("/orderFinish")
@@ -54,8 +58,7 @@ public class OrderingController {
 	@GetMapping("/orderManagement")
 	public void manage(Model model){
 		System.out.println("/ordering/orderManagement: GET");
-		String userid="abc1234";
-		List<OrderingVO> orderlist = service.getList(userid);
+		List<OrderingVO> orderlist = service.getList("");
 		System.out.println(orderlist);
 		model.addAttribute("orderList" , orderlist);		
 	}
