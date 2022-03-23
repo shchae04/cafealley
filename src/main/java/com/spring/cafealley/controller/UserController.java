@@ -36,6 +36,7 @@ import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
+import com.spring.cafealley.reply.service.ICmReplyService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
 import com.spring.cafealley.util.PageCreator;
@@ -53,6 +54,8 @@ public class UserController {
 	private ImgService imgService;
 	@Autowired
 	private ICmBoardService cmBoardService;
+	@Autowired
+	private ICmReplyService cmReplyService;
 	
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
@@ -291,15 +294,19 @@ public class UserController {
 	
 	// 자유게시판 작성 댓글 보기로 이동
 	@GetMapping("/cmnReplyChk")
-	public void CmnReplyChk() {}
-	
-	//email QnA로 이동
-	@GetMapping("/emailQnA")
-	public void emailQnA() {}
+	public void CmnReplyChk(PageVO vo, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 CmnBoardChk 메서드 발동");
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(cmReplyService.getTotal(vo));
 		
-	//주문내역/배송내역 조회로 이동
-	@GetMapping("/orderDelHistory")
-	public void orderDelHistory() {}
+
+		model.addAttribute("replyList", cmReplyService.getReplyList(vo));
+		model.addAttribute("pc", pc);
+	}
 	
 	// 홍보게시판 작성 글 보기로 이동
 	@GetMapping("/promoBoardChk")
@@ -309,6 +316,10 @@ public class UserController {
 	@GetMapping("/promoReplyChk")
 	public void PromoReplyChk() {}
 	
+	
+	//주문내역/배송내역 조회로 이동
+	@GetMapping("/orderDelHistory")
+	public void orderDelHistory() {}
 	
 	// 로그아웃
 	@GetMapping("/logout")
