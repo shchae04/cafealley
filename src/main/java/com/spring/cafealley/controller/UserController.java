@@ -34,8 +34,10 @@ import org.springframework.web.util.WebUtils;
 import com.spring.cafealley.board.service.BoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.PromoBoardVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
+import com.spring.cafealley.promoboard.service.IPromoBoardService;
 import com.spring.cafealley.reply.service.ICmReplyService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
@@ -56,6 +58,8 @@ public class UserController {
 	private ICmBoardService cmBoardService;
 	@Autowired
 	private ICmReplyService cmReplyService;
+	@Autowired
+	private IPromoBoardService promBoardService;
 	
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
@@ -187,42 +191,7 @@ public class UserController {
 
 	}
 	
-	/*
-	//이미지 파일 전송 요청
-	@ResponseBody
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> getFile (@RequestBody String filepath, String filename) {
-		System.out.println("filename: " + filename);
-		System.out.println("filepath: " + filepath);
-		
-		//날짜폴더, 파일명은 따로 전달해준다.
-		File file = new File(filepath + "\\" + filename);
-		System.out.println(file);
-		
-		ResponseEntity<byte[]> result = null;
-		try {
-			//추가적으로 필요한 정보 전달.
-			//org.springframework.http.HttpHeaders
-			HttpHeaders headers = new HttpHeaders();
-			//probeContentType: 파라미터로 전달받은 파일의 타입을 문자열로 변환해 주는 메서드
-			//사용자에게 보여주고자 하는 데이터가 어떤 파일인지를 검사해서 응답 상태 코드를 다르게 리턴할 수도 있습니다.
-			headers.add("Cotent-Type", Files.probeContentType(file.toPath()));
-			
-			
-			ResponseEntity<>(응답 객체에 답을 내용, 헤더에 답을 내용, 상태메세지)
-			FileCopyUtils: 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드의 집합체
-			file객체 안에 있는 내용을 복사하고 byte배열로 변환해서 바디에 담아 화면에 전달.
-			
-			copyToByteArray는 필수!
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	*/
+
 
 	// 마이페이지 수정 요청
 	@PostMapping("/userUpdate")
@@ -310,14 +279,29 @@ public class UserController {
 	
 	// 홍보게시판 작성 글 보기로 이동
 	@GetMapping("/promoBoardChk")
-	public void PromoBoardChk() {}
+	public void promoBoardChk(PageVO paging, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 promoBoardChk 메서드 발동");
+		System.out.println("요청 페이지 번호: " + paging.getPageNum());
+		
+
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		paging.setCondition("writer");
+		paging.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(paging);
+		pc.setArticleTotalCount(promBoardService.getTotal(paging));
+		System.out.println(pc);
+
+		model.addAttribute("boardList", promBoardService.getList(paging));
+		model.addAttribute("pc", pc);
+	}
 	
-	// 홍보게시판 작성 글 보기로 이동
+	// 홍보게시판 작성 댓글 보기로 이동
 	@GetMapping("/promoReplyChk")
-	public void PromoReplyChk() {}
+	public void promoReplyChk() {}
 	
 	
-	//주문내역/배송내역 조회로 이동
+	// 주문/배송내역 조회로 이동
 	@GetMapping("/orderDelHistory")
 	public void orderDelHistory() {}
 	
