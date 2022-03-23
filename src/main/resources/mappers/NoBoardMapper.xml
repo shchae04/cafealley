@@ -6,6 +6,16 @@
   
   <mapper namespace="com.spring.cafealley.board.mapper.INoBoardMapper">
   
+  	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'writer'">
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+	</sql>
+  
+  
 
   <insert id="regist">
 	INSERT INTO noboard(bno, title, writer, content,key)
@@ -35,6 +45,7 @@
 			SELECT ROWNUM AS rn, tbl.* FROM
 				(
 				SELECT * FROM noboard
+				<include refid="search"/>
 				ORDER BY bno DESC
 				) tbl
 			)

@@ -69,11 +69,11 @@
                                 <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
-                                    <div style="text-align: center;">
-	                                    <img alt="pic1" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
-	                                    <img alt="pic2" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
-	                                    <img alt="pic3" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
-                                    </div>
+                                    
+	                                    <img alt="pic1" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
+	                                    <img alt="pic2" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
+	                                    <img alt="pic3" style="width: 300px; height: 300px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                   
                                     
                                 </div>
                              
@@ -95,7 +95,10 @@
                     <br><br><br>
                     <br>
                     <!-- 작성한 회원만 수정가능 -->
+                    <c:if test="${login.userid eq article.writer}">
                     <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
+                    </c:if>
+                    
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/noBoard/noList"/>'">목록</button>
                     <!-- 이전글 다음글 버튼 배치 -->
                     <div class="col-xs-3">
