@@ -283,7 +283,7 @@ public class UserController {
 		
 		System.out.println("pc: " + pc);
 		
-		model.addAttribute("boardList", cmBoardService.getTotal(vo));
+		model.addAttribute("boardList", cmBoardService.getList(vo));
 		model.addAttribute("pc", pc);
 		
 		
