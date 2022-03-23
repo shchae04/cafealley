@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.cafealley.command.UserVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IUserMapper {
 
@@ -19,6 +20,9 @@ public interface IUserMapper {
 
 	// 회원 정보 조회
 	UserVO getInfo(String userId);
+	
+	// 총 게시물 수
+	int getTotal(PageVO vo);
 
 	// 회원 정보 수정
 	void updateUser(UserVO vo);

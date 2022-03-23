@@ -434,8 +434,7 @@ button.btn-cart, button.btn-order {
 
 
 
-        //******** 이 부분은 innerHTML에 들어가는 selected-price가 나중에 상품판매게시핀DB에서 가격을 가져오기때문에 
-        //******** 기능구현때 확실히 손보아야해요
+
         // easycart에 있는 수량 바꾸면 옆에 뜨는 가격이랑 합계도 다시 갱신되게~
         $easycart.addEventListener('change', e => {
             productTotalLoad(e.target);
@@ -451,7 +450,7 @@ button.btn-cart, button.btn-order {
             console.log('input의 type이 number임');
             $selectprice = $input.parentNode.nextElementSibling;
 
-            let pricePerEach = $input.getAttribute('id').replace('b',''); //*************** 여기 우항이 페이지에 뿌려지는거 가져와야해서 EL태그로 아마 가져올거에요.
+            let pricePerEach = $input.getAttribute('id').replace('b','');
             let quantity = parseInt($input.value);
             let productPriceTotal = pricePerEach * quantity;
             // 정규표현식으로 컴마 붙여주고 원도 친절히 붙여줌.
@@ -486,6 +485,49 @@ button.btn-cart, button.btn-order {
 
             totalLoad();
         })
+        
+		$(function(){
+			
+			// 장바구니 클릭시 본인 실제장바구니에 db 넣어줘야함 
+			$('.btn-cart').on('click', function(e){
+				let arr = [];
+				const inputnumbers = document.querySelectorAll('input[type="number"]');
+				const selectedprices = document.querySelectorAll('.selected-price');
+				for(let n = 0; n<inputnumbers.length; n++){
+					let cartamount = inputnumbers[n].value; // 이게 cartamount
+					let prono = $('#a'+inputnumbers[n].getAttribute('id').replace('b','')).val(); // 이게 prono 
+					let carttotalprice = selectedprices[n].textContent.replaceAll(',','').replace('원',''); // 이게 cattotalprice
+					arr.push({
+						'prono' : prono,
+						'cartamount' : cartamount,
+						'carttotalprice' : carttotalprice
+					});
+				}
+				
+				$.ajax({
+					type: "post",
+					url: "<c:url value='/cart/cartRegist' />",
+					data: JSON.stringify(arr),
+					contentType : 'application/json',
+					success: function(result){
+						if(result === 'registSuccess'){
+							if(confirm('장바구니에 성공적으로 등록되었습니다. 장바구니로 이동하시겠습니까?')){
+								location.href='${pageContext.request.contextPath}/cart/cartList';
+							}
+						}else if(result === 'noLogin'){
+							alert('로그인 후 시도해주세요'); // 근데 애초에 나중에 인터셉터에서.. 사장님 로그인한것만 들여보낼텐데..
+							return;
+						}
+					},
+					error : function(){
+						alert('장바구니 등록에 실패했습니다. 다시 시도하세요.');
+					}
+				}); // end ajax
+
+			});// end bt-ncart click
+			
+			
+		});// end $(function(){});
     </script>
 </body>
 

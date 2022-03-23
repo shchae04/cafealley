@@ -30,7 +30,7 @@
 		<div class="header">
 			<nav class="header-container">
 				<div class="header-logo">
-					<a href="#"><img width="150px"
+					<a href="<c:url value='/'/>"><img width="150px"
 						src="<c:url value='/img/logo.png'/>" alt="logo"></a>
 				</div>
 
@@ -49,7 +49,7 @@
 										<ul class="dropdown-menu">
 											<li id="header-name">${login.username}님(일반회원)</li>
 											<li>${login.useremail}</li>
-											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
 											<li id="header-barcode">barcode here</li>
 										</ul>
 									</li>
@@ -60,6 +60,7 @@
 											<li id="header-name">${login.username}님(사업자회원)</li>
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+											<li><a href="<c:url value='/cart/cartList' />">장바구니</a></li>
 										</ul>
 									</li>
 								</c:otherwise>
@@ -77,10 +78,10 @@
 				<ul class="header-nav header-nav-dropdown clearfix">
 					<li><a href="#">사이트 소개</a></li>
 					<li><a href="#">Alley 위치</a></li>
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">Coffee Talk</a></li>
-					<li><a href="#">카페 게시판</a></li>
-					<li><a href="#">이벤트</a></li>
+					<li><a href="<c:url value='/noBoard/noList'/>">공지사항</a></li>
+					<li><a href="<c:url value='/cmBoard/cmList'/>">Coffee Talk</a></li>
+					<li><a href="<c:url value='/promo/list'/>">카페 게시판</a></li>
+					<li><a href="<c:url value='/evBoard/evList'/>">이벤트</a></li>
 					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">원두</a></li>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.user.mapper.IUserMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class UserService implements IUserService {
@@ -96,6 +97,12 @@ public class UserService implements IUserService {
 		data.put("userid", userid);
 		mapper.keepLogin(data);
 
+	}
+
+
+	@Override
+	public int getTotal(PageVO vo) {
+		return 1;
 	}
 
 }
