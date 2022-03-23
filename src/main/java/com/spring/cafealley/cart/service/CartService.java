@@ -51,6 +51,7 @@ public class CartService implements ICartService {
 					mapper.insert(vo, 1); // 임시장바구니 시작
 				else
 					mapper.insert(vo, 2); // 임시장바구니 이어가기
+				count++;
 			}
 		}
 		
@@ -69,10 +70,22 @@ public class CartService implements ICartService {
 		mapper.delete(cartno);
 	}
 	
+	// 수정
 	@Override
 	public void update(CartVO vo) {
 		mapper.update(vo);
 	}
+	
+	// 해당유저 가장 큰 carttype가져오기 
+	@Override
+	public int getMaxCarttype(String userid) {
+		if(mapper.countCart(userid)==0) {
+			return 0;
+		}else {
+			return mapper.getMaxCarttype(userid);
+		}
+	}
 
+	
 
 }

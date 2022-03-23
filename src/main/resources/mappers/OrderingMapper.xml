@@ -92,7 +92,8 @@
   	<select id="getOrder" resultType="com.spring.cafealley.command.OrderingVO">
   	SELECT * 
   	  FROM ordering
-  	 WHERE ordernum = #{ordernum}
+  	 WHERE userid = #{userid}
+  	   AND carttype = #{carttype}
   	</select>
   	
   	

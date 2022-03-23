@@ -44,5 +44,6 @@ public class CartVO {
 	private int carttotalprice;	
 
 	private String proname;
+	private int filenum;
 	
 }
