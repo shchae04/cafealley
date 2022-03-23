@@ -15,13 +15,14 @@ public interface IUserService {
 
 	// 로그인
 	UserVO login(String userId, String userPw);
-
+	
+	
 	// 회원 정보 얻어오기
 	UserVO getInfo(String userId);
-	
+	/*
 	// 총 게시물 수
 	int getTotal(PageVO vo);
-
+	 */
 	// 회원정보 수정
 	void updateUser(UserVO vo);
 

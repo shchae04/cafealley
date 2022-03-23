@@ -15,12 +15,11 @@ import com.spring.cafealley.util.PageVO;
 @Service
 public class UserService implements IUserService {
 
-	@Autowired
+	@Autowired 
 	private IUserMapper mapper;
 	
 
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 	@Override
 	public int idCheck(String userId) {
 		return mapper.idCheck(userId);
@@ -98,11 +97,5 @@ public class UserService implements IUserService {
 		mapper.keepLogin(data);
 
 	}
-
-
-	@Override
-	public int getTotal(PageVO vo) {
-		return 1;
-	}
-
+	
 }

@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.cafealley.board.service.BoardService;
+import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
@@ -51,7 +52,7 @@ public class UserController {
 	@Autowired
 	private ImgService imgService;
 	@Autowired
-	private BoardService boardService;
+	private ICmBoardService cmBoardService;
 	
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
@@ -269,19 +270,20 @@ public class UserController {
 	public void CmnBoardChk(PageVO vo, HttpSession session, Model model) {
 		System.out.println("컨트롤러의 CmnBoardChk 메서드 발동");
 		
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(cmBoardService.getTotal(vo));
+		
 		System.out.println("페이지 번호: " + vo.getPageNum());
 		System.out.println("검색어: " + vo.getKeyword());
 		System.out.println("검색 조건: " + vo.getCondition());
 		
-		PageCreator pc = new PageCreator();
-		pc.setPaging(vo);
-		String userId = ((UserVO)session.getAttribute("login")).getUserid();
-		vo.setKeyword(userId); //키워드에 userid를 넣음
-		pc.setArticleTotalCount(boardService.getTotal(vo));
-		
 		System.out.println("pc: " + pc);
 		
-		model.addAttribute("boardList", boardService.getList(vo));
+		model.addAttribute("boardList", cmBoardService.getTotal(vo));
 		model.addAttribute("pc", pc);
 		
 		
