@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,6 @@
                         <table class="table table-hover w-auto">
                             <thead>
                             	<tr>
-                            		<th>번호</th>
 	                                <td>댓글</td>
 	                                <td>작성게시글</td>
 	                                <td>작성일</td>
@@ -94,25 +94,16 @@
                             </thead>
 
                             <tbody>
+                               <c:forEach var="vo" items="${boardList}">
                                 <tr>
-                                    <td>3</td>
-                                    <td><a href="#">댓글 내용 작성 목록입니다 (자동크기 조절로 크기 조절 가능합니다)</a></td>
-                                    <td>댓글을 작성한 게시글 입니다</td>
-                                    <td>0000.00.00</td>
+                                    <td>
+                                    	<a href="<c:url value='/cmBoard/cmDetail?bno=${vo.bno}'/>">${vo.title}</a>
+                                    </td>
+                                    <td>${vo.writer}</td>
+		                            <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><a href="#">댓글 내용을 클릭하면 해당 작성 게시글 상세보기 창으로 이동합니다</a></td>
-                                    <td>작성게시글</td>
-                                    <td>0000.00.00</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">댓글내용</a></td>
-                                    <td>작성게시글</td>
-                                    <td>0000.00.00</td>
-                                </tr>
-                            </tbody>
+                               </c:forEach>
+                           </tbody>
                         </table>
 					</form>
 

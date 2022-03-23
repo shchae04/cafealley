@@ -17,13 +17,13 @@ public interface IUserMapper {
 
 	// 로그인
 	UserVO login(@Param("userid") String userId, @Param("userpw") String userPw);
-
+	
 	// 회원 정보 조회
 	UserVO getInfo(String userId);
 	
 	// 총 게시물 수
-	int getTotal(PageVO vo);
-
+	//int getTotal(PageVO vo);
+	
 	// 회원 정보 수정
 	void updateUser(UserVO vo);
 
