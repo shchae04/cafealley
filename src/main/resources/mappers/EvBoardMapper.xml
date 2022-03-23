@@ -6,6 +6,15 @@
   
   <mapper namespace="com.spring.cafealley.board.mapper.IEvBoardMapper">
   
+  	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'writer'">
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+	</sql>
+  
   <insert id="regist">
   	INSERT INTO evboard(bno, title, writer, content,key)
 	VALUES(evboard_seq.NEXTVAL, #{title}, #{writer}, #{content},#{key})
@@ -33,6 +42,7 @@
 			SELECT ROWNUM AS rn, tbl.* FROM
 				(
 				SELECT * FROM evboard
+				<include refid="search"></include>
 				ORDER BY bno DESC
 				) tbl
 			)

@@ -53,14 +53,17 @@ public class NoBoardController {
 		//목록 불러와라
 		service.getList(vo);
 		
-		model.addAttribute("noList",service.getList(vo));
 		
 		PageCreator pc = new PageCreator();
 		pc.setPaging(vo);
 		pc.setArticleTotalCount(service.getTotal(vo));
-		System.out.println(pc);
+		
+		System.out.println("검색어 :" +vo.getKeyword());
+		System.out.println("검색조건 :" +vo.getCondition());
+		System.out.println("pagecreator값 :"+pc);
 //		페이징처리
 		model.addAttribute("pc",pc); 
+		model.addAttribute("noList",service.getList(vo));
 		
 		return "noticeboard/noticeBoardList";
 	}
