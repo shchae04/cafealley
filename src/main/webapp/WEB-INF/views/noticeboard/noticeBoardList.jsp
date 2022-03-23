@@ -69,14 +69,13 @@
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
                             <div class="search-wrap clearfix">
-                                <select class="form-control search-select" id="condition">
-                                    <option value="title">제목</option>
-
-                                    <option value="writer">작성자</option>
+                                <select class="form-control search-select" name="condition">
+                                    <option value="title" ${pc.paging.condition == 'title' ? 'selected' : ''}>제목</option>
+                                    <option value="writer" ${pc.paging.condition == 'writer' ? 'selected' : ''}>작성자</option>
 
                                 </select>
-                                <button id="searchbtn" type="button" class="btn search-btn">검색</button>
-                                <input type="text" class="form-control search-input">
+                                <button id="searchbtn" type="submit" class="btn search-btn">검색</button>
+                                <input type="text" name="keyword" class="form-control search-input">
                             </div>
 
                         </div>
@@ -135,7 +134,6 @@
 	                            
 	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
 	                            <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
-	                            <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
 	                            <input type="hidden" name="keyword" value="${pc.paging.keyword}">
 	                            <input type="hidden" name="condition" value="${pc.paging.condition}">
 	                            

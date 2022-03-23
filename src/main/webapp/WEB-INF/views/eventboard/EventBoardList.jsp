@@ -69,14 +69,13 @@
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
                             <div class="search-wrap clearfix">
-                                <select class="form-control search-select" id="condition">
-                                    <option value="title">제목</option>
-
-                                    <option value="writer">작성자</option>
+                          	<select class="form-control search-select" name="condition">
+                                <option value="title" ${pc.paging.condition == 'title' ? 'selected' : ''}>제목</option>
+                                <option value="writer" ${pc.paging.condition == 'writer' ? 'selected' : ''}>작성자</option>
 
                                 </select>
-                                <button id="searchbtn" type="button" class="btn search-btn">검색</button>
-                                <input type="text" class="form-control search-input">
+                                <button id="searchbtn" type="submit" class="btn search-btn">검색</button>
+                                <input type="text" name="keyword" class="form-control search-input">
                             </div>
 
                         </div>

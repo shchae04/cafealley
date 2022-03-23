@@ -63,23 +63,21 @@
                         </div>
                         <div class="form-group">
                             <label for="content clearfix">내용</label>
-                            <div class="form-row">
-                            <!-- key 값이랑 연동. -->
-                                <div class="img-wrapper" style="margin: 40px 0; width: 33%; float: left;">
+                           
+                            <div class="form-group">
                                    
                                     <!-- img테이블이랑 join 해서 파일 경로를 가져온다. -->
-                                    <div style="text-align: center;">
-	                                    <img alt="pic1" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
-	                                    <img alt="pic2" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
-	                                    <img alt="pic3" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                <div class="img-wrapper" style="margin: 100px auto;" >
+                                    
+	                                    <img alt="pic1" style="display:block; margin: 0 auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/1'/>">
+	                                    <img alt="pic2" style="display:block; margin: 30px auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/2'/>">
+	                                    <img alt="pic3" style="display:block; margin: 0 auto; width: 600px; height: 450px;" onerror="deleteimg(this)" src="<c:url value='/loadimg/display/${article.key}/3'/>">
+                                    
                                     </div>
                                     
                                 </div>
-                             
-                              
-                            </div>
-                                <div class="detailtext">
-             					 <p class="col-xs-12">
+                                <div class="form-group" style="float: left;">
+             					 <p>
              					 ${article.content}
              					 
              					 </p>	
@@ -94,7 +92,9 @@
                     <br><br><br>
                     <br>
                     <!-- 작성한 회원만 수정가능 -->
-                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/evBoard/evModi?bno=${article.bno}"/>'">수정</button>
+                    <c:if test="${login.userid eq article.writer}">
+                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
+                    </c:if>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/evBoard/evList"/>'">목록</button>
                     <!-- 이전글 다음글 버튼 배치 -->
                     <div class="col-xs-3">
