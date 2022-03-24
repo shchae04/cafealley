@@ -34,7 +34,7 @@
 		   p.filenum
 	  FROM cart c
 	  LEFT OUTER JOIN product p
-	  ON c.prono = p.prono
+	    ON c.prono = p.prono
 	 WHERE userid = #{userid}
 	   AND carttype = #{carttype}
 </select>
@@ -65,6 +65,16 @@
 	SELECT COUNT(*)
 	  FROM cart
 	 WHERE userid = #{userid}
+</select>
+
+<select id="selectOne" resultType="com.spring.cafealley.command.CartVO">
+	SELECT c.*,
+		   p.proname,
+		   p.filenum
+	  FROM cart c
+ 	  LEFT OUTER JOIN product p
+	    ON c.prono = p.prono
+	 WHERE cartno = #{cartno}
 </select>
 	
 

@@ -25,7 +25,7 @@ section {
 
 .container {
 	min-width: 1200px;
-	height: 100%;
+	min-height: 700px;
 }
 
 .row {
@@ -216,6 +216,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								<td><br>상품명</td>
 								<td><br>수량</td>
 								<td><br>상품가격</td>
+								<td><br>상품 가격 총합</td>
 								<td></td>
 							</tr>
 						</thead>
@@ -224,7 +225,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="6">
+								<td colspan="7">
 									<p>
 										상품 합계금액 <strong id="product-total-price">47700</strong>원 + 배송비
 										<strong>3,000</strong>원 = 총 합계 <strong id="total-price">47700</strong>원
@@ -268,6 +269,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
         					totalpricewon = cartList[i].carttotalprice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
         					
         					priceperitem = cartList[i].carttotalprice / cartList[i].cartamount;
+        					priceperitemwon = priceperitem.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
         					
 	        				str+='<tr>';
 	        				str+='<td class="prod-checkbox"><input id="chk'+ cartList[i].cartno + '" type="checkbox"></td>';
@@ -278,6 +280,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	        				str+='<p>'+cartList[i].proname + '</p>';
 	        				str+='</td>';
 	        				str+='<td class="prod-qty"><input type="number" name="" id="a'+cartList[i].cartno+'" value="'+ cartList[i].cartamount + '" min="1"><br></td>';
+	        				str+='<td><p>'+ priceperitemwon +'</p></td>'
 	        				str+='<td class="prod-price">';
 	        				str+='<p class=' + priceperitem + ' id="b'+ cartList[i].cartno +'"" >'+ totalpricewon +'</p>';
 	        				str+='</td>';
@@ -297,7 +300,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
         	
         	function isTbodyEmpty(){
         		if($('tbody').html() === ''){
-        			$('tbody').html(`<tr><td colspan='9'><p style='font-weight: 700; textalign: center; font-size:25px;'> 해당하는 결과가<br> 없습니다.</p></td></tr>`);
+        			$('tbody').html(`<tr><td colspan='9'><p style='font-weight: 700; textalign: center; font-size:25px;'> 장바구니에 상품이<br> 없습니다.</p></td></tr>`);
         		}
         	}
         	
@@ -410,6 +413,59 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             	}
             });
             
+            // 선택 상품 주문 로직
+            $('.btn-sel-order').on('click', function(e){
+            	if(confirm('선택된 상품을 주문하시겠습니까?')){
+            		arr=[];
+	            	for(let input of $('.prod-checkbox input[type="checkbox"]')){
+	            		if(input.checked){
+	            			arr.push(parseInt(input.getAttribute('id').replace('chk','')));
+	            		}
+	            	}
+	            	$.ajax({
+	            		url : '<c:url value="/cart/cartRealOrder"/>',
+	            		type : 'post',
+	            		contentType : 'application/json',
+	            		data : JSON.stringify(arr),
+	            		success : function(result){
+	            			if(result !== ''){
+	            				location.href="${pageContext.request.contextPath}/ordering/orderRegist/" + result;
+	            			}
+	            		},
+	            		error : function(){
+	            			alert('주문에 실패하였습니다. 관리자에게 문의해주세요.');
+	            		}
+	            	}); // end ajax
+            	}else{
+            		return;
+            	}
+            }); // end btn-sel-order click event
+            
+            // 전체 주문 로직
+            $('.btn-all-order').on('click', function(e){
+            	if(confirm('장바구니안의 전체상품을 주문하시겠습니까?')){
+            		arr=[];
+	            	for(let input of $('.prod-checkbox input[type="checkbox"]')){
+            			arr.push(parseInt(input.getAttribute('id').replace('chk','')));
+	            	}
+	            	$.ajax({
+	            		url : '<c:url value="/cart/cartRealOrder"/>',
+	            		type : 'post',
+	            		contentType : 'application/json',
+	            		data : JSON.stringify(arr),
+	            		success : function(result){
+	            			if(result !== ''){
+	            				location.href="${pageContext.request.contextPath}/ordering/orderRegist/" + result;
+	            			}
+	            		},
+	            		error : function(){
+	            			alert('주문에 실패하였습니다. 관리자에게 문의해주세요.');
+	            		}
+	            	}); // end ajax
+            	}else{
+            		return;
+            	}
+            }); // end btn-all-order click event
    	
         }); // end $(function(){});
         

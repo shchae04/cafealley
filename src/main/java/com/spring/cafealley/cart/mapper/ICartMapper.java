@@ -14,6 +14,9 @@ public interface ICartMapper {
 	// 장바구니 찾기
 	List<CartVO> select(@Param("userid")String userid, @Param("carttype") int carttype);
 	
+	// 장바구니 하나 찾기
+	CartVO selectOne(int cartno);
+	
 	// 장바구니 삭제
 	void delete(int cartno);
 	

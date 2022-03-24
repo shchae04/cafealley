@@ -29,6 +29,7 @@ public class OrderingController {
 	@Autowired
 	ICartService cartservice;
 	
+	// 바로구매로 주문 페이지 이동
 	@GetMapping("/orderRegist/{carttype}")
 	public String regist(@PathVariable int carttype, Model model, HttpSession session) {
 		System.out.println("order/orderRegist: GET");
@@ -39,7 +40,12 @@ public class OrderingController {
 		model.addAttribute("cartList", lastInsertedCartList);
 		return "ordering/orderRegist";
 	}
+	
+	
 
+	
+	
+	// 주문
 	@PostMapping("/orderRegist")
 	public String orderRegist(OrderingVO vo, RedirectAttributes ra, HttpSession session){
 		System.out.println("/ordering/orderRegist: POST");

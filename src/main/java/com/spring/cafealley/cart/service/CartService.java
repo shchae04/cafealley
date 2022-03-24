@@ -85,6 +85,11 @@ public class CartService implements ICartService {
 			return mapper.getMaxCarttype(userid);
 		}
 	}
+	
+	@Override
+	public CartVO selectOne(int cartno) {
+		return mapper.selectOne(cartno);
+	}
 
 	
 

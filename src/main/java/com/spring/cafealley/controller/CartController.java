@@ -135,4 +135,27 @@ public class CartController {
 		return "delSuccess";
 	}
 	
+	@ResponseBody
+	@PostMapping("/cartRealOrder")
+	public String cartRealOrder(@RequestBody List<Integer> cartnos, HttpSession session) {
+		System.out.println("/cart/cartRealRegist: POST");
+		
+		String userid = ((UserVO)session.getAttribute("login")).getUserid();
+		
+		List<CartVO> selList = new ArrayList<>();
+		// 주문되면 이제 박제될거니깐 임시장바구니로 복제해둠.
+		for(int cartno : cartnos) {
+			selList.add(service.selectOne(cartno));
+		}
+		service.insert(selList, "temp", userid);
+		int maxCartType = service.getMaxCarttype(userid);
+		
+		// 복제 후에는 실제 장바구니에서 제거해줌.
+		for(int cartno : cartnos) {
+			service.delete(cartno);
+		}
+		
+		return Integer.toString(maxCartType);
+	}
+	
 }
