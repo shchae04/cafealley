@@ -26,5 +26,6 @@ public interface ICmBoardMapper {
 	//삭제
 	void delete(int bno);
 	
-	
+	//메인에 top5 목록 불러오기
+    List<BoardVO> getMainCmBaord();
 }

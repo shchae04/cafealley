@@ -54,6 +54,21 @@
 		
   </select>
   
+  <select id="getMainCmBaord" resultType="com.spring.cafealley.command.BoardVO">
+              SELECT * FROM
+            (
+            SELECT ROWNUM AS rn, tbl.* FROM
+                (
+                SELECT * FROM cmboard
+                ORDER BY cnt DESC
+                ) tbl
+            )
+        <![CDATA[
+        WHERE rn > 0
+        AND rn <= 5
+        ]]>
+  </select>
+  
 
   
   <select id="getTotal" resultType="int">
