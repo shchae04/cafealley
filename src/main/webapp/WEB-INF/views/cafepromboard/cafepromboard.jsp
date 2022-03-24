@@ -956,8 +956,8 @@
 	                        }
 	                        
 	                    str += ` 
-	                        <a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
-	                        <a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
+	                        <a id="regist" href="` + list[i].bno +`"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
+	                        <a id="delete" href="` + list[i].bno +`"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
 	                    </div>
 	                </div>`;
 	                
@@ -976,6 +976,8 @@
 			console.log('상세보기 글번호: ' + bno);
 			modalContent(bno);
 		}); //end 모달 상세보기.
+		
+	
 		
 		function modalContent(bno) {
 			console.log('모달 상세처리 진행.');
@@ -1085,6 +1087,8 @@
 	                    str += `<div class="profile">
 	                            <img src="<c:url value='/img/profile.png'/>">
 	                            <p>` + list[i].writer + `</p>
+	                            
+	                            <span style="float:right;" class="glyphicon glyphicon-remove" id="rnodelete"></span>
 	                        </div>
 	                        <div class="content">` + 
 	                        	list[i].content + `
@@ -1609,6 +1613,8 @@
 			return time;
 			
 		}
+      
+      
 
 
 
@@ -1648,6 +1654,21 @@
             var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
             return (v * w) / 100;
         }
+        
+        
+        
+      	//댓글 달기 버튼을 누르면 모달창을 띄워주자.
+        $('#contentDiv').on('click','a',function(e){
+        	e.preventDefault();
+        	console.log($(this).attr('href'));
+        		const bno = $(this).attr('href');
+        	if($(this).attr('id') === 'regist'){
+        		
+    			//창 띄움.
+    			modalContent(bno);
+        	}
+        });
+      
         
         //좋아요 기능 구현을 하자.
         $('#contentDiv').on('click', 'a', function(e) {

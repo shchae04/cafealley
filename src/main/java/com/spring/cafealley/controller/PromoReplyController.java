@@ -40,6 +40,19 @@ public class PromoReplyController {
 	}
 	
 	
+	//삭제만 가능.
+	@PostMapping("/delete")
+	@ResponseBody
+	public String delete(@RequestBody PromoReplyVO vo) {
+		System.out.println("댓글 삭제 요청 들어옴!");
+		
+		service.replyDelete(vo.getRno());
+		
+		System.out.println("글번호 :" + vo.getBno() + "댓글번호 :" + vo.getRno());
+		return "success";
+	}
+	
+	
 }
 
 
