@@ -36,11 +36,8 @@ input:read-only {
 </head>
 
 <body>
-
-	
-
 	<div class="finor-container"
-		style="width: 1200px; margin: 200px auto 100px">
+		style="width: 1200px; margin: 100px auto ">
 		<div class="finor-wrapper2" style="margin: 40px; text-align: center;">
 			<h3>주문정보 상세보기</h3>
 		</div>
@@ -202,9 +199,6 @@ input:read-only {
 				</table>
 			</div>
 		</div>
-
-
-	<%@ include file="../include/footer.jsp"%>
 	<script>
 	
 	$(function(){

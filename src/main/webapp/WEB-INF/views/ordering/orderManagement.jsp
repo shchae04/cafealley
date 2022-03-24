@@ -68,6 +68,8 @@ input[type='text'],
 select{
 	border: 1px solid #ddd;
 	text-align : center;
+	float:left;
+	width: 200px;
 }
 select{
 	width: 100px;
@@ -160,7 +162,7 @@ button:disabled {
         $(function(){
             $('#btn-del-info').click(function(){
             	let ordernum = $('#btn-del-info').attr('class');
-                window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=' + $('#track'+ordernum).val(), '사용자 배송정보', 'width=500, height=700, scrollbars=yes, resizable=no')
+                window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=' + $('#track'+ordernum).val(), '사용자 배송정보', 'width=600, height=700, scrollbars=yes, resizable=no')
             });//배송정보보기 버튼 이벤트 끝
             
             for(let ttp of $('.order-ttp')){
