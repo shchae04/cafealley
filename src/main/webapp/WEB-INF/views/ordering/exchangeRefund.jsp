@@ -51,7 +51,10 @@
             border-top: 1px solid #bbb;
             border-bottom: 1px solid #fff;
         }
-
+		.container > .row > .col-xs-12 > .table > tbody > tr > td{
+			vertical-align: baseline;
+		}
+		
         .btn-guide-text {
             font-size: 20px;
             margin: 50px 0;
@@ -156,13 +159,13 @@
                         <i class="fa-solid fa-angle-right"></i> 고객님의 단순 변심에 의한 교환/환불 배송료는 고객님 부담입니다.
                     </li>
                     <li>
-                        <i class="fa-solid fa-angle-right"></i> 원단, 주자재, 봉제 불량은 무상수리 또는 교환해 드립니다.
+                        <i class="fa-solid fa-angle-right"></i> 상품 초기 불량은 무상수리 또는 교환해 드립니다.
                     </li>
                     <li>
-                        <i class="fa-solid fa-angle-right"></i> 소비자 부주의에 의한 제품 손상 및 세탁 부주의로 인한 이염, 변형, 파손된 제품은<br>교환 / 환불의 사유가 되지 않습니다
+                        <i class="fa-solid fa-angle-right"></i> 소비자 부주의에 의한 제품 손상 및 세탁 부주의로 인한 변형, 파손된 제품은<br>교환 / 환불의 사유가 되지 않습니다
                     </li>
                     <li>
-                        <i class="fa-solid fa-angle-right"></i> 사용감이 있거나 상품 택 제거 후에는 교환/ 환불이 불가하오니 주의 바랍니다.
+                        <i class="fa-solid fa-angle-right"></i> 특별한 이유 없이 이미 사용한 상품에 대해서는 변덕으로 인한 사유로 교환/ 환불이 불가하오니 주의 바랍니다.
                     </li>
                 </ul>
 

@@ -8,7 +8,9 @@ public interface IOrderingService {
 
 	void order(OrderingVO vo);
 	
-	List<OrderingVO> getList(String userId);
+	OrderingVO getOrderByOrdernum(int ordernum);
+	
+	List<OrderingVO> getList(String userid);
 	
 	OrderingVO getOrder(String userid, int carttype);
 	

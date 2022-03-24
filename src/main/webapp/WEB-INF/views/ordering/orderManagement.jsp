@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,30 @@ section {
 a {
 	font-weight: 700;
 }
+.order-img{
+	width: 25px;
+	height: 25px;
+}
+.container{
+	min-width:1100px;
+	min-height: 500px;
+}
+input:read-only{
+	background: #dfdfdf;
+	border : 1px solid rgb(118, 118, 118);
+}
+input[type='text'],
+select{
+	border: 1px solid #ddd;
+	text-align : center;
+}
+select{
+	width: 100px;
+}
+button:disabled {
+	background: #dfdfdf;
+}
+
 </style>
 </head>
 <body>
@@ -61,7 +86,7 @@ a {
 		<div class="container">
 			<p class="ord-mgmt-title">주문 관리</p>
 			<table class="table ord-mgmt-table w-auto text-center align-middle"
-				style="min-width: 800px; max-width: 1000px; min-height: 400px;">
+				style="min-width: 800px; ">
 				<thead>
 					<tr>
 						<td>주문번호</td>
@@ -70,6 +95,7 @@ a {
 						<td>주문 정보</td>
 						<td>주문 날짜</td>
 						<td>주문 상태</td>
+						<td>운송장번호</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,29 +103,47 @@ a {
 						<tr>
 							<form action="#" method="post" name="${order.ordernum}">
 								<td>${order.ordernum}</td>
-								<td>${order.userid}</td>
-								<td>${order.ordertotalprice}</td>
-								<td><a href="#">상품번호 : <c:forEach var="cart"
-											items="${order.ordercart}">
-				                        	${cart.prono},
-				                        </c:forEach>
-								</a></td>
-								<!-- <td><a href="#">xxxx 외 x개</a></td> -->
-								<td><fmt:formatDate value="${order.orderdate}" pattern="YY/MM/dd hh:mm" /></td>
-								<td><select id="status${order.ordernum}">
-										<option value="waitdeposit" ${order.orderstatus == 'waitdeposit' ? 'selected' : '' }>입금대기중</option>
-										<option value="completedeposit" ${order.orderstatus == 'completedeposit' ? 'selected' : ''}>입금완료</option>
-										<option value="waitdelivery" ${order.orderstatus == 'waitdelivery' ? 'selected' : ''}>배송준비중</option>
-										<option value="ontheboard" ${order.orderstatus == 'ontheboard' ? 'selected' : '' }>배송중</option>
-										<option value="completedelivery" ${order.orderstatus == 'completedelivery' ? 'selected' : '' }>배송완료</option>
-								</select></td>
+								<td id="id${order.ordernum}">${order.userid}</td>
+								<td class="order-ttp">${order.ordertotalprice}</td>
 								<td>
+									<a href="${order.ordernum}" class="btn-detail">
+										<img class="order-img"alt="주문이미지" src="<c:url value='/loadimg/display/${order.ordercart[0].filenum}/1'/>"> 
+										${order.ordercart[0].proname}
+										<c:if test="${fn:length(order.ordercart) >1}">
+										 	외 ${fn:length(order.ordercart)-1}개의 상품
+										 </c:if>
+									</a>
+								</td>
+								<td>
+									<fmt:formatDate value="${order.orderdate}" pattern="YY/MM/dd hh:mm" />
+								</td>
+								<td>
+									<select id="status${order.ordernum}"  ${order.orderstatus == 'completedelivery' ? 'disabled' : '' }>
+									<c:if test="${order.orderstatus == 'waitdeposit' ? true : false}">
+											<option value="completedeposit" ${order.orderstatus == 'waitdeposit' ? 'selected' : ''}>입금대기</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'waitdeposit' || order.orderstatus == 'completedeposit' ? true : false}">
+											<option value="completedeposit" ${order.orderstatus == 'completedeposit' ? 'selected' : ''}>입금완료</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'completedeposit' || order.orderstatus == 'waitdelivery' ? true : false}">
+											<option value="waitdelivery" ${order.orderstatus == 'waitdelivery' ? 'selected' : ''}>출고준비중</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'waitdelivery' || order.orderstatus == 'ontheboard' ? true : false}">
+											<option value="ontheboard" ${order.orderstatus == 'ontheboard' ? 'selected' : '' }>배송중</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' ? true : false }">
+											<option value="completedelivery" ${order.orderstatus == 'completedelivery' ? 'selected' : '' }>배송완료</option>
+										</c:if>
+									</select>
+								</td>
+								<td>
+									<input type="text" id="track${order.ordernum}" placeholder="현재는 입력할 수 없습니다." value="${order.deliverytracknum}" readonly>
 									<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' }">
-										<button id="btn-del-info">배송정보보기</button>
+										<button type="button" id="btn-del-info" class="${order.ordernum}">배송정보보기</button>
 									</c:if>
 								</td>
 								<td>
-									<button id="${order.ordernum}" type="button" onclick="updateOrder(this)">수정하기</button>
+									<button ${order.orderstatus == 'completedelivery' ? 'disabled' : ''} id="${order.ordernum}" type="button" onclick="updateOrder(this)">${order.orderstatus == 'completedelivery' ? '수정불가' : '수정하기'}</button>
 								</td>
 							</form>
 						</tr>
@@ -115,21 +159,56 @@ a {
     
         $(function(){
             $('#btn-del-info').click(function(){
-                window.open('http://127.0.0.1:5500/orderManagement.html', '사용자 배송정보', 'width=500, height=700, scrollbars=yes, resizable=no')
+            	let ordernum = $('#btn-del-info').attr('class');
+                window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=' + $('#track'+ordernum).val(), '사용자 배송정보', 'width=500, height=700, scrollbars=yes, resizable=no')
             });//배송정보보기 버튼 이벤트 끝
+            
+            for(let ttp of $('.order-ttp')){
+            	ttp.textContent = ttp.textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
+            }
+            console.log($('input[name="deliverytracknum"]').length);
+            
+            
+            $('.table').on('change', 'select', function(e){
+            	if(e.target.value === 'ontheboard'){
+            		ordernum = e.target.getAttribute('id').replace('status', '');
+            		$('#track'+ordernum).attr('readonly', false);
+            		$('#track'+ordernum).attr('placeholder', '대한통운 운송장번호 입력');
+            		$('#track'+ordernum).focus();
+            	}
+            });
+            
+            $('.table').on('click', '.btn-detail', function(e){
+            	e.preventDefault();
+            	ordernum = e.target.getAttribute('href');
+            	userid = $('#id'+ordernum).text(); 
+            	window.open('<c:url value="/ordering/orderDetail/' + ordernum + '/'+ userid +'"/>', '주문 상세보기', 'width=1000, height=700, scrollbars=yes, resizable=no');
+            });
+            
+            
         }); //end jQuery
         
         
         function updateOrder($input){
-        	let ordernum = $input.getAttribute('id');
-        	let orderstatus = document.querySelector('#status' + ordernum).value;
-        	console.log(ordernum);
-        	console.log(orderstatus);
-        	const $form = document.querySelector('form[name="'+ordernum+'"]');
-        	console.log($form);
-        	console.log($form.getAttribute('action'));
-        	$form.setAttribute('action','<c:url value="/ordering/orderModify/' + ordernum + '/' + orderstatus + '"/>');
-        	$form.submit();
+        	if(confirm('한번 주문상태를 수정하면 이전의 주문상태로 돌릴수 없습니다.\n수정하는 정보가 확실하십니까?')){
+	        	let ordernum = $input.getAttribute('id');
+	        	let orderstatus = document.querySelector('#status' + ordernum).value;
+	        	const $form = document.querySelector('form[name="'+ordernum+'"]');
+	        	if($('#track'+ordernum).attr('readonly')){
+	        		$form.setAttribute('action','<c:url value="/ordering/orderModify/' + ordernum + '/' + orderstatus + '/' + 0 + '"/>');
+	        	}else{
+	        		// 숫자와 하이픈만 입력 가능케하는 정규식
+	        		
+	        		if(/[^0123456789-]/g.test( $('#track'+ordernum).val() ) ){
+	        			alert('\"숫자\" 또는 \"숫자 + 하이픈\" 으로 입력 해주세요.');
+	        			$('#track'+ordernum).focus();
+	        			return;
+	        		}
+	        		tracknum = $('#track'+ordernum).val().replaceAll('-','');
+	        		$form.setAttribute('action','<c:url value="/ordering/orderModify/' + ordernum + '/' + orderstatus + '/' + tracknum + '"/>');
+	        	}
+	        	$form.submit();
+        	}
         }
 		
     </script>

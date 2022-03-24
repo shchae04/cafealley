@@ -62,8 +62,8 @@
   
   
     <sql id="getListUserId">
-    	<if test="userId != null and userId != '' ">
-    		WHERE o.userid = #{userid}
+    	<if test="userid != 'allofthem'">
+    		WHERE userid = #{userid}
     	</if>
     </sql>  
   
@@ -89,7 +89,7 @@
   	  LEFT OUTER JOIN cart c
   	    ON o.userid = c.userid 
   	   AND o.carttype = c.carttype
-  	 <include refid="getListUserId"></include>
+  	 <include refid="getListUserId"/>
   	 ORDER BY o.ordernum DESC
   	</select>
   	
@@ -99,6 +99,12 @@
   	  FROM ordering
   	 WHERE userid = #{userid}
   	   AND carttype = #{carttype}
+  	</select>
+  	
+  	<select id="getOrderByOrdernum" resultType="com.spring.cafealley.command.OrderingVO">
+  	SELECT *
+  	  FROM ordering
+  	 WHERE ordernum = #{ordernum}
   	</select>
   	
   	

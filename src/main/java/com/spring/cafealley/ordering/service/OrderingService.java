@@ -22,6 +22,7 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public List<OrderingVO> getList(String userid) {
+		System.out.println("OrderingService에서의 파라머티로 받은 userid : " + userid);
 		List<OrderingVO> list = mapper.getList(userid);
 		System.out.println(list);
 		return list;
@@ -39,8 +40,12 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public void delete(int ordernum) {
-		// TODO Auto-generated method stub
-
+		//mapper.delete(ordernum);
+	}
+	
+	@Override
+	public OrderingVO getOrderByOrdernum(int ordernum) {
+		return mapper.getOrderByOrdernum(ordernum);
 	}
 
 }
