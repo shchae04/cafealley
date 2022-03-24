@@ -881,7 +881,7 @@
 					}
 					
 					for(let i=0; i<list.length; i++) {
-						console.log(list[i].key);
+						console.log('게시글 정보'+list[i].filenum);
 						//filenum === 0 이라면
 						if(list[i].filenum === 0){
 							
@@ -889,7 +889,7 @@
 						str += '<div class="content-wrapper">';
 	                    str += '<div class="title-inner">';
 	                    str += '<div class="profile">';
-	                    str += `<img src='<c:url value="/img/profile.png"/>' />`;
+	                    str += `<img src='<c:url value="/img/profile.png"/>'`+` style="width:40px; height:40px;" />`;
 	                    str += '</div>';
 	                    str += '<div class="title">';
 	                    str += '<p>' + list[i].writer + '</p>';
@@ -973,7 +973,7 @@
 						str += '<div class="content-wrapper">';
 	                    str += '<div class="title-inner">';
 	                    str += '<div class="profile">';
-	                    str += `<img src='<c:url value="/loadimg/display/`+list[i].filenum+`/1"/>' />`;
+	                    str += `<img style="width:40px" src='<c:url value="/loadimg/display/`+list[i].filenum+`/1"/>' />`;
 	                    str += '</div>';
 	                    str += '<div class="title">';
 	                    str += '<p>' + list[i].writer + '</p>';
@@ -1081,6 +1081,10 @@
 				function(data) {
 					console.log(data);
 					
+					if(data.filenum != 0){
+						
+					
+					
 					str += '<ol class="carousel-indicators">';
                     str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
                     if(data.filecnt === 2) {
@@ -1125,7 +1129,11 @@
 				`<input type="hidden" id="con-bno" name="bno" value="` + data.bno + `">
 
                 <div class="profile">
-                    <img src="<c:url value='/img/profile.png'/>">
+                    
+                    
+                    <img style="width:40px" src="<c:url value='/loadimg/display/` + data.filenum + `/1'/>">                   	
+                                    	
+                    
                 </div>
                 <div class="title">
                     <p id="con-writer">` + data.writer + `</p>
@@ -1136,7 +1144,75 @@
                         <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                                 class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
                     </div>;`
-                }
+            		    }
+					//data.filenum 이 null 이 아닌경우.
+					} else {
+						
+						
+						
+						
+						str += '<ol class="carousel-indicators">';
+	                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+	                    if(data.filecnt === 2) {
+	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+	                    } else if(data.filecnt === 3) {
+	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+	                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+	                    }
+	                    str += '</ol>';     
+	                    
+	                    str += '<div class="carousel-inner" role="listbox">';
+	                    str += `<div class="item active">
+	                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
+	                    	</div>`;
+	                   	if(data.filecnt === 2) {
+	                   		str += `<div class="item">
+	                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+	                        	</div>`;
+	                   	} else if(data.filecnt === 3) {
+	                   		str += `<div class="item">
+	                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+	                        	</div>`;
+	                   		str += `<div class="item">
+	                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+	                        	</div>`;
+	                   	}
+	                   	
+	                   	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+	                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	                    <span class="sr-only">Previous</span>
+	                </a>
+	                <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+	                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	                    <span class="sr-only">Next</span>
+	                </a>`;
+	                $('#myCarousel2').html(str);
+	                
+	                str = '';
+	                
+	                str += 
+	                	
+					`<input type="hidden" id="con-bno" name="bno" value="` + data.bno + `">
+
+	                <div class="profile">
+	                    
+	                    
+	                    <img src="<c:url value='/img/profile.png'/>">                   	
+	                                    	
+	                    
+	                </div>
+	                <div class="title">
+	                    <p id="con-writer">` + data.writer + `</p>
+	                </div>`;
+	                if(data.writer === '${login.username}') {
+	                	str += `<div class="cafeowner-menu">
+	                        <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
+	                        <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
+	                                class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
+	                    </div>;`
+	            		    }
+						
+					}
                 $('#addProf').html(str);
                 
                 //$('#con-bno').val(data.bno);

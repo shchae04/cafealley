@@ -33,7 +33,7 @@
 					   u.filenum
 				  FROM promoboard pr
 				  LEFT JOIN users u
-				    ON pr.writer = u.userid
+				    ON pr.writer = u.username
 				<include refid="search"/>
 				ORDER BY bno DESC
 				) tbl
@@ -47,7 +47,10 @@
 	<!-- 상세보기 -->
 	<select id="getContent"
 		resultType="com.spring.cafealley.command.PromoBoardVO">
-		SELECT * FROM promoboard
+		SELECT pr.* , u.filenum  
+		  FROM 
+		promoboard pr LEFT JOIN users u
+		ON pr.writer = u.username
 		WHERE bno = #{bno}
 	</select>
 
