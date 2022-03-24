@@ -32,13 +32,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.cafealley.board.service.BoardService;
+import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.ImgVO;
 import com.spring.cafealley.command.PromoBoardVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
 import com.spring.cafealley.promoboard.service.IPromoBoardService;
+import com.spring.cafealley.reply.mapper.INoReplyMapper;
 import com.spring.cafealley.reply.service.ICmReplyService;
+import com.spring.cafealley.reply.service.IEvReplyService;
+import com.spring.cafealley.reply.service.IReplyService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
 import com.spring.cafealley.util.PageCreator;
@@ -60,6 +64,10 @@ public class UserController {
 	private ICmReplyService cmReplyService;
 	@Autowired
 	private IPromoBoardService promBoardService;
+	@Autowired
+	private IReplyService noReplyService;
+	@Autowired
+	private IEvReplyService evReplyService;
 	
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
@@ -306,6 +314,31 @@ public class UserController {
 	// 홍보게시판 작성 댓글 보기로 이동
 	@GetMapping("/promoReplyChk")
 	public void promoReplyChk() {}
+	
+	// 공지 게시판 작성 댓글 보기로 이동
+	@GetMapping("/noReplyChk")
+	public void noReplyChk(PageVO vo, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 noReplyChk 메서드 발동");
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(noReplyService.getTotal(vo));
+		
+
+		model.addAttribute("replyList", noReplyService.getReplyList(vo));
+		model.addAttribute("pc", pc);
+		System.out.println(noReplyService.getReplyList(vo));
+		System.out.println(pc);
+		
+	}
+	
+	// 이벤트 게시판 작성 댓글 보기로 이동
+	@GetMapping("/evReplyChk")
+	public void evReplyChk(PageVO vo, HttpSession session, Model model) {
+		
+	}
 	
 	
 	// 주문/배송내역 조회로 이동

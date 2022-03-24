@@ -85,7 +85,19 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#">회원정보</a></li>
 						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
+							data-toggle="dropdown" href="#">공지 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/noReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">이벤트 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/evReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">커뮤니티 게시판<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value='/user/cmnBoardChk' />">작성글보기</a></li>
 								<li><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
