@@ -555,7 +555,6 @@
 	                                <th>번호</th>
 	                                <th>제목</th>
 	                                <th>작성일</th>
-	                                <th>조회수</th>
 	                             </tr>
                             </thead>
 
@@ -563,12 +562,11 @@
                             <tbody>
                                <c:forEach var="vo" items="${boardList}">
                                 <tr>
-                                    <td>${vo.bno}</td>
+                                    <td id="writtenBno">${vo.bno}</td>
                                     <td>
-                                    	<a href="<c:url value="/promo/getContent/${vo.bno}" />">${vo.content}</a>
+                                    	<a style="cursor: pointer;" id="toBoardDetail">${vo.content}</a>
                                     </td>
-                                    <td>${vo.writer}</td>
-		                            <td><fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+		                            <td><fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/></td>
                                 </tr>
                                </c:forEach>
                            </tbody>
@@ -677,128 +675,7 @@
     </div> <!-- modal-fade myModal2-->
     
     
-     <!---------------------------------------------------------- 작성 Modal ---------------------------------------------------------->
-    <div class="modal fade" id="myModal4">
-        <div class="modal-dialog" style="width: 1200px;">
-            <button type="button" class="close" data-dismiss="modal" id="writing-dismiss">&times;</button>
-            <!-- Modal Content -->
-            <div class="modal-content">
-
-                <div class="modal-body clearfix">
-                    <div class="modal-promimg" id="writingmodal-img">
-                        <div id="myCarousel4" class="carousel" data-ride="carousel" data-interval="false">
-
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel4" data-slide-to="0" class="active"></li>
-                            </ol>
-
-
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-
-
-                                    <label for="file" class="fileDiv">
-                                        <p>클릭해서 업로드할 이미지를 선택해주세요.</p>
-                                        <img id="fileImg" src="<c:url value='/img/upload.png'/>" alt="upload" />
-                                        <input type="file" name="file" id="file" onchange="readURL(this)"
-                                            style="display: none;">
-                                    </label>
-                                </div>
-                            </div>
-
-                            <a class="left carousel-control" href="#myCarousel4" role="button" data-slide="prev"
-                                style="display:none">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel4" role="button" data-slide="next"
-                                style="display:none">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-
-                        </div> <!-- carousel-->
-                    </div> <!-- modal-promimg -->
-
-
-
-                    <div class="modal-promcontent">
-                        <div class="title-inner">
-
-                            <!--제목영역-->
-                            <div class="profile">
-                                <img src="<c:url value='/img/profile.png'/>">
-                            </div>
-                            <div class="title">
-                                <p id="writer">${login.username}</p>
-                            </div>
-                            <div class="cafeowner-menu">
-                                <a href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;Complete</a>
-                            </div>
-                        </div>
-                        <!--내용영역 70자 내로 작성하게 할 것.-->
-                        <div class="content-inner">
-                            <textarea name="content" id="writingmodal-content"></textarea>
-                        </div>
-
-                        <!-- 좋아요 및 해쉬태그 영역-->
-                        <div class="like-inner">
-                            <!-- 해쉬태그 -->
-                            <ul class="hashtag clearfix">
-                                <p>Area</p>
-                                <span>#</span>
-                                <select name="area" id="write-area">
-                                    <option value="서울" selected>서울</option>
-                                    <option value="경기/인천">경기/인천</option>
-                                    <option value="강원">강원</option>
-                                    <option value="충북">충북</option>
-                                    <option value="충남/대전">충남/대전</option>
-                                    <option value="경북/대구">경북/대구</option>
-                                    <option value="경남/부산">경남/부산</option>
-                                    <option value="전북">전북</option>
-                                    <option value="전남/광주">전남/광주</option>
-                                    <option value="제주">제주</option>
-                                </select>
-
-
-                                <div style="margin-top: 25px;"></div>
-                                <p>Place</p>
-                                <span>#</span>
-                                <select name="place" id="write-place">
-                                    <option value="none" selected> - </option>
-                                    <option value="Nature / Wooden">Nature / Wooden</option>
-                                    <option value="Concrete / Industrial">Concrete / Industrial</option>
-                                    <option value="Modern / Neat">Modern / Neat</option>
-                                    <option value="Retro / Vintage">Retro / Vintage</option>
-                                    <option value="Cozy / Comfort">Cozy / Comfort</option>
-                                </select>
-
-
-                                <div style="margin-top: 25px;"></div>
-                                <p>Restrictions</p>
-                                <ul>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit1" name="limitation1" value="No Kids">No Kids</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit2" name="limitation2" value="No Pet">No Pet</label></li>
-                                    <li><span>#&nbsp;</span><label><input type="checkbox" id="limit3" name="limitation3" value="No Study">No Study</label></li>
-                                </ul>
-                                <p class="warn">카페 사장님께서는 연관 없는 내용을 작성시 제재를 받으실 수 있습니다.</p>
-                        </div>
-                        </ul>
-                    </div>
-
-
-                </div> <!-- modal-promcontent-->
-
-            </div> <!-- modal-body-->
-
-        </div> <!-- modal-content -->
-    </div> <!-- modal-dialog -->
-    </div> <!-- modal-fade myModal4-->
     
-    
-
-
-
     <!---------------------------------------------------------- 수정 Modal ---------------------------------------------------------->
     <div class="modal fade" id="modifyModal">
         <div class="modal-dialog" style="width: 1200px;">
@@ -889,6 +766,15 @@
         </div> <!-- modal-content -->
     </div> <!-- modal-dialog -->
     </div> <!-- modal-fade myModal3-->
+    
+    
+        
+	<div id="contentDiv">
+	                
+		<!-- getJSON이 영역을 채우고 있어용 -->
+	            
+	</div>
+    
     </section>
 
     <%@ include file="../include/footer.jsp" %>
@@ -903,9 +789,10 @@
 	
 	
 	//상세보기 처리
-	$('#contentDiv').on('click', '.carousel-inner a', function(e) {
+	$('#toBoardDetail').click(function(e) {
 		e.preventDefault();
-		const bno = $(this).attr('href');
+		const bno = $('#writtenBno').text();
+		console.log('typeOfbno: ' + typeof(bno));
 		console.log('상세보기 글번호: ' + bno);
 		modalContent(bno);
 	}); //end 모달 상세보기.
@@ -1208,7 +1095,7 @@
 	
 
 
-
+	/*
 	const $area = document.getElementById('area');
     const $place = document.getElementById('place');
     const $restrict = document.getElementById('restrict');
@@ -1257,7 +1144,7 @@
 
 
     })
-
+	*/
 
 
     let filecount = 0;

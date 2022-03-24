@@ -283,7 +283,6 @@ public class UserController {
 		System.out.println("컨트롤러의 promoBoardChk 메서드 발동");
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		
-
 		String userName = ((UserVO)session.getAttribute("login")).getUsername();
 		paging.setCondition("writer");
 		paging.setKeyword(userName); //키워드에 userid를 넣음
