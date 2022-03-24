@@ -284,15 +284,23 @@ public class UserController {
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		
 
-		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		String userName = ((UserVO)session.getAttribute("login")).getUsername();
 		paging.setCondition("writer");
-		paging.setKeyword(userId); //키워드에 userid를 넣음
+		paging.setKeyword(userName); //키워드에 userid를 넣음
 		PageCreator pc = new PageCreator();
 		pc.setPaging(paging);
 		pc.setArticleTotalCount(promBoardService.getTotal(paging));
 		System.out.println(pc);
+		
+		List<PromoBoardVO> boardList = new ArrayList<>();
+		for(PromoBoardVO vo : promBoardService.getList(paging)) {
+			vo.setLikeCnt(promBoardService.likeCnt(vo.getBno()));
+			boardList.add(vo);
+		}
+		
+		System.out.println(boardList);
 
-		model.addAttribute("boardList", promBoardService.getList(paging));
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("pc", pc);
 	}
 	
