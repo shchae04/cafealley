@@ -134,4 +134,6 @@ public class CmBoardController {
 		return "redirect:/cmBoard/cmList";
 		}
 	
+	
+	
 }

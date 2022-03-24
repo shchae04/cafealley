@@ -301,16 +301,15 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		
-<<<<<<< HEAD
+
 		// 이미지 로드 실패시 이미지태그 삭제
 		function deleteimg($input){
 			$input.remove();
 		}
 	 
 	
-=======
+
 	$(function() {
->>>>>>> origin/Minji
 		//다음 주소 api 사용해보기
 		function searchAddress() {
 	        new daum.Postcode({
@@ -343,26 +342,7 @@
 		});//주소 찾기 버튼 클릭 시 카카오 api 함수 발동
 		
 		
-<<<<<<< HEAD
-		$(function() {
-			const fileImgSrc = $('#fileImg').attr('src');
-			
-				$.ajax({
-					type : 'get',
-					url : '<c:url value="/user/display" />',
-					data : fileImgSrc,
-					contentType : 'application/json',
-					success : function(data) {
-						console.log('비동기 success');
-						console.log('fileImgSrc: ' + data);
-					}
-				});// 인증 이메일 전송 비동기 끝 
-=======
 
-		
-		
->>>>>>> origin/Minji
-			
 			// 유효성 검증 정규표현식
 			const getPwCheck = RegExp(/^.*(?=.*\d)(?=.*[a-zA-Z])/);
 			const getEmailCheck =  RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
