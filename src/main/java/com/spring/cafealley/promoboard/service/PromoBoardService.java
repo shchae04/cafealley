@@ -72,4 +72,5 @@ public class PromoBoardService implements IPromoBoardService {
 		return mapper.getTotal(vo);
 	}
 
+	
 }

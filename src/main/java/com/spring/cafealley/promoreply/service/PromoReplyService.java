@@ -32,6 +32,11 @@ public class PromoReplyService implements IPromoReplyService{
 	public void replyDelete(int rno) {
 		mapper.replyDelete(rno);
 	}
+	@Override
+	public String getWriter(int rno) {
+		
+		return mapper.getWriter(rno);
+	}
 
 
 

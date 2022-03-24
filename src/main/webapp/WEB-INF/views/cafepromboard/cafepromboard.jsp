@@ -1088,13 +1088,13 @@
 	                            <img src="<c:url value='/img/profile.png'/>">
 	                            <p>` + list[i].writer + `</p>
 	                            
-	                            <span style="float:right;" class="glyphicon glyphicon-remove" id="rnodelete"></span>
-	                        </div>
-	                        <div class="content">` + 
-	                        	list[i].content + `
-	                        </div>
-	                        <small>` + timeStamp(list[i].regdate) + `</small>
-	                    </div>`;
+	                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+		                        </div>
+		                        <div class="content">` + 
+		                        	list[i].content + `
+		                        </div>
+		                        <small>` + timeStamp(list[i].regdate) + `</small>
+	                    		</div>`;
 					}
 					$('#replyContentDiv').html(str);
 				}
@@ -1136,6 +1136,11 @@
 			}); //end ajax
 			
 		}); // end 댓글등록
+		
+		
+		//삭제 버튼 누르면 
+		
+		
 		
 		
 		//수정버튼을 눌렀을 때의 이벤트 처리.
@@ -1277,6 +1282,48 @@
 
 		});
 		
+		
+		//댓글 삭제 버튼 누르면
+		$('#replyContentDiv').on('click','a',function(e){
+			e.preventDefault();
+			//고유 기능 막고 rno 가져옴
+			if($(this).attr('id') !== 'rnodelete'){
+				return;
+			}
+			
+			const rno = $(this).parent().children('#rnodelete')[0].getAttribute('href');
+			console.log(rno);
+			const bno = $('#con-bno').val();
+			console.log(bno);
+			
+			$.ajax({
+				type : 'post',
+				url : '<c:url value ="/promoReply/delete"/>',
+				data : JSON.stringify({
+					'rno' : rno
+				}),
+				contentType : 'application/json',
+				success : function(data){
+					if(data === 'success'){
+						
+					console.log('삭제 성공')
+					modalReplyList(bno);
+					}else if(data === 'fail'){
+						alert('삭제 권한이 없습니다.');
+					}
+				}
+				
+				
+					,error : function(error){
+						console.log(error);
+						alert('삭제실패 관리자 문의.')
+					}
+					
+				
+ 				
+			});//end ajax
+			
+		});
     
     
     
@@ -1662,12 +1709,15 @@
         	e.preventDefault();
         	console.log($(this).attr('href'));
         		const bno = $(this).attr('href');
-        	if($(this).attr('id') === 'regist'){
+        		//댓글달기와 삭제 버튼을 누르면 모달창을 띄워줌.
+        	if($(this).attr('id') === 'regist' || $(this).attr('id') === 'delete'){
         		
     			//창 띄움.
     			modalContent(bno);
         	}
         });
+      	
+      	
       
         
         //좋아요 기능 구현을 하자.

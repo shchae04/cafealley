@@ -36,6 +36,12 @@
 				) tbl
 			)
 	</select>
+	
+	<select id="getWriter" resultType="String">
+	SELECT writer
+	FROM promoreply
+	WHERE bno = #{bno} AND rno = #{rno}
+	</select>
 
 
 </mapper>
