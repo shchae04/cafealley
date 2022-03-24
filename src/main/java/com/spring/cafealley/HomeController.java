@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.cafealley.board.service.ICmBoardService;
+
 /**
  * Handles requests for the application home page.
  */
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	private ICmBoardService cmBoardService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -32,6 +36,11 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		
+		//메인에 top5 목록 불러오기
+		model.addAttribute("boardList", cmBoardService.getMainCmBaord());
+        System.out.println(cmBoardService.getMainCmBaord());
+	
 		
 		return "home";
 	}

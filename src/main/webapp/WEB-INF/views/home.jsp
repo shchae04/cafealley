@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 	<title>Cafe Alley</title>
@@ -27,13 +28,13 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1">
+                            <a href="<c:url value='/promo/list'/>"><img src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1"></a>
                         </div>
                         <div class="item">
-                            <img src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2">
+                            <a href="<c:url value='/shop/shopList'/>"><img src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2"></a>
                         </div>
                         <div class="item">
-                            <img src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3">
+                            <a href="<c:url value='/cmBoard/cmList'/>"><img src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3"></a>
                         </div>
                     </div>
 
@@ -56,12 +57,7 @@
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12">
-                    <h2>Located</h2>
-                </div>
-            </div>
-            <div class="row">
-                <ul class="col-xs-12 prod-list mapsize">
+                <ul class="col-xs-12 mapsize">
                     <img src="<c:url value='/img/map1111.png'/>">
                  
                 </ul>
@@ -71,35 +67,35 @@
             <!-- 이달의 커피숍-->
             <div class="row">
                 <ul class="col-xs-12" style="margin-top: 80px; margin-left: 20px;">
-                    <h2>이달의 커피숍</h2>
+                    <h2>BEST CAFE</h2>
                 </ul>
                 <ul class="col-xs-12" style="margin: 0 auto; padding: 0;">
                     <li class="col-xs-2" style="margin: 0 20px;">
-                        <a href="#" class="prod-link">
+                        <a href="#">
                             <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
                            
                         </a>
                     </li>
                     <li class="col-xs-2" style="margin: 0 20px;">
-                        <a href="#" class="prod-link">
+                        <a href="#">
                             <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
                             
                         </a>
                     </li>
                     <li class="col-xs-2" style="margin: 0 20px;">
-                        <a href="#" class="prod-link">
+                        <a href="#">
                             <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
                            
                         </a>
                     </li>
                     <li class="col-xs-2" style="margin: 0 20px;">
-                        <a href="#" class="prod-link">
+                        <a href="#">
                             <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
                          
                         </a>
                     </li>
                     <li class="col-xs-2" style="margin: 0 20px;">
-                        <a href="#" class="prod-link">
+                        <a href="#">
                             <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
                         </a>
                     </li>
@@ -112,18 +108,52 @@
     <section>
         <div class="container">
             <div class="row">
-                <ul class="col-xs-12 prod-list" style="margin: 0 auto; padding: 0;">
-                    <li class="col-xs-6">
-                        <h3>커뮤니티 게시판</h3>
-                        <a href="#" class="prod-link">
-                            <img src="<c:url value='/img/box1.jpg'/>" alt="box1">
-                        </a>
-                    </li>
+                <ul class="col-xs-12">
                     <li class="col-xs-6">
                         <h3>공지사항</h3>
-                        <a href="#" class="prod-link">
-                            <img src="<c:url value='/img/box2.jpg'/>" alt="box2">
-                        </a>
+                        <table class="table table-hover w-auto">
+                           <thead>
+                               <tr>
+                                <th>제목</th>
+                                <th>작성일</th>
+                            </tr>
+                           </thead>
+
+                           <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
+                           <tbody>
+                               <c:forEach var="vo" items="${boardList}">
+                                <tr>
+                                    <td>
+                                        <a href="<c:url value='/noBoard/noDetail?bno=${vo.bno}'/>">${vo.title}</a>
+                                    </td>
+                                    <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+                                </tr>
+                               </c:forEach>
+                           </tbody>
+                       </table>
+                    </li>
+                    <li class="col-xs-6">
+                        <h3>커뮤니티</h3>
+                        <table class="table table-hover w-auto">
+                           <thead>
+                               <tr>
+                                <th>제목</th>
+                                <th>작성일</th>
+                            </tr>
+                           </thead>
+
+                           <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
+                           <tbody>
+                               <c:forEach var="vo" items="${boardList}">
+                                <tr>
+                                    <td>
+                                        <a href="<c:url value='/cmBoard/cmDetail?bno=${vo.bno}'/>">${vo.title}</a>
+                                    </td>
+                                    <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+                                </tr>
+                               </c:forEach>
+                           </tbody>
+                       </table>
                     </li>
                 </ul>
             </div>
@@ -134,17 +164,15 @@
     <section>
         <div class="container">
             <div class="row">
-                <ul class="col-xs-12 prod-list">
+                <ul class="col-xs-12" style="margin-bottom: 50px;">
                     <li class="col-xs-6">
-                        <h3 style="text-align: left;">#커피의 종류</h3>
+                        <h3 style="text-align: left;">커피 종류</h3>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/DPDH9lOs3QI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- 
                     </li>
+                    
                     <li class="col-xs-6">
-                        <h3>Membership</h3>
-                        <a href="#" class="prod-link">
-                            <img src="<c:url value='/img/box2.jpg'/>" alt="box2">
-                        </a>
+                        <h3 style="text-align: left;">원두 종류</h3>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/OdWEovjCy1o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -153,6 +181,22 @@
 
 
 <%@ include file="./include/footer.jsp"%>
+
+<script>
+$(function() {
+
+    console.log('${boardList}');
+    // 페이지 url 요청
+    $('#pagination').on('click', 'a', function(e) {
+        e.preventDefault();
+        console.log($(this));
+        const value = $(this).data('pagenum');
+        console.log(value);
+        document.pageForm.pageNum.value = value;
+        document.pageForm.submit();
+    });
+});// end jQuery
+</script>
 
 </body>
 </html>
