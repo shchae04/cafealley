@@ -134,10 +134,6 @@ public class CmBoardController {
 		return "redirect:/cmBoard/cmList";
 		}
 	
-	//메인에 top5 목록 불러오기
-	@GetMapping("/")
-    public void getMainCmBaord(Model model) {
-        model.addAttribute("boardList", service.getMainCmBaord());
-    }
+	
 	
 }
