@@ -121,12 +121,12 @@
 
                            <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
                            <tbody>
-                               <c:forEach var="vo" items="${boardList}">
+                               <c:forEach var="no" items="${noboard}">
                                 <tr>
                                     <td>
-                                        <a href="<c:url value='/noBoard/noDetail?bno=${vo.bno}'/>">${vo.title}</a>
+                                        <a href="<c:url value='/noBoard/noDetail?bno=${no.bno}'/>">${no.title}</a>
                                     </td>
-                                    <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+                                    <td> <fmt:formatDate value="${no.regdate}" pattern="MM-dd"/>
                                 </tr>
                                </c:forEach>
                            </tbody>
@@ -144,12 +144,12 @@
 
                            <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
                            <tbody>
-                               <c:forEach var="vo" items="${boardList}">
+                               <c:forEach var="cm" items="${cmboard}">
                                 <tr>
                                     <td>
-                                        <a href="<c:url value='/cmBoard/cmDetail?bno=${vo.bno}'/>">${vo.title}</a>
+                                        <a href="<c:url value='/cmBoard/cmDetail?bno=${cm.bno}'/>">${cm.title}</a>
                                     </td>
-                                    <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+                                    <td> <fmt:formatDate value="${cm.regdate}" pattern="MM-dd"/>
                                 </tr>
                                </c:forEach>
                            </tbody>

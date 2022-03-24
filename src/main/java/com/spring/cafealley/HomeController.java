@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.cafealley.board.service.BoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.util.PageCreator;
@@ -28,6 +29,8 @@ public class HomeController {
 	
 	@Autowired
 	private ICmBoardService cmBoardService;
+	@Autowired
+	private BoardService noBaordService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -43,8 +46,9 @@ public class HomeController {
 //		
 //		model.addAttribute("serverTime", formattedDate);
 		
-		
-		model.addAttribute("boardList", cmBoardService.getMainCmBaord());
+		//커뮤, 공지 보드 최신글 top5 불러오기
+		model.addAttribute("cmboard", cmBoardService.getMainCmBaord());
+		model.addAttribute("noboard", noBaordService.getMainNoBaord());
 		
 	
 		

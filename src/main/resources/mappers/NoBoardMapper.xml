@@ -53,7 +53,21 @@
 		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
 		AND rn <= #{pageNum} * #{countPerPage}
 		]]>
-		
+  </select>
+  
+  <select id="getMainNoBaord" resultType="com.spring.cafealley.command.BoardVO">
+              SELECT * FROM
+            (
+            SELECT ROWNUM AS rn, tbl.* FROM
+                (
+                SELECT * FROM noboard
+                ORDER BY regdate DESC
+                ) tbl
+            )
+        <![CDATA[
+        WHERE rn > 0
+		AND rn <= 5
+        ]]>
   </select>
   
 
