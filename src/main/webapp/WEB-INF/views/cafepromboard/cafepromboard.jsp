@@ -881,10 +881,15 @@
 					}
 					
 					for(let i=0; i<list.length; i++) {
+						console.log(list[i].key);
+						//filenum === 0 이라면
+						if(list[i].filenum === 0){
+							
+						
 						str += '<div class="content-wrapper">';
 	                    str += '<div class="title-inner">';
 	                    str += '<div class="profile">';
-	                    str += '<img src="<c:url value='/img/profile.png'/>">';    
+	                    str += `<img src='<c:url value="/img/profile.png"/>' />`;
 	                    str += '</div>';
 	                    str += '<div class="title">';
 	                    str += '<p>' + list[i].writer + '</p>';
@@ -961,7 +966,95 @@
 	                    </div>
 	                </div>`;
 	                
+					} //filenum 0 끝.
+					
+					else{ //filenum !== 0
+						
+						str += '<div class="content-wrapper">';
+	                    str += '<div class="title-inner">';
+	                    str += '<div class="profile">';
+	                    str += `<img src='<c:url value="/loadimg/display/`+list[i].filenum+`/1"/>' />`;
+	                    str += '</div>';
+	                    str += '<div class="title">';
+	                    str += '<p>' + list[i].writer + '</p>';
+	                    str += '<small>' + timeStamp(list[i].regdate) + '</small>';
+	                    str += '</div>';
+	                    str += '</div>';
+	                    str += '<div class="content-inner">';
+	                    str += '<p>' + list[i].content + '</p>';
+	                    str += '</div>';
+	                    str += '<div class="image-inner">';
+
+	                    str += '<div id="carousel-carou' + i + '" style="width: 900px; height: 600px;" class="carousel" data-ride="carousel" data-interval="false">';
+	                    str += '<ol class="carousel-indicators">';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="0" class="active"></li>';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    str += '</ol>';
+	                    str += '<div class="carousel-inner" role="listbox">';
+	                    str += '<div class="item active">';
+	                    str += '<a data-toggle="modal" href="' + list[i].bno + '">'
+	                    str += `<img src="<c:url value='/loadimg/display/` + list[i].key + `/1'/>" alt="슬라이드1"></a>`;
+	                    str += '</div>';
+						if(list[i].filecnt === 2) {
+		                    str += '<div class="item">';
+		                   	str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/2'/>" alt="슬라이드2"></a>`;
+		                    str += '</div>';
+	                    } else if(list[i].filecnt === 3) {
+		                    str += '<div class="item">';
+		                   	str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/2'/>" alt="슬라이드2"></a>`;
+		                    str += '</div>';
+
+	                    	str += '<div class="item">';
+		                    str += `<a data-toggle="modal" href="` + list[i].bno + `"><img src="<c:url value='/loadimg/display/` + list[i].key + `/3'/>" alt="슬라이드3"></a>`;
+		                    str += '</div>';
+	                    }
+	                    
+	                    str += '</div>';
+	                    str += '<a class="left carousel-control" href="#carousel-carou' + i + '" role="button" data-slide="prev">';
+	                    str += '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>';
+	                    str += '</a>';
+	                    str += '<a class="right carousel-control" href="#carousel-carou' + i + '" role="button" data-slide="next">';
+	                    str += '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
+	                    str += '<span class="sr-only">Next</span>';
+	                    str += '</a>';
+	                    str += '</div>';
+	                    str += '</div>';
+	                    str += `<div class="like-inner">
+	                        <!--좋아요-->
+	                        <img src="<c:url value='/img/like2.png'/>"> <span>` + list[i].likeCnt + `</span>
+	                        <!-- 해쉬태그 -->
+	                        <ul class="hashtag main clearfix">
+	                            <li><a href="#">#` + list[i].area  + `</a></li>
+	                            <li><a href="#">#` + list[i].place + `</a></li>
+	                            <li><a href="#">` + (list[i].limitation1 === 'true' ? '#No Kids ' : '#Kids Free ') + (list[i].limitation2 === 'true' ? '#No Pets ' : '#Pets Free ') + (list[i].limitation3 === 'true' ? '#No Study' : '#Study Free') +
+	                            `</a></li>
+	                        </ul>
+	                    </div>
+	                    <div class="link-inner">
+	                        <a id="likeBtn" href="` + list[i].bno + `">`;
+	                        
+	                        if(data !== null) {
+		                        if(data.includes(list[i].bno)) {
+		                        	str += `<img src="<c:url value='/img/like2.png' />" alt="like2">&nbsp;좋아요</a>`;
+		                        } else {
+		                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+		                        }
+	                        } else {
+	                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+	                        }
+	                        
+	                    str += ` 
+	                        <a id="regist" href="` + list[i].bno +`"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
+	                        <a id="delete" href="` + list[i].bno +`"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
+	                    </div>
+	                </div>`;
+	                
+						
+						
 					}
+					
+				}
 	                $('#contentDiv').html(str);
 				}
 			); //end getJSON
@@ -1081,11 +1174,16 @@
 					for(let i=0; i<list.length; i++) {
 						if(i === 0) {
 							str += '<div class="reply-content blinking">';
-						} else {
+						} else 	{
 							str += '<div class="reply-content">';
 						}
-	                    str += `<div class="profile">
-	                            <img src="<c:url value='/img/profile.png'/>">
+						///////수정한곳
+						if(list[i].filenum !== 0){
+							
+	                    
+							
+							str += `<div class="profile">
+	                            <img src="<c:url value='/loadimg/display/`+list[i].filenum+`/1'/>">
 	                            <p>` + list[i].writer + `</p>
 	                            
 	                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
@@ -1095,7 +1193,25 @@
 		                        </div>
 		                        <small>` + timeStamp(list[i].regdate) + `</small>
 	                    		</div>`;
-					}
+							} //filenum === 0일때
+							
+							
+							else { //filenum !== 0일때 기본이미지 설정.
+								
+								str += `<div class="profile">
+		                            <img src="<c:url value='/img/profile.png'/>">
+		                            <p>` + list[i].writer + `</p>
+		                            
+		                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+			                        </div>
+			                        <div class="content">` + 
+			                        	list[i].content + `
+			                        </div>
+			                        <small>` + timeStamp(list[i].regdate) + `</small>
+		                    		</div>`;
+								
+							}
+						}
 					$('#replyContentDiv').html(str);
 				}
 			); //end getJSON	
@@ -1292,15 +1408,16 @@
 			}
 			
 			const rno = $(this).parent().children('#rnodelete')[0].getAttribute('href');
-			console.log(rno);
+			console.log('삭제할 댓글 번호: '+rno);
 			const bno = $('#con-bno').val();
-			console.log(bno);
+			console.log('삭제할 글 번호: '+bno);
 			
 			$.ajax({
 				type : 'post',
 				url : '<c:url value ="/promoReply/delete"/>',
 				data : JSON.stringify({
 					'rno' : rno
+					
 				}),
 				contentType : 'application/json',
 				success : function(data){

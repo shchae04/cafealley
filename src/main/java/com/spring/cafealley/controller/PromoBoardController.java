@@ -2,6 +2,7 @@ package com.spring.cafealley.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,7 @@ public class PromoBoardController {
 //				vo.setFilecnt(3);
 //			}
 //		}
+		
 		
 		for(PromoBoardVO vo : list) {
 			vo.setLikeCnt(boardService.likeCnt(vo.getBno()));

@@ -18,8 +18,10 @@ public interface IPromoReplyService {
 	//댓글 삭제 
 	void replyDelete(int rno);
 	
-	//rno에 따른 게시물 작성자 가져오기
-	String getWriter(int rno);
+	//rno에 따른 데이터 가져오기
+	PromoReplyVO getReplyContent(int rno);
+	
+	
 
 	
 

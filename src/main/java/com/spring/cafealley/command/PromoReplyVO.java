@@ -17,4 +17,6 @@ public class PromoReplyVO {
 	private String content;
 	private Timestamp regdate;
 	private String ismod;
+	
+	private int filenum;
 }

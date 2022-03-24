@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +39,12 @@ public class PromoReplyController {
 	
 	@GetMapping("/replyList/{bno}")
 	@ResponseBody
-	public List<PromoReplyVO> replyList(@PathVariable int bno) {
+	public List<PromoReplyVO> replyList(@PathVariable int bno,Model model) {
 		System.out.println("댓글 목록 요청 들어옴.");
+		
+		
+		
+		
 		return service.getList(bno);
 	}
 	
@@ -52,15 +58,19 @@ public class PromoReplyController {
 			
 			//vo.getRno 에 따른 게시물의 작성자와 세션 아이디 비교 해야함.
 			//메서드 선언.
-			String writer = service.getWriter(vo.getRno());
+			//왜 null값이 오지..
+			System.out.println(vo);
+			PromoReplyVO pvo = service.getReplyContent(vo.getRno());
+			System.out.println("삭제할 댓글 데이터:" + pvo);
+			String writer = pvo.getWriter();
 			UserVO uvo = (UserVO) session.getAttribute("login");
+			System.out.println("userid :" + uvo.getUserid() + "작성자 :" + writer);
 			
 			//admin != null 이면 모든 댓글 삭제 가능.
 			if(uvo.getUserid().equals(writer) || uvo.getAdmin() != null) {
+				System.out.println("삭제됨");
 				
-				System.out.println("댓글 삭제 요청 들어옴!"+ vo.getRno());
 				service.replyDelete(vo.getRno());
-				System.out.println("삭제 완료 전달된 댓글번호 :" + vo.getRno());
 				return "success";
 			}
 		} return "fail";

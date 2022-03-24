@@ -6,6 +6,16 @@
 <mapper
 	namespace="com.spring.cafealley.promoboard.mapper.IPromoBoardMapper">
 
+
+	<sql id="search">
+		<if test="condition == 'writer'">
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == ''|| condition == null">
+			
+		</if>
+		
+	</sql>
 	<!-- 글등록 -->
 	<insert id="regist">
 		INSERT INTO Promoboard(bno, writer, key, content, area, place, regdate, limitation1, limitation2, limitation3, filecnt)
@@ -19,10 +29,12 @@
 			(
 			SELECT ROWNUM as rn, tbl.* FROM
 				(
-				SELECT * FROM promoboard
-				<if test="condition == 'writer'">
-					WHERE writer LIKE '%'||#{keyword}||'%'
-				</if>
+				SELECT pr.*,
+					   u.filenum
+				  FROM promoboard pr
+				  LEFT JOIN users u
+				    ON pr.writer = u.userid
+				<include refid="search"/>
 				ORDER BY bno DESC
 				) tbl
 			)
