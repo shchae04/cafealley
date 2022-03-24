@@ -46,6 +46,11 @@ public class CmBoardService implements ICmBoardService {
 	public void delete(int bno) {
 		mapper.delete(bno);
 	}
+	
+	@Override
+    public List<BoardVO> getMainCmBaord() {
+        return mapper.getMainCmBaord();
+    }
 
 
 
