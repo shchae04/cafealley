@@ -110,7 +110,7 @@
                            </tbody>
                        </table>
 					
-					<form action="<c:url value='/user/cmnBoardChk' />" name="pageForm">
+						<form action="<c:url value='/user/cmnBoardChk' />" name="pageForm">
 	                        <div class="text-center">
 	                            <ul class="pagination" id="pagination">
 	                            	<c:if test="${pc.prev}">

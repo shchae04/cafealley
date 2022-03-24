@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.reply.mapper.ICmReplyMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class CmReplyService implements ICmReplyService {
@@ -34,6 +35,16 @@ public class CmReplyService implements ICmReplyService {
 		cmmapper.replyDelete(rno);
 	}
 
+	@Override
+	public int getTotal(PageVO vo) {
+		return cmmapper.getTotal(vo);
+	}
+
+
+	@Override
+	public List<ReplyVO> getReplyList(PageVO vo) {
+		return cmmapper.getReplyList(vo);
+	}
 
 
 }

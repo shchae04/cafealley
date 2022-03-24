@@ -20,6 +20,9 @@
 			SELECT ROWNUM as rn, tbl.* FROM
 				(
 				SELECT * FROM promoboard
+				<if test="condition == 'writer'">
+					WHERE writer LIKE '%'||#{keyword}||'%'
+				</if>
 				ORDER BY bno DESC
 				) tbl
 			)
@@ -50,6 +53,12 @@
 		DELETE FROM promoboard
 		WHERE bno = #{bno}
 	</delete>
+	
+	<!-- 총 게시물 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM promoboard
+	</select>
 	
 	
 	

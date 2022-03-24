@@ -67,4 +67,9 @@ public class PromoBoardService implements IPromoBoardService {
 		return mapper.likeCnt(bno);
 	}
 
+	@Override
+	public int getTotal(PageVO vo) {
+		return mapper.getTotal(vo);
+	}
+
 }
