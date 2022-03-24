@@ -23,10 +23,6 @@ public interface IPromoBoardService {
 	//삭제
 	void delete(int bno);
 	
-
-	//총 게시물 수
-	int getTotal(PageVO vo);
-	
 	////////////////////////////////////////////////////////////
 	
 	//좋아요 추가
