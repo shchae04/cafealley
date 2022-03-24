@@ -27,7 +27,7 @@ public interface ICmBoardService {
 	//삭제
 	void delete(int bno);
 
-	//메인에 top5 목록 불러오기
+	//메인에 최신글 5개 목록 불러오기
     List<BoardVO> getMainCmBaord();
 	
 
