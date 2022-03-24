@@ -547,33 +547,31 @@
                     </h3>
                     <br>
 
-                    <form action="#">
-                        <!--테이블 자동 크기 조절-->
-                        <table class="table table-hover w-auto">
-                            <thead>
-                            	<tr>
-	                                <th>번호</th>
-	                                <th>제목</th>
-	                                <th>작성일</th>
-	                                <th>조회수</th>
-	                             </tr>
-                            </thead>
+                     <!--테이블 자동 크기 조절-->
+                     <table class="table table-hover w-auto">
+                         <thead>
+                         	<tr>
+                              <th>번호</th>
+                              <th>제목</th>
+                              <th>작성일</th>
+                              <th>조회수</th>
+                           </tr>
+                         </thead>
 
-                            <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
-                            <tbody>
-                               <c:forEach var="vo" items="${boardList}">
-                                <tr>
-                                    <td>${vo.bno}</td>
-                                    <td>
-                                    	<a href="<c:url value="/promo/getContent/${vo.bno}" />">${vo.content}</a>
-                                    </td>
-                                    <td>${vo.writer}</td>
-		                            <td><fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
-                                </tr>
-                               </c:forEach>
-                           </tbody>
-                       </table>
-					</form>
+                         <!--작성글을 클릭하면 해당 게시물 상세 창으로 이동합니다-->
+                         <tbody>
+                            <c:forEach var="vo" items="${boardList}">
+                             <tr>
+                                 <td>${vo.bno}</td>
+                                 <td>
+                                 	<a href="<c:url value="/promo/getContent/${vo.bno}" />">${vo.content}</a>
+                                 </td>
+                                 <td>${vo.writer}</td>
+                           <td><fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
+                             </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 
 					<form action="<c:url value='/user/promoBoardChk' />" name="pageForm">
 					  <div class="text-center">

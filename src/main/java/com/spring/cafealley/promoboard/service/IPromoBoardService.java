@@ -24,8 +24,6 @@ public interface IPromoBoardService {
 	void delete(int bno);
 	
 
-	//총 게시물 수
-	int getTotal(PageVO vo);
 	
 	////////////////////////////////////////////////////////////
 	
