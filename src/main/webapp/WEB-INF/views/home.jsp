@@ -41,21 +41,20 @@
 						</div>
 					</div>
 
-					<!-- 좌, 우 화살표 -->
+					<!-- carousel control  -->
 					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> 
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>
 					</a> 
 					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> 
 					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					    <span class="sr-only">Next</span>
+						<span class="sr-only">Next</span>
 					</a>
 
 				</div>
 			</div>
 		</div>
 	</section>
-
 
 	<!-- map api -->
 	<section>
@@ -80,15 +79,15 @@
 				</ul>
 				<ul class="col-xs-12" style="text-align: center;">
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
 				</ul>
 			</div>
 		</div>
@@ -186,9 +185,8 @@
 
 	<%@ include file="./include/footer.jsp"%>
 	
-	<!-- MAP AppKey : 17136e4884602adf06d712c2e104879b-->
+	<!-- map appkey : 17136e4884602adf06d712c2e104879b -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b&libraries=services"></script>
-	
 	<script>
 		$(function() {
 

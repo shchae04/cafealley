@@ -146,16 +146,6 @@
 			//네이버 로그인 API
 			//Client ID - pqVtFOpYyzJzRAPjYSYs
 			//Client Secret - BlS3zrgBho
-			const naverLogin = new naver.LoginWithNaverId(
-					{	
-						clientId: "pqVtFOpYyzJzRAPjYSYs",
-						callbackUrl: "http://localhost/cafealley/",
-						loginButton: {color: "green", type: 2, height: 40}
-					}
-				);
-			 naverLogin.init(); // 네이버 로그인 설정
-			 
-			 
 			
 			const getIdCheck = RegExp(/^[a-z0-9]{4,12}$/);
 			const getPwCheck = RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
