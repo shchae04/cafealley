@@ -28,6 +28,10 @@ public class PromoBoardVO {
 	private String limitation3;
 	private String ismod;
 	
+	
+	//user에서 이미지 파일 가져오는 filenum
+	private int filenum;
+	
 	//파일 개수가 몇 개인지를 알려주는 컬럼 추가.
 	private int filecnt;
 	

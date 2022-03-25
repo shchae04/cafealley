@@ -22,9 +22,8 @@ public interface IPromoBoardService {
 
 	//삭제
 	void delete(int bno);
-	
 
-	////////////////////////////////////////////////////////////
+
 	
 	//좋아요 추가
 	void createLike(PromoLikeVO vo);

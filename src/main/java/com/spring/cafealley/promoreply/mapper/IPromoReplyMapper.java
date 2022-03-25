@@ -19,7 +19,11 @@ public interface IPromoReplyMapper {
 	void replyDelete(int rno);
 
 	//rno에 따른 게시물 작성자 가져오기
-	String getWriter(int rno);
+	PromoReplyVO getReplyContent(int rno);
+	
+
+	
+	
 	
 
 
