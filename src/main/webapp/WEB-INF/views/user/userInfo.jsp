@@ -220,7 +220,7 @@
 										<tr>
 											<td>*E-mail</td>
 											<td>
-												<input style="width: 180px;" class="form-control input-sm" id="useremail" name="useremail">
+												<input value="${login.useremail}" style="width: 180px; cursor: default;" class="form-control input-sm" id="useremail" name="useremail" readonly>
 												<span id="emailChk"></span>
 											</td>
 										</tr>
@@ -364,7 +364,7 @@
 			//핸드폰 값
 			const userphone = $('#userphone1').val() + $('#userphone1').val() + $('#userphone1').val();
 			
-			let chk1 = false, chk2 = false, chk3 = false, chk4 = false, chk5 = false;
+			let chk1 = false, chk2 = false, chk3 = false, chk4 = false;
 
 			//수정버튼 클릭 시 사용자의 입력값 검증!
 			$('#updateBtn').click(function() {
@@ -405,6 +405,7 @@
 					chk2 = true;
 				}
 				
+				/*
 				// 이메일란 입력 검증
 				if($('#useremail').val() ==='') {
 					console.log('이메일 값 공백');
@@ -421,34 +422,34 @@
 					$('#emailChk').html('');
 					chk3 = true;
 				}
-				
+				*/
 				// 전화번호란 입력 검증
 				if(getPhoneCheck.test(userphone)) {
 					console.log('전화번호 양식에 맞지 않음');
 					$('#phoneChk').html('<b style="font-size: 12px; color: red;">숫자만 입력 가능합니다.</b>');
-					chk4 = false;
+					chk3 = false;
 				} else {
 					console.log('전화번호 값 검증 완료');
 					$('#phoneChk').html('');
-					chk4 = true;
+					chk3 = true;
 				}
 				
 				// 사업자번호란 입력 검증
 				if($('#businessnum').val() === undefined) {
-					chk5 = true;
+					chk4 = true;
 				} else if(!getBsnsNumCheck.test($('#businessnum').val())) {
 					console.log('사업자번호 양식에 맞지 않음');
 					console.log($('#businessnum').val());
 					$('#bsnsNumCheck').html('<b style="font-size: 12px; color: red;">양식에 맞게 작성해 주세요.</b>');
-					chk5 = false;
+					chk4 = false;
 				} else {
 					console.log('사업자번호 값 검증 완료');
 					$('#bsnsNumCheck').html('');
-					chk5 = true;
+					chk4 = true;
 				}
 				
 				//전부 통과됐다면 수정 처리
-				if(chk1 && chk2 && chk3 && chk4 && chk5) {
+				if(chk1 && chk2 && chk3 && chk4) {
 					confirm('수정하시겠습니까?');
 					console.log('수정 처리');
 					$('#updateBtn').attr('type', 'submit');
