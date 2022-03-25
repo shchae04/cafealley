@@ -126,32 +126,42 @@
 							<div class="login-center2 clearfix">
 								<div style="float: left;">아직 회원이 아니신가요?</div>
 								<div style="float: right;">
-									<a href="#">일반회원 가입</a><br> <a href="#">카페회원 가입</a>
+									<a href="<c:url value='/user/formJoinGen' />">일반회원 가입</a><br> <a href="<c:url value='/user/formJoinBsns' />">카페회원 가입</a>
 								</div>
 							</div>
-
-							<div class="login-p-center">또는</div>
-							<button type="button" class="btn btn-block"
-								style="background-color: #04cf5c; color: white;">
-								<strong>N</strong>
-							</button>
 						</div>
 					</form>
-					<br>
-					<div class="login-p-center">네이버 가입은 일반 회원만 가능합니다.</div>
 				</div>
 				<div class="modal-footer"></div>
 			</div>
 		</div>
 	</div>
-
+	
+	<!-- 네이버 로그인을 위한 script -->
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+	
 	<script>
 		$(function() {
+			
+			//네이버 로그인 API
+			//Client ID - pqVtFOpYyzJzRAPjYSYs
+			//Client Secret - BlS3zrgBho
+			const naverLogin = new naver.LoginWithNaverId(
+					{	
+						clientId: "pqVtFOpYyzJzRAPjYSYs",
+						callbackUrl: "http://localhost/cafealley/",
+						loginButton: {color: "green", type: 2, height: 40}
+					}
+				);
+			 naverLogin.init(); // 네이버 로그인 설정
+			 
+			 
+			
 			const getIdCheck = RegExp(/^[a-z0-9]{4,12}$/);
 			const getPwCheck = RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
 
 			let chk1 = false, chk2 = false;
-
+			
 			//로그인 버튼 클릭 이벤트
 			$('#btnLogin').click(function() {
 				//ID 입력값 검증 끝
