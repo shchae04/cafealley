@@ -64,14 +64,14 @@
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">이벤트 게시판<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="<c:url value='/user/evReplyChk' />">작성댓글보기</a></li>
+								<li class="active"><a href="<c:url value='/user/evReplyChk' />">작성댓글보기</a></li>
 							</ul>
 						</li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">커뮤니티 게시판<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value='/user/cmnBoardChk' />">작성글보기</a></li>
-								<li class="active"><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
+								<li><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
 							</ul>
 						</li>
 						<c:if test="${not empty login.businessnum}">
@@ -101,7 +101,7 @@
                             <thead>
                             	<tr>
 	                                <td>댓글</td>
-	                                <td>작성 댓글</td>
+	                                <td>작성게시글</td>
 	                                <td>작성일</td>
 	                             </tr>
                             </thead>
@@ -110,7 +110,7 @@
                                <c:forEach var="vo" items="${replyList}">
                                 <tr>
                                     <td>
-                                    	<a href="<c:url value='/cmBoard/cmDetail?bno=${vo.bno}'/>">${vo.content}</a>
+                                    	<a href="<c:url value='/evBoard/evDetail?bno=${vo.bno}'/>">${vo.content}</a>
                                     </td>
                                     <td>${vo.writer}</td>
 		                            <td> <fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/>
@@ -120,7 +120,7 @@
                         </table>
 					</form>
 
-                    <form action="<c:url value='/user/cmnReplyChk' />" name="pageForm">
+                    <form action="<c:url value='/user/evReplyChk' />" name="pageForm">
                      <div class="text-center">
                          <ul class="pagination" id="pagination">
                          	<c:if test="${pc.prev}">

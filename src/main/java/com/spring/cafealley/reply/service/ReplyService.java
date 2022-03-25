@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.reply.mapper.INoReplyMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class ReplyService implements IReplyService {
@@ -32,6 +33,16 @@ public class ReplyService implements IReplyService {
 	@Override
 	public void replyDelete(int rno) {
 		nomapper.replyDelete(rno);
+	}
+
+	@Override
+	public List<ReplyVO> getReplyList(PageVO vo) {
+		return nomapper.getReplyList(vo);
+	}
+
+	@Override
+	public int getTotal(PageVO vo) {
+		return nomapper.getTotal(vo);
 	}
 
 

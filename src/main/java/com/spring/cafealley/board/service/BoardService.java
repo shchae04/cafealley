@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.cafealley.board.mapper.INoBoardMapper;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.util.PageVO;
 
 @Service
