@@ -198,6 +198,37 @@ input:read-only {
 					</tbody>
 				</table>
 			</div>
+			
+			
+			<c:if test="${order.refundreason != null && order.refundreason != ''}">
+			
+			<div class="finor-wrapper2" style="margin-top: 40px;">
+				<h4 style="margin-bottom: 15px; display: inline-block;">교환/환불정보</h4>
+				&nbsp; 
+			</div>
+			
+			<div class="finor-wrapper2">
+				<table class="finor-infota ">
+					<tbody class="finor-transinfota orderinfo-input"
+						style="text-align: left;">
+						<tr>
+							<td style="width: 200px;">교환/환불 사유</td>
+							<td><span name="orderusername" style="line-height: normal; width: 250px;">${order.refundreason == 'wrong-sending' ?'오배송':order.refundreason=='different-info'?'상품정보 상이':order.refundreason=='missing-prize'?'상품누락':'단순변심'} ${order.refunddetailreason != '' && order.refunddetailreason !=null ? '/' : ''} ${order.refunddetailreason !='' && order.refunddetailreason !=null ? order.refunddetailreason :''} </span></td>
+						</tr>
+						<c:choose>
+							<c:when test="${order.refundbank}">
+								<tr>
+									<td>환불 계좌</td>
+									<td>${order.refundbankname} / ${order.refundbank}</td>
+								</tr>
+							</c:when>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+			</c:if>
+			
+			
 		</div>
 	<script>
 	
