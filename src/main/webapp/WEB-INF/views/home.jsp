@@ -7,7 +7,6 @@
 <title>Cafe Alley</title>
 
 <link rel="stylesheet" href="<c:url value='/css/mainstyle.css'/>">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b"></script>
 
 </head>
 <body>
@@ -15,7 +14,7 @@
 	<%@ include file="./include/header.jsp"%>
 
 	<section style="margin-top: 150px;">
-		<!-- 슬라이드(캐러셀) 구현 시작 -->
+		<!-- Carousel 구현 시작 -->
 		<div class="container" style="width: auto;">
 			<div class="row">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -29,34 +28,34 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<a href="<c:url value='/promo/list'/>"><img
-								src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1"></a>
+							<a href="<c:url value='/promo/list'/>">
+							<img src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1"></a>
 						</div>
 						<div class="item">
-							<a href="<c:url value='/shop/shopList'/>"><img
-								src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2"></a>
+							<a href="<c:url value='/shop/shopList'/>">
+							<img src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2"></a>
 						</div>
 						<div class="item">
-							<a href="<c:url value='/cmBoard/cmList'/>"><img
-								src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3"></a>
+							<a href="<c:url value='/cmBoard/cmList'/>">
+							<img src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3"></a>
 						</div>
 					</div>
 
-					<!-- 좌, 우 화살표 (없애고 싶으면 지워도 됩니다.) -->
-					<a class="left carousel-control" href="#myCarousel" role="button"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<!-- 좌, 우 화살표 -->
+					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> 
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel" role="button"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
+					</a> 
+					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> 
+					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
 					</a>
 
 				</div>
 			</div>
 		</div>
 	</section>
+
 
 	<!-- map api -->
 	<section>
@@ -69,7 +68,7 @@
 		</div>
 
 
-		<!-- 이달의 커피숍-->
+		<!-- BEST CAFE -->
 		<div class="container" style="margin-top: 50px">
 			<div class="row">
 				<ul class="col-xs-12">
@@ -81,15 +80,15 @@
 				</ul>
 				<ul class="col-xs-12" style="text-align: center;">
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
 					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+						src="<c:url value='/img/box1.jpg'/>" alt="box1" /></a>
 				</ul>
 			</div>
 		</div>
@@ -187,7 +186,9 @@
 
 	<%@ include file="./include/footer.jsp"%>
 	
+	<!-- MAP AppKey : 17136e4884602adf06d712c2e104879b-->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b&libraries=services"></script>
+	
 	<script>
 		$(function() {
 
@@ -204,7 +205,6 @@
 		});// end jQuery
 		
 		
-		// Map api
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -215,19 +215,23 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
 		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Places();
-
-		const addrList = '${bsnsUserAddr}';
-		console.log(addrList);
-		let addr;
+		var geocoder = new kakao.maps.services.Geocoder();
 		
-		for(let i=0; i<addrList.length; i++) {
+		const addrList = new Array();
+		
+		<c:forEach items="${bsnsUserAddr}" var="addr">
+			addrList.push('${addr}');
+		</c:forEach>
+		
+		console.log(addrList);
+		
+		for(let address of addrList) {
 			
-			addr = addrList.findindex(i);
-			
+			console.log(address);
+			console.log(typeof(addr));
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(addr, function(result, status) {
+			geocoder.addressSearch(address, function(result, status) {
 		
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
@@ -242,7 +246,7 @@
 		
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + address + '</div>'
 			        });
 			        infowindow.open(map, marker);
 		
