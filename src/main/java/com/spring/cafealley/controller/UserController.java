@@ -292,9 +292,13 @@ public class UserController {
 		System.out.println(pc);
 		
 		List<PromoBoardVO> boardList = new ArrayList<>();
-		for(PromoBoardVO vo : promBoardService.getList(paging)) {
-			vo.setLikeCnt(promBoardService.likeCnt(vo.getBno()));
-			boardList.add(vo);
+		
+		
+		PromoBoardVO vo = new PromoBoardVO();
+		vo.setArea("");//null값 방지.
+		for(PromoBoardVO pvo : promBoardService.getList(paging,vo)) {
+			pvo.setLikeCnt(promBoardService.likeCnt(pvo.getBno()));
+			boardList.add(pvo);
 		}
 		
 		System.out.println(boardList);

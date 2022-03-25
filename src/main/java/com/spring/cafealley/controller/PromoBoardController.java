@@ -55,15 +55,18 @@ public class PromoBoardController {
 		return "success";
 	}
 	
+	
 	//비동기 통신 후 가져올 목록
 	@GetMapping("/getList")
 	@ResponseBody
-	public List<PromoBoardVO> getList(PageVO paging) {
+	public List<PromoBoardVO> getList(PageVO paging, PromoBoardVO vo) {
 		System.out.println("글 목록 요청 들어옴.");
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		paging.setCountPerPage(5);
 		
-		List<PromoBoardVO> list = boardService.getList(paging);
+		//제한사항을 command 객체로 받는다.
+		
+		List<PromoBoardVO> list = boardService.getList(paging,vo);
 //		for(PromoBoardVO vo : list) {
 //			ImgVO ivo = imgService.select(vo.getKey());
 //			if(ivo.getFilename3() == null) {
@@ -76,8 +79,9 @@ public class PromoBoardController {
 //		}
 		
 		
-		for(PromoBoardVO vo : list) {
-			vo.setLikeCnt(boardService.likeCnt(vo.getBno()));
+		for(PromoBoardVO pvo : list) {
+			
+			pvo.setLikeCnt(boardService.likeCnt(pvo.getBno()));
 		}
 		
 		System.out.println(list);

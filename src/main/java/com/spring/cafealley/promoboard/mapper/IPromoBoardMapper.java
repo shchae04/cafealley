@@ -2,6 +2,8 @@ package com.spring.cafealley.promoboard.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.cafealley.command.PromoBoardVO;
 import com.spring.cafealley.command.PromoLikeVO;
 import com.spring.cafealley.util.PageVO;
@@ -12,7 +14,7 @@ public interface IPromoBoardMapper {
 	void regist(PromoBoardVO vo);
 
 	//목록
-	List<PromoBoardVO> getList(PageVO paging);
+	List<PromoBoardVO> getList(@Param("page") PageVO paging, @Param("vo") PromoBoardVO vo);
 
 	//상세보기
 	PromoBoardVO getContent(int bno);

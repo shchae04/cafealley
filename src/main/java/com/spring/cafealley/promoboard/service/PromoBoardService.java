@@ -22,8 +22,8 @@ public class PromoBoardService implements IPromoBoardService {
 	}
 
 	@Override
-	public List<PromoBoardVO> getList(PageVO paging) {
-		return mapper.getList(paging);
+	public List<PromoBoardVO> getList(PageVO paging,PromoBoardVO vo) {
+		return mapper.getList(paging,vo);
 	}
 
 	@Override
@@ -72,4 +72,5 @@ public class PromoBoardService implements IPromoBoardService {
 		return mapper.getTotal(vo);
 	}
 
+	
 }

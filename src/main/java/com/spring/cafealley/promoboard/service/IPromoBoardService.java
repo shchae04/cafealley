@@ -12,11 +12,11 @@ public interface IPromoBoardService {
 	void regist(PromoBoardVO vo);
 
 	//목록
-	List<PromoBoardVO> getList(PageVO paging);
+	List<PromoBoardVO> getList(PageVO paging, PromoBoardVO vo);
 
 	//상세보기
 	PromoBoardVO getContent(int bno);
-
+	
 	//수정
 	void update(PromoBoardVO vo);
 
@@ -42,6 +42,7 @@ public interface IPromoBoardService {
 	//총 게시물 수
 	int getTotal(PageVO vo);
 
+	
 
 
 	
