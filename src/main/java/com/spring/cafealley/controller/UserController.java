@@ -34,10 +34,13 @@ import org.springframework.web.util.WebUtils;
 import com.spring.cafealley.board.service.BoardService;
 import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
+import com.spring.cafealley.cart.service.ICartService;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.OrderingVO;
 import com.spring.cafealley.command.PromoBoardVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
+import com.spring.cafealley.ordering.service.IOrderingService;
 import com.spring.cafealley.promoboard.service.IPromoBoardService;
 import com.spring.cafealley.reply.mapper.INoReplyMapper;
 import com.spring.cafealley.reply.service.ICmReplyService;
@@ -68,7 +71,10 @@ public class UserController {
 	private IReplyService noReplyService;
 	@Autowired
 	private IEvReplyService evReplyService;
-	
+	@Autowired
+	private IOrderingService orderingService; 
+	@Autowired
+	private ICartService cartService;
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -356,7 +362,27 @@ public class UserController {
 	
 	// 주문/배송내역 조회로 이동
 	@GetMapping("/orderDelHistory")
-	public void orderDelHistory() {}
+	public void orderDelHistory(HttpSession session, Model model, PageVO vo) {
+		String userid = ((UserVO)session.getAttribute("login")).getUserid() ;
+		System.out.println("/ordering/orderManagement: GET");
+		List<OrderingVO> orderlist = orderingService.getList(userid, vo);
+		for(int i =0; i<orderlist.size(); i++) {
+			for(int j=0; j<orderlist.get(i).getOrdercart().size(); j++) {
+ 				 String proname = cartService.selectOne(orderlist.get(i).getOrdercart().get(j).getCartno()).getProname();
+ 				 int filenum = cartService.selectOne(orderlist.get(i).getOrdercart().get(j).getCartno()).getFilenum();
+ 				 orderlist.get(i).getOrdercart().get(j).setProname(proname);
+ 				 orderlist.get(i).getOrdercart().get(j).setFilenum(filenum);
+			 }
+		}
+		System.out.println(orderlist);
+		model.addAttribute("orderList" , orderlist);
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(orderingService.getTotal());
+		System.out.println(pc);
+		model.addAttribute("pc",pc);
+	}
 	
 	// 로그아웃
 	@GetMapping("/logout")

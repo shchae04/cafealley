@@ -78,6 +78,20 @@ button:disabled {
 	background: #dfdfdf;
 }
 
+        
+		.pagination > li > a {
+        background-color: black !important;
+        border : 1px solid black !important;
+        color: white !important;
+    	}
+		.pagination > li > a:hover {
+        background-color: gray !important;
+        color: white !important;
+        border : 1px solid white !important;
+        cursor: pointer !important;
+    	}
+
+
 </style>
 </head>
 <body>
@@ -97,7 +111,7 @@ button:disabled {
 						<td>주문 정보</td>
 						<td>주문 날짜</td>
 						<td>주문 상태</td>
-						<td>운송장번호</td>
+						<td>배송 정보</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -120,8 +134,8 @@ button:disabled {
 									<fmt:formatDate value="${order.orderdate}" pattern="YY/MM/dd hh:mm" />
 								</td>
 								<td>
-									<select id="status${order.ordernum}"  ${order.orderstatus == 'completedelivery' ? 'disabled' : '' }>
-									<c:if test="${order.orderstatus == 'waitdeposit' ? true : false}">
+									<select id="status${order.ordernum}"  ${order.orderstatus == 'completedelivery' || order.orderstatus=='ordercancel' || order.orderstatus=='exchange' || order.orderstatus=='refund' ? 'disabled' : '' }>
+										<c:if test="${order.orderstatus == 'waitdeposit' ? true : false}">
 											<option value="completedeposit" ${order.orderstatus == 'waitdeposit' ? 'selected' : ''}>입금대기</option>
 										</c:if>
 										<c:if test="${order.orderstatus == 'waitdeposit' || order.orderstatus == 'completedeposit' ? true : false}">
@@ -136,41 +150,81 @@ button:disabled {
 										<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' ? true : false }">
 											<option value="completedelivery" ${order.orderstatus == 'completedelivery' ? 'selected' : '' }>배송완료</option>
 										</c:if>
+										<c:if test="${order.orderstatus == 'ordercancel' ? true : false }">
+											<option value="completedelivery" ${order.orderstatus == 'ordercancel' ? 'selected' : '' }>주문취소</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'exchange' ? true : false }">
+											<option value="completedelivery" ${order.orderstatus == 'exchange' ? 'selected' : '' }>교환요청</option>
+										</c:if>
+										<c:if test="${order.orderstatus == 'refund' ? true : false }">
+											<option value="completedelivery" ${order.orderstatus == 'refund' ? 'selected' : '' }>환불요청</option>
+										</c:if>
 									</select>
 								</td>
 								<td>
 									<input type="text" id="track${order.ordernum}" placeholder="현재는 입력할 수 없습니다." value="${order.deliverytracknum}" readonly>
-									<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' }">
+									<c:if test="${order.orderstatus == 'ontheboard' || order.orderstatus == 'completedelivery' || order.orderstatus == 'refund' || order.orderstatus == 'exchange' }">
 										<button type="button" id="btn-del-info" class="${order.ordernum}">배송정보보기</button>
 									</c:if>
 								</td>
-								<td>
-									<button ${order.orderstatus == 'completedelivery' ? 'disabled' : ''} id="${order.ordernum}" type="button" onclick="updateOrder(this)">${order.orderstatus == 'completedelivery' ? '수정불가' : '수정하기'}</button>
-								</td>
+									<td>
+										<button ${ (order.orderstatus == 'completedelivery' || order.orderstatus == 'refund' || order.orderstatus =='ordercancel' || order.orderstatus == 'exchange') ? 'disabled' : ''} id="${order.ordernum}" type="button" onclick="updateOrder(this)">${ (order.orderstatus == 'completedelivery' || order.orderstatus == 'refund' || order.orderstatus =='ordercancel' || order.orderstatus == 'exchange') ? '수정불가' : '수정하기'}</button>
+									</td>
 							</form>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			<div class="text-center">
+				<!-- 페이징 처리 부분  -->
+               	<form action="<c:url value='/user/orderDelHistory'/>" name="pageForm">
+					<ul class="pagination" id="pagination">
+						<c:if test="${pc.prev}">
+							<li><a href="#" data-pageNum="${pc.beginPage-1}">이전</a></li>
+                           </c:if>
+                           <c:forEach var="curPage" begin="${pc.beginPage}" end="${pc.endPage}">
+							<li class="${pc.paging.pageNum == curPage ? 'active' : ''}">
+                           		<a href="#" data-pageNum="${curPage}">${curPage}</a>
+                           	</li>
+						</c:forEach>
+                           
+                          <c:if test="${pc.next}">
+                         		<li><a href="#" data-pageNum="${pc.endPage+1}">다음</a></li>
+                          </c:if>
+                      </ul>
+                      <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
+                      <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
+                      <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
+                      <input type="hidden" name="keyword" value="${pc.paging.keyword}">
+                      <input type="hidden" name="condition" value="${pc.paging.condition}">
+    			</form>
+				<!-- 페이징 처리 끝 -->
+			</div>
 		</div>
 	</section>
 
 	<%@ include file="../include/footer.jsp"%>
-
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b&libraries=services"></script>
 	<script>
     
         $(function(){
+        	
+        	// 배송 정보보기 대한통운 띄우기
             $('#btn-del-info').click(function(){
             	let ordernum = $('#btn-del-info').attr('class');
                 window.open('http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=' + $('#track'+ordernum).val(), '사용자 배송정보', 'width=600, height=700, scrollbars=yes, resizable=no')
-            });//배송정보보기 버튼 이벤트 끝
-            
+            });
+        	
+        	
+            // 상품 가격 이쁘게 띄우기
             for(let ttp of $('.order-ttp')){
             	ttp.textContent = ttp.textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
             }
             console.log($('input[name="deliverytracknum"]').length);
             
             
+            // 배송중으로 변경하려면 운송장 번호 띄울 것.
             $('.table').on('change', 'select', function(e){
             	if(e.target.value === 'ontheboard'){
             		ordernum = e.target.getAttribute('id').replace('status', '');
@@ -180,6 +234,8 @@ button:disabled {
             	}
             });
             
+            
+            // 상세보기 클릭시 상세보기 팝업 띄움 
             $('.table').on('click', '.btn-detail', function(e){
             	e.preventDefault();
             	ordernum = e.target.getAttribute('href');
@@ -187,10 +243,24 @@ button:disabled {
             	window.open('<c:url value="/ordering/orderDetail/' + ordernum + '/'+ userid +'"/>', '주문 상세보기', 'width=1000, height=700, scrollbars=yes, resizable=no');
             });
             
+        	// 페이징
+    		$('#pagination').on('click', 'a', function(e) {
+        			e.preventDefault();
+        			console.log($(this));
+        			const value = $(this).data('pagenum');
+        			console.log(value);
+        			document.pageForm.pageNum.value = value;
+        			document.pageForm.submit();
+        		});
+          
+            
+            
+            
             
         }); //end jQuery
         
         
+        // 주문 상태 수정 클릭 함수
         function updateOrder($input){
         	if(confirm('한번 주문상태를 수정하면 이전의 주문상태로 돌릴수 없습니다.\n수정하는 정보가 확실하십니까?')){
 	        	let ordernum = $input.getAttribute('id');
@@ -205,6 +275,10 @@ button:disabled {
 	        			alert('\"숫자\" 또는 \"숫자 + 하이픈\" 으로 입력 해주세요.');
 	        			$('#track'+ordernum).focus();
 	        			return;
+	        		}else if($('#track'+ordernum).val()===''){
+	        			alert('운송장번호를 입력해주세요.');
+	        			$('#track'+ordernum).focus();
+	        			return;
 	        		}
 	        		tracknum = $('#track'+ordernum).val().replaceAll('-','');
 	        		$form.setAttribute('action','<c:url value="/ordering/orderModify/' + ordernum + '/' + orderstatus + '/' + tracknum + '"/>');
@@ -212,6 +286,8 @@ button:disabled {
 	        	$form.submit();
         	}
         }
+        
+        
 		
     </script>
 
