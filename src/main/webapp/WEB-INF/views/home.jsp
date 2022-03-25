@@ -7,7 +7,6 @@
 <title>Cafe Alley</title>
 
 <link rel="stylesheet" href="<c:url value='/css/mainstyle.css'/>">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b"></script>
 
 </head>
 <body>
@@ -204,7 +203,6 @@
 		});// end jQuery
 		
 		
-		// Map api
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -215,19 +213,23 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
 		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Places();
-
-		const addrList = '${bsnsUserAddr}';
-		console.log(addrList);
-		let addr;
+		var geocoder = new kakao.maps.services.Geocoder();
 		
-		for(let i=0; i<addrList.length; i++) {
+		const addrList = new Array();
+		
+		<c:forEach items="${bsnsUserAddr}" var="addr">
+			addrList.push('${addr}');
+		</c:forEach>
+		
+		console.log(addrList);
+		
+		for(let address of addrList) {
 			
-			addr = addrList.findindex(i);
-			
+			console.log(address);
+			console.log(typeof(addr));
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(addr, function(result, status) {
+			geocoder.addressSearch(address, function(result, status) {
 		
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
@@ -242,7 +244,7 @@
 		
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + address + '</div>'
 			        });
 			        infowindow.open(map, marker);
 		
