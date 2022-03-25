@@ -53,16 +53,28 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!--카테고리 메뉴-->
-                    <ul class="nav nav-tabs">
-                        <li><a href="<c:url value='/user/userInfo' />">회원정보</a></li>
-                        <li class="dropdown active">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<c:url value='/user/cmnBoardChk' />">작성글보기</a></li>
-                                <li class="active"><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
-                            </ul>
-                        </li>
-                        <c:if test="${not empty login.businessnum}">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#">회원정보</a></li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">공지 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/noReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">이벤트 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/evReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">커뮤니티 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/cmnBoardChk' />">작성글보기</a></li>
+								<li class="active"><a href="<c:url value='/user/cmnReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<c:if test="${not empty login.businessnum}">
 							<li class="dropdown"><a class="dropdown-toggle"
 								data-toggle="dropdown" href="#">홍보 게시판<span class="caret"></span></a>
 								<ul class="dropdown-menu">
@@ -75,7 +87,8 @@
 								<a href="<c:url value='/user/orderDelHistory' />">주문내역/배송조회</a>
 							</li>
 						</c:if>
-                    </ul>
+						
+					</ul>
 
                     <br>
                     <h3>

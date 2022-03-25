@@ -53,7 +53,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!--카테고리 메뉴-->
-                    <!--카테고리 메뉴-->
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#">회원정보</a></li>
 						<li class="dropdown"><a class="dropdown-toggle"

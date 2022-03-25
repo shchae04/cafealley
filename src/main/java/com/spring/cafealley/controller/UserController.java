@@ -337,7 +337,20 @@ public class UserController {
 	// 이벤트 게시판 작성 댓글 보기로 이동
 	@GetMapping("/evReplyChk")
 	public void evReplyChk(PageVO vo, HttpSession session, Model model) {
+
+		System.out.println("컨트롤러의 evReplyChk 메서드 발동");
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(evReplyService.getTotal(vo));
 		
+
+		model.addAttribute("replyList", evReplyService.getReplyList(vo));
+		model.addAttribute("pc", pc);
+		System.out.println(noReplyService.getReplyList(vo));
+		System.out.println(pc);
 	}
 	
 	

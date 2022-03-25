@@ -46,7 +46,7 @@
 				<if test="condition == 'writer'">
 					WHERE writer LIKE '%'||#{keyword}||'%'
 				</if>
-				ORDER BY bno DESC
+				ORDER BY rno DESC
 				) tbl
 			)
 				<![CDATA[
@@ -60,7 +60,7 @@
   
   <select id="getTotal" resultType="int">
   	SELECT COUNT(*)
-  	FROM cmboard
+  	FROM cmreply
   </select>
 
 
