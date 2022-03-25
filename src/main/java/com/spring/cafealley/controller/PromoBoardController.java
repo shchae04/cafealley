@@ -64,6 +64,8 @@ public class PromoBoardController {
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		paging.setCountPerPage(5);
 		
+		System.out.println("제한사항이 포함된 vo :" + vo);
+		
 		//제한사항을 command 객체로 받는다.
 		
 		List<PromoBoardVO> list = boardService.getList(paging,vo);
