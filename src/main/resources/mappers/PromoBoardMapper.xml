@@ -6,16 +6,87 @@
 <mapper
 	namespace="com.spring.cafealley.promoboard.mapper.IPromoBoardMapper">
 
-
+	<!-- 체크하면 true -> 제한 하면 true -->
+	
+	<sql id="area">
+		<if test="vo.area == '서울'">AND area = '서울'</if>
+		<if test="vo.area == '경기/인천'">AND area = '경기/인천'</if>
+		<if test="vo.area == '강원'">AND area = '강원'</if>
+		<if test="vo.area == '충북'">AND area = '충북'</if>
+		<if test="vo.area == '충남/대전'">AND area = '충남/대전'</if>
+		<if test="vo.area == '경북/대구'">AND area = '경북/대구'</if>
+		<if test="vo.area == '경남/부산'">AND area = '경남/부산'</if>
+		<if test="vo.area == '전북'">AND area = '전북'</if>
+		<if test="vo.area == '전남/광주'">AND area = '전남/광주'</if>
+		<if test="vo.area == '제주'">AND area = '제주'</if>
+		<if test="vo.area == null or vo.area == ''">
+		
+		</if>
+	</sql>
+	
+	<sql id="restrict">
+	
+		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
+		WHERE limitation1 = 'true' AND limitaion2 = 'true' AND limitation3 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
+		WHERE limitation1 = 'true' AND limitaion2 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
+		WHERE limitation1 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
+		WHERE limitation1 = 'true' AND limitaion2 = 'false' AND limitation3 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
+		WHERE limitation2 = 'true' AND limitaion3 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
+		WHERE limitaion2 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
+		WHERE limitation1 = 'false' AND limitaion2 = 'false' AND limitation3 = 'true'
+		</if>
+		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
+		where pr.writer = u.username
+		</if>
+	</sql>
+	
+	<sql id="mood">
+		<if test="vo.place == 'Nature / Wooden'">
+		AND place = 'Nature / Wooden'
+		</if>
+		<if test="vo.place == 'Concrete / Industrial'">
+		AND place = 'Concrete / Industrial'
+		</if>
+		<if test="vo.place == 'Mordern / Neat'">
+		AND place = 'Mordern / Neat'
+		</if>
+		<if test="vo.place == 'Retro / Vintage'">
+		AND place = 'Retro / Vintage'
+		</if>
+		<if test="vo.place == 'Cozy / Comfort'">
+		AND place = 'Cozy / Comfort'
+		</if>
+		<if test="vo.place == null or vo.place ==''">
+		
+		</if>
+	</sql>
+	
+	
+	
 	<sql id="search">
-		<if test="condition == 'writer'">
+		<if test="page.condition == 'writer'">
 			WHERE writer LIKE '%'||#{keyword}||'%'
 		</if>
-		<if test="condition == ''|| condition == null">
+		<if test="page.condition == '' or page.condition == null">
 			
 		</if>
-		
 	</sql>
+
+
+		
+	
 	<!-- 글등록 -->
 	<insert id="regist">
 		INSERT INTO Promoboard(bno, writer, key, content, area, place, regdate, limitation1, limitation2, limitation3, filecnt)
@@ -34,15 +105,19 @@
 				  FROM promoboard pr
 				  LEFT JOIN users u
 				    ON pr.writer = u.username
-				<include refid="search"/>
-				ORDER BY bno DESC
+				<include refid="restrict"/>
+				<include refid="area"/>
+				<include refid="mood"/>
+				
+				ORDER BY pr.bno DESC
 				) tbl
 			)
 		<![CDATA[
-		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
-		AND rn <= #{pageNum} * #{countPerPage}
+		WHERE rn > (#{page.pageNum} - 1) * #{page.countPerPage}
+		AND rn <= #{page.pageNum} * #{page.countPerPage}
 		]]>
 	</select>
+	
 
 	<!-- 상세보기 -->
 	<select id="getContent"
