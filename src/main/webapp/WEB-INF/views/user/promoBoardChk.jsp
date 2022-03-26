@@ -519,6 +519,18 @@
                     <!--카테고리 메뉴-->
                     <ul class="nav nav-tabs">
                         <li><a href="<c:url value='/user/userInfo' />">회원정보</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">공지 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/noReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">이벤트 게시판<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value='/user/evReplyChk' />">작성댓글보기</a></li>
+							</ul>
+						</li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티게시판<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -563,8 +575,8 @@
                                <c:forEach var="vo" items="${boardList}">
                                 <tr>
                                     <td id="writtenBno">${vo.bno}</td>
-                                    <td>
-                                    	<a style="cursor: pointer;" id="toBoardDetail">${vo.content}</a>
+                                    <td id="tdContent">
+                                    	<a onclick="modalContent(${vo.bno})" style="cursor: pointer;">${vo.content}</a>
                                     </td>
 		                            <td><fmt:formatDate value="${vo.regdate}" pattern="MM-dd"/></td>
                                 </tr>
@@ -789,14 +801,28 @@
 	
 	
 	//상세보기 처리
+	/*
+	function toBoardDetail(bno) {
+		
+	}
+	*/
+	
+	$('tbody td a').on('click', function(e) {
+		e.preventDefault();
+		const bno = $('written-bno').text();
+		console.log('상세보기 글번호: ' + bno);
+		modalContent(bno);
+	});//end 모달 상세보기.
+	
+	/*
 	$('#toBoardDetail').click(function(e) {
 		e.preventDefault();
 		const bno = $('#writtenBno').text();
 		console.log('typeOfbno: ' + typeof(bno));
 		console.log('상세보기 글번호: ' + bno);
 		modalContent(bno);
-	}); //end 모달 상세보기.
-	
+	}); 
+	*/
 	function modalContent(bno) {
 		console.log('모달 상세처리 진행.');
 		let str = '';

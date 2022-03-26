@@ -898,7 +898,7 @@
                 console.log('지역필터안에 들어옴');
                 for (let $li of $area.children) {
                     console.log($li.children[0].children[0] !== e.target);
-                    if ($li.children[0].children[0] != e.target) {
+                    if ($li.children[0].children[0] !== e.target) {
                         $li.children[0].children[0].checked = false;
                         $li.children[0].style.fontSize = '14px';
                     
