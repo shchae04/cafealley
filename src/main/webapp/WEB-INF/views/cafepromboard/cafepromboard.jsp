@@ -865,7 +865,12 @@
 		
 		
 		
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+	
+>>>>>>> 619b4f8aa560ee6abb57215f4e3b22e8bef2a710
 			
 			
 			
@@ -1244,8 +1249,6 @@
         	console.log('제한사항 설정 함수 GetJson : ' + '제한사항1 :'+limit1+ '제한사항2 :'+ limit2+ '제한사항3 :'+ limit3+ '장소: '+ picarea + 'mood :'+ picmood);
                 //getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
                 
-               
-
 
         console.log(data);
 			if(reset == true) {
@@ -1253,10 +1256,6 @@
 				str = '';
 			}
 			
-			
-
-			
-
 		
 			
 			
