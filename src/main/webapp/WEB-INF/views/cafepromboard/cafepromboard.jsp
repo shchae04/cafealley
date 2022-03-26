@@ -830,7 +830,7 @@
 		let page = 1;
 		
     	getListLike(function(data) {
-			getList(data, true, page);
+			getList(data, true, page,'','','','','');
 		});
     	
     	function getListLike(callbackFunc) {
@@ -859,15 +859,421 @@
 			
 		} //end getList
 		
-		function getList(data, reset, page) {
+		
+		//
+		
+		
+		
+		
+	
 			
-			console.log(data);
+			
+			
+	
+		
+			//지역 페이징 처리 각자의 area li 지목.
+        		const $area = document.getElementById('area');
+                const $place = document.getElementById('place');
+                const $restrict = document.getElementById('restrict');
+
+                //값을 담을 변수 선언 값이 판단 될 때 마다
+                var picarea ='';
+                var picmood ='';
+                var limit1 ='';
+                var limit2 ='';
+                var limit3 ='';
+		
+             
+                	
+                	//값 불러오는곳!!
+		
+                	
+        
+        	function getList(data, reset, page,limit1,limit2,limit3,area,place) {
+
+			
+        	// 값 불러오는곳!
+        	
+        
+        		const $promboardfilter = document.querySelector('.promboard-filter');
+                $promboardfilter.addEventListener('click', e => {
+
+
+
+                    console.log('이벤트 발생');
+
+                    if (e.target.matches('#area input[type="checkbox"]')) {
+                        console.log('지역필터안에 들어옴');
+
+                        //선택한 지역
+                        picarea = e.target.parentNode.textContent;
+
+                        if (e.target.checked) {
+
+                            if (picarea === '서울') {
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                //나머지 false 처리.
+                                // console.log($area.children[1].children[0].childNodes[0]);
+                                for (let $li of $area.children) {
+                                    //console.log($li);
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '경기/인천') {
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for (let $li of $area.children) {
+                                    //console.log($li);
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '강원') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '충북') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '충남/대전') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '경북/대구') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '경남/부산') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '전북') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '전남/광주') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+                            if (picarea === '제주') {
+                                e.target.parentNode.style.fontSize = '20px';
+                                for (let $li of $area.children) {
+                                    if ($li.children[0].children[0] !== e.target) {
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+
+                                }
+                            }
+
+
+
+
+                        } else {
+
+
+                            if (picarea === '서울') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '경기/인천') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '강원') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '충북') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '충남/대전') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '경북/대구') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '경남/부산') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '전북') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '전남/광주') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                            if (picarea === '제주') {
+                                e.target.parentNode.style.fontSize = '14px';
+                                picarea = '';
+                            }
+
+                        }
+
+
+
+
+
+                    } else if (e.target.matches('#place input[type="checkbox"]')) {
+                        console.log('분위기필터안에 들어옴');
+                        
+                        picmood = e.target.parentNode.textContent;
+
+                        if (e.target.checked) {
+
+                            if(picmood === 'Nature / Wooden'){
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for($li of $place.children){
+                                    if($li.children[0].children[0] !== e.target){
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+                                }
+                            }
+
+                            if(picmood === 'Concrete / Industrial'){
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for($li of $place.children){
+                                    if($li.children[0].children[0] !== e.target){
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+                                }
+                            }
+
+                            if(picmood === 'Morden / Neat'){
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for($li of $place.children){
+                                    if($li.children[0].children[0] !== e.target){
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+                                }
+                            }
+
+                            if(picmood === 'Retro / Vintage'){
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for($li of $place.children){
+                                    if($li.children[0].children[0] !== e.target){
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+                                }
+                            }
+
+                            if(picmood === 'Cozy / Comfort'){
+                                e.target.parentNode.style.fontSize = '20px';
+
+                                for($li of $place.children){
+                                    if($li.children[0].children[0] !== e.target){
+                                        $li.children[0].children[0].checked = false;
+                                        $li.children[0].style.fontSize = '14px';
+                                    }
+                                }
+                            }
+
+
+
+
+                        } else {
+
+                            if(picmood === 'Nature / Wooden'){
+                                picmood = '';
+                            }
+
+                            if(picmood === 'Concrete / Industrial'){
+                                picmood = '';
+                            }
+
+
+                            if(picmood === 'Morden / Neat'){
+                                picmood = '';
+                            }
+
+
+                            if(picmood === 'Retro / Vintage'){
+                                picmood = '';
+                            }
+
+
+                            if(picmood === 'Cozy / Comfort'){
+                                picmood = '';
+                            }
+
+
+                        }
+
+                    } else if (e.target.matches('#restrict input[type="checkbox"]')) {
+                        if (e.target.checked) {
+                            e.target.parentNode.style.fontSize = '20px';
+                            var restrict = e.target.parentNode.textContent;
+
+                            //boolean 타입의 변수 3개 선언. 누적해서 제한해야 하는데 어떻게 하지..
+
+                            if (restrict === 'No Kids') {
+                                limit1 = 'true';
+                            }
+
+                            if (restrict === 'No Pets') {
+                                limit2 = 'true';
+                            }
+
+                            if (restrict === 'No Study') {
+                                limit3 = 'true';
+                            }
+
+
+
+
+
+                        } else {
+                            var restrict = e.target.parentNode.textContent;
+                            if (restrict === 'No Kids') {
+                                limit1 = 'false';
+                                e.target.parentNode.style.fontSize = '14px';
+                            }
+                            if (restrict === 'No Pets') {
+                                limit2 = 'false';
+                                e.target.parentNode.style.fontSize = '14px';
+                            }
+                            if (restrict === 'No Study') {
+                                limit3 = 'false';
+                                e.target.parentNode.style.fontSize = '14px';
+                            }
+
+
+                        }
+
+
+
+                    } else {
+                        //여기서 getList 불러
+                        return;
+                    }
+
+                    //전송합니다. 제한사항 , 지역, 무드
+                    //limit1,limit2,limit3,picarea,plicmood
+                    // getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+
+
+
+
+        	console.log('제한사항 설정 함수 in : ' + '제한사항1 :'+limit1+ '제한사항2 :'+ limit2+ '제한사항3 :'+ limit3+ '장소: '+ picarea + 'mood :'+ picmood);
+
+        			//서울이면 한번 부르고, 경기두번, 강원 3번 뭔가 이상한데?
+                }); //이벤트 처리 끝. 
+                
+        	console.log('제한사항 설정 함수 GetJson : ' + '제한사항1 :'+limit1+ '제한사항2 :'+ limit2+ '제한사항3 :'+ limit3+ '장소: '+ picarea + 'mood :'+ picmood);
+                //getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+                
+               
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	// 값 불러오는 함수 종료.
+			
+			
+			
+        
+        console.log(data);
 			if(reset == true) {
+				console.log('페이지 초기화');
 				str = '';
 			}
+			
+			
+			
+			console.log('제한사항 in getJson'+limit1,limit2,limit3,picarea,picmood);
+		
+			
+			
 
 			$.getJSON(
-				'<c:url value="/promo/getList?pageNum=" />' + page,
+				'<c:url value="/promo/getList?pageNum=" />' + page +"&limitation1="+
+						limit1 +"&limitation2="+limit2+"&limitation3="+limit3+
+						"&area="+area+"&place="+place,
 				function(list) {
 					console.log(JSON.stringify(list));					
 					
@@ -1058,6 +1464,8 @@
 	                $('#contentDiv').html(str);
 				}
 			); //end getJSON
+			
+			return;
 			
 		};
 		
@@ -1520,55 +1928,15 @@
     
     
     
-		const $area = document.getElementById('area');
-        const $place = document.getElementById('place');
-        const $restrict = document.getElementById('restrict');
+        
+         // 주석처리 if( || || 처리로 input 값을 모두 얻자.)
+            //console.log(area);
+            //console.log(limit1,limit2,limit3);
 
-        const $promboardfilter = document.querySelector('.promboard-filter');
-        $promboardfilter.addEventListener('click', e => {
-            console.log('이벤트 발생');
-            console.log(e.target);
-            if (e.target.matches('#area input[type="checkbox"]')) {
-                console.log('지역필터안에 들어옴');
-                for (let $li of $area.children) {
-                    console.log($li.children[0].children[0] !== e.target);
-                    if ($li.children[0].children[0] !== e.target) {
-                        $li.children[0].children[0].checked = false;
-                        $li.children[0].style.fontSize = '14px';
-                    } else {
-                        if (e.target.checked) {
-                            e.target.parentNode.style.fontSize = '20px';
-                        } else {
-                            e.target.parentNode.style.fontSize = '14px';
-                        }
-                    }
-
-                }
-            } else if (e.target.matches('#place input[type="checkbox"]')) {
-                console.log('분위기필터안에 들어옴');
-                for (let $li of $place.children) {
-                    if ($li.children[0].children[0] !== e.target) {
-                        $li.children[0].children[0].checked = false;
-                        $li.children[0].style.fontSize = '14px';
-                    } else {
-                        if (e.target.checked) {
-                            e.target.parentNode.style.fontSize = '20px';
-                        } else {
-                            e.target.parentNode.style.fontSize = '14px';
-                        }
-                    }
-                }
-            } else if (e.target.matches('#restrict input[type="checkbox"]')) {
-                if (e.target.checked) {
-                    e.target.parentNode.style.fontSize = '20px';
-                } else {
-                    e.target.parentNode.style.fontSize = '14px';
-                }
-            } else return;
-
-
-        })
-
+            
+        //간단하게 해결해 보자.. ->
+        
+                                                                                                                                                                            
 
 
         let filecount = 0;
@@ -1961,6 +2329,8 @@
 		}); //end 좋아요 처리.
         
 		
+		
+		
 		//무한 스크롤
 		$(window).scroll(function() {
 			//윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같다면 로직을 수행.
@@ -1974,7 +2344,7 @@
 				++page;
 				console.log(page);
 				getListLike(function(data) {
-					getList(data, false, page);
+					getList(data, false, page,'','','','','');
 				});
 			
 			}
