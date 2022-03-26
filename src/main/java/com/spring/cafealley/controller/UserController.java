@@ -32,13 +32,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.cafealley.board.service.BoardService;
+import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
+import com.spring.cafealley.cart.service.ICartService;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.OrderingVO;
 import com.spring.cafealley.command.PromoBoardVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
+import com.spring.cafealley.ordering.service.IOrderingService;
 import com.spring.cafealley.promoboard.service.IPromoBoardService;
+import com.spring.cafealley.reply.mapper.INoReplyMapper;
 import com.spring.cafealley.reply.service.ICmReplyService;
+import com.spring.cafealley.reply.service.IEvReplyService;
+import com.spring.cafealley.reply.service.IReplyService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.MailSendService;
 import com.spring.cafealley.util.PageCreator;
@@ -60,7 +67,14 @@ public class UserController {
 	private ICmReplyService cmReplyService;
 	@Autowired
 	private IPromoBoardService promBoardService;
-	
+	@Autowired
+	private IReplyService noReplyService;
+	@Autowired
+	private IEvReplyService evReplyService;
+	@Autowired
+	private IOrderingService orderingService; 
+	@Autowired
+	private ICartService cartService;
 	
 	//비밀번호 암호화를 위한 BCryptPasswordEncoder 객체
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -311,10 +325,68 @@ public class UserController {
 	@GetMapping("/promoReplyChk")
 	public void promoReplyChk() {}
 	
+	// 공지 게시판 작성 댓글 보기로 이동
+	@GetMapping("/noReplyChk")
+	public void noReplyChk(PageVO vo, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 noReplyChk 메서드 발동");
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(noReplyService.getTotal(vo));
+		
+
+		model.addAttribute("replyList", noReplyService.getReplyList(vo));
+		model.addAttribute("pc", pc);
+		System.out.println(noReplyService.getReplyList(vo));
+		System.out.println(pc);
+		
+	}
+	
+	// 이벤트 게시판 작성 댓글 보기로 이동
+	@GetMapping("/evReplyChk")
+	public void evReplyChk(PageVO vo, HttpSession session, Model model) {
+
+		System.out.println("컨트롤러의 evReplyChk 메서드 발동");
+		String userId = ((UserVO)session.getAttribute("login")).getUserid();
+		vo.setCondition("writer");
+		vo.setKeyword(userId); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(evReplyService.getTotal(vo));
+		
+
+		model.addAttribute("replyList", evReplyService.getReplyList(vo));
+		model.addAttribute("pc", pc);
+		System.out.println(noReplyService.getReplyList(vo));
+		System.out.println(pc);
+	}
+	
 	
 	// 주문/배송내역 조회로 이동
 	@GetMapping("/orderDelHistory")
-	public void orderDelHistory() {}
+	public void orderDelHistory(HttpSession session, Model model, PageVO vo) {
+		String userid = ((UserVO)session.getAttribute("login")).getUserid() ;
+		System.out.println("/ordering/orderManagement: GET");
+		List<OrderingVO> orderlist = orderingService.getList(userid, vo);
+		for(int i =0; i<orderlist.size(); i++) {
+			for(int j=0; j<orderlist.get(i).getOrdercart().size(); j++) {
+ 				 String proname = cartService.selectOne(orderlist.get(i).getOrdercart().get(j).getCartno()).getProname();
+ 				 int filenum = cartService.selectOne(orderlist.get(i).getOrdercart().get(j).getCartno()).getFilenum();
+ 				 orderlist.get(i).getOrdercart().get(j).setProname(proname);
+ 				 orderlist.get(i).getOrdercart().get(j).setFilenum(filenum);
+			 }
+		}
+		System.out.println(orderlist);
+		model.addAttribute("orderList" , orderlist);
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(vo);
+		pc.setArticleTotalCount(orderingService.getTotal());
+		System.out.println(pc);
+		model.addAttribute("pc",pc);
+	}
 	
 	// 로그아웃
 	@GetMapping("/logout")

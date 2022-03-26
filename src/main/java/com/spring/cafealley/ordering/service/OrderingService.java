@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.OrderingVO;
 import com.spring.cafealley.ordering.mapper.IOrderingMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class OrderingService implements IOrderingService {
@@ -21,8 +22,10 @@ public class OrderingService implements IOrderingService {
 	}
 
 	@Override
-	public List<OrderingVO> getList(String userid) {
-		List<OrderingVO> list = mapper.getList(userid);
+	public List<OrderingVO> getList(String userid, PageVO vo) {
+		System.out.println("OrderingService에서의 파라머티로 받은 userid : " + userid);
+		System.out.println("OrderingService에서의 파라머티로 받은 paging : " + vo);
+		List<OrderingVO> list = mapper.getList(userid, vo);
 		System.out.println(list);
 		return list;
 	}
@@ -39,8 +42,17 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public void delete(int ordernum) {
-		// TODO Auto-generated method stub
-
+		//mapper.delete(ordernum);
+	}
+	
+	@Override
+	public OrderingVO getOrderByOrdernum(int ordernum) {
+		return mapper.getOrderByOrdernum(ordernum);
 	}
 
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
+	}
+	
 }

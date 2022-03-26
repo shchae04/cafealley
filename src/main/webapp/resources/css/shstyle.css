@@ -185,11 +185,14 @@ tr>td>a {
 
 .pagination > li > a {
         background-color: black !important;
+        border : 1px solid black !important;
         color: white !important;
     }
 .pagination > li > a:hover {
         background-color: gray !important;
         color: white !important;
+        border : 1px solid white !important;
+        cursor: pointer !important;
     }
 
 

@@ -865,7 +865,7 @@
 		
 		
 		
-	
+
 			
 			
 			
@@ -1245,18 +1245,8 @@
                 //getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
                 
                
-        	
-        	
-        	
-        	
-        	
-        	
-        	
-        	// 값 불러오는 함수 종료.
-			
-			
-			
-        
+
+
         console.log(data);
 			if(reset == true) {
 				console.log('페이지 초기화');
@@ -1264,8 +1254,9 @@
 			}
 			
 			
+
 			
-			console.log('제한사항 in getJson'+limit1,limit2,limit3,picarea,picmood);
+
 		
 			
 			

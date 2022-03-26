@@ -46,9 +46,9 @@
   	
   	<resultMap type="com.spring.cafealley.command.CartVO" id="cart">
   		<id property="cartno" column="cartno"/>
-  		<result property="carttype" column="carttype"/>
+  		<result property="carttype" column="ccarttype"/>
   		<result property="prono" column="prono"/>
-  		<result property="userid" column="userid"/>
+  		<result property="userid" column="cuserid"/>
   		<result property="cartamount" column="cartamount"/>
   		<result property="carttotalprice" column="carttotalprice"/>
   	</resultMap>
@@ -58,11 +58,23 @@
   		<if test="deliverytracknum != null and deliverytracknum != '' ">
   			,deliverytracknum = #{deliverytracknum}
   		</if>
+  		<if test="refundreason != null and refundreason != '' ">
+  			,refundreason= #{refundreason}
+  		</if>
+  		<if test="refunddetailreason != null and refunddetailreason != '' ">
+  			,refunddetailreason = #{refunddetailreason}
+  		</if>
+  		<if test="refundbankname != null and refundbankname != '' ">
+  			,refundbankname = #{refundbankname}
+  		</if>
+  		<if test="refundbank != null and refundbank != '' ">
+  			,refundbank = #{refundbank}
+  		</if>
   	</sql>
   
   
     <sql id="getListUserId">
-    	<if test="userId != null and userId != '' ">
+    	<if test="userid != 'allofthem'">
     		WHERE o.userid = #{userid}
     	</if>
     </sql>  
@@ -83,14 +95,26 @@
   	</insert>
   	
   	<select id="getList" resultMap="orderInfo">
-  	SELECT o.*,
-  		   c.*
-  	  FROM ordering o 
-  	  LEFT OUTER JOIN cart c
-  	    ON o.userid = c.userid 
-  	   AND o.carttype = c.carttype
-  	 <include refid="getListUserId"></include>
-  	 ORDER BY o.ordernum DESC
+	SELECT * 
+	  FROM( SELECT ROWNUM AS rn,
+	           				 tbl.*
+	          FROM (SELECT o.*,
+	          	     	   c.cartno,
+	          	     	   c.carttype as ccarttype,
+	          	     	   c.prono,
+	          	     	   c.userid as cuserid,
+	          	     	   c.cartamount,
+	          	     	   c.carttotalprice
+	            	  FROM ordering o 
+	              	  LEFT OUTER JOIN cart c
+		            	ON o.userid = c.userid 
+		           	   AND o.carttype = c.carttype
+	 	         	   <include refid="getListUserId"/>
+	         	 	 ORDER BY o.ordernum DESC) tbl)
+	<![CDATA[
+	WHERE rn <= #{paging.pageNum} * #{paging.countPerPage} 
+	AND rn > ((#{paging.pageNum} - 1) * #{paging.countPerPage})
+	]]> 
   	</select>
   	
   	
@@ -101,6 +125,11 @@
   	   AND carttype = #{carttype}
   	</select>
   	
+  	<select id="getOrderByOrdernum" resultType="com.spring.cafealley.command.OrderingVO">
+  	SELECT *
+  	  FROM ordering
+  	 WHERE ordernum = #{ordernum}
+  	</select>
   	
   	<update id="modify">
   	UPDATE ordering
@@ -113,6 +142,12 @@
   	DELETE ordering
   	 WHERE ordernum = #{ordernum}
   	</delete>
+  
+	<select id="getTotal" resultType="int">
+  	SELECT COUNT(*)
+  	FROM ordering
+  </select>
+  
   
   
   </mapper>
