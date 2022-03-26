@@ -1,5 +1,6 @@
 package com.spring.cafealley.user.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -47,5 +48,8 @@ public interface IUserMapper {
 	 * (login이라는 세션 데이터 -> 로그인 중이라는 징표)
 	 */
 	UserVO getUserWithSessionId(String sessionId);
+	
+	//모든 사업자 회원의 카페주소 불러오기
+	List<String> getBsnsUserAddr();
 
 }

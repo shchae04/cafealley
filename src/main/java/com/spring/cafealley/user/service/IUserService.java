@@ -1,6 +1,7 @@
 package com.spring.cafealley.user.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.util.PageVO;
@@ -38,7 +39,9 @@ public interface IUserService {
 	// 컨트롤러에게 받은 매개값으로 받은 값을 Map으로 포장해야 함
 	// MyBatis로 DB연동을 진행할 때 파라미터 값이 2개 이상이라면 어노테이션을 사용하거나 맵 혹은 객체로 포장해 보내야 한다.
 	void keepLogin(String session, Date limittime, String userid);
-
+	
+	//모든 사업자 회원의 카페주소 불러오기
+	List<String> getBsnsUserAddr();
 }
 
 

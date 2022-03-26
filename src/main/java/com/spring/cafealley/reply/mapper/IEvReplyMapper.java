@@ -3,6 +3,7 @@ package com.spring.cafealley.reply.mapper;
 import java.util.List;
 
 import com.spring.cafealley.command.ReplyVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IEvReplyMapper {
 
@@ -17,5 +18,11 @@ public interface IEvReplyMapper {
 	
 	//댓글 삭제 rno,bno.조인.
 	void replyDelete(int rno);
+	
+	//총 게시물 수
+	int getTotal(PageVO vo);
+	
+	//목록 요청(페이징)
+	List<ReplyVO> getReplyList(PageVO vo);
 
 }

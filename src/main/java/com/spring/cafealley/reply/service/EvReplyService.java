@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.reply.mapper.IEvReplyMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class EvReplyService implements IEvReplyService {
@@ -32,6 +33,16 @@ public class EvReplyService implements IEvReplyService {
 	@Override
 	public void replyDelete(int rno) {
 		evmapper.replyDelete(rno);
+	}
+
+	@Override
+	public int getTotal(PageVO vo) {
+		return evmapper.getTotal(vo);
+	}
+
+	@Override
+	public List<ReplyVO> getReplyList(PageVO vo) {
+		return evmapper.getReplyList(vo);
 	}
 
 

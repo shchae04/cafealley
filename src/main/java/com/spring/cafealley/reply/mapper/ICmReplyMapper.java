@@ -19,9 +19,6 @@ public interface ICmReplyMapper {
 	//댓글 삭제 rno,bno.조인.
 	void replyDelete(int rno);
 	
-	
-	
-	
 	//총 게시물 수
 	int getTotal(PageVO vo);
 	

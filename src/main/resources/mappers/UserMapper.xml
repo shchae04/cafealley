@@ -10,6 +10,10 @@
 		<result property="limittime" column="limittime" />
 	</resultMap>
 	
+	<resultMap type="com.spring.cafealley.command.UserVO" id="list">
+		<result property="addrbasic" column="addrbasic" />
+	</resultMap>
+	
 	
 	
 	<!-- 회원가입 -->
@@ -96,6 +100,12 @@
 	<select id="getUserWithSessionId" resultMap="UserMap">
 		SELECT * FROM users
 		WHERE sessionid = #{sessionid}
+	</select>
+	
+	<select id="getBsnsUserAddr" resultType="string">
+		SELECT addrbasic
+		FROM users
+		WHERE businessnum IS NOT NULL
 	</select>
 	 
 </mapper>

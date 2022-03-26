@@ -1,0 +1,27 @@
+input, textarea, button, select {
+	/* 고유하게 적용되어있는 form 관련 요소들을 제거해서
+     여러 브라우저에서 동일한 디자인을 얻게 함.*/
+	-webkit-appearance: none; /*크롬, 사파리*/
+	-moz-appearance: none; /*파이어폭스*/
+	appearance: none; /*ie, edge*/
+	border: none;
+}
+
+ul, ol, dl, li {
+	/*리스트 스타일은 사용할 일이 많지 않아요.*/
+	list-style: none;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.container {
+	min-width: 1200px;
+}

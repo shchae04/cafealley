@@ -3,6 +3,7 @@ package com.spring.cafealley.board.mapper;
 import java.util.List;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.ReplyVO;
 import com.spring.cafealley.util.PageVO;
 
 public interface INoBoardMapper {
