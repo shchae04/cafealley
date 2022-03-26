@@ -5,13 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.cafealley.command.OrderingVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IOrderingMapper {
 	// 주문 등록
 	void order(OrderingVO vo);
 	
 	// 해당 아이디의 모든 주문 가져오기
-	List<OrderingVO> getList(@Param("userid") String userid);
+	List<OrderingVO> getList(@Param("userid") String userid,
+							@Param("paging") PageVO paging);
 	
 	OrderingVO getOrderByOrdernum(@Param("ordernum") int ordernum);
 	
@@ -24,5 +26,7 @@ public interface IOrderingMapper {
 	
 	// 주문 삭제 - 주문내역을 삭제할 수는 없음. 안쓰일 것. 
 	void delete(int ordernum);
+	
+	int getTotal();
 	 
 }

@@ -14,7 +14,7 @@
 	<%@ include file="./include/header.jsp"%>
 
 	<section style="margin-top: 150px;">
-		<!-- 슬라이드(캐러셀) 구현 시작 -->
+		<!-- Carousel 구현 시작 -->
 		<div class="container" style="width: auto;">
 			<div class="row">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -28,27 +28,26 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<a href="<c:url value='/promo/list'/>"><img
-								src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1"></a>
+							<a href="<c:url value='/promo/list'/>">
+							<img src="<c:url value='/img/slide1.jpg'/>" alt="슬라이드1"></a>
 						</div>
 						<div class="item">
-							<a href="<c:url value='/shop/shopList'/>"><img
-								src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2"></a>
+							<a href="<c:url value='/shop/shopList'/>">
+							<img src="<c:url value='/img/slide2.jpg'/>" alt="슬라이드2"></a>
 						</div>
 						<div class="item">
-							<a href="<c:url value='/cmBoard/cmList'/>"><img
-								src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3"></a>
+							<a href="<c:url value='/cmBoard/cmList'/>">
+							<img src="<c:url value='/img/slide3.jpg'/>" alt="슬라이드3"></a>
 						</div>
 					</div>
 
-					<!-- 좌, 우 화살표 (없애고 싶으면 지워도 됩니다.) -->
-					<a class="left carousel-control" href="#myCarousel" role="button"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<!-- carousel control  -->
+					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> 
+					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel" role="button"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</a> 
+					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> 
+					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
 					</a>
 
@@ -68,7 +67,7 @@
 		</div>
 
 
-		<!-- 이달의 커피숍-->
+		<!-- BEST CAFE -->
 		<div class="container" style="margin-top: 50px">
 			<div class="row">
 				<ul class="col-xs-12">
@@ -186,6 +185,7 @@
 
 	<%@ include file="./include/footer.jsp"%>
 	
+	<!-- map appkey : 17136e4884602adf06d712c2e104879b -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17136e4884602adf06d712c2e104879b&libraries=services"></script>
 	<script>
 		$(function() {
