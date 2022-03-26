@@ -25,7 +25,7 @@ public class BoardHandler implements HandlerInterceptor {
 		//세션 userid
 		HttpSession session = request.getSession();
 		 UserVO vo = (UserVO) session.getAttribute("login");
-		String userid = (String) session.getAttribute("userid");
+		String userid = vo.getUserid();
 		System.out.println("세션 작성자: " +userid);
 		
 		if(vo != null) {
