@@ -27,25 +27,25 @@
 	<sql id="restrict">
 	
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'true' AND limitation3 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'true' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
 		WHERE limitation1 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'false' AND limitation3 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'false' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
-		WHERE limitation2 = 'true' AND limitaion3 = 'true'
+		WHERE limitation2 = 'true' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
-		WHERE limitaion2 = 'true'
+		WHERE limitation2 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'false' AND limitaion2 = 'false' AND limitation3 = 'true'
+		WHERE limitation1 = 'false' AND limitation2 = 'false' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
 		where pr.writer = u.username
