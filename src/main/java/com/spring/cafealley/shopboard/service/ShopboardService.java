@@ -39,5 +39,10 @@ public class ShopboardService implements IShopboardService {
 	public void delete(int bno) {
 		mapper.delete(bno);
 	}
+	
+	@Override
+	public void hit(int bno) {
+		mapper.hit(bno);
+	}
 
 }

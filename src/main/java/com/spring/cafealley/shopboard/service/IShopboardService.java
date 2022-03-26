@@ -19,5 +19,8 @@ public interface IShopboardService {
 	void modify(ShopboardVO vo);
 	
 	// 글 삭제
-	void delete(int bno);	
+	void delete(int bno);
+	
+	// 조회수 증가
+	void hit(int bno);
 }

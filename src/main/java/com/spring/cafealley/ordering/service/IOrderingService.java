@@ -20,4 +20,6 @@ public interface IOrderingService {
 	void delete(int ordernum);
 	
 	int getTotal();
+	
+	int getExistPro(int prono);
 }

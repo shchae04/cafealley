@@ -55,4 +55,9 @@ public class OrderingService implements IOrderingService {
 		return mapper.getTotal();
 	}
 	
+	@Override
+	public int getExistPro(int prono) {
+		return mapper.getExistPro(prono);
+	}
+	
 }

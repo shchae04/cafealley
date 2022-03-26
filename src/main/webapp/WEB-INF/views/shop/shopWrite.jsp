@@ -300,7 +300,7 @@
         <div class="container">
             
             <div class="row">
-            	<form action="#" method="post" enctype="multipart/form-data">
+            	<form action="#" method="post" enctype="multipart/form-data" name="writeForm">
 	                <div class="upper-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
@@ -321,10 +321,10 @@
 	                        </p>
 	                        <p class="price">
 	                            <p class="org-price">
-	                                <span class="prod-text">정가</span> <span id="prorice">0</span>원
+	                                <span class="prod-text">정가</span> <span id="prorice">${leastPro.proprice }</span>원
 	                            </p>
 	                            <p class="sell-price">
-	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">0</span>원</strong>
+	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">${leastPro.prosellprice}</span>원</strong>
 	                            </p>
 	                        </p>
 	                        <p class="quantity">
@@ -355,7 +355,7 @@
 	                                        </td>
 	                                        <td>${product.procategory}</td>
 	                                        <td>${product.prono}</td>
-	                                        <td class="large-cell">${product.proname }</td>
+	                                        <td class="large-cell">${product.proname}</td>
 	                                        <td>${product.proprice}</td>
 	                                        <td>${product.prosellprice}</td>
 	                                        <td>${product.prostock}</td>
@@ -381,7 +381,7 @@
 	                <div class="lower-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
 	                    </div>
 	                </div>
                 </form> <!-- end form  --> 
@@ -396,8 +396,6 @@
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>
-	
-		// 상품관리페이지에서 등록할 상품 안가져오면 돌려보냄
 		
 	
 	
@@ -408,6 +406,19 @@
             if (!e.target.matches('.img')) {
                 return;
             }
+            
+          //작성시 이미지 유효성 검사
+    		let file = e.target.value;
+    		console.log(file);
+    		file = file.slice(file.indexOf('.') + 1).toLowerCase();
+    		console.log(file);
+    		if(file !== 'jpg' && file !== 'png' && file !== 'jpeg' && file !== 'bmp') {
+    			alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다.');
+    			$('#img').val('');
+    			return;
+    		} 
+            
+            
             readURL(e.target);
         });
 
@@ -434,6 +445,35 @@
 
             }
         }
+        
+        // jqeury start
+        $(function(){
+        	
+        	// 등록 버튼 클릭시 유효성검사 후 submit해주기.
+        	$('.btn-regist').on('click',function(e){
+        		// 상품 게시글 메인 이미지 등록 해야함
+        		if($('#img').val = ''){
+        			alert('상품판매 게시글의 메인 이메지는 필수입니다.');
+        			$('label[for="img"]').focus();
+        			return;
+        		// 상품 게시글 타이틀 등록해야함.
+        		}else if($('input[name="title"]').val() == ''){
+        			alert('상품판매 게시글의 제목은 필수입니다.');
+        			$('input[name="title"]').focus();
+        			return;
+        		}else if($('input[name="content"]').val() == ''){
+        			alert('상품판매 게시글의 내용은 필수입니다.');
+        			$('input[name="content"]').focus();
+        			return;
+        		}
+        		
+        		document.writeForm.submit();
+        	});
+        	
+        	
+        });
+        
+        
     </script>
 </body>
 

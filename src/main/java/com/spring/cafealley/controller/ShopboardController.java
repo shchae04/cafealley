@@ -1,8 +1,12 @@
 package com.spring.cafealley.controller;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +77,23 @@ public class ShopboardController {
 		if(prono4 !=0)
 			proList.add(productService.getProduct(prono4));
 		model.addAttribute("proList",proList);
+		
+		ProductVO leastSellPricePro = new ProductVO();
+		int min=0;
+		for(ProductVO provo : proList) {
+			if(min==0) { // 첫빠따가 일단 min
+				min = provo.getProsellprice();
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;
+			}else if(min >= provo.getProsellprice()) {
+				min = provo.getProsellprice();
+				leastSellPricePro.setProsellprice(provo.getProsellprice()) ;
+				leastSellPricePro.setProprice(provo.getProprice()) ;		
+			}
+		}
+		System.out.println(leastSellPricePro);
+		model.addAttribute("leastPro", leastSellPricePro);
+		
 	}
 	
 	@PostMapping("/shopWrite")
@@ -108,8 +129,26 @@ public class ShopboardController {
 	
 	@GetMapping("/shopDetail/{bno}")
 	public String shopDetail(@PathVariable int bno,
-						   Model model) {
+						   Model model, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("/shop/shopDetail: GET");
+		Cookie[] cookies = request.getCookies();
+		boolean onedayflag = false;
+		if(cookies!= null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("shopvisited" + Integer.toString(bno))) {
+					onedayflag = true;
+					break;
+				}
+			}
+		}
+		// 쿠키를 뒤졌는데 24시간 이내로 방문하였던 흔적이 없다면, 쿠키만들어주고 
+		if(!onedayflag) {
+			Cookie shopvisited = new Cookie("shopvisited" + Integer.toString(bno), "true");
+			shopvisited.setMaxAge(60 * 60 * 24);
+			response.addCookie(shopvisited);
+			// 조회수도 하나 증가시켜줌.
+			service.hit(bno);
+		}
 		
 		ShopboardVO vo =  service.getContent(bno);
 		System.out.println("getContent에서 불러온 판매게시글 vo : "+vo);
@@ -130,6 +169,8 @@ public class ShopboardController {
 		System.out.println(leastSellPricePro);
 		model.addAttribute("leastPro", leastSellPricePro);
 		model.addAttribute("shop",vo);
+		
+
 		return "/shop/shopDetail";
 	}
 	

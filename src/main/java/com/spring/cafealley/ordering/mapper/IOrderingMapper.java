@@ -29,4 +29,5 @@ public interface IOrderingMapper {
 	
 	int getTotal();
 	 
+	int getExistPro(int prono);
 }

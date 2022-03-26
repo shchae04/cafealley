@@ -7,7 +7,7 @@ import lombok.ToString;
 /*
 CREATE TABLE product (
 	prono NUMBER(5,0) PRIMARY KEY,
-	proname VARCHAR2(30) NULL,
+	proname VARCHAR2(100) NULL,
 	proprice NUMBER(10,0)	NOT NULL,
 	prosellprice	NUMBER(10,0) NOT NULL,
 	procategory VARCHAR2(50) NOT NULL,

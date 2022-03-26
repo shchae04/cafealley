@@ -32,6 +32,19 @@ a:focus{
     text-decoration: none;
 }
 
+.nav .open > a, .nav .open > a:hover,
+.nav .open > a:focus,
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus,
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color: black !important;
+	color:white !important;
+	border-color: black !important;
+}
+
+
+
+
+
 
 /* 헤더 */
 header {
@@ -48,19 +61,19 @@ header {
 
 a,
 a:visited {
-    text-decoration: none;
-    color: black;
-    outline: none;
+    text-decoration: none !important;
+    color: black !important;
+    outline: none !important;
 }
 
 a:hover {
-    text-decoration: none;
-    color: black;
-    font-weight: bolder;
+    text-decoration: none !important;
+    color: black !important;
+    font-weight: bolder !important;
 }
 
 a:active {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .login-center {

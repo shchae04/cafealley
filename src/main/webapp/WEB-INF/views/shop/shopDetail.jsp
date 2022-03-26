@@ -294,7 +294,7 @@ button.btn-cart, button.btn-order {
 				<div class="col-xs-6">
 					<div class="detail-info">
 						<p class="title">${shop.title}</p>
-						<a class = "shop-modify" href="<c:url value='/shop/shopModify/${shop.bno}'/>"><span class="glyphicon glyphicon-erase">수정</span></a>
+						<a class = "shop-modify" href="<c:url value='/shop/shopModify/${shop.bno}'/>"><span class="glyphicon glyphicon-erase">수정/삭제</span></a>
 						
 						<p class="price">
 						<p class="org-price">

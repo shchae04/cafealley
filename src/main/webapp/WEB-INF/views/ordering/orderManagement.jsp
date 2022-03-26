@@ -102,7 +102,7 @@ button:disabled {
 		<div class="container">
 			<p class="ord-mgmt-title">주문 관리</p>
 			<table class="table ord-mgmt-table w-auto text-center align-middle"
-				style="min-width: 800px; ">
+				style="min-width: 1200px; ">
 				<thead>
 					<tr>
 						<td>주문번호</td>

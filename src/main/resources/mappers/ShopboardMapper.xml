@@ -124,6 +124,13 @@
   WHERE bno = #{bno}
   </update>
   
+  <update id="hit">
+  UPDATE shopboard
+  SET hit = hit+1
+  WHERE bno = #{bno}
+  </update>
+  
+  
   <delete id="delete">
   DELETE FROM shopboard
   WHERE bno = #{bno}

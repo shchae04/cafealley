@@ -408,14 +408,33 @@
 		function deleteimg($input){
 			$input.remove();
 		}
+		
 		const $delBtn = document.querySelector('.btn-remove');
 		
 		$delBtn.onclick = function() {
 				console.log('누름');
 				document.updateForm.setAttribute('action', '<c:url value="/shop/shopDelete"/>');
 				document.updateForm.submit();	
-
 		};
+		
+		
+		// jqeury start
+        $(function(){
+        	
+        	// 등록 버튼 클릭시 유효성검사 후 submit해주기.
+        	$('.btn-regist').on('click',function(e){
+        		// 타이틀 필수
+        		if($('input[name="title"]').val() == ''){
+        			alert('상품 게시글의 제목은 필수입니다.');
+        			$('input[name="title"]').focus();
+        			return;
+        		}
+        		
+        		document.updateForm.submit();
+        	});
+        	
+        	
+        });
 	
     
     </script>

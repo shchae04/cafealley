@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cafealley.command.ProductVO;
 import com.spring.cafealley.img.service.IImgService;
+import com.spring.cafealley.ordering.service.IOrderingService;
 import com.spring.cafealley.product.service.IProductService;
 
 @Controller
@@ -28,6 +29,11 @@ public class ProductController {
 	
 	@Autowired
 	private IImgService imgservice;
+	
+	@Autowired
+	private IOrderingService orderingservice;
+	
+	
 
 	//관리자 상품 목록 이동
 	@GetMapping("/productList")
@@ -74,6 +80,11 @@ public class ProductController {
 	@ResponseBody
 	public String delete(@RequestBody int prono) {
 		System.out.println("/product/productDelete: POST");
+		
+		if(orderingservice.getExistPro(prono)!=0) {
+			return "cantDelete";
+		}
+		
 		service.deleteProduct(prono);
 		System.out.println("비동기 삭제 완료.");
 		return "delSuccess";

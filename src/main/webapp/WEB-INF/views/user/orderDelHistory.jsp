@@ -16,6 +16,10 @@
     
 
     <style>
+    	.container{
+    		min-height:440px;
+    	}
+    
         .clearfix::after {
             content: '';
             display: block;
@@ -147,7 +151,7 @@
 	                                <th>주문상품</th>
 	                                <th>총 구매금액</th>
 	                                <th>주문상태</th>
-	                                <td>배송 정보</td>
+	                                <th>배송 정보</th>
 	                                <th>환불/반품</th>
 	                             <tr>
                             </thead>

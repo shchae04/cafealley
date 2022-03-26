@@ -148,6 +148,15 @@
   	FROM ordering
   </select>
   
+  	<select id="getExistPro" resultType="int">
+		SELECT COUNT(c.prono)
+		  FROM ordering o
+		  LEFT OUTER JOIN cart c
+			ON o.userid = c.userid
+		 WHERE c.prono = #{prono}
+		   AND o.carttype = c.carttype
+  	</select>
+  
   
   
   </mapper>

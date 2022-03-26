@@ -545,20 +545,35 @@ thead{
         		}
         	}
         	
+        	procategory = '';
         	
-        	
-        	// 상품 등록
+        	// 상품 판매게시물 등록
         	$('.btn-shop-regist').on('click', function(e){
         		let str =''; // 체크된거 url의 매개변수로 담아주기위해 저장.
         		let count = 0;
         		for(let checkbox of $('.chk-shop-regist')){
         			console.log(checkbox);
         			
+        			
+        			
 	        		if(checkbox.checked){
 	        			count = count + 1;
 	        			let namecheck = (count==1? "":count); // 1은 db에 숫자가 기입되어있지 않아서.. 매개변수에 안붙여야함.
 	        			let ampersand = (count==1? "":"&");
 	        			str+= ampersand + "prono"+ namecheck  + "=" + checkbox.getAttribute('id');
+	        			
+	        			// 같은 카테고리로만 묶어서 상품 판매 게시판에 등록 할 수 있음.
+	        			prono = checkbox.getAttribute("id");
+	        			if (count==1){
+	        				procategory = document.querySelector('#cat'+prono + '> p').textContent;
+	        				console.log('처음 카테고리 : ' + procategory)
+	        			}else if(procategory !== document.querySelector('#cat'+prono +'> p' ).textContent){
+	        				console.log('이후 카테고리 : ' + document.querySelector('#cat' + prono + '>p').textContent);
+	        				alert('같은 카테고리의 상품끼리만 판매 게시글에 등록이 가능합니다.');
+	        				return;
+	        			}
+	        			
+	        			
 	        		}
 	        	}
         		if(count==0){ // 선택된거 하나도 없으면
@@ -678,7 +693,7 @@ thead{
         				success: function(result) {
         					if(result === 'modSuccess') {
         						alert('상품이 정상적으로 수정되었습니다.');
-        						getList(true,'all','none'); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
+        						getList(true,'all','none'); //수정이 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
         						//자동으로 목록으로 가지는 않음,
         					}
         				},
@@ -706,6 +721,9 @@ thead{
     						alert('상품이 정상적으로 삭제되었습니다.');
     						getList(true,'all','none'); //삭제가 반영된 글 목록을 새롭게 보여줘야 하기 때문에 str을 초기화. 
     						//자동으로 목록으로 가지는 않음,
+    					}else if(result ==='cantDelete'){
+    						alert('이미 주문이 한번이라도 이뤄진 상품에 대해서는 삭제할 수 없습니다.');
+    						return;
     					}
     				},
     				error: function() {

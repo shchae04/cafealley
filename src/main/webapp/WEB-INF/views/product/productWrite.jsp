@@ -244,7 +244,7 @@ tbody> tr> td> .topmargin{
 	<%@ include file="../include/header.jsp"%>
 
 	<section>
-	<form action="productWrite" method="post" enctype="multipart/form-data">
+	<form action="productWrite" method="post" enctype="multipart/form-data" name="productForm">
 		<div class="container">
 			<p class="page-title">상품 등록</p>
 			<p class="page-desc">
@@ -299,7 +299,7 @@ tbody> tr> td> .topmargin{
 					<br>
 					<div class="lower-bar clearfix">
 						<div class="divforright">
-							<button class="btn-all-order" type="submit">
+							<button class="btn-all-order" type="button">
 								<span class="glyphicon glyphicon-ok"></span> 상품 등록완료
 							</button>
 						</div>
@@ -423,6 +423,13 @@ tbody> tr> td> .topmargin{
                 alert('모든 입력에대해 기재해주세요.');
                 return;
             }
+            
+            if($('input[name="proprice"]').val()<=$('input[name="prosellprice"]').val()){
+            	alert('상품 판매가는 상품 정상가보다 낮게 측정되어야 합니다.');
+            	return;
+            }
+            document.productForm.submit();
+            
         });
         
         function regex(input){

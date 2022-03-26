@@ -77,6 +77,33 @@ section {
 	display: block;
 	clear: both;
 }
+
+.divforleft {
+	width: fit-content;
+	height: fit-content;
+	text-align: center;
+	display: block;
+	float: left;
+	margin-left: -200px;
+}
+
+.divforleft>ul>li {
+	padding: 10px;
+	border-top: 2px solid black;
+}
+
+.divforleft p {
+	display: block;
+	width: fit-content;
+	margin: 0 auto 10px;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.select-category a {
+	color: black;
+}
+
 </style>
 
 </head>
@@ -92,6 +119,18 @@ section {
 				<a href="#" class="crt-page">원두</a>
 			</span>
 			<hr>
+			<div class="divforleft">
+				<p>종류</p>
+				<ul class="select-category">
+					<li><a href="all">전체</a></li>
+					<li><a href="beans">원두</a></li>
+					<li><a href="tea">티/액상차</a></li>
+					<li><a href="milk">유제품</a></li>
+					<li><a href="syrup">시럽/소스</a></li>
+					<li><a href="powder">파우더/농축액</a></li>
+					<li><a href="coffeemachine">커피용품, 머신</a></li>
+				</ul>
+			</div>
 			<c:forEach var="shop" items="${shopList}" varStatus="status">				
 				<li class="col-xs-3">
 					<div class="prod-list-inner">

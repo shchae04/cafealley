@@ -16,7 +16,7 @@
 
 	<%@ include file="../include/header.jsp" %>
 	
-    <div class="finor-container" style="margin-top: 200px; margin: 0 auto;">
+    <div class="finor-container" style="margin: 200px auto 0;">
         <div class="finor-wrapper">
             <div class="inner-finor">
                 <table class="finor-table">
