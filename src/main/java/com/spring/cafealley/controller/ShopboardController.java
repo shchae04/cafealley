@@ -25,6 +25,8 @@ import com.spring.cafealley.command.ShopboardVO;
 import com.spring.cafealley.img.service.IImgService;
 import com.spring.cafealley.product.service.IProductService;
 import com.spring.cafealley.shopboard.service.IShopboardService;
+import com.spring.cafealley.util.PageCreator;
+import com.spring.cafealley.util.PageVO;
 
 @Controller
 @RequestMapping("/shop")
@@ -38,9 +40,17 @@ public class ShopboardController {
 	IImgService imgService;
 	
 	@GetMapping("/shopList")
-	public void shopList(Model model) {
+	public void shopList(Model model, PageVO paging) {
 		System.out.println("/shop/shopList: GET");
-		List<ShopboardVO> shopList = service.getList();
+		System.out.println("초기의 PageVO : " + paging);
+		
+		
+		if(paging.getCondition() == null || paging.getCondition().equals("") )
+			paging.setCondition("");
+		if(paging.getKeyword() == null || paging.getKeyword().equals(""))
+			paging.setKeyword("lastest");
+		
+		List<ShopboardVO> shopList = service.getList(paging);
 		
 		// 해당 판매 게시글에 등록된 상품중 최저가를 같이 뿌려주기 위함.
 		List<Integer> sellPriceList = new ArrayList<>();
@@ -57,8 +67,15 @@ public class ShopboardController {
 			// 해당 게시글의 최저가 또한 shopList와 같은 순서로 저장됨.  
 			sellPriceList.add(min);
 		}
+		System.out.println("shopList: " + shopList);
 		model.addAttribute("shopList",shopList);
 		model.addAttribute("sellPriceList",sellPriceList);
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(paging);
+		pc.setArticleTotalCount(service.getTotal());
+		System.out.println(pc);
+		model.addAttribute("pc",pc);
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.ShopboardVO;
 import com.spring.cafealley.shopboard.mapper.IShopboardMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class ShopboardService implements IShopboardService {
@@ -21,8 +22,8 @@ public class ShopboardService implements IShopboardService {
 	}
 
 	@Override
-	public List<ShopboardVO> getList() {
-		return mapper.getList();
+	public List<ShopboardVO> getList(PageVO vo) {
+		return mapper.getList(vo);
 	}
 
 	@Override
@@ -43,6 +44,10 @@ public class ShopboardService implements IShopboardService {
 	@Override
 	public void hit(int bno) {
 		mapper.hit(bno);
+	}
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
 	}
 
 }

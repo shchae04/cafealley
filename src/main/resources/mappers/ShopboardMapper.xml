@@ -43,6 +43,28 @@
   	<if test=" prono3 != null and prono2 != '' ">#{prono3}, </if>
   	<if test=" prono4 != null and prono2 != '' ">#{prono4}, </if>
   </sql>
+  
+  
+  	<!--  shopboard 카테고리 -->
+  	<sql id="search">
+  		<if test="condition != '' and condition != null ">
+  		WHERE p.procategory = #{condition}
+  		</if>
+  	</sql>
+  	
+  	<sql id="order">
+  		<if test=" keyword == 'latest' "> ORDER BY s.regdate DESC </if>
+  		<if test=" keyword == 'oldest' "> ORDER BY s.regdate ASC </if>
+  		<if test=" keyword == 'hit' "> ORDER BY s.hit ASC </if>
+  		<if test=" keyword == 'pricelow' "> ORDER BY p.prosellprice ASC </if>
+  		<if test=" keyword == 'pricehigh' "> ORDER BY p.prosellprice DESC </if>
+  	</sql>
+  
+  
+  
+  
+  
+  
 
   
   <insert id="regist">
@@ -60,32 +82,40 @@
   </select>
    -->
   <select id="getList" resultMap="shopInfo">
-  SELECT s.bno,
-         s.title,
-         s.content,
-         s.regdate,
-         s.hit,
-         s.prono, 
-         s.prono2, 
-         s.prono3, 
-         s.prono4, 
-         s.filenum,
-  		 p.prono as productprono,
-         p.proname,
-         p.proprice,
-         p.prosellprice,
-         p.procategory,
-         p.prodetail,
-         p.prostock,
-         p.filenum as productfilenum
-    FROM shopboard s
-    LEFT OUTER JOIN product p
-      ON s.prono = p.prono
-      OR s.prono2 = p.prono
-      OR s.prono3 = p.prono
-      OR s.prono4 = p.prono
-   ORDER BY s.regdate DESC
-  </select>
+	SELECT *
+	  FROM (SELECT ROWNUM AS rn,
+	                         tbl.*
+	          FROM (SELECT s.bno,
+	                 	   s.title,
+	                 	   s.content,
+	                 	   s.regdate,
+	                 	   s.hit,
+	                 	   s.prono, 
+	                 	   s.prono2, 
+	                 	   s.prono3, 
+	                 	   s.prono4, 
+	                 	   s.filenum,
+	                 	   p.prono as productprono,
+	                 	   p.proname,
+	                 	   p.proprice,
+	                 	   p.prosellprice,
+	                 	   p.procategory,
+	                 	   p.prodetail,
+	                 	   p.prostock,
+	                 	   p.filenum as productfilenum
+	            	  FROM shopboard s
+	            	  LEFT OUTER JOIN product p
+	              		ON s.prono = p.prono
+	              		OR s.prono2 = p.prono
+	              		OR s.prono3 = p.prono
+	              		OR s.prono4 = p.prono
+	              	 <include refid="search"/>	
+	           		 <include refid="order"/>) tbl)
+	<![CDATA[
+	WHERE rn <= #{pageNum} * #{countPerPage}
+	AND rn >((#{pageNum} -1) * #{countPerPage})
+	]]>
+	</select>
   
   <select id="getContent" resultMap="shopInfo">
   SELECT s.bno,
@@ -136,5 +166,9 @@
   WHERE bno = #{bno}
   </delete>
   
+  <select id="getTotal" resultType="int">
+  SELECT COUNT(*)
+  FROM shopboard
+  </select>
   
   </mapper>

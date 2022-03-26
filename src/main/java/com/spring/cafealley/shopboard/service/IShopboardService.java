@@ -3,6 +3,7 @@ package com.spring.cafealley.shopboard.service;
 import java.util.List;
 
 import com.spring.cafealley.command.ShopboardVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IShopboardService {
 
@@ -10,7 +11,7 @@ public interface IShopboardService {
 	void regist(ShopboardVO vo);
 	
 	// 글 조회
-	List<ShopboardVO> getList();
+	List<ShopboardVO> getList(PageVO vo);
 	
 	// 글 상세조회
 	ShopboardVO getContent(int bno);
@@ -23,4 +24,6 @@ public interface IShopboardService {
 	
 	// 조회수 증가
 	void hit(int bno);
+	
+	int getTotal();
 }
