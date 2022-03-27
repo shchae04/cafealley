@@ -50,7 +50,19 @@
 											<li id="header-name">${login.username}님(일반회원)</li>
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
-											<li id="header-barcode">barcode here</li>
+											<!--  <li id="header-barcode">barcode here</li> -->
+										</ul>
+									</li>
+								</c:when>
+								<c:when test="${login.admin}">
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(관리자)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
+											<li><a href="<c:url value='/order/orderManagement' />">주문관리</a></li>										
+											<li><a href="<c:url value='/product/productList' />">상품관리</a></li>										
+											<!--  <li id="header-barcode">barcode here</li> -->
 										</ul>
 									</li>
 								</c:when>
@@ -61,6 +73,7 @@
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
 											<li><a href="<c:url value='/cart/cartList' />">장바구니</a></li>
+											<li><a href="<c:url value='/user/orderDelHistory' />">주문내역</a></li>
 										</ul>
 									</li>
 								</c:otherwise>
@@ -82,6 +95,7 @@
 					<li><a href="<c:url value='/cmBoard/cmList'/>">Coffee Talk</a></li>
 					<li><a href="<c:url value='/promo/list'/>">카페 게시판</a></li>
 					<li><a href="<c:url value='/evBoard/evList'/>">이벤트</a></li>
+					<c:if test="${login.businessnum}">
 					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">원두</a></li>
@@ -90,7 +104,9 @@
 							<li><a href="#">시럽 / 소스</a></li>
 							<li><a href="#">파우더 / 농축액</a></li>
 							<li><a href="#">커피용품, 머신</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					</c:if>
 				</ul>
 
 			</nav>
