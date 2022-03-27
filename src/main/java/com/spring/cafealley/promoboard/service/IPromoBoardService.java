@@ -39,12 +39,13 @@ public interface IPromoBoardService {
 	//게시글마다 좋아요 개수 체크
 	int likeCnt(int bno);
 
-
-	int getTotal(PageVO vo); 
-
 	
-
-
+	
+	
+	
+	
+	
+	int getTotal(PageVO vo); 
 
 	
 	

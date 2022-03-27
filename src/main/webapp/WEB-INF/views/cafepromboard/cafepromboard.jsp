@@ -830,7 +830,7 @@
 		let page = 1;
 		
     	getListLike(function(data) {
-			getList(data, true, page);
+			getList(data, true, page,'','','','','');
 		});
     	
     	function getListLike(callbackFunc) {
@@ -859,15 +859,181 @@
 			
 		} //end getList
 		
-		function getList(data, reset, page) {
+		
+		//
+		
+		
+		
+		
+		function getList(data, reset, page,limit1,limit2,limit3,area,place) {
 			
-			console.log(data);
+			
+			// 제한사항 데이터 시작.
+			
+				//지역 페이징 처리 각자의 area li 지목.
+		const $area = document.getElementById('area');
+        const $place = document.getElementById('place');
+        const $restrict = document.getElementById('restrict');
+        console.log($area);
+        console.log($place);
+        console.log($restrict);
+
+        //값을 담을 변수 선언 값이 판단 될 때 마다
+        var picarea ='';
+        var picmood ='';
+        var limit1 ='false';
+        var limit2 ='false';
+        var limit3 ='false';
+        
+        
+        const $promboardfilter = document.querySelector('.promboard-filter');
+        $promboardfilter.addEventListener('click', e => {
+      
+        	
+        	
+        	
+            console.log('이벤트 발생');
+            console.log(e.target);
+            if (e.target.matches('#area input[type="checkbox"]')) {
+                console.log('지역필터안에 들어옴');
+                for (let $li of $area.children) {
+                    console.log($li.children[0].children[0] !== e.target);
+                    if ($li.children[0].children[0] !== e.target) {
+                        $li.children[0].children[0].checked = false;
+                        $li.children[0].style.fontSize = '14px';
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    } else {
+                        if (e.target.checked) {
+                            e.target.parentNode.style.fontSize = '20px';
+                            
+                            var area = $li.children[0].textContent;
+                            console.log('지역필터의 선택' +e.target, area);
+                            
+                            
+    						//찾았다 값. text 형식으로옴
+    						const torf = e.target.checked;
+                            console.log('지역이 체크됨?'+torf);
+                            picarea = e.target.parentNode.textContent;
+                            console.log(picarea);
+                            //게시글 받아오기..비동기... 클릭하면 false네?
+                           	
+                           	//클릭되었을때  게시글 불러오기
+                           	getList(data,true,page,limit1,limit2,limit3,picarea,'');
+                          	return;
+                            
+                            
+                            
+                        } else {
+                            e.target.parentNode.style.fontSize = '14px';
+                        }
+                    }
+
+                }
+            } else if (e.target.matches('#place input[type="checkbox"]')) {
+                console.log('분위기필터안에 들어옴');
+                for (let $li of $place.children) {
+                    if ($li.children[0].children[0] !== e.target) {
+                        $li.children[0].children[0].checked = false;
+                        $li.children[0].style.fontSize = '14px';
+                    } else {
+                        if (e.target.checked) {
+                            e.target.parentNode.style.fontSize = '20px';
+                            
+                          	//값. text 형식으로옴
+                          	
+    						picmood = e.target.parentNode.textContent;
+                            console.log(picmood);
+                            getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+                          	return;
+                           
+                        } else {
+                            e.target.parentNode.style.fontSize = '14px';
+                            
+                        }
+                    }
+                }
+            } else if (e.target.matches('#restrict input[type="checkbox"]')) {
+                if (e.target.checked) {
+                    e.target.parentNode.style.fontSize = '20px';
+                    var restrict = e.target.parentNode.textContent;
+                   
+                    //boolean 타입의 변수 3개 선언. 누적해서 제한해야 하는데 어떻게 하지..
+                    
+                    if(restrict === 'No Kids'){
+                    	limit1 = 'true';
+                    }
+                    
+                    if(restrict === 'No Pets'){
+                    	limit2 = 'true';
+                    }
+                    
+                    if(restrict === 'No Study'){
+                    	limit3 = 'true';
+                    }
+                    
+                    
+                    
+                   
+                    
+                } else {
+                    	var restrict = e.target.parentNode.textContent;
+                    if(restrict === 'No Kids'){
+                    	limit1 = 'false';
+                    e.target.parentNode.style.fontSize = '14px';
+                    }
+                    if(restrict === 'No Pets'){
+                    	limit2 = 'false';
+                    e.target.parentNode.style.fontSize = '14px';
+                    }
+                    if(restrict === 'No Study'){
+                    	limit3 = 'false';
+                    e.target.parentNode.style.fontSize = '14px';
+                    }
+                    	
+                    
+                }
+                    
+                   
+                
+            } else {
+            	getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+          	return;
+            }
+
+            //전송합니다. 제한사항 , 지역, 무드
+            //limit1,limit2,limit3,picarea,plicmood
+           // getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+            console.log('제한사항'+limit1,limit2,limit3,picarea,picmood);
+            
+
+            //제한사항. list 받아오기.                 
+            
+          
+           	
+
+        }) 
+        
+
+        console.log(data);
 			if(reset == true) {
 				str = '';
 			}
+			
+			
+		
+			
+			
 
 			$.getJSON(
-				'<c:url value="/promo/getList?pageNum=" />' + page,
+				'<c:url value="/promo/getList?pageNum=" />' + page +"&limitation1="+
+						limit1 +"&limitation2="+limit2+"&limitation3="+limit3+
+						"&area="+area+"&place="+place,
 				function(list) {
 					console.log(JSON.stringify(list));					
 					
@@ -1058,6 +1224,8 @@
 	                $('#contentDiv').html(str);
 				}
 			); //end getJSON
+			
+			return;
 			
 		};
 		
@@ -1520,55 +1688,15 @@
     
     
     
-		const $area = document.getElementById('area');
-        const $place = document.getElementById('place');
-        const $restrict = document.getElementById('restrict');
+        
+         // 주석처리 if( || || 처리로 input 값을 모두 얻자.)
+            //console.log(area);
+            //console.log(limit1,limit2,limit3);
 
-        const $promboardfilter = document.querySelector('.promboard-filter');
-        $promboardfilter.addEventListener('click', e => {
-            console.log('이벤트 발생');
-            console.log(e.target);
-            if (e.target.matches('#area input[type="checkbox"]')) {
-                console.log('지역필터안에 들어옴');
-                for (let $li of $area.children) {
-                    console.log($li.children[0].children[0] !== e.target);
-                    if ($li.children[0].children[0] !== e.target) {
-                        $li.children[0].children[0].checked = false;
-                        $li.children[0].style.fontSize = '14px';
-                    } else {
-                        if (e.target.checked) {
-                            e.target.parentNode.style.fontSize = '20px';
-                        } else {
-                            e.target.parentNode.style.fontSize = '14px';
-                        }
-                    }
-
-                }
-            } else if (e.target.matches('#place input[type="checkbox"]')) {
-                console.log('분위기필터안에 들어옴');
-                for (let $li of $place.children) {
-                    if ($li.children[0].children[0] !== e.target) {
-                        $li.children[0].children[0].checked = false;
-                        $li.children[0].style.fontSize = '14px';
-                    } else {
-                        if (e.target.checked) {
-                            e.target.parentNode.style.fontSize = '20px';
-                        } else {
-                            e.target.parentNode.style.fontSize = '14px';
-                        }
-                    }
-                }
-            } else if (e.target.matches('#restrict input[type="checkbox"]')) {
-                if (e.target.checked) {
-                    e.target.parentNode.style.fontSize = '20px';
-                } else {
-                    e.target.parentNode.style.fontSize = '14px';
-                }
-            } else return;
-
-
-        })
-
+            
+        //간단하게 해결해 보자.. ->
+        
+                                                                                                                                                                            
 
 
         let filecount = 0;
@@ -1961,6 +2089,8 @@
 		}); //end 좋아요 처리.
         
 		
+		
+		
 		//무한 스크롤
 		$(window).scroll(function() {
 			//윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같다면 로직을 수행.
@@ -1974,7 +2104,7 @@
 				++page;
 				console.log(page);
 				getListLike(function(data) {
-					getList(data, false, page);
+					getList(data, false, page,'','','','','');
 				});
 			
 			}

@@ -121,7 +121,7 @@
 		<div class="modal-dialog">
 
 			<!-- Modal Content -->
-			<div class="modal-content">
+			<div class="modal-content" style="height: 371.5px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">로그인</h4>
@@ -252,7 +252,7 @@
 					            chk2 = false;
 							} else {
 								console.log('로그인 성공');
-								location.href='http://localhost/cafealley';
+								location.href='http://localhost';
 							}
 						},
 						error : function() {
