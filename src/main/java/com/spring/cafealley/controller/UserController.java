@@ -443,6 +443,14 @@ public class UserController {
 		}
 
 	}
+	
+	
+	@GetMapping("/alleyMap")
+	public void alleyMap(Model model) {
+		//map api
+		model.addAttribute("bsnsUserAddr", service.getBsnsUserAddr());
+		System.out.println(service.getBsnsUserAddr());
+	}
 
 }
 
