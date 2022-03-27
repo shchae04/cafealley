@@ -293,7 +293,7 @@ public class UserController {
 	
 	// 홍보게시판 작성 글 보기로 이동
 	@GetMapping("/promoBoardChk")
-	public void promoBoardChk(PageVO paging, HttpSession session, Model model) {
+	public void promoBoardChk(PageVO paging,PromoBoardVO vo, HttpSession session, Model model) {
 		System.out.println("컨트롤러의 promoBoardChk 메서드 발동");
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		
@@ -307,9 +307,6 @@ public class UserController {
 		
 		List<PromoBoardVO> boardList = new ArrayList<>();
 		
-		
-		PromoBoardVO vo = new PromoBoardVO();
-		vo.setArea("");//null값 방지.
 		for(PromoBoardVO pvo : promBoardService.getList(paging,vo)) {
 			pvo.setLikeCnt(promBoardService.likeCnt(pvo.getBno()));
 			boardList.add(pvo);
