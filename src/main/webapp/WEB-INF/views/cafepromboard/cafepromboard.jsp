@@ -458,7 +458,7 @@
             margin-top: 150px;
         }
 
-        #myModal4 .modal-promimg img[alt="upload"] {
+        #myModal4 .modal-promimg img[src="/cafealley/img/upload.png"] {
             width: 300px;
             min-height: 300px;
             margin: 0 250px 100px;
@@ -590,7 +590,7 @@
                         <!-- 좋아요 및 해쉬태그 영역-->
                         <div class="like-inner">
                             <!-- 해쉬태그 -->
-                            <ul class="hashtag clearfix">
+                            
                                 <p>Area</p>
                                 <span>#</span>
                                 <select name="area" id="mod-area">
@@ -792,7 +792,7 @@
                             <li><label><input type="checkbox">Concrete / Industrial</label></li>
                             <li><label><input type="checkbox">Morden / Neat</label></li>
                             <li><label><input type="checkbox">Retro / Vintage</label></li>
-                            <li><label><input type="checkbox">Cozy / Comfort </label></li>
+                            <li><label><input type="checkbox">Cozy / Comfort</label></li>
                         </ul>
                     </li>
                     <li>
@@ -862,15 +862,6 @@
 		
 		//
 		
-		
-		
-		
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-	
->>>>>>> 619b4f8aa560ee6abb57215f4e3b22e8bef2a710
 			
 			
 			
@@ -884,23 +875,14 @@
                 //값을 담을 변수 선언 값이 판단 될 때 마다
                 var picarea ='';
                 var picmood ='';
-                var limit1 ='';
-                var limit2 ='';
-                var limit3 ='';
+                var limit1 ='false';
+                var limit2 ='false';
+                var limit3 ='false';
 		
              
                 	
                 	//값 불러오는곳!!
-		
-                	
-        
-        	function getList(data, reset, page,limit1,limit2,limit3,area,place) {
-
-			
-        	// 값 불러오는곳!
-        	
-        
-        		const $promboardfilter = document.querySelector('.promboard-filter');
+		const $promboardfilter = document.querySelector('.promboard-filter');
                 $promboardfilter.addEventListener('click', e => {
 
 
@@ -1244,10 +1226,30 @@
         	console.log('제한사항 설정 함수 in : ' + '제한사항1 :'+limit1+ '제한사항2 :'+ limit2+ '제한사항3 :'+ limit3+ '장소: '+ picarea + 'mood :'+ picmood);
 
         			//서울이면 한번 부르고, 경기두번, 강원 3번 뭔가 이상한데?
-                }); //이벤트 처리 끝. 
+        					
+        					
+        	 if(e.target.matches('#restrict input[type="checkbox"]') || e.target.matches('#place input[type="checkbox"]') || e.target.matches('#area input[type="checkbox"]')){
+                 //e.target이 클릭하면 그때만 getList를 부른다.
+                 console.log('getList함수 동작!!!!!!!!!!!!!');
+                 getListLike(function(data){
+                	 
+                 getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
                 
-        	console.log('제한사항 설정 함수 GetJson : ' + '제한사항1 :'+limit1+ '제한사항2 :'+ limit2+ '제한사항3 :'+ limit3+ '장소: '+ picarea + 'mood :'+ picmood);
-                //getList(data,true,page,limit1,limit2,limit3,picarea,picmood);
+                 })
+
+             }
+                }); //이벤트 처리 끝. 
+                	
+        
+        	function getList(data, reset, page,limit1,limit2,limit3,area,place) {
+
+			
+        	// 값 불러오는곳!
+        	
+        
+        		
+                
+        
                 
 
         console.log(data);
@@ -1381,13 +1383,21 @@
 	                    str += '</div>';
 	                    str += '<div class="image-inner">';
 
+	                   
+	                    
 	                    str += '<div id="carousel-carou' + i + '" style="width: 900px; height: 600px;" class="carousel" data-ride="carousel" data-interval="false">';
+	                  
+	                    
+	                    // 날리거나 안날리기.
 	                    str += '<ol class="carousel-indicators">';
 	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="0" class="active"></li>';
 	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
 	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
 	                    str += '</ol>';
-	                    str += '<div class="carousel-inner" role="listbox">';
+	                   // 
+	                    
+	                   
+	                   str += '<div class="carousel-inner" role="listbox">';
 	                    str += '<div class="item active">';
 	                    str += '<a data-toggle="modal" href="' + list[i].bno + '">'
 	                    str += `<img src="<c:url value='/loadimg/display/` + list[i].key + `/1'/>" alt="슬라이드1"></a>`;
