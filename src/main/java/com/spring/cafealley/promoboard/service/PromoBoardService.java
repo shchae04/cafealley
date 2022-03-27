@@ -23,6 +23,8 @@ public class PromoBoardService implements IPromoBoardService {
 
 	@Override
 	public List<PromoBoardVO> getList(PageVO paging,PromoBoardVO vo) {
+		System.out.println("서비스"+mapper.getList(paging, vo));
+		System.out.println("서비스"+vo);
 		return mapper.getList(paging,vo);
 	}
 

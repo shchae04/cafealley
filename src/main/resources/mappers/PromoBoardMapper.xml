@@ -19,36 +19,35 @@
 		<if test="vo.area == '전북'">AND area = '전북'</if>
 		<if test="vo.area == '전남/광주'">AND area = '전남/광주'</if>
 		<if test="vo.area == '제주'">AND area = '제주'</if>
-		<if test="vo.area == null or vo.area == ''">
 		
-		</if>
 	</sql>
 	
 	<sql id="restrict">
 	
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'true' AND limitation3 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'true' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'true' AND limitation3 = 'false'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
-		WHERE limitation1 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'false' AND limitation3 = 'false'
 		</if>
 		<if test="vo.limitation1 == 'true' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'true' AND limitaion2 = 'false' AND limitation3 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'false' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'true'">
-		WHERE limitation2 = 'true' AND limitaion3 = 'true'
+		WHERE limitation1 = 'true' AND limitation2 = 'true' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'true' and vo.limitation3 == 'false'">
-		WHERE limitaion2 = 'true'
+		WHERE limitation1 = 'true' AND limitation2= 'true' AND limitation3 = 'false'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'true'">
-		WHERE limitation1 = 'false' AND limitaion2 = 'false' AND limitation3 = 'true'
+		WHERE limitation1 = 'false' AND limitation2 = 'false' AND limitation3 = 'true'
 		</if>
 		<if test="vo.limitation1 == 'false' and vo.limitation2 == 'false' and vo.limitation3 == 'false'">
-		where pr.writer = u.username
+		where pr.writer = u.username 
+		
 		</if>
 	</sql>
 	
@@ -108,6 +107,8 @@
 				<include refid="restrict"/>
 				<include refid="area"/>
 				<include refid="mood"/>
+				
+				<include refid="search"/>
 				
 				ORDER BY pr.bno DESC
 				) tbl
