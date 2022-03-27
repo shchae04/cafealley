@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cafealley.command.PromoReplyVO;
 import com.spring.cafealley.promoreply.mapper.IPromoReplyMapper;
+import com.spring.cafealley.util.PageVO;
 
 @Service
 public class PromoReplyService implements IPromoReplyService{
@@ -38,6 +39,16 @@ public class PromoReplyService implements IPromoReplyService{
 		PromoReplyVO vo = mapper.getReplyContent(rno);
 		
 		return vo;
+	}
+
+	@Override
+	public int getTotal(PageVO vo) {
+		return mapper.getTotal(vo);
+	}
+
+	@Override
+	public List<PromoReplyVO> getReplyList(PageVO paging) {
+		return mapper.getReplyList(paging);
 	}
 
 	
