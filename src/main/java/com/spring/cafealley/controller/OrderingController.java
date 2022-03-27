@@ -20,8 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.cafealley.cart.service.ICartService;
 import com.spring.cafealley.command.CartVO;
 import com.spring.cafealley.command.OrderingVO;
+import com.spring.cafealley.command.ProductVO;
 import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.ordering.service.IOrderingService;
+import com.spring.cafealley.product.service.IProductService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
 
@@ -33,6 +35,8 @@ public class OrderingController {
 	IOrderingService service;
 	@Autowired
 	ICartService cartservice;
+	@Autowired
+	IProductService productservice;
 	
 	// 주문 페이지 이동
 	@GetMapping("/orderRegist/{carttype}")
@@ -56,6 +60,22 @@ public class OrderingController {
 		System.out.println("/ordering/orderRegist: POST");
 		String userid = ((UserVO) session.getAttribute("login")).getUserid();
 		System.out.println(vo);
+		
+		
+		int registCarttype = vo.getCarttype();
+		String registUserId = vo.getUserid();
+		List<CartVO> registCartList = cartservice.select(registUserId, registCarttype);
+		for(CartVO registCart :registCartList) {
+			if(productservice.getProduct(registCart.getProno()).getProstock() <  registCart.getCartamount()) {
+				ra.addFlashAttribute("msg", "현재 " + registCart.getProname() + "에 대한 재고가 주문하시고자 하는 수량보다 적습니다.\n수량을 수정해주세요. \n재고 : " + productservice.getProduct(registCart.getProno()).getProstock());
+				return "redirect:/cart/cartList";
+			}
+		}
+		
+		
+		
+		
+		
 		service.order(vo);
 		OrderingVO lastOrdered = service.getOrder(userid, vo.getCarttype());
 		ra.addFlashAttribute("lastOrdered",lastOrdered);
@@ -97,6 +117,19 @@ public class OrderingController {
 		vo.setOrderstatus(orderstatus);
 		if(!deliverytracknum.equals("0")) {
 			vo.setDeliverytracknum(deliverytracknum);
+		}
+		
+		// 출고중비중으로 바꾸는거면 실제로 재고 깎아주기.
+		if(orderstatus.equals("waitdelivery")) {
+			OrderingVO order = service.getOrderByOrdernum(ordernum);
+			List<CartVO> orderCartList = cartservice.select(order.getUserid(), order.getCarttype());
+			for(CartVO orderCart :orderCartList) {
+				ProductVO voforupdate = new ProductVO();
+				voforupdate.setProno(orderCart.getProno());
+				voforupdate.setProstock(productservice.getProduct(orderCart.getProno()).getProstock() - orderCart.getCartamount());
+				productservice.updateStock(voforupdate);
+			}
+			
 		}
 		service.modify(vo);
 		

@@ -252,7 +252,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	<%@ include file="../include/footer.jsp" %>
 
 	<script>    
-        
+    	let msg = '${msg}';
+    	if(msg !== ''){
+    		alert(msg);
+    	}
+	
+	
+	
         $(function(){
 
         	let str = '';	
