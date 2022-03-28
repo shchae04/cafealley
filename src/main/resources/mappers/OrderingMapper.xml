@@ -78,6 +78,43 @@
     		WHERE o.userid = #{userid}
     	</if>
     </sql>  
+    
+    <sql id="status">
+    	<if test="userid != 'allofthem'">
+    		<if test="paging.condition == '1'">
+   		 		OR o.orderstatus == 'waitdeposit'
+    			OR o.orderstatus == 'completedeposit'
+    		</if>
+    		 <if test="paging.condition == '2'">
+    			OR o.orderstatus == 'ontheboard'
+    			OR o.orderstatus == 'completedelivery'
+    		 </if>
+    		 <if test="paging.condition == '3'">
+    		 	OR o.orderstatus == 'refund'
+    		 	OR o.orderstatus == 'exchange'
+    		 </if>
+    		 <if test="paging.condition == '4'">
+    		 	OR o.orderstatus == 'ordercancel'
+    		 </if>
+    	</if>
+    	<if test="userid == 'allofthem'">
+    		<if test="paging.condition == '1'">
+   		 		WHERE o.orderstatus == 'waitdeposit'
+    			OR o.orderstatus == 'completedeposit'
+    		</if>
+    		 <if test="paging.condition == '2'">
+    			WHERE o.orderstatus == 'ontheboard'
+    			OR o.orderstatus == 'completedelivery'
+    		 </if>
+    		 <if test="paging.condition == '3'">
+    		 	WHERE o.orderstatus == 'refund'
+    		 	OR o.orderstatus == 'exchange'
+    		 </if>
+    		 <if test="paging.condition == '4'">
+    		 	WHERE o.orderstatus == 'ordercancel'
+    		 </if>
+    	</if>
+    </sql>
   
   
   	<insert id="order">
@@ -110,6 +147,7 @@
 		            	ON o.userid = c.userid 
 		           	   AND o.carttype = c.carttype
 	 	         	   <include refid="getListUserId"/>
+	 	         	   <include refid="status"/>
 	         	 	 ORDER BY o.ordernum DESC) tbl)
 	<![CDATA[
 	WHERE rn <= #{paging.pageNum} * #{paging.countPerPage} 

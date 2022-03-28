@@ -13,7 +13,7 @@
 	<bean id="BoardHandler" class="com.spring.cafealley.util.interceptor.BoardHandler" />
 	<bean id="AdminHandler" class="com.spring.cafealley.util.interceptor.AdminAuthHandler" />
 	<bean id="UserHandler" class="com.spring.cafealley.util.interceptor.UserAuthHandler"/>
-	<bean id="CafeHandler" class="com.spring,cafealley.util.interceptor.CafeUserAuthHandler"/>
+	<bean id="CafeHandler" class="com.spring.cafealley.util.interceptor.CafeUserAuthHandler"/>
 	<mvc:interceptors>
 	
 		<mvc:interceptor>
@@ -44,21 +44,23 @@
 			<mvc:mapping path="/shop/shopModify/**"/>
 			<mvc:mapping path="/shop/shopDelete"/>
 			<mvc:mapping path="/shop/shopDelete/**"/>
+			<mvc:mapping path="/ordering/orderManagement"/>
+			<mvc:mapping path="/ordering/orderModify/**/waitdeposit/**"/>
 			<mvc:mapping path="/ordering/orderModify/**/completedeposit/**"/>
 			<mvc:mapping path="/ordering/orderModify/**/waitdelivery/**"/>
 			<mvc:mapping path="/ordering/orderModify/**/ontheboard/**"/>
 			<mvc:mapping path="/ordering/orderModify/**/completedelivery/**"/>
-			<mvc:mapping path="/product/productList"/>			
-			<mvc:mapping path="/product/getList"/>
-			<mvc:mapping path="/product/getList/**"/>
-			<mvc:mapping path="/product/getList/**/**"/>
-			<mvc:mapping path="/product/productWrite"/>
-			<mvc:mapping path="/product/productDelete"/>
-			<mvc:mapping path="/product/productModify"/>
+			<mvc:mapping path="/product/**"/>					
 			<mvc:mapping path="/evBoard/evWrite"/>
+			<mvc:mapping path="/evBoard/write"/>
 			<mvc:mapping path="/evBoard/evModi"/>
+			<mvc:mapping path="/evBoard/modify"/>
+			<mvc:mapping path="/evBoard/delete"/>
 			<mvc:mapping path="/noBoard/noWrite"/>
+			<mvc:mapping path="/noBoard/write"/>
 			<mvc:mapping path="/noBoard/noModi"/>
+			<mvc:mapping path="/noBoard/modify"/>
+			<mvc:mapping path="/noBoard/delte"/>
 			
 			<ref bean="AdminHandler" />
 		</mvc:interceptor>
@@ -76,12 +78,25 @@
 			<mvc:mapping path="/cmReply/replyRegist"/>
 			<mvc:mapping path="/evReply/replyRegist"/>
 			<mvc:mapping path="/noReply/replyRegist"/>
-			
+			<mvc:mapping path="/promo/like"/>
 			<ref bean="UserHandler"/>
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-			<mvc:mapping path=""/>
+			<mvc:mapping path="/promo/upload"/>
+			<mvc:mapping path="/promo/update"/>
+			<mvc:mapping path="/promo/delete"/>
+			<mvc:mapping path="/cart/**"/>
+			<mvc:mapping path="/user/orderDelHistory"/>			
+			<mvc:mapping path="/ordering/orderRegist"/>
+			<mvc:mapping path="/ordering/orderRegist/**"/>
+			<mvc:mapping path="/ordering/orderFinish"/>
+			<mvc:mapping path="/ordering/orderModify/**/ordercancel/**"/>
+			<mvc:mapping path="/ordering/exchangeRefund"/>
+			<mvc:mapping path="/ordering/exchangeRefund/**"/>
+			<mvc:mapping path="/shop/shopList"/>
+			<mvc:mapping path="/shop/shopDetail"/>
+			<mvc:mapping path="/shop/shopDetail/**"/>
 			<ref bean="CafeHandler"/>
 		</mvc:interceptor>
 		

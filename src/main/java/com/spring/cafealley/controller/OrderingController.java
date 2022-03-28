@@ -185,7 +185,7 @@ public class OrderingController {
 		// 기본주소있으면 교환임.
 		if(vo.getDeliverybasicaddr() != "" && vo.getDeliverybasicaddr() != null) {
 			// 교환은 기존 주문상태를 교환으로 바꾸고 리즌이랑 디테일리즌도 바꾸고
-			vo.setOrderstatus("exchnage");
+			vo.setOrderstatus("exchange");
 			service.modify(vo);
 			// 배송정보만 새걸로 바꾸고 새로운주문 등록해줌.
 			OrderingVO conventional = service.getOrderByOrdernum(vo.getOrdernum());

@@ -382,7 +382,8 @@ public class UserController {
 	@GetMapping("/orderDelHistory")
 	public void orderDelHistory(HttpSession session, Model model, PageVO vo) {
 		String userid = ((UserVO)session.getAttribute("login")).getUserid() ;
-		System.out.println("/ordering/orderManagement: GET");
+		System.out.println("/user/orderDelHistory: GET");
+		System.out.println("orderDelHistory에 들어온 PageVO : " + vo);
 		List<OrderingVO> orderlist = orderingService.getList(userid, vo);
 		for(int i =0; i<orderlist.size(); i++) {
 			for(int j=0; j<orderlist.get(i).getOrdercart().size(); j++) {
