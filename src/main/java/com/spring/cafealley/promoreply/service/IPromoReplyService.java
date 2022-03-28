@@ -3,6 +3,7 @@ package com.spring.cafealley.promoreply.service;
 import java.util.List;
 
 import com.spring.cafealley.command.PromoReplyVO;
+import com.spring.cafealley.util.PageVO;
 
 public interface IPromoReplyService {
 
@@ -21,6 +22,9 @@ public interface IPromoReplyService {
 	//rno에 따른 데이터 가져오기
 	PromoReplyVO getReplyContent(int rno);
 	
+	int getTotal(PageVO vo); 
+	
+	List<PromoReplyVO> getReplyList(PageVO paging);
 	
 
 	

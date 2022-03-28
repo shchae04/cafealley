@@ -42,6 +42,7 @@ import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.ImgService;
 import com.spring.cafealley.ordering.service.IOrderingService;
 import com.spring.cafealley.promoboard.service.IPromoBoardService;
+import com.spring.cafealley.promoreply.service.IPromoReplyService;
 import com.spring.cafealley.reply.mapper.INoReplyMapper;
 import com.spring.cafealley.reply.service.ICmReplyService;
 import com.spring.cafealley.reply.service.IEvReplyService;
@@ -67,6 +68,8 @@ public class UserController {
 	private ICmReplyService cmReplyService;
 	@Autowired
 	private IPromoBoardService promBoardService;
+	@Autowired
+	private IPromoReplyService promoReplyService;
 	@Autowired
 	private IReplyService noReplyService;
 	@Autowired
@@ -293,7 +296,7 @@ public class UserController {
 	
 	// 홍보게시판 작성 글 보기로 이동
 	@GetMapping("/promoBoardChk")
-	public void promoBoardChk(PageVO paging,PromoBoardVO vo, HttpSession session, Model model) {
+	public void promoBoardChk(PageVO paging, PromoBoardVO vo, HttpSession session, Model model) {
 		System.out.println("컨트롤러의 promoBoardChk 메서드 발동");
 		System.out.println("요청 페이지 번호: " + paging.getPageNum());
 		
@@ -320,7 +323,21 @@ public class UserController {
 	
 	// 홍보게시판 작성 댓글 보기로 이동
 	@GetMapping("/promoReplyChk")
-	public void promoReplyChk() {}
+	public void promoReplyChk(PageVO paging, PromoBoardVO vo, HttpSession session, Model model) {
+		System.out.println("컨트롤러의 promoReplyChk 메서드 발동");
+		
+		String userName = ((UserVO)session.getAttribute("login")).getUsername();
+		paging.setCondition("writer");
+		paging.setKeyword(userName); //키워드에 userid를 넣음
+		PageCreator pc = new PageCreator();
+		pc.setPaging(paging);
+		pc.setArticleTotalCount(promoReplyService.getTotal(paging));
+		System.out.println(pc);
+		
+		model.addAttribute("replyList", promoReplyService.getReplyList(paging));
+		model.addAttribute("pc", pc);
+		
+	}
 	
 	// 공지 게시판 작성 댓글 보기로 이동
 	@GetMapping("/noReplyChk")
@@ -439,6 +456,14 @@ public class UserController {
 			return "none";
 		}
 
+	}
+	
+	
+	@GetMapping("/alleyMap")
+	public void alleyMap(Model model) {
+		//map api
+		model.addAttribute("bsnsUserAddr", service.getBsnsUserAddr());
+		System.out.println(service.getBsnsUserAddr());
 	}
 
 }

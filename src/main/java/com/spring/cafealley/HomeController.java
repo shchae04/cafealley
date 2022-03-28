@@ -1,6 +1,7 @@
 package com.spring.cafealley;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +19,9 @@ import com.spring.cafealley.board.service.BoardService;
 import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.command.PromoBoardVO;
+import com.spring.cafealley.command.PromoLikeVO;
+import com.spring.cafealley.promoboard.service.IPromoBoardService;
 import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
@@ -36,6 +40,8 @@ public class HomeController {
 	private IBoardService noBaordService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private IPromoBoardService promoBaordService;
 	
 	
 	@GetMapping("/")
@@ -49,6 +55,31 @@ public class HomeController {
 		//map api
 		model.addAttribute("bsnsUserAddr", userService.getBsnsUserAddr());
 		System.out.println(userService.getBsnsUserAddr());
+		
+		
+		/*
+		//베스트 카페 top5
+		for(PromoLikeVO b : promoBaordService.bestCafe()) {
+			
+		}
+		*/
+		
+		List<PromoLikeVO> promoLike = promoBaordService.bestCafe();
+		System.out.println(promoLike);
+		
+		model.addAttribute("bestCafe", promoLike);
+		System.out.println(promoBaordService.bestCafe());
+		
+		List<PromoBoardVO> boardList = new ArrayList<>();
+				 
+		PromoBoardVO vo = new PromoBoardVO();
+		//vo.setBno(bno);
+		
+		
+		//model.addAttribute("promoVO" promoBaordService.getList(paging, ));
+		
+		
+		
 		
 		return "home";
 	}

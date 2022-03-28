@@ -685,9 +685,8 @@
             </div> <!-- modal-content -->
         </div> <!-- modal-dialog -->
     </div> <!-- modal-fade myModal2-->
-    
-    
-    
+
+
     <!---------------------------------------------------------- 수정 Modal ---------------------------------------------------------->
     <div class="modal fade" id="modifyModal">
         <div class="modal-dialog" style="width: 1200px;">
@@ -728,7 +727,7 @@
                         <!-- 좋아요 및 해쉬태그 영역-->
                         <div class="like-inner">
                             <!-- 해쉬태그 -->
-                            <ul class="hashtag clearfix">
+                            
                                 <p>Area</p>
                                 <span>#</span>
                                 <select name="area" id="mod-area">
@@ -794,9 +793,9 @@
     
     <script>
 	
-	const boardList = '${boardList}';
+	const replyList = '${replyList}';
 	const pc = '${pc}';
-	console.log('boardList: ' + boardList);
+	console.log('replyList: ' + replyList);
 	console.log('pc: ' + pc);
 	
 	
@@ -807,22 +806,15 @@
 	}
 	*/
 	
+	/*
 	$('tbody td a').on('click', function(e) {
 		e.preventDefault();
 		const bno = $('written-bno').text();
 		console.log('상세보기 글번호: ' + bno);
 		modalContent(bno);
 	});//end 모달 상세보기.
-	
-	/*
-	$('#toBoardDetail').click(function(e) {
-		e.preventDefault();
-		const bno = $('#writtenBno').text();
-		console.log('typeOfbno: ' + typeof(bno));
-		console.log('상세보기 글번호: ' + bno);
-		modalContent(bno);
-	}); 
 	*/
+	
 	function modalContent(bno) {
 		console.log('모달 상세처리 진행.');
 		let str = '';
@@ -831,6 +823,10 @@
 			'<c:url value="/promo/getContent/" />' + bno,
 			function(data) {
 				console.log(data);
+				
+				if(data.filenum != 0){
+					
+				
 				
 				str += '<ol class="carousel-indicators">';
                 str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
@@ -876,7 +872,11 @@
 			`<input type="hidden" id="con-bno" name="bno" value="` + data.bno + `">
 
             <div class="profile">
-                <img src="<c:url value='/img/profile.png'/>">
+                
+                
+                <img style="width:40px" src="<c:url value='/loadimg/display/` + data.filenum + `/1'/>">                   	
+                                	
+                
             </div>
             <div class="title">
                 <p id="con-writer">` + data.writer + `</p>
@@ -887,7 +887,75 @@
                     <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                             class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
                 </div>;`
-            }
+        		    }
+				//data.filenum 이 null 이 아닌경우.
+				} else {
+					
+					
+					
+					
+					str += '<ol class="carousel-indicators">';
+                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+                    if(data.filecnt === 2) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    } else if(data.filecnt === 3) {
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+                    }
+                    str += '</ol>';     
+                    
+                    str += '<div class="carousel-inner" role="listbox">';
+                    str += `<div class="item active">
+                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
+                    	</div>`;
+                   	if(data.filecnt === 2) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   	} else if(data.filecnt === 3) {
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                        	</div>`;
+                   		str += `<div class="item">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+                        	</div>`;
+                   	}
+                   	
+                   	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>`;
+                $('#myCarousel2').html(str);
+                
+                str = '';
+                
+                str += 
+                	
+				`<input type="hidden" id="con-bno" name="bno" value="` + data.bno + `">
+
+                <div class="profile">
+                    
+                    
+                    <img src="<c:url value='/img/profile.png'/>">                   	
+                                    	
+                    
+                </div>
+                <div class="title">
+                    <p id="con-writer">` + data.writer + `</p>
+                </div>`;
+                if(data.writer === '${login.username}') {
+                	str += `<div class="cafeowner-menu">
+                        <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
+                        <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
+                                class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
+                    </div>;`
+            		    }
+					
+				}
             $('#addProf').html(str);
             
             //$('#con-bno').val(data.bno);
@@ -925,19 +993,44 @@
 				for(let i=0; i<list.length; i++) {
 					if(i === 0) {
 						str += '<div class="reply-content blinking">';
-					} else {
+					} else 	{
 						str += '<div class="reply-content">';
 					}
-                    str += `<div class="profile">
-                            <img src="<c:url value='/img/profile.png'/>">
+					///////수정한곳
+					if(list[i].filenum !== 0){
+						
+                    
+						
+						str += `<div class="profile">
+                            <img src="<c:url value='/loadimg/display/`+list[i].filenum+`/1'/>">
                             <p>` + list[i].writer + `</p>
-                        </div>
-                        <div class="content">` + 
-                        	list[i].content + `
-                        </div>
-                        <small>` + timeStamp(list[i].regdate) + `</small>
-                    </div>`;
-				}
+                            
+                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+	                        </div>
+	                        <div class="content">` + 
+	                        	list[i].content + `
+	                        </div>
+	                        <small>` + timeStamp(list[i].regdate) + `</small>
+                    		</div>`;
+						} //filenum === 0일때
+						
+						
+						else { //filenum !== 0일때 기본이미지 설정.
+							
+							str += `<div class="profile">
+	                            <img src="<c:url value='/img/profile.png'/>">
+	                            <p>` + list[i].writer + `</p>
+	                            
+	                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+		                        </div>
+		                        <div class="content">` + 
+		                        	list[i].content + `
+		                        </div>
+		                        <small>` + timeStamp(list[i].regdate) + `</small>
+	                    		</div>`;
+							
+						}
+					}
 				$('#replyContentDiv').html(str);
 			}
 		); //end getJSON	
@@ -1119,6 +1212,49 @@
 
 	});
 	
+	
+	//댓글 삭제 버튼 누르면
+	$('#replyContentDiv').on('click','a',function(e){
+		e.preventDefault();
+		//고유 기능 막고 rno 가져옴
+		if($(this).attr('id') !== 'rnodelete'){
+			return;
+		}
+		
+		const rno = $(this).parent().children('#rnodelete')[0].getAttribute('href');
+		console.log('삭제할 댓글 번호: '+rno);
+		const bno = $('#con-bno').val();
+		console.log('삭제할 글 번호: '+bno);
+		
+		$.ajax({
+			type : 'post',
+			url : '<c:url value ="/promoReply/delete"/>',
+			data : JSON.stringify({
+				'rno' : rno
+				
+			}),
+			contentType : 'application/json',
+			success : function(data){
+				if(data === 'success'){
+					
+				console.log('삭제 성공')
+				modalReplyList(bno);
+				}else if(data === 'fail'){
+					alert('삭제 권한이 없습니다.');
+				}
+			}
+			
+			
+				,error : function(error){
+					console.log(error);
+					alert('삭제실패 관리자 문의.')
+				}
+				
+			
+				
+		});//end ajax
+		
+	});
 
 
 	/*

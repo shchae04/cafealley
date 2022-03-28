@@ -1,6 +1,8 @@
 package com.spring.cafealley.promoboard.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,5 +76,9 @@ public class PromoBoardService implements IPromoBoardService {
 		return mapper.getTotal(vo);
 	}
 
+	@Override
+	public List<PromoLikeVO> bestCafe() {
+		return mapper.bestCafe();
+	}
 	
 }

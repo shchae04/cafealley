@@ -71,23 +71,20 @@
 		<div class="container" style="margin-top: 50px">
 			<div class="row">
 				<ul class="col-xs-12">
-					<ul class="col-xs-6">
+					<li class="col-xs-6">
 						<h3>
 							<strong>BEST CAFE</strong>
 						</h3>
-					</ul>
+					</li>
 				</ul>
 				<ul class="col-xs-12" style="text-align: center;">
-					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
-					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
-					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
-					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
-					<a href="#"> <img style="width: 224px; height: 200px;"
-						src="<c:url value='/img/box1.jpg'/>" alt="box1"/></a>
+					<c:forEach var="bc" items="${bestCafe}">
+						<a onclick="modalContent(${bestCafe.bno})" style="cursor: pointer;">
+							<img style="width: 224px; height: 200px;"
+							 src="${pageContext.request.contextPath}/loadimg/display/${promBoardVO.filenum}/1" alt="box1"/>
+						</a>
+					</c:forEach>
+						
 				</ul>
 			</div>
 		</div>

@@ -82,7 +82,13 @@
 			
 		</if>
 	</sql>
+	
 
+	<sql id="bestCafe">
+		<if test="vo.bno =! null">
+		WHERE bno = #{bno}
+		</if>
+	</sql>
 
 		
 	
@@ -109,6 +115,7 @@
 				<include refid="mood"/>
 				
 				<include refid="search"/>
+				<include refid="bestCafe"/>
 				
 				ORDER BY pr.bno DESC
 				) tbl
@@ -185,6 +192,18 @@
 		SELECT COUNT(*) FROM
 		promoboardlike 
 		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 좋아요 랭킹 top5 가져오기 -->
+	<select id="bestCafe" resultType="com.spring.cafealley.command.PromoLikeVO">
+		SELECT bno, COUNT(*),
+		ROW_NUMBER() OVER(ORDER BY COUNT(*) DESC) AS RANK
+		FROM promoboardlike
+		GROUP BY bno
+		<![CDATA[
+		HAVING count(*) > 0
+		AND count(*) <= 5
+		]]>
 	</select>
 	
 	
