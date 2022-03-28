@@ -2330,7 +2330,10 @@
         $('#contentDiv').on('click', 'a', function(e) {
         	e.preventDefault();
         	console.log($(this).attr('id'));
-        	if(!($(this).attr('id') === 'likeBtn')) {
+        	if(e.target.getAttribute('alt') === 'like1' && e.target.getAttribute('alt') === 'like2'){
+				return;							
+			}
+        	if(!($(this).attr('id') === 'likeBtn' || e.target.getAttribute('alt')=== 'like2') || e.target.getAttribute('alt')=== 'like1') {
         		console.log('좋아요 버튼이 아님!');
         		return;
         	}
@@ -2364,9 +2367,7 @@
 					if(result === 'like') {
 						
 						
-						if(e.target.getAttribute('alt') === 'like1' && e.target.getAttribute('alt') === 'like2'){
-							return;							
-						}
+						
 						e.target.firstChild.setAttribute('src', '/img/like2.png');
 						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
 						console.log($likeCnt);
@@ -2375,9 +2376,7 @@
 						
 					} else {
 						
-						if(e.target.getAttribute('alt') === 'like1' && e.target.getAttribute('alt') === 'like2'){
-							return;
-						}
+						
 							e.target.firstChild.setAttribute('src', '/img/like1.png');
 							const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
 							console.log($likeCnt);
