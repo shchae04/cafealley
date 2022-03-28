@@ -49,6 +49,9 @@ public interface IPromoBoardMapper {
 	// 좋아요 개수 상위 top5 글
 	List<PromoLikeVO> bestCafe();
 	
+	//메인 게시판 5개!@!@!@!
+	PromoBoardVO getRanked(int bno);
+	
 	
 	
 	

@@ -92,7 +92,7 @@
                     <br><br><br>
                     <br>
 					<c:if test="${login.userid eq article.writer}">
-                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
+                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/cmBoard/cmModi?bno=${article.bno}"/>'">수정</button>
                     </c:if>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/cmBoard/cmList"/>'">목록</button>
                     <!-- 이전글 다음글 버튼 배치 -->

@@ -81,4 +81,8 @@ public class PromoBoardService implements IPromoBoardService {
 		return mapper.bestCafe();
 	}
 	
+	@Override
+	public PromoBoardVO getRanked(int bno) {
+		return mapper.getRanked(bno);
+	}
 }

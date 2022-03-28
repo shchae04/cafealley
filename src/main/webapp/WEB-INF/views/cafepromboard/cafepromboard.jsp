@@ -455,7 +455,7 @@
 
         .fileDiv p {
             text-align: center;
-            margin-top: 150px;
+            margin-top: 10px;
         }
 
         #myModal4 .modal-promimg img[src="/cafealley/img/upload.png"] {
@@ -1273,14 +1273,14 @@
 					if(reset != false) {
 			            str += `<c:if test="${login.businessnum != null}">
 			                <div class="cafeowner-menu">
-			                    <a class="glyphicon glyphicon-user" href="#"> My Posts</a>
+			                    <a class="glyphicon glyphicon-user" href="mypost"> My Posts</a>
 			                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" href="#myModal4"> Write</a>
 			                </div>
 		                </c:if>`;
 					}
 					
 					for(let i=0; i<list.length; i++) {
-						console.log('게시글 정보'+list[i].filenum);
+						console.log('게시글 정보'+list[i]);
 						//filenum === 0 이라면
 						if(list[i].filenum === 0){
 							
@@ -1302,9 +1302,27 @@
 
 	                    str += '<div id="carousel-carou' + i + '" style="width: 900px; height: 600px;" class="carousel" data-ride="carousel" data-interval="false">';
 	                    str += '<ol class="carousel-indicators">';
+	                    
+	                    
+	                    //indicator 보여지는 곳.
+	                    
+	                    
+	         
+	                    
+	                    
+	                    
 	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="0" class="active"></li>';
-	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
-	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    if(list[i].filecnt === 2) {
+	                    	str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    } else if(list[i].filecnt === 3) {
+	                    	str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    	str += ' <li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    }
+	                   
+	                    
+	                    
+	                    
+	                    
 	                    str += '</ol>';
 	                    str += '<div class="carousel-inner" role="listbox">';
 	                    str += '<div class="item active">';
@@ -1346,6 +1364,10 @@
 	                            `</a></li>
 	                        </ul>
 	                    </div>
+	                    
+	                    
+	                    
+	                    
 	                    <div class="link-inner">
 	                        <a id="likeBtn" href="` + list[i].bno + `">`;
 	                        
@@ -1356,7 +1378,7 @@
 		                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
 		                        }
 	                        } else {
-	                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+	                        	str += `<img src="<c:url value='/img/like1.png'/>" alt="like1">&nbsp;좋아요</a>`;
 	                        }
 	                        
 	                    str += ` 
@@ -1390,12 +1412,21 @@
 	                  
 	                    
 	                    // 날리거나 안날리기.
+	                    
+	                    
 	                    str += '<ol class="carousel-indicators">';
 	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="0" class="active"></li>';
-	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
-	                    str += '<li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    if(list[i].filecnt === 2) {
+	                    	str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    } else if(list[i].filecnt === 3) {
+	                    	str += '<li data-target="#carousel-carou' + i +'" data-slide-to="1"></li>';
+	                    	str += ' <li data-target="#carousel-carou' + i +'" data-slide-to="2"></li>';
+	                    }
 	                    str += '</ol>';
-	                   // 
+	                   
+	                    
+	                    
+	                    // 
 	                    
 	                   
 	                   str += '<div class="carousel-inner" role="listbox">';
@@ -1439,18 +1470,20 @@
 	                        </ul>
 	                    </div>
 	                    <div class="link-inner">
+	                    
 	                        <a id="likeBtn" href="` + list[i].bno + `">`;
 	                        
-	                        if(data !== null) {
-		                        if(data.includes(list[i].bno)) {
-		                        	str += `<img src="<c:url value='/img/like2.png' />" alt="like2">&nbsp;좋아요</a>`;
-		                        } else {
-		                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
-		                        }
+						
+                        if(data !== null) {
+	                        if(data.includes(list[i].bno)) {
+	                        	str += `<img src="<c:url value='/img/like2.png' />" alt="like2">&nbsp;좋아요</a>`;
 	                        } else {
 	                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
 	                        }
-	                        
+                        } else {
+                        	str += `<img src="<c:url value='/img/like1.png' />" alt="like1">&nbsp;좋아요</a>`;
+                        }
+                    
 	                    str += ` 
 	                        <a id="regist" href="` + list[i].bno +`"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
 	                        <a id="delete" href="` + list[i].bno +`"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
@@ -1479,7 +1512,13 @@
 			modalContent(bno);
 		}); //end 모달 상세보기.
 		
-	
+		
+		
+		
+		
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+		//모달 상세
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		function modalContent(bno) {
 			console.log('모달 상세처리 진행.');
@@ -1495,12 +1534,12 @@
 					
 					
 					str += '<ol class="carousel-indicators">';
-                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+                    str += '<li data-target="#myCarousel2" data-slide-to="0"></li>';
                     if(data.filecnt === 2) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1" class=""></li>';
                     } else if(data.filecnt === 3) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+                    	str += '<li data-target="#myCarousel2" data-slide-to="1" class=""></li>';
+                    	str += '<li data-target="#myCarousel2" data-slide-to="2" class=""></li>';
                     }
                     str += '</ol>';     
                     
@@ -1560,13 +1599,13 @@
 						
 						
 						
-						str += '<ol class="carousel-indicators">';
-	                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
+						str += '<ol class="carousel-indicators" >';
+	                    str += '<li data-target="#myCarousel2" data-slide-to="0"></li>';
 	                    if(data.filecnt === 2) {
 	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
 	                    } else if(data.filecnt === 3) {
 	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
+	                    	str += '<li data-target="#myCarousel2" data-slide-to="2"></li>';
 	                    }
 	                    str += '</ol>';     
 	                    
@@ -2277,6 +2316,11 @@
     			//창 띄움.
     			modalContent(bno);
         	}
+        		
+        	// My post를 누르면 href 로 이동시킨다.
+        	if($(this).attr('href') === 'mypost'){
+        		location.href = "<c:url value ='/user/promoBoardChk'/>";
+        	}
         });
       	
       	
@@ -2290,7 +2334,15 @@
         		console.log('좋아요 버튼이 아님!');
         		return;
         	}
-			console.log('좋아요 버튼 클릭!');
+        	
+        	
+        	
+        
+        
+        	
+        	
+			console.log('좋아요 버튼 클릭!' + $(this));
+			console.log($(this).attr('src')!='');
 			const $btn = e.target;
 			const bno = $(this).attr('href');
 			const id = '${login.userid}';
@@ -2310,16 +2362,26 @@
 				success: function(result) {
 					console.log(result);
 					if(result === 'like') {
-						e.target.firstChild.setAttribute('src', '/cafealley/img/like2.png');
+						
+						
+						if(e.target.getAttribute('alt') === 'like1' && e.target.getAttribute('alt') === 'like2'){
+							return;							
+						}
+						e.target.firstChild.setAttribute('src', '/img/like2.png');
 						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
 						console.log($likeCnt);
 						$likeCnt.textContent = Number($likeCnt.textContent) + 1;
 						
+						
 					} else {
-						e.target.firstChild.setAttribute('src', '/cafealley/img/like1.png');
-						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
-						console.log($likeCnt);
-						$likeCnt.textContent = Number($likeCnt.textContent) - 1;
+						
+						if(e.target.getAttribute('alt') === 'like1' && e.target.getAttribute('alt') === 'like2'){
+							return;
+						}
+							e.target.firstChild.setAttribute('src', '/img/like1.png');
+							const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
+							console.log($likeCnt);
+							$likeCnt.textContent = Number($likeCnt.textContent) - 1;
 
 					}
 				},
@@ -2367,6 +2429,8 @@
         	}
 		});
         */
+        
+        
         
         
         
