@@ -47,6 +47,32 @@
 	</select>
 	
 	
+	<!-- 총 댓글 수 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM promoreply
+	</select>
+	
+	<!-- 목록(페이징 o) -->
+	<select id="getReplyList" resultType="com.spring.cafealley.command.PromoReplyVO">
+	SELECT * FROM
+			(
+			SELECT ROWNUM AS rn, tbl.* FROM
+				(
+				SELECT pr.*,
+				 	   u.filenum
+				  FROM promoreply pr
+				  LEFT OUTER JOIN users u
+				    ON pr.writer = #{keyword}
+				 ORDER BY rno DESC
+				) tbl
+			)
+		<![CDATA[
+		WHERE rn > (#{pageNum} - 1) * #{countPerPage}
+		AND rn <= #{pageNum} * #{countPerPage}
+		]]>
+	</select>
+	
 
 
 </mapper>

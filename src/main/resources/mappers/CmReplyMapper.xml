@@ -37,7 +37,7 @@
 	
 	
 	<!-- 페이징 처리 o -->
-	<select id="getReplyList" resultType="com.spring.cafealley.command.BoardVO">
+	<select id="getReplyList" resultType="com.spring.cafealley.command.ReplyVO">
   			SELECT * FROM	
 			(
 			SELECT ROWNUM AS rn, tbl.* FROM

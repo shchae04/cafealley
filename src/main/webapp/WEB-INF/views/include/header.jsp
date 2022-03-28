@@ -90,11 +90,12 @@
 
 				<ul class="header-nav header-nav-dropdown clearfix">
 					<li><a href="#">사이트 소개</a></li>
-					<li><a href="#">Alley 위치</a></li>
+					<li><a href="<c:url value='/user/alleyMap'/>">Alley 위치</a></li>
 					<li><a href="<c:url value='/noBoard/noList'/>">공지사항</a></li>
 					<li><a href="<c:url value='/cmBoard/cmList'/>">Coffee Talk</a></li>
 					<li><a href="<c:url value='/promo/list'/>">카페 게시판</a></li>
 					<li><a href="<c:url value='/evBoard/evList'/>">이벤트</a></li>
+
 					<c:if test="${login.businessnum != ''}">
 					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
 						<ul class="dropdown-menu">
@@ -106,6 +107,7 @@
 							<li><a href="#">커피용품, 머신</a></li>
 						</ul>
 					</li>
+
 					</c:if>
 				</ul>
 

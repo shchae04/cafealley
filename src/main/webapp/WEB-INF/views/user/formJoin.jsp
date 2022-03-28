@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>로그인 폼</title>
+<title>회원가입</title>
 
 <link rel="stylesheet" href="<c:url value='/css/kwstyle.css'/>">
 	
@@ -544,7 +544,7 @@
 								<label for="id"><span class="redstar">* &nbsp;</span>아이디</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;
 								<div class="input-group">
 									<input type="text" id="userId" class="idinput" name="userid"
-										placeholder="아이디(영문 포함 4~12자 이상)">
+										placeholder="아이디(영문 또는 영문과 숫자 조합 4~12자 이상)">
 									<button type="button" id="idCheckBtn" class="btn-id-check btn btn-primary"
 										style="background-color: lightgray; color: black; border: 0px;">아이디중복체크</button>
 								</div>
@@ -556,7 +556,7 @@
 								<label for="password"><span class="redstar">*
 										&nbsp;</span>비밀번호</label>&emsp;&emsp;&nbsp;&nbsp; <input type="password"
 									id="userPw" class="pwinput" name="userpw"
-									placeholder="비밀번호 (영 대/소문자, 숫자조합 8~16자)"> <span
+									placeholder="비밀번호 (영 대/소문자, 숫자 조합 8~16자)"> <span
 									id="msgPw"></span>
 								<!-- 비밀번호 유효성 메세지 공간 -->
 							</div>
@@ -663,16 +663,25 @@
 	<script>
 		//제이쿼리 시작
 		$(function() {
+			
+			const idtest = RegExp(/^[a-z0-9]{5,12}$/);
+
 			let code = ''; //이메일 전송 인증 번호 저장을 위한 변수
 
 			//아이디 중복체크 검증
 			$('#idCheckBtn').click(function() {
 				console.log('아이디 중복체크 버튼 클릭');
+				console.log($('#userId').val());
 				
-				if($('#userId').val() === '') {//공백 체크
+				
+				if(!idtest.test($('#userId').val())) {
+					alert('아이디는 4~12자의 영문자 또는 영문자와 숫자 조합이어야 합니다.');
+					return;
+					
+				} else if($('#userId').val() === '') {
 					alert('아이디는 필수 값 입니다.');
 					return;
-				}
+				} 
 				
 				$(this).attr('type', 'button');
 				//$('.btn-success').attr('type', 'button');//회원가입 버튼 기능 없애기
@@ -797,7 +806,6 @@
 
 		//const phone = $phone.value + '-' + $phone2.value + '-' + $phone3.value;
 
-		const idtest = /^[a-z0-9]{4,12}$/;
 		const pwtest = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 		const emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		const phonetest = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -813,10 +821,7 @@
                 alert('이름을 입력해 주세요');
                 $name.focus();
                 return;
-            } else if (!idtest.test($id.value)) {
-				alert('아이디는 4~12자의 영문자와 숫자 조합이어야 합니다.');
-				return;
-			} else if (!pwtest.test($pw.value)) {
+            } else if (!pwtest.test($pw.value)) {
                 alert('비밀번호는 하나 이상의 대문자와 숫자, 특수문자 조합으로 8자리 이상이어야 합니다.');
                 $pw.value = '';
                 $pw.focus();
@@ -875,9 +880,6 @@
 			} else if ($id.value === '') {
 				alert('아이디를 입력해 주세요');
 				$id.focus();
-				return;
-			} else if (!idtest.test($id.value)) {
-				alert('아이디는 4~12자의 영문자와 숫자 조합이어야 합니다.');
 				return;
 			} else if (!pwtest.test($pw.value)) {
 				alert('비밀번호는 하나 이상의 대문자와 숫자, 특수문자 조합으로 8자리 이상이어야 합니다.');

@@ -41,10 +41,6 @@ public interface IPromoBoardService {
 
 	
 	
-	
-	
-	
-	
 	int getTotal(PageVO vo); 
 
 	
