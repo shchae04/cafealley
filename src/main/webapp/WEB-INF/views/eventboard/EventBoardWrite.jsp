@@ -100,7 +100,7 @@
                         </div>
                         
                         <div class="fileDiv">
-							<img id="fileImg" src="<c:url value='/img/blog1.png' />" />
+							<img id="fileImg" src="<c:url value='/img/load.png' />" />
 						</div>
                         
                         

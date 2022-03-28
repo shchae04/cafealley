@@ -455,7 +455,7 @@
 
         .fileDiv p {
             text-align: center;
-            margin-top: 150px;
+            margin-top: 10px;
         }
 
         #myModal4 .modal-promimg img[src="/cafealley/img/upload.png"] {
