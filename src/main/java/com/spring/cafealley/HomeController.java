@@ -41,7 +41,7 @@ public class HomeController {
 	@Autowired
 	private IUserService userService;
 	@Autowired
-	private IPromoBoardService promoBaordService;
+	private IPromoBoardService promoBoardService;
 	
 	
 	@GetMapping("/")
@@ -57,23 +57,18 @@ public class HomeController {
 		System.out.println(userService.getBsnsUserAddr());
 		
 		
-		/*
-		//베스트 카페 top5
-		for(PromoLikeVO b : promoBaordService.bestCafe()) {
-			
-		}
-		*/
 		
-		List<PromoLikeVO> promoLike = promoBaordService.bestCafe();
+		//베스트 카페 top5
+		
+		List<PromoLikeVO> promoLike = promoBoardService.bestCafe();
 		System.out.println(promoLike);
 		
-		model.addAttribute("bestCafe", promoLike);
-		System.out.println(promoBaordService.bestCafe());
+		//model.addAttribute("bestCafe", promoLike);
 		
-		List<PromoBoardVO> boardList = new ArrayList<>();
-				 
+		List<PromoBoardVO> boardList = new ArrayList<>();	 
 		PromoBoardVO vo = new PromoBoardVO();
-		//vo.setBno(bno);
+		
+		
 		
 		
 		//model.addAttribute("promoVO" promoBaordService.getList(paging, ));
