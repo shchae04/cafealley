@@ -86,12 +86,12 @@ public class CmBoardController {
 		
 		List<MultipartFile> files =  file.getFiles("files");
 		
-		
+		System.out.println("파일 사이즈:" + files.size());
 
 		System.out.println("list files :" + files);
 		
 		//key를 가장최근 업로드된 번호로 가져온다
-		if(files.size() == 0) {
+		if(files.size() == 1) {
 			//파일이 없다.
 			vo.setKey(0);
 		} else {		

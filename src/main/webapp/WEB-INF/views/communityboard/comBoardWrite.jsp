@@ -161,11 +161,7 @@
                 event.preventDefault();
                 alert('제목과 내용을 확인해주세요.')
                 return;
-            } else if($('#file').val() === ''||$('#file').val() === null){
-            	event.preventDefault();
-            	alert('첨부 이미지는 필수입니다.');
-            	return;
-            }
+            } 
 
             document.writeform.submit();
 

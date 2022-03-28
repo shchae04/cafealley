@@ -152,18 +152,14 @@
         const content = document.getElementById('content')
         console.log(content)
 
-        // 수정버튼
+        // 등록버튼(이미지 제한 해제.)
         document.querySelector('#modbtn').addEventListener('click', function () {
 
             if (title.value === '' || content.value === '') {
                 event.preventDefault();
                 alert('제목과 내용을 확인해주세요.')
                 return;
-            } else if($('#file').val() === ''||$('#file').val() === null){
-            	event.preventDefault();
-            	alert('첨부 이미지는 필수입니다.');
-            	return;
-            }
+            } 
 
             document.writeform.submit();
 

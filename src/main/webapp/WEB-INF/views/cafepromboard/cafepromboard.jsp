@@ -2290,7 +2290,10 @@
         		console.log('좋아요 버튼이 아님!');
         		return;
         	}
-			console.log('좋아요 버튼 클릭!');
+        	
+        	
+			console.log('좋아요 버튼 클릭!' + $(this));
+			console.log($(this).attr('src')!='');
 			const $btn = e.target;
 			const bno = $(this).attr('href');
 			const id = '${login.userid}';
@@ -2310,13 +2313,13 @@
 				success: function(result) {
 					console.log(result);
 					if(result === 'like') {
-						e.target.firstChild.setAttribute('src', '/cafealley/img/like2.png');
+						e.target.firstChild.setAttribute('src', '/img/like2.png');
 						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
 						console.log($likeCnt);
 						$likeCnt.textContent = Number($likeCnt.textContent) + 1;
 						
 					} else {
-						e.target.firstChild.setAttribute('src', '/cafealley/img/like1.png');
+						e.target.firstChild.setAttribute('src', '/img/like1.png');
 						const $likeCnt = e.target.parentNode.previousElementSibling.children[1];
 						console.log($likeCnt);
 						$likeCnt.textContent = Number($likeCnt.textContent) - 1;
