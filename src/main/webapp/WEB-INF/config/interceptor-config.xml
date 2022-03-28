@@ -13,6 +13,7 @@
 	<bean id="BoardHandler" class="com.spring.cafealley.util.interceptor.BoardHandler" />
 	<bean id="AdminHandler" class="com.spring.cafealley.util.interceptor.AdminAuthHandler" />
 	<bean id="UserHandler" class="com.spring.cafealley.util.interceptor.UserAuthHandler"/>
+	<bean id="CafeHandler" class="com.spring,cafealley.util.interceptor.CafeUserAuthHandler"/>
 	<mvc:interceptors>
 	
 		<mvc:interceptor>
@@ -33,6 +34,7 @@
 			<!-- 원래 모든 게시판의 reply 수정 삭제도 해주어야 했으나 비동기 방식으로 data를 넘기다보니
 			해당 data를 인터셉터에서 가져오는 방식이 복잡해서 각각 controller의 update와 delete 요청마다 검사하였음.  -->
 			<ref bean="BoardHandler" />
+			
 		</mvc:interceptor>
 	
 		<mvc:interceptor>
@@ -77,6 +79,12 @@
 			
 			<ref bean="UserHandler"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path=""/>
+			<ref bean="CafeHandler"/>
+		</mvc:interceptor>
+		
 	
 	</mvc:interceptors>
 
