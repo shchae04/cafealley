@@ -44,24 +44,24 @@
 							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
 							
 							<c:choose>
+								<c:when test="${login.admin == 'yes'}">
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(관리자)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
+											<li><a href="<c:url value='/ordering/orderManagement' />">주문관리</a></li>										
+											<li><a href="<c:url value='/product/productList' />">상품관리</a></li>										
+											<!--  <li id="header-barcode">barcode here</li> -->
+										</ul>
+									</li>
+								</c:when>
 								<c:when test="${empty login.businessnum}">
 									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li id="header-name">${login.username}님(일반회원)</li>
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
-											<!--  <li id="header-barcode">barcode here</li> -->
-										</ul>
-									</li>
-								</c:when>
-								<c:when test="${login.admin}">
-									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li id="header-name">${login.username}님(관리자)</li>
-											<li>${login.useremail}</li>
-											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
-											<li><a href="<c:url value='/order/orderManagement' />">주문관리</a></li>										
-											<li><a href="<c:url value='/product/productList' />">상품관리</a></li>										
 											<!--  <li id="header-barcode">barcode here</li> -->
 										</ul>
 									</li>
