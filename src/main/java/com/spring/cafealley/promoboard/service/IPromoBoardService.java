@@ -23,6 +23,9 @@ public interface IPromoBoardService {
 
 	//삭제
 	void delete(int bno);
+	
+	//메인 게시판 5개!@!@!@!
+		PromoBoardVO getRanked(int bno);
 
 
 	

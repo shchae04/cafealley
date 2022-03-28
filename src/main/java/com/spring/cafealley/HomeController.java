@@ -65,18 +65,25 @@ public class HomeController {
 		*/
 		
 		List<PromoLikeVO> promoLike = promoBaordService.bestCafe();
-		System.out.println(promoLike);
 		
-		model.addAttribute("bestCafe", promoLike);
-		System.out.println(promoBaordService.bestCafe());
+//		정수배열 
 		
 		List<PromoBoardVO> boardList = new ArrayList<>();
+		
+	 for(PromoLikeVO pvo : promoLike) {
+			
+			boardList.add(promoBaordService.getRanked(pvo.getBno()));
+			System.out.println(pvo.getBno());
+			System.out.println("배열 담는중" + pvo);
+			System.out.println(boardList);
+			
+		}
+		
+		model.addAttribute("rank",boardList);
+		
+		
 				 
-		PromoBoardVO vo = new PromoBoardVO();
-		//vo.setBno(bno);
 		
-		
-		//model.addAttribute("promoVO" promoBaordService.getList(paging, ));
 		
 		
 		
