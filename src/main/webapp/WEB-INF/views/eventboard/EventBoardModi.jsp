@@ -51,7 +51,7 @@
                         </div>
                             
                     </div>
-                    <form name="modifyform" action="<c:url value='/noBoard/modify'/>" method="post">
+                    <form name="modifyform" action="<c:url value='/evBoard/modify'/>" method="post">
                         <!-- 
 
                         <div class="row col-xs-12">
@@ -63,10 +63,11 @@
                           </select>
                         </div>
                       -->
-						                      
-   						<div class="form-group">
-                            <label>번호</label>
-                            <input class="form-control" name='bno' value="${article.bno}" readonly>
+						  
+						  	<div class="form-group">
+                            <label>글번호</label>
+                            <span style="font-size: 18px; font-weight: bold;">${article.bno}</span>
+                            <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
                         </div>
                         <div class="form-group" 
                         style="border-top:3px solid black; border-bottom:3px solid black; padding-bottom: 20px; padding-top: 20px;">
@@ -74,10 +75,12 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
+                            <span style="display: block;">${article.writer}</span>
+                            <input type="hidden" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
-                        <div class="form-group">
+                        
+                        <div class="form-group">                
 
                             <label for="title">
                                 제목
@@ -94,7 +97,7 @@
 							</label>
                         </div>
 						
-                        <button class="detailbtn btn btn-dark" id="listbtn"
+                        <button type="button" class="detailbtn btn btn-dark" id="listbtn"
                             style="float: left; background-color: #000; color: #fff; border-color: #000;">목록</button>
 
 
@@ -159,6 +162,11 @@
 
         });
 
+        //목록 버튼
+        const list = document.getElementById('listbtn');
+        list.addEventListener('click',function(){
+       	location.href = "<c:url value= '/evBoard/evList' />" 
+        });
      
 
 

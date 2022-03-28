@@ -76,7 +76,7 @@
 	
 	<sql id="search">
 		<if test="page.condition == 'writer'">
-			WHERE writer LIKE '%'||#{keyword}||'%'
+			WHERE writer LIKE '%'||#{page.keyword}||'%'
 		</if>
 		<if test="page.condition == '' or page.condition == null">
 			
