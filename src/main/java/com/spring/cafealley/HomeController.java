@@ -41,7 +41,7 @@ public class HomeController {
 	@Autowired
 	private IUserService userService;
 	@Autowired
-	private IPromoBoardService promoBaordService;
+	private IPromoBoardService promoBoardService;
 	
 	
 	@GetMapping("/")
@@ -56,29 +56,23 @@ public class HomeController {
 		model.addAttribute("bsnsUserAddr", userService.getBsnsUserAddr());
 		System.out.println(userService.getBsnsUserAddr());
 		
+		//베스트 카페
+		List<PromoLikeVO> promoLike = promoBoardService.bestCafe();
+		System.out.println(promoLike);
 		
-		/*
-		//베스트 카페 top5
-		for(PromoLikeVO b : promoBaordService.bestCafe()) {
-			
-		}
-		*/
-		
-		List<PromoLikeVO> promoLike = promoBaordService.bestCafe();
-		
-//		정수배열 
+		//정수배열 
 		
 		List<PromoBoardVO> boardList = new ArrayList<>();
 		
-	 for(PromoLikeVO pvo : promoLike) {
-			
-			boardList.add(promoBaordService.getRanked(pvo.getBno()));
+		for(PromoLikeVO pvo : promoLike) {
+				
+			boardList.add(promoBoardService.getRanked(pvo.getBno()));
 			System.out.println(pvo.getBno());
 			System.out.println("배열 담는중" + pvo);
-			System.out.println(boardList);
 			
 		}
-		
+
+		System.out.println(boardList);
 		model.addAttribute("rank",boardList);
 		
 		

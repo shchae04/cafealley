@@ -10,7 +10,7 @@
 
 <style>
 
-	.clearfix::after {
+		.clearfix::after {
             content: '';
             display: block;
             clear: both;
@@ -21,24 +21,6 @@
             margin-top: 150px;
             margin-bottom: 50px;
         }
-        .pagination .page-link {
-            color: #000;
-        }
-
-        .pagination .page-link:active,
-        .pagination .page-pre:active,
-        .pagination .page-link:focus,
-        .pagination .page-pre:focus,
-        .pagination .page-link:hover,
-        .pagination .page-pre:hover {
-            color: #000;
-        }
-
-        .pagination .cur-page {
-            background: #000;
-            color: #fff;
-        }
-        
         
     	.blinking{ 
 	    	-webkit-animation:blink 1.2s ease-in-out  alternate; 
@@ -73,65 +55,16 @@
         li {
             list-style: none;
         }
-
-        .aside-wrapper {
-            position: absolute;
-            min-width: 20%;
-            max-width: 20%;
-            margin: 0;
-            left: 0px;
-            background-color: #ffffff;
-            top: 150px;
-
-        }
-
-        aside {
-            min-width: 100%;
-            float: left;
-            position: sticky;
-            top: 150px;
-        }
-
-        .promboard-filter {
-            padding: 0 30px 0 30px;
-        }
-
-        .promboard-filter>li {
-            border-bottom: solid 1px black;
-            padding: 0.5vh 0 0.5vh 0;
-        }
-
-        .promboard-filter li span {
-            font-size: 2vh;
-            font-weight: 700;
-        }
-
-        .promboard-filter li ul li {
-            padding: 0;
-            margin: 0;
-        }
-
-        .promboard-filter input[type="checkbox"] {
-            font-size: 1.5vh;
-            display: none;
-        }
-
-        .promboard-filter label:hover {
-            cursor: pointer;
-        }
-
-
-
         /* snsboard */
-        section {
+        
+        .modalSection {
             position: relative;
             left: 300px;
             min-width: 900px;
             max-width: 900px;
             margin: 20px 0 0 0;
         }
-
-        #contentDiv {
+                #contentDiv {
             margin: 0 0 0 calc(30vw - 300px);
             min-width: 940px;
             max-width: 940px;
@@ -349,7 +282,7 @@
         }
 
         .modal-promcontent .reply-inner {
-            padding: 30px 0 15px;
+            padding-top: 30px;
             margin-top: 50px;
             border-bottom: 1px solid #ddd;
             min-height: 325px;
@@ -500,8 +433,7 @@
             position: absolute;
             bottom: -100px;
             color: red;
-        }
-        
+        }        
         
 
 </style>
@@ -575,10 +507,10 @@
 					</li>
 				</ul>
 				<ul class="col-xs-12" style="text-align: center;">
-					<c:forEach var="bc" items="${rank}">
-						<a onclick="modalContent(${bc.bno})" style="cursor: pointer;">
+					<c:forEach var="r" items="${rank}">
+						<a onclick="modalContent(${r.bno})" style="cursor: pointer;">
 							<img style="width: 224px; height: 200px;"
-							 src="${pageContext.request.contextPath}/loadimg/display/${bc.filenum}/1" alt="box1"/>
+							 src="${pageContext.request.contextPath}/loadimg/display/${r.key}/1" alt="box"/>
 						</a>
 					</c:forEach>
 						
@@ -586,77 +518,9 @@
 			</div>
 		</div>
 		
-		<!---------------------------------------------------------- 글 상세  Modal ---------------------------------------------------------->
-    <div class="modal fade" id="modalContent">
-        <div class="modal-dialog" style="width: 1200px;">
-
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-            <!-- Modal Content -->
-            <div class="modal-content">
-
-                <div class="modal-body clearfix">
-
-                    <div class="modal-promimg">
-                        <div id="myCarousel2" class="carousel" data-ride="carousel" data-interval="false">
-							
-							<!-- 비동기 방식으로 캐러셀 추가 -->
-							
-                        </div> <!-- carousel-->
-                    </div> <!-- modal-promimg -->
-
-
-
-                    <div class="modal-promcontent">
-                        <div id="addProf" class="title-inner">
-
-							<!-- 비동기 내에서 완성됨. -->
-							
-                        </div>
-                        <!--내용영역 70자 내로 작성하게 할 것.-->
-                        <div class="content-inner">
-                            <p id="con-content"></p>
-                            <small id="con-regdate"></small>
-                        </div>
-
-                        <!-- 좋아요 및 해쉬태그 영역-->
-                        <div class="like-inner">
-                            <!--좋아요-->
-                            <img src="<c:url value='/img/like2.png'/>"> <span id="like-cnt">522</span>
-                            <!-- 해쉬태그 -->
-                            <ul class="hashtag clearfix">
-                                <li><a id="con-area" href="#">#서울</a></li>
-                                <li><a id="con-place" href="#">#Morden / Neat</a></li>
-                                <li><a id="con-limit" href="#">#No Kids</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- 댓글 영역 -->
-                        <div id="replyContentDiv" class="reply-inner">
-							
-							<!-- 비동기 방식으로 불러오고 있습니다. -->
-							
-                        </div>
-                        <div class="reply-form">
-                                <textarea name="content" id="modal-reply-content" placeholder="댓글 입력"></textarea>
-                                <input type="button" value="게시" id="replyRegBtn"></input>
-                        </div>
-
-
-
-                    </div> <!-- modal-promcontent-->
-
-                </div> <!-- modal-body-->
-
-            </div> <!-- modal-content -->
-        </div> <!-- modal-dialog -->
-    </div> <!-- modal-fade myModal2-->
-
-		<div id="contentDiv">
-	                
-		<!-- getJSON이 영역을 채우고 있어용 -->
-	            
-	</div>
+		
+		
+		
 		
 	</section>
 
@@ -719,6 +583,82 @@
 			</div>
 		</div>
 	</section>
+	
+	<section id="modalSection">
+		<!---------------------------------------------------------- 글 상세  Modal ---------------------------------------------------------->
+	    <div class="modal fade" id="modalContent">
+	        <div class="modal-dialog" style="width: 1200px;">
+	
+	            <button type="button" class="close" data-dismiss="modal">&times;</button>
+	
+	            <!-- Modal Content -->
+	            <div class="modal-content">
+	
+	                <div class="modal-body clearfix">
+	
+	                    <div class="modal-promimg">
+	                        <div id="myCarousel2" class="carousel" data-ride="carousel" data-interval="false">
+								
+								<!-- 비동기 방식으로 캐러셀 추가 -->
+								
+	                        </div> <!-- carousel-->
+	                    </div> <!-- modal-promimg -->
+	
+	
+	
+	                    <div class="modal-promcontent">
+	                        <div id="addProf" class="title-inner">
+	
+								<!-- 비동기 내에서 완성됨. -->
+								
+	                        </div>
+	                        <!--내용영역 70자 내로 작성하게 할 것.-->
+	                        <div class="content-inner">
+	                            <p id="con-content"></p>
+	                            <small id="con-regdate"></small>
+	                        </div>
+	
+	                        <!-- 좋아요 및 해쉬태그 영역-->
+	                        <div class="like-inner">
+	                            <!--좋아요-->
+	                            <img src="<c:url value='/img/like2.png'/>"> <span id="like-cnt">522</span>
+	                            <!-- 해쉬태그 -->
+	                            <ul class="hashtag clearfix">
+	                                <li><a id="con-area" href="#">#서울</a></li>
+	                                <li><a id="con-place" href="#">#Morden / Neat</a></li>
+	                                <li><a id="con-limit" href="#">#No Kids</a></li>
+	                            </ul>
+	                        </div>
+	
+	                        <!-- 댓글 영역 -->
+	                        <div id="replyContentDiv" class="reply-inner">
+								
+								<!-- 비동기 방식으로 불러오고 있습니다. -->
+								
+	                        </div>
+	                        <div class="reply-form">
+	                                <textarea name="content" id="modal-reply-content" placeholder="댓글 입력"></textarea>
+	                                <input type="button" value="게시" id="replyRegBtn"></input>
+	                        </div>
+	
+	
+	
+	                    </div> <!-- modal-promcontent-->
+	
+	                </div> <!-- modal-body-->
+	
+	            </div> <!-- modal-content -->
+	        </div> <!-- modal-dialog -->
+	    </div> <!-- modal-fade myModal2-->
+	
+		<div id="contentDiv">
+	                
+			<!-- getJSON이 영역을 채우고 있어용 -->
+		            
+		</div>
+	</section>
+	
+	
 
 	<!--하단 배너 2-->
 	<section>
@@ -831,8 +771,6 @@
 					console.log(data);
 					
 					if(data.filenum != 0){
-						
-					
 					
 					str += '<ol class="carousel-indicators">';
 	                str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
@@ -1041,6 +979,35 @@
 				}
 			); //end getJSON	
 		} //end 댓글 목록 불러오기
+		
+		//날짜 처리 함수
+		function timeStamp(millis) {
+			
+			const date = new Date(); //현재 날짜
+			//현재 날짜를 밀리초로 변환 - 등록일 밀리초  -> 시간차
+			const gap = date.getTime() - millis;
+			
+			let time; //리턴할 시간
+			if(gap < 60 * 60 * 24 * 1000) { //1일 미만인 경우
+				if(gap < 60 * 60 * 1000) { //1시간 미만일 경우
+					time = '방금 전';
+				} else { //1시간 이상일 경우
+					time = parseInt(gap / (1000 * 60 * 60)) + '시간 전';
+				}
+			} else { //1일 이상일 경우
+				const today = new Date(millis);
+				const year = today.getFullYear(); //년
+				const month = today.getMonth() + 1; //월
+				const day = today.getDate(); //일
+				const hour = today.getHours(); //시
+				const minute = today.getMinutes(); //분
+				
+				time = year + '년 ' + month + '월 ' + day + '일 ' + hour + '시' + minute + '분';
+			}
+			
+			return time;
+			
+		}
 		
 		
 	</script>
