@@ -45,6 +45,9 @@ public class ReplyService implements IReplyService {
 		return nomapper.getTotal(vo);
 	}
 
-
+	@Override
+	public ReplyVO getReply(int rno) {
+		return nomapper.getReply(rno);
+	}
 
 }

@@ -45,6 +45,10 @@ public class EvReplyService implements IEvReplyService {
 		return evmapper.getReplyList(vo);
 	}
 
+	@Override
+	public ReplyVO getReply(int rno) {
+		return evmapper.getReply(rno);
+	}
 
 
 }

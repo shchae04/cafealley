@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
-  
+		.container{
+ 			min-height: 550px;
+  		}
   		.pagination {
             margin-left: 430px;
         }

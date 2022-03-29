@@ -40,28 +40,26 @@
 						<c:when test="${empty login}">
 							<li><a data-toggle="modal" href="#myModal">로그인</a></li>
 						</c:when>
-						<c:otherwise>
-							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
-							
+						<c:otherwise>					
 							<c:choose>
+								<c:when test="${login.admin == 'yes'}">
+									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li id="header-name">${login.username}님(관리자)</li>
+											<li>${login.useremail}</li>
+											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
+											<li><a href="<c:url value='/ordering/orderManagement' />">주문관리</a></li>										
+											<li><a href="<c:url value='/product/productList' />">상품관리</a></li>										
+											<!--  <li id="header-barcode">barcode here</li> -->
+										</ul>
+									</li>
+								</c:when>
 								<c:when test="${empty login.businessnum}">
 									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li id="header-name">${login.username}님(일반회원)</li>
 											<li>${login.useremail}</li>
 											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
-											<!--  <li id="header-barcode">barcode here</li> -->
-										</ul>
-									</li>
-								</c:when>
-								<c:when test="${login.admin}">
-									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li id="header-name">${login.username}님(관리자)</li>
-											<li>${login.useremail}</li>
-											<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>										
-											<li><a href="<c:url value='/order/orderManagement' />">주문관리</a></li>										
-											<li><a href="<c:url value='/product/productList' />">상품관리</a></li>										
 											<!--  <li id="header-barcode">barcode here</li> -->
 										</ul>
 									</li>
@@ -78,13 +76,14 @@
 									</li>
 								</c:otherwise>
 							</c:choose>
+							<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>
 					
-					
-					
-					<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+					<c:if test="${empty login}">
 					<li><a href="<c:url value='/user/joinSelect' />">회원가입</a></li>
+					</c:if>
 					<li><a href="mailto:coffeealley.gmail.com">고객문의</a></li>
 				</ul>
 
@@ -95,17 +94,19 @@
 					<li><a href="<c:url value='/cmBoard/cmList'/>">Coffee Talk</a></li>
 					<li><a href="<c:url value='/promo/list'/>">카페 게시판</a></li>
 					<li><a href="<c:url value='/evBoard/evList'/>">이벤트</a></li>
-					<c:if test="${not empty login.businessnum}">
-						<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
-							<ul class="dropdown-menu">
-								<li><a href="#">원두</a></li>
-								<li><a href="#">티 / 액상차</a></li>
-								<li><a href="#">유제품</a></li>
-								<li><a href="#">시럽 / 소스</a></li>
-								<li><a href="#">파우더 / 농축액</a></li>
-								<li><a href="#">커피용품, 머신</a></li>
-							</ul>
-						</li>
+
+					<c:if test="${login.businessnum != ''}">
+					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
+						<ul class="dropdown-menu">
+							<li><a href="#">원두</a></li>
+							<li><a href="#">티 / 액상차</a></li>
+							<li><a href="#">유제품</a></li>
+							<li><a href="#">시럽 / 소스</a></li>
+							<li><a href="#">파우더 / 농축액</a></li>
+							<li><a href="#">커피용품, 머신</a></li>
+						</ul>
+					</li>
+
 					</c:if>
 				</ul>
 

@@ -59,6 +59,13 @@
 		FROM noreply
 	</select>
 
+
+  	<select id="getReply" resultType="com.spring.cafealley.command.ReplyVO">
+  		SELECT *
+  		FROM noreply
+  		WHERE rno = #{rno}
+  	</select>
+
 </mapper>
 
 

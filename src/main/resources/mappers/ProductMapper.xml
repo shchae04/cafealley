@@ -32,6 +32,13 @@
 	  	 WHERE prono = #{prono}
 	  </update>
 	  
+	  <update id="updateStock">
+	  	UPDATE product
+	  	   SET prostock=#{prostock}
+	  	 WHERE prono = #{prono}
+	  </update> 
+	  
+	  
 	  <delete id="deleteProduct">
  		DELETE FROM product
 	  	 WHERE prono =#{prono}

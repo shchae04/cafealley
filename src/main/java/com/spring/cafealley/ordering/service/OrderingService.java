@@ -23,10 +23,10 @@ public class OrderingService implements IOrderingService {
 
 	@Override
 	public List<OrderingVO> getList(String userid, PageVO vo) {
-		System.out.println("OrderingService에서의 파라머티로 받은 userid : " + userid);
-		System.out.println("OrderingService에서의 파라머티로 받은 paging : " + vo);
+		System.out.println("OrderingService에서의 파라미터로 받은 userid : " + userid);
+		System.out.println("OrderingService에서의 파라미터로 받은 paging : " + vo);
 		List<OrderingVO> list = mapper.getList(userid, vo);
-		System.out.println(list);
+		System.out.println("OrderingService에서 출력하는 orderList : " + list);
 		return list;
 	}
 
