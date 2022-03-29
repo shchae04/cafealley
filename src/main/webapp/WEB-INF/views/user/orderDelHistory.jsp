@@ -16,6 +16,11 @@
     
 
     <style>
+    
+    	* {
+			border-radius: 0 !important;
+		}
+    
     	.container{
     		min-height:440px;
     	}

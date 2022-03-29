@@ -11,6 +11,10 @@
     <title>cmnboardChk</title>
 
     <style>
+    
+    	* {
+			border-radius: 0 !important;
+		}
         .clearfix::after {
             content: '';
             display: block;

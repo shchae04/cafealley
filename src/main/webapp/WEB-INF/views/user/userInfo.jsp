@@ -11,6 +11,10 @@
 
 
 <style>
+	
+	* {
+		border-radius: 0 !important;
+	}
 
 	.container {
 		min-width: 1200px;
@@ -230,7 +234,7 @@
 													value="${login.zipcode}"
 													class="form-control input-sm" id="addrzipnum"
 													name="zipcode">
-													<button style="display: inline-block;" type="button" class="addr-btn btn btn-primary" id="addrBtn">주소찾기</button>
+													<button style="display: inline-block; background: #000;" type="button" class="addr-btn btn btn-primary" id="addrBtn">주소찾기</button>
 												</td>
 											</tr>
 											<tr>
@@ -424,6 +428,7 @@
 				
 				// 사업자번호란 입력 검증
 				if($('#businessnum').val() === undefined) {
+					console.log($('#businessnum').val());
 					chk4 = true;
 				} else if(!getBsnsNumCheck.test($('#businessnum').val())) {
 					console.log('사업자번호 양식에 맞지 않음');
@@ -432,6 +437,7 @@
 					chk4 = false;
 				} else {
 					console.log('사업자번호 값 검증 완료');
+					console.log($('#businessnum').val());
 					$('#bsnsNumCheck').html('');
 					chk4 = true;
 				}
