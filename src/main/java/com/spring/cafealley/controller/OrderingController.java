@@ -89,6 +89,7 @@ public class OrderingController {
 	@GetMapping("/orderManagement")
 	public void manage(Model model, PageVO vo){
 		System.out.println("/ordering/orderManagement: GET");
+		vo.setCountPerPage(10);
 		List<OrderingVO> orderlist = service.getList("allofthem", vo);
 		for(int i =0; i<orderlist.size(); i++) {
 			for(int j=0; j<orderlist.get(i).getOrdercart().size(); j++) {

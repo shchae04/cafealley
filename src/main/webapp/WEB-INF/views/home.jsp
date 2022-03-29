@@ -7,7 +7,11 @@
 <title>Cafe Alley</title>
 
 <link rel="stylesheet" href="<c:url value='/css/mainstyle.css'/>">
-
+	<style>
+		.carousel-inner > .item > a > img{
+			min-width: 100%;
+		}
+	</style>
 </head>
 <body>
 

@@ -40,9 +40,7 @@
 						<c:when test="${empty login}">
 							<li><a data-toggle="modal" href="#myModal">로그인</a></li>
 						</c:when>
-						<c:otherwise>
-							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
-							
+						<c:otherwise>					
 							<c:choose>
 								<c:when test="${login.admin == 'yes'}">
 									<li class="dropdown"><a href="#">${login.userid}님<span class="caret"></span></a>
@@ -78,13 +76,14 @@
 									</li>
 								</c:otherwise>
 							</c:choose>
+							<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+							<li><a data-toggle="modal" href="<c:url value='/user/logout' />">로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>
 					
-					
-					
-					<li><a href="<c:url value='/user/userInfo' />">마이페이지</a></li>
+					<c:if test="${login.userid == ''}">
 					<li><a href="<c:url value='/user/joinSelect' />">회원가입</a></li>
+					</c:if>
 					<li><a href="mailto:coffeealley.gmail.com">고객문의</a></li>
 				</ul>
 
