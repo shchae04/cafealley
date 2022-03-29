@@ -504,15 +504,15 @@
 				<ul class="col-xs-12">
 					<li class="col-xs-6">
 						<h3>
-							<strong>BEST CAFE</strong>
+							<strong>CAFE BOARD</strong>
 						</h3>
 					</li>
 				</ul>
 				<ul class="col-xs-12" style="text-align: center;">
-					<c:forEach var="r" items="${rank}">
-						<a onclick="modalContent(${r.bno})" style="cursor: pointer;">
+					<c:forEach var="c" items="${cntCafe}">
+						<a onclick="modalContent(${c.bno})" style="cursor: pointer;">
 							<img style="width: 224px; height: 200px;"
-							 src="${pageContext.request.contextPath}/loadimg/display/${r.key}/1" alt="box"/>
+							 src="${pageContext.request.contextPath}/loadimg/display/${c.key}/1" alt="box"/>
 						</a>
 					</c:forEach>
 						
@@ -981,6 +981,85 @@
 				}
 			); //end getJSON	
 		} //end 댓글 목록 불러오기
+		
+		//상세보기에서 댓글을 달았을 때의 등록 처리
+		$('#replyRegBtn').click(function() {
+			const content = $('#modal-reply-content').val();
+			const writer = '${login.userid}';
+			const bno = $('#con-bno').val();
+			console.log(bno + writer + content);
+			
+			if(writer === '') {
+				alert('로그인 후 댓글 쓰기가 가능합니다.');
+				return;
+			} else if(content.trim() === '') {
+				alert('댓글 내용이 있어야 등록이 가능합니다.');
+				return;
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/promoReply/regist" />',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					'bno' : bno,
+					'writer' : writer,
+					'content' : content
+				}),
+				success: function(result) {
+					console.log('댓글 등록 완료!');
+					$('#modal-reply-content').val('');
+					modalReplyList(bno);
+				},
+				error: function() {
+					alert('댓글 등록 실패! 관리자에게 문의.');
+				}
+			}); //end ajax
+			
+		}); // end 댓글등록
+		
+		//댓글 삭제 버튼 누르면
+		$('#replyContentDiv').on('click','a',function(e){
+			e.preventDefault();
+			//고유 기능 막고 rno 가져옴
+			if($(this).attr('id') !== 'rnodelete'){
+				return;
+			}
+			
+			const rno = $(this).parent().children('#rnodelete')[0].getAttribute('href');
+			console.log('삭제할 댓글 번호: '+rno);
+			const bno = $('#con-bno').val();
+			console.log('삭제할 글 번호: '+bno);
+			
+			$.ajax({
+				type : 'post',
+				url : '<c:url value ="/promoReply/delete"/>',
+				data : JSON.stringify({
+					'rno' : rno
+					
+				}),
+				contentType : 'application/json',
+				success : function(data){
+					if(data === 'success'){
+						
+					console.log('삭제 성공')
+					modalReplyList(bno);
+					}else if(data === 'fail'){
+						alert('삭제 권한이 없습니다.');
+					}
+				}
+				
+				
+					,error : function(error){
+						console.log(error);
+						alert('삭제실패 관리자 문의.')
+					}
+					
+				
+ 				
+			});//end ajax
+			
+		});
 		
 		//날짜 처리 함수
 		function timeStamp(millis) {

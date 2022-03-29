@@ -104,7 +104,7 @@
                     <br>
                     <!-- 작성한 회원만 수정가능 -->
                     <c:if test="${login.userid eq article.writer}">
-                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
+                    <button style="left: 5px;" class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/noBoard/noModi?bno=${article.bno}"/>'">수정</button>
                     </c:if>
                     
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/noBoard/noList"/>'">목록</button>
