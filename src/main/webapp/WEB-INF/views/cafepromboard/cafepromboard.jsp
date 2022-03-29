@@ -270,6 +270,7 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
+            max-width: 800px
             margin: 0 auto;
         }
 
@@ -439,6 +440,7 @@
 
         .fileDiv {
             width: 800px;
+            height: 600px;
             box-sizing: border-box;
             border: 1px dashed #ffffff;
         }
@@ -455,13 +457,15 @@
 
         .fileDiv p {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 100px;
+            font-size: 20px;
         }
 
-        #myModal4 .modal-promimg img[src="/cafealley/img/upload.png"] {
+        #myModal4 .modal-promimg img[src="/img/upload.png"] {
             width: 300px;
             min-height: 300px;
-            margin: 0 250px 100px;
+            max-height: 580px;
+            margin: 120px 250px 100px;
         }
 
         #myModal4 .like-inner .hashtag p.warn {
@@ -1276,7 +1280,7 @@
 			                    <a class="glyphicon glyphicon-user" href="mypost"> My Posts</a>
 			                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" href="#myModal4"> Write</a>
 			                </div>
-		                </c:if>`;
+		                </c:if>`
 					}
 					
 					for(let i=0; i<list.length; i++) {
@@ -1591,7 +1595,7 @@
                         <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
                         <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                                 class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-                    </div>;`
+                    </div>`
             		    }
 					//data.filenum 이 null 이 아닌경우.
 					} else {
@@ -1657,7 +1661,7 @@
 	                        <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
 	                        <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
 	                                class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-	                    </div>;`
+	                    </div>`
 	            		    }
 						
 					}
