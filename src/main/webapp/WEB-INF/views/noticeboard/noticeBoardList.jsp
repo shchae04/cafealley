@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
-<<<<<<< HEAD
   
   		
     	* {
@@ -47,9 +46,7 @@
         }
         
         .listhead > div {
-        	margin-top: 55px !important;
-        	margin-left: 100px !important;
-        
+        	margin-top: 55px !important;        
         }
         
         .navbar-form{

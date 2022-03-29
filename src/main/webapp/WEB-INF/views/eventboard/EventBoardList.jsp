@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
-<<<<<<< HEAD
+    
   
   		
     	* {
@@ -46,9 +46,8 @@
             color: #000;
         }
         
-        .listhead > div {
-        	margin-top: 55px !important;
-        	margin-left: 100px !important;
+    .listhead > div {
+        	margin-top: 55px; margin-left: 100px;
         
         }
         
@@ -64,10 +63,9 @@
         	right: 90px; top: 10px;
         }
         
-        table {
+        .table {
         	width:1000px !important;
         	margin: 0 auto !important;
-        	text-align: center !important;
         }
         
     
