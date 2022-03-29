@@ -82,7 +82,9 @@
 			
 		</if>
 	</sql>
+	
 
+	
 
 		
 	
@@ -117,6 +119,16 @@
 		WHERE rn > (#{page.pageNum} - 1) * #{page.countPerPage}
 		AND rn <= #{page.pageNum} * #{page.countPerPage}
 		]]>
+	</select>
+	
+	<select id="getRanked" resultType="com.spring.cafealley.command.PromoBoardVO">
+				
+		SELECT pr.*,
+			   u.filenum
+		FROM promoboard pr
+		LEFT JOIN users u
+		ON pr.writer = u.username
+		WHERE bno = #{bno}
 	</select>
 	
 
@@ -185,6 +197,19 @@
 		SELECT COUNT(*) FROM
 		promoboardlike 
 		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 좋아요 랭킹 top5 가져오기 -->
+	<select id="bestCafe" resultType="com.spring.cafealley.command.PromoLikeVO">
+		SELECT bno, COUNT(*),
+		ROW_NUMBER() OVER(ORDER BY COUNT(*) DESC) AS RANK
+		FROM promoboardlike 
+		GROUP BY bno
+		<![CDATA[
+		HAVING count(*) > 0
+		AND count(*) <= 5
+		]]>
+				
 	</select>
 	
 	

@@ -1,6 +1,7 @@
 package com.spring.cafealley.promoboard.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -45,6 +46,11 @@ public interface IPromoBoardMapper {
 	//총 게시물 수
 	int getTotal(PageVO vo);
 	
+	// 좋아요 개수 상위 top5 글
+	List<PromoLikeVO> bestCafe();
+	
+	//메인 게시판 5개!@!@!@!
+	PromoBoardVO getRanked(int bno);
 	
 	
 	
