@@ -60,6 +60,13 @@
   	SELECT COUNT(*)
   	FROM evreply
   </select>
+  
+  <select id="getReply" resultType="com.spring.cafealley.command.ReplyVO">
+  	SELECT *
+  	FROM evreply
+  	WHERE rno = #{rno}
+  </select>
+  
 
 
 </mapper>

@@ -66,8 +66,8 @@ public class PromoReplyController {
 			UserVO uvo = (UserVO) session.getAttribute("login");
 			System.out.println("userid :" + uvo.getUserid() + "작성자 :" + writer);
 			
-			//admin != null 이면 모든 댓글 삭제 가능.
-			if(uvo.getUserid().equals(writer) || uvo.getAdmin() != null) {
+			//admin이면 모든 댓글 삭제 가능.
+			if(uvo.getUserid().equals(writer) || uvo.getAdmin() != null || !uvo.getAdmin().equals("")) {
 				System.out.println("삭제됨");
 				
 				service.replyDelete(vo.getRno());

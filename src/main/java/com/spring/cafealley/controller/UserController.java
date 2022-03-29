@@ -220,13 +220,18 @@ public class UserController {
 		System.out.println("param: " + vo);
 		System.out.println("file: " + file);
 		
+		
+		
 		List<MultipartFile> fileList = new ArrayList<>();
 		fileList.add(file);
 		
 		
 		if(file.getSize() == 0) {
 			System.out.println("파일정보가 존재하지 않음. " + file);
-			vo.setFilenum(0);
+			if(service.getInfo(vo.getUserid()).getFilenum() != 0 ) {
+				vo.setFilenum(service.getInfo(vo.getUserid()).getFilenum()); 
+			}else
+				vo.setFilenum(0);
 		} else {
 			System.out.println("파일정보가 존재함. imgService 호출. " + file);
 			System.out.println(imgService.getLastUploaded());
@@ -382,7 +387,9 @@ public class UserController {
 	@GetMapping("/orderDelHistory")
 	public void orderDelHistory(HttpSession session, Model model, PageVO vo) {
 		String userid = ((UserVO)session.getAttribute("login")).getUserid() ;
-		System.out.println("/ordering/orderManagement: GET");
+		System.out.println("/user/orderDelHistory: GET");
+		System.out.println("orderDelHistory에 들어온 PageVO : " + vo);
+		vo.setCountPerPage(10);
 		List<OrderingVO> orderlist = orderingService.getList(userid, vo);
 		for(int i =0; i<orderlist.size(); i++) {
 			for(int j=0; j<orderlist.get(i).getOrdercart().size(); j++) {
@@ -392,7 +399,7 @@ public class UserController {
  				 orderlist.get(i).getOrdercart().get(j).setFilenum(filenum);
 			 }
 		}
-		System.out.println(orderlist);
+		System.out.println("UserContorller에서 출력하는 orderlist : " + orderlist);
 		model.addAttribute("orderList" , orderlist);
 		
 		PageCreator pc = new PageCreator();

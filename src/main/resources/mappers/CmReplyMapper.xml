@@ -62,6 +62,12 @@
   	SELECT COUNT(*)
   	FROM cmreply
   </select>
+  
+  <select id="getReply" resultType="com.spring.cafealley.command.ReplyVO">
+  	SELECT *
+  	FROM cmreply
+  	WHERE rno = #{rno}
+  </select>
 
 
 </mapper>

@@ -91,7 +91,29 @@ button:disabled {
         cursor: pointer !important;
     	}
 
-
+        .top {
+            padding: 12px;
+            border: 1px solid gray;
+            position: relative;
+            min-width:1200px;
+        }
+  		.btn-xs{
+			color:white !important;
+			background : black !important;
+			border: 1px solid black !important;
+			width: 70px;
+			
+		}
+		.btn-s{
+			color:white !important;
+			background : black !important;
+			border: 1px solid black !important;
+			font-size: 12px;
+			padding : 1px 5px;
+			height: 22px;
+			border-radius : 3px;
+		}
+        
 </style>
 </head>
 <body>
@@ -101,6 +123,18 @@ button:disabled {
 	<section>
 		<div class="container">
 			<p class="ord-mgmt-title">주문 관리</p>
+			<form action="<c:url value='/ordering/orderManagement'/>" method="get" name="statusForm">
+            <div class="top">
+			<!--클릭하면 해당 기간의 주문내역을 조회합니다-->
+				<strong>조회구분</strong>
+                <button type="button" class="btn-xs" id="sf">전체</button>
+				<button type="button" class="btn-xs" id="sf1">입금/결제</button>
+				<button type="button" class="btn-s" id="sf2">배송중/배송완료</button>
+                <button type="button" class="btn-xs"id="sf3">환불/교환</button>
+                <button type="button" class="btn-xs" id="sf4">주문취소</button>
+                <input type="hidden" name="condition" id="sfcondition" value="">                            
+			</div>
+			</form>
 			<table class="table ord-mgmt-table w-auto text-center align-middle"
 				style="min-width: 1200px; ">
 				<thead>
@@ -253,7 +287,14 @@ button:disabled {
         			document.pageForm.submit();
         		});
           
-            
+    		
+    		// 조회구분
+    		$('.top').on('click', 'button', function(e){
+    			e.preventDefault();
+    			let condition = e.target.getAttribute('id').replace('sf','');
+    			$('#sfcondition').val(condition);
+    			document.statusForm.submit();
+    		})
             
             
             

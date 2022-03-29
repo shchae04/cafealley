@@ -41,6 +41,12 @@ public class CmReplyService implements ICmReplyService {
 	public int getTotal(PageVO vo) {
 		return cmmapper.getTotal(vo);
 	}
+	
+	@Override
+	public ReplyVO getReply(int rno) {
+	
+		return cmmapper.getReply(rno);
+	}
 
 
 	@Override

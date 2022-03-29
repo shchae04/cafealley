@@ -54,28 +54,18 @@ public class NoReplyController {
 	@PostMapping("/update")
 	public String update(@RequestBody ReplyVO rno, HttpSession session) {
 	
-		//user 작성자 검증  
-		/*
-		  UserVO uvo = (UserVO) session.getAttribute("login"); String uwriter
-		  =uvo.getUserid(); System.out.println("세션에서 가져온 write" + uwriter); String
-		 rwriter = rno.getWriter(); System.out.println("댓글 작성자" + rwriter);
-		
-		if(uwriter.equals(rwriter)) {
-			service.replyDelete(rno.getRno());
-			return "modSuccess";
-		} else {
-			return "fail";
+		// 작성자 검증
+		ReplyVO reply = service.getReply(rno.getRno());
+		String writer = reply.getWriter();
+		String userid = ( (UserVO) (session.getAttribute("login")) ).getUserid();
+		if(!writer.equals(userid)) {
+			return "modFail";
 		}
-		 */
-		//가져온 값이 null이면
-		if(rno.getContent() == null) {
-			return"fail";
-		} else {
-			System.out.println("수정 요청값:" + rno);
-			service.replyUpdate(rno); //rno만 가지고있을텐데? 메서드 수정함.
-			return "modSuccess";
-			
-		}
+
+		System.out.println("수정 요청값:" + rno);
+		service.replyUpdate(rno); //rno만 가지고있을텐데? 메서드 수정함.
+		return "modSuccess";
+
 		
 		
 	
@@ -83,18 +73,17 @@ public class NoReplyController {
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestBody ReplyVO rvo) {
+	public String delete(@RequestBody ReplyVO rvo, HttpSession session) {
 	
-//		//user 작성자 검증  
-//		String uwriter =uvo.getUserid();
-//		String rwriter = rvo.getWriter();
-//		
-//		if(uwriter.equals(rwriter)) {
-//			service.replyDelete(rvo.getRno());
-//			return "delSuccess";
-//		} else {
-//			return "fail";
-//		}
+
+		// 작성자 검증  
+		ReplyVO reply = service.getReply(rvo.getRno());
+		String writer = reply.getWriter();
+		String userid = ( (UserVO) (session.getAttribute("login")) ).getUserid();
+		if(!writer.equals(userid)) {
+			return "delFail";
+		}
+		
 		service.replyDelete(rvo.getRno());
 		return "delSuccess";
 	

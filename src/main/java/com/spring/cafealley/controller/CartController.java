@@ -46,6 +46,7 @@ public class CartController {
 		return "registSuccess";
 	}
 	
+	// 장바구니 주문결제창으로 이동
 	@ResponseBody
 	@PostMapping("/cartOrder")
 	public String cartOrder(@RequestBody List<CartVO> cartList, HttpSession session) {
