@@ -17,6 +17,10 @@
    
 
     <style>
+    
+    	* {
+    		border-radius: 0 !important;
+    	}
         .container {
             min-width: 1200px;
             margin-top: 180px;

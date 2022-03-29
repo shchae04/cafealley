@@ -25,6 +25,10 @@
         .write-service{
             text-align: center;
         }
+        
+    	* {
+    		border-radius: 0 !important;
+    	}
     </style>
 
 
@@ -45,7 +49,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>이벤트 게시글 수정하기</strong>
+                                 &nbsp;&nbsp;<strong style="border-bottom:3px solid black;">이벤트 게시판</strong>
                             </h3>
                             
                         </div>

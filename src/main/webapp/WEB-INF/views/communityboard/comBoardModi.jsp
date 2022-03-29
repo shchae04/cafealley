@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cmboardmodi</title>
+    <title>커뮤니티 게시판 글 수정</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
@@ -17,8 +17,6 @@
     
 
     <style>
-    	
-    	
     	* {
     		border-radius: 0 !important;
     	}
@@ -27,9 +25,6 @@
             min-width: 1200px;
             margin-top: 180px;
             margin-bottom: 80px;
-        }
-        .write-service{
-            text-align: center;
         }
     </style>
 
@@ -49,14 +44,15 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
-                        <div >
+                        <div>
                             <h3 class="write-service">
-                                <strong>커뮤니티 게시글 수정하기</strong>
+                                &nbsp;&nbsp;<strong style="border-bottom:3px solid black;">커뮤니티 게시판</strong>
                             </h3>
                             
                         </div>
                             
                     </div>
+                    <br>
                     <form name="modifyform" action="<c:url value='/cmBoard/modify'/>" method="post">
                         <!-- 
 
@@ -72,20 +68,19 @@
 						                      
    						
                         <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
-                        <div class="form-group clearfix" 
-                        style="border-bottom:3px solid black; padding-bottom: 10px; padding-top: 10px;">
+                        <div class="form-group clearfix">
 							
-                            <label for="writer" style=" float: left;">
+                            <label for="writer">
                                 작성자
-                            </label>
-                            <span style="display: block; float: left; left: 5px;">${article.writer}</span>
+                            </label><br>
+                            <span style="display: block;">${article.writer}</span>
                             <input type="hidden" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         
                         
                         <div class="form-group"
-                        	style="border-bottom:3px solid black; padding-bottom: 10px;"
+                        	style="border-top:3px solid black; border-bottom:3px solid black; padding-bottom: 20px; padding-top: 20px;"
                         >
 
                             <label for="title">

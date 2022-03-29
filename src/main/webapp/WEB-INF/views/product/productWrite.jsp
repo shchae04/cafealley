@@ -425,6 +425,8 @@ tbody> tr> td> .topmargin{
             }
             
             if($('input[name="proprice"]').val()<=$('input[name="prosellprice"]').val()){
+            	console.log('proprice' + $('input[name="proprice"]').val());
+            	console.log('prosellprice' + $('input[name="prosellprice"]').val());
             	alert('상품 판매가는 상품 정상가보다 낮게 측정되어야 합니다.');
             	return;
             }
