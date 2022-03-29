@@ -140,39 +140,18 @@
 							<form id="infoForm" action="<c:url value='/user/userUpdate' />" method="post" enctype="multipart/form-data">
 								<table class="table">
 									<tbody class="m-control">
+										<tr>
+											<td class="col-sm-2">
+												프로필 사진
+											</td>
+											<td class="profile-img col-sm-8">
+                                             	<label for="img"> ${login.filenum == 0 ? 
+	                                             	'클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요 ' : 
+	                                             	'<img id="fileImg" style="width:100px; height:100px;" id="profileImg" src="" alt="upload"/>' }</label>
+                                             	<input type="file" name="file" id="img">
+	                                         </td>
+                                        </tr>
 
-										<c:choose>
-											<c:when test="${login.filenum == 0}">
-												<tr>
-													<td class="col-sm-2">
-														프로필 사진
-													</td>
-													<td class="profile-img col-sm-8">
-		                                                <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-		                                                <input type="file" name="file" id="img">
-		                                            </td>
-	                                            </tr>
-											</c:when>
-											<c:otherwise>
-												<tr>
-		                                            <td class="col-sm-2">
-		                                            	프로필 사진
-		                                            </td>
-													<td class="profile-img col-sm-8">
-		                                                <img style="width:100px; height:100px;" id="profileImg" src="${pageContext.request.contextPath}/loadimg/display/${login.filenum}/1" alt="upload"/>
-		                                            </td>
-												</tr>
-												<tr>
-													<td class="col-sm-2">
-														프로필 사진 수정
-													</td>
-													<td class="profile-img col-sm-8">
-		                                                <label for="img">클릭하거나<br>드래그 드롭하여<br>이미지를<br>업로드하세요</label>
-		                                                <input type="file" name="file" id="img">
-		                                            </td>
-	                                            </tr>
-											</c:otherwise>
-										</c:choose>
 										<tr>
 											<td class="col-sm-2">*아이디</td>
 											<td class="col-sm-8">
@@ -322,6 +301,15 @@
 	
 
 	$(function() {
+		
+		let filenum = ${login.filenum};
+		if(filenum !== 0){
+			$('label[for="img"] > img').attr('src', '/loadimg/display/' + filenum + '/1');
+			$('#fileImg').css('margin-top', '-20px');
+		}
+		
+		
+		
 		//다음 주소 api 사용해보기
 		function searchAddress() {
 	        new daum.Postcode({

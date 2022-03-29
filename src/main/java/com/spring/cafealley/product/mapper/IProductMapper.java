@@ -25,4 +25,5 @@ public interface IProductMapper {
 	//상품 하나 가져오기
 	ProductVO getProduct(int prono);
 	
+	void updateStock(ProductVO vo);
 }

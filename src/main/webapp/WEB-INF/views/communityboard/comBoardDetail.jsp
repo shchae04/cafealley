@@ -440,11 +440,6 @@ $(document).ready(function() {
 					} else return;
 				
 				} else return;
-						
-						
-						
-				
-					
 				
 				
 			});//삭제 처리 끝.

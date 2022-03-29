@@ -84,6 +84,15 @@
 			width: 70px;
 			
 		}
+		.btn-s{
+			color:white !important;
+			background : black !important;
+			border: 1px solid black !important;
+			font-size: 12px;
+			padding : 1px 5px;
+			height: 22px;
+			border-radius : 3px;
+		}
 
 		
     </style>
@@ -132,14 +141,18 @@
                     </h3>
 
                     <div>
+                    <form action="<c:url value='/user/orderDelHistory'/>" method="get" name="statusForm">
                         <div class="top">
                             <!--클릭하면 해당 기간의 주문내역을 조회합니다-->
-                            <strong>조회기간</strong>
-                            <button type="button" class="btn-xs">15일</button>
-                            <button type="button" class="btn-xs">1개월</button>
-                            <button type="button" class="btn-xs">3개월</button>
-                            <button type="button" class="btn-xs">6개월</button>
+                            <strong>조회구분</strong>
+                            <button type="button" class="btn-xs" id="sf">전체</button>
+                            <button type="button" class="btn-xs" id="sf1">입금/결제</button>
+                            <button type="button" class="btn-s" id="sf2">배송중/배송완료</button>
+                            <button type="button" class="btn-xs"id="sf3">환불/교환</button>
+                            <button type="button" class="btn-xs" id="sf4">주문취소</button>
+                            <input type="hidden" name="condition" id="sfcondition" value="">                            
                         </div>
+                    </form>
                     </div>
 
                         <!--테이블 자동 크기 조절-->
@@ -294,7 +307,18 @@
 		
 		for(let ttp of $('.order-ttp')){
 	    	ttp.textContent = ttp.textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
-	    }				
+	    }
+		
+		
+		// 조회구분
+		$('.top').on('click', 'button', function(e){
+			e.preventDefault();
+			let condition = e.target.getAttribute('id').replace('sf','');
+			$('#sfcondition').val(condition);
+			document.statusForm.submit();
+		})
+		
+		
 		
 	});
 

@@ -40,5 +40,10 @@ public class ProductService implements IProductService {
 	public ProductVO getProduct(int prono) {
 		return mapper.getProduct(prono);
 	}
+	
+	@Override
+	public void updateStock(ProductVO vo) {
+		mapper.updateStock(vo);
+	}
 
 }

@@ -20,6 +20,9 @@
     		border-radius: 0 !important;
     	}
   
+		.container{
+ 			min-height: 550px;
+  		}
   		.pagination {
             margin-left: 430px;
         }

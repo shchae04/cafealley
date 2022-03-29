@@ -26,6 +26,7 @@ public interface ICmReplyService {
 	//목록 요청(페이징)
 	List<ReplyVO> getReplyList(PageVO vo);
 		
+		ReplyVO getReply(int rno);
 		
 	
 }
