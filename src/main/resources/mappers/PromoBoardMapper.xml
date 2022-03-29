@@ -58,8 +58,8 @@
 		<if test="vo.place == 'Concrete / Industrial'">
 		AND place = 'Concrete / Industrial'
 		</if>
-		<if test="vo.place == 'Mordern / Neat'">
-		AND place = 'Mordern / Neat'
+		<if test="vo.place == 'Modern / Neat'">
+		AND place = 'Modern / Neat'
 		</if>
 		<if test="vo.place == 'Retro / Vintage'">
 		AND place = 'Retro / Vintage'

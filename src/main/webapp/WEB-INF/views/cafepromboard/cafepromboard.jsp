@@ -527,7 +527,7 @@
                             <!-- 해쉬태그 -->
                             <ul class="hashtag clearfix">
                                 <li><a id="con-area" href="#">#서울</a></li>
-                                <li><a id="con-place" href="#">#Morden / Neat</a></li>
+                                <li><a id="con-place" href="#">#Modern / Neat</a></li>
                                 <li><a id="con-limit" href="#">#No Kids</a></li>
                             </ul>
                         </div>
@@ -618,7 +618,7 @@
                                     <option value="-"> - </option>
                                     <option value="Nature / Wooden">Nature / Wooden</option>
                                     <option value="Concrete / Industrial">Concrete / Industrial</option>
-                                    <option value="Morden / Neat">Morden / Neat</option>
+                                    <option value="Modern / Neat">Modern / Neat</option>
                                     <option value="Retro / Vintage">Retro / Vintage</option>
                                     <option value="Cozy / Comfort">Cozy / Comfort</option>
                                 </select>
@@ -794,7 +794,7 @@
                         <ul id="place">
                             <li><label><input type="checkbox">Nature / Wooden</label></li>
                             <li><label><input type="checkbox">Concrete / Industrial</label></li>
-                            <li><label><input type="checkbox">Morden / Neat</label></li>
+                            <li><label><input type="checkbox">Modern / Neat</label></li>
                             <li><label><input type="checkbox">Retro / Vintage</label></li>
                             <li><label><input type="checkbox">Cozy / Comfort</label></li>
                         </ul>
@@ -1109,7 +1109,7 @@
                                 }
                             }
 
-                            if(picmood === 'Morden / Neat'){
+                            if(picmood === 'Modern / Neat'){
                                 e.target.parentNode.style.fontSize = '20px';
 
                                 for($li of $place.children){
@@ -1156,7 +1156,7 @@
                             }
 
 
-                            if(picmood === 'Morden / Neat'){
+                            if(picmood === 'Modern / Neat'){
                                 picmood = '';
                             }
 
