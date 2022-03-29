@@ -68,7 +68,7 @@ public class OrderingController {
 		for(CartVO registCart :registCartList) {
 			if(productservice.getProduct(registCart.getProno()).getProstock() <  registCart.getCartamount()) {
 				ra.addFlashAttribute("msg1", "현재 " + registCart.getProname() + "에 대한 재고가 주문하시고자 하는 수량보다 적습니다.");
-				ra.addFlashAttribute("msg2", "수량을 수정해주세요. 재고 : " + productservice.getProduct(registCart.getProno()).getProstock());
+				ra.addFlashAttribute("msg2","수량을 수정해주세요. 재고 :  " + productservice.getProduct(registCart.getProno()).getProstock());
 				return "redirect:/cart/cartList";
 			}
 		}

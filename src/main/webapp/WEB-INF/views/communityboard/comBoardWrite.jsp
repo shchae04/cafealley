@@ -18,13 +18,13 @@
     
 
     <style>
+    	* {
+    		border-radius: 0 !important;
+    	}
         .container {
             min-width: 1200px;
             margin-top: 180px;
             margin-bottom: 80px;
-        }
-        .write-service{
-            text-align: center;
         }
         
         .fileDiv {
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>커뮤니티 게시글 작성하기</strong>
+                                &nbsp;&nbsp; <strong>커뮤니티 게시판</strong>
                             </h3>
                             
                         </div>

@@ -11,6 +11,11 @@
     <title>promoboardChk</title>
 
     <style>
+    	
+    	* {
+			border-radius: 0 !important;
+		}
+    	
         .clearfix::after {
             content: '';
             display: block;
@@ -70,55 +75,6 @@
         }
         a:focus{
             color:black;
-        }
-        li {
-            list-style: none;
-        }
-
-        .aside-wrapper {
-            position: absolute;
-            min-width: 20%;
-            max-width: 20%;
-            margin: 0;
-            left: 0px;
-            background-color: #ffffff;
-            top: 150px;
-
-        }
-
-        aside {
-            min-width: 100%;
-            float: left;
-            position: sticky;
-            top: 150px;
-        }
-
-        .promboard-filter {
-            padding: 0 30px 0 30px;
-        }
-
-        .promboard-filter>li {
-            border-bottom: solid 1px black;
-            padding: 0.5vh 0 0.5vh 0;
-        }
-
-        .promboard-filter li span {
-            font-size: 2vh;
-            font-weight: 700;
-        }
-
-        .promboard-filter li ul li {
-            padding: 0;
-            margin: 0;
-        }
-
-        .promboard-filter input[type="checkbox"] {
-            font-size: 1.5vh;
-            display: none;
-        }
-
-        .promboard-filter label:hover {
-            cursor: pointer;
         }
 
 

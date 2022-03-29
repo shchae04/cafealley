@@ -10,20 +10,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유 게시판</title>
+    <title>공지 게시판</title>
 
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
-<<<<<<< HEAD
   
   		
     	* {
     		border-radius: 0 !important;
     	}
   
-  		.container{
-  			min-height: 550px;
+		.container{
+ 			min-height: 550px;
   		}
   		.pagination {
             margin-left: 430px;
@@ -47,8 +46,7 @@
         }
         
         .listhead > div {
-        	margin-top: 55px !important;
-        	margin-left: 100px !important;
+        	margin-bottom: 10px; margin-left: 100px;
         
         }
         
@@ -64,8 +62,8 @@
         	right: 90px; top: 10px;
         }
         
-        table {
-        	width: 1000px !important;
+        .table {
+        	width:1000px !important;
         	margin: 0 auto !important;
         }
     
@@ -93,9 +91,9 @@
                 </div>
 
                 <!-- 검색창을 배치하고 싶을 때 -->
-                <div class="listhead" style="margin-bottom: 100px;">
+                <div class="listhead">
                     <div
-                        style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
+                        style="float: left; font-size: 20px; margin-top: 50px; border-bottom: 3px solid black;">
                         <strong>공지 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">

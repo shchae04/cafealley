@@ -12,6 +12,11 @@
     
 
     <style>
+    	
+    	* {
+			border-radius: 0 !important;
+		}
+    	
         .clearfix::after {
             content: '';
             display: block;
@@ -54,7 +59,7 @@
                 <div class="col-sm-12">
                     <!--카테고리 메뉴-->
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#">회원정보</a></li>
+						<li><a href="<c:url value='/user/userInfo' />">회원정보</a></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">공지 게시판<span class="caret"></span></a>
 							<ul class="dropdown-menu">

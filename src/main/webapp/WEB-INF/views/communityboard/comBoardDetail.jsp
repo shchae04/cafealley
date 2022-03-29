@@ -101,7 +101,7 @@
                     
                     <br><br><br>
                     <br>
-					<c:if test="${login.userid eq article.writer}">
+					<c:if test="${login.userid eq article.writer || login.admin != null}">
                     <button style="left: 5px;" class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/cmBoard/cmModi?bno=${article.bno}"/>'">수정</button>
                     </c:if>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/cmBoard/cmList"/>'">목록</button>

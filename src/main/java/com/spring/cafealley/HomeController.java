@@ -64,4 +64,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/cafeinfo")
+	public void cafeinfo() {
+		
+	}
+	
 }

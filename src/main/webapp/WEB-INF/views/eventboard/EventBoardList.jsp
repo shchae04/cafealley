@@ -15,15 +15,13 @@
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
-<<<<<<< HEAD
-  
-  		
-    	* {
+    
+  * {
     		border-radius: 0 !important;
     	}
   
-  		.container{
-  			min-height: 550px;
+		.container{
+ 			min-height: 550px;
   		}
   		.pagination {
             margin-left: 430px;
@@ -47,8 +45,7 @@
         }
         
         .listhead > div {
-        	margin-top: 55px !important;
-        	margin-left: 100px !important;
+        	margin-bottom: 10px; margin-left: 100px;
         
         }
         
@@ -64,10 +61,9 @@
         	right: 90px; top: 10px;
         }
         
-        table {
+        .table {
         	width:1000px !important;
         	margin: 0 auto !important;
-        	text-align: center !important;
         }
         
     
@@ -97,7 +93,7 @@
                 <!-- 검색창을 배치하고 싶을 때 -->
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div
-                        style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
+                        style="float: left; font-size: 20px; margin-top: 50px; border-bottom: 3px solid black;">
                         <strong>이벤트 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>evboardwrite</title>
+    <title>이벤트 게시판 글 작성</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
@@ -17,13 +17,14 @@
    
 
     <style>
+    
+    	* {
+    		border-radius: 0 !important;
+    	}
         .container {
             min-width: 1200px;
             margin-top: 180px;
             margin-bottom: 80px;
-        }
-        .write-service{
-            text-align: center;
         }
         .fileDiv {
 			height: 100px;
@@ -56,7 +57,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>이벤트 게시글 작성하기</strong>
+                                &nbsp;&nbsp;<strong>이벤트 게시판</strong>
                             </h3>
                             
                         </div>
@@ -80,7 +81,7 @@
                             <label for="writer">
                                 작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="${login.userid }" readonly
+                            <input type="text" class="form-control" id="writer" name="writer" value="${login.userid}" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">
