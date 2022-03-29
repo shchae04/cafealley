@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>noboardmodi</title>
+    <title>공지 게시판 글 수정</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- <link rel="stylesheet" href="../css/shstyle.css"> -->
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
             margin-top: 180px;
             margin-bottom: 80px;
         }
-        .write-service{
-            text-align: center;
-        }
+    	* {
+    		border-radius: 0 !important;
+    	}
     </style>
 
 
@@ -50,12 +50,13 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                <strong>공지 게시글 수정하기</strong>
+                                 &nbsp;&nbsp;<strong style="border-bottom:3px solid black;">공지 게시판</strong>
                             </h3>
                             
                         </div>
                             
                     </div>
+                    <br>
                     <form name="modifyform" action="<c:url value='/noBoard/modify'/>" method="post">
                         <!-- 
 
@@ -70,7 +71,6 @@
                       -->
 						
 						<div class="form-group">
-                            <label>글번호</label>
                             <span style="font-size: 18px; font-weight: bold;">${article.bno}</span>
                             <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
                         </div>

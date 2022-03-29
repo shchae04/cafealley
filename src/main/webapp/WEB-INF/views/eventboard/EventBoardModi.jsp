@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>evboardmodi</title>
+    <title>이벤트 게시판 글 수정</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="https://kit.fontawesome.com/6bdfd4f896.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
@@ -21,9 +21,6 @@
             min-width: 1200px;
             margin-top: 180px;
             margin-bottom: 80px;
-        }
-        .write-service{
-            text-align: center;
         }
         
     	* {
@@ -55,6 +52,7 @@
                         </div>
                             
                     </div>
+                    <br>
                     <form name="modifyform" action="<c:url value='/evBoard/modify'/>" method="post">
                         <!-- 
 
@@ -69,7 +67,6 @@
                       -->
 						  
 						  	<div class="form-group">
-                            <label>글번호</label>
                             <span style="font-size: 18px; font-weight: bold;">${article.bno}</span>
                             <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
                         </div>
