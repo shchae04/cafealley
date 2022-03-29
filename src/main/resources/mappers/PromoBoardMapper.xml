@@ -199,17 +199,23 @@
 		WHERE bno = #{bno}
 	</select>
 	
-	<!-- 좋아요 랭킹 top5 가져오기 -->
-	<select id="bestCafe" resultType="com.spring.cafealley.command.PromoLikeVO">
-		SELECT bno, COUNT(*),
-		ROW_NUMBER() OVER(ORDER BY COUNT(*) DESC) AS RANK
-		FROM promoboardlike 
-		GROUP BY bno
+	<!-- 카페보드 신규 글 5개 가져오기 -->
+	<select id="cntCafe" resultType="com.spring.cafealley.command.PromoBoardVO">
+		SELECT * FROM
+		(
+		SELECT ROWNUM as rn, tbl.*
+		
+		FROM
+		    (
+		    SELECT *
+		    FROM promoboard
+		    ORDER BY regdate DESC
+		    ) tbl
+		)
 		<![CDATA[
-		HAVING count(*) > 0
-		AND count(*) <= 5
-		]]>
-				
+		WHERE rn > 0
+		AND rn <= 5
+		]]>	
 	</select>
 	
 	

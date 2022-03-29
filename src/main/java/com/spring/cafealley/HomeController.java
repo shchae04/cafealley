@@ -57,29 +57,8 @@ public class HomeController {
 		System.out.println(userService.getBsnsUserAddr());
 		
 		//베스트 카페
-		List<PromoLikeVO> promoLike = promoBoardService.bestCafe();
-		System.out.println(promoLike);
-		
-		//정수배열 
-		
-		List<PromoBoardVO> boardList = new ArrayList<>();
-		
-		for(PromoLikeVO pvo : promoLike) {
-				
-			boardList.add(promoBoardService.getRanked(pvo.getBno()));
-			System.out.println(pvo.getBno());
-			System.out.println("배열 담는중" + pvo);
-			
-		}
-
-		System.out.println(boardList);
-		model.addAttribute("rank",boardList);
-		
-		
-				 
-		
-		
-		
+		System.out.println(promoBoardService.cntCafe());
+		model.addAttribute("cntCafe",promoBoardService.cntCafe());
 		
 		
 		return "home";

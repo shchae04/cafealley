@@ -46,8 +46,8 @@ public interface IPromoBoardMapper {
 	//총 게시물 수
 	int getTotal(PageVO vo);
 	
-	// 좋아요 개수 상위 top5 글
-	List<PromoLikeVO> bestCafe();
+	// 카페보드 신규 글 5개 불러오기
+	List<PromoBoardVO> cntCafe();
 	
 	//메인 게시판 5개!@!@!@!
 	PromoBoardVO getRanked(int bno);

@@ -77,12 +77,14 @@ public class PromoBoardService implements IPromoBoardService {
 	}
 
 	@Override
-	public List<PromoLikeVO> bestCafe() {
-		return mapper.bestCafe();
-	}
-	
-	@Override
 	public PromoBoardVO getRanked(int bno) {
 		return mapper.getRanked(bno);
 	}
+	
+	@Override
+	public List<PromoBoardVO> cntCafe() {
+		return mapper.cntCafe();
+	}
+		
 }
+	
