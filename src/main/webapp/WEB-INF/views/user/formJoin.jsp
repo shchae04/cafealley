@@ -594,7 +594,7 @@
 											&nbsp;</span>우편번호</label>&emsp;&emsp;&nbsp;
 									<div class="input-group">
 										<input type="text" name="zipcode" id="postnum" class="postnum"
-											placeholder="우편번호를 검색하세요.">
+											placeholder="우편번호를 검색하세요." readonly>
 										<button type="button" id="btnZipCode" class="btn-zip-code btn btn-primary"
 												style="background-color: lightgray; color: black; border: 0px;" onclick="searchAddress()">우편번호검색</button>
 									</div>
@@ -603,7 +603,7 @@
 								<div class="form-inline form-group">
 									<label for="fraddr"><span class="redstar">*
 											&nbsp;</span>기본주소</label>&emsp;&emsp;&nbsp; <input type="text" id="fraddr"
-										class="fraddr" name="addrbasic" placeholder="기본주소를 입력하세요.">
+										class="fraddr" name="addrbasic" placeholder="기본주소를 입력하세요." readonly>
 								</div>
 
 								<div class="form-inline form-group">
@@ -751,6 +751,12 @@
 					$resultMsg.css('color', 'red');
 				}
 			});//인증 번호 비교 이벤트 끝
+			
+			if(!$('#postnum').val()=== '' && !$('#fraddr').val()=== '') {
+				$('#seaddr').attr('readonly', true);
+			} else {
+				$('#seaddr').attr('readonly', false);
+			}
 			
 		});//end jQuery	
 		

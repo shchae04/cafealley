@@ -17,6 +17,12 @@
     
 
     <style>
+    	
+    	
+    	* {
+    		border-radius: 0 !important;
+    	}
+    	
         .container {
             min-width: 1200px;
             margin-top: 180px;
@@ -64,24 +70,23 @@
                         </div>
                       -->
 						                      
-   						<div class="form-group">
-                            <label>글번호</label>
-                            <span style="font-size: 18px; font-weight: bold;">${article.bno}</span>
-                            <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
-                        </div>
-                        <div class="form-group" 
-                        style="border-top:3px solid black; border-bottom:3px solid black; padding-bottom: 20px; padding-top: 20px;">
-
-                            <label for="writer">
+   						
+                        <input type="hidden" style="background: none; border: none;" class="form-control" name='bno' value="${article.bno}" readonly>
+                        <div class="form-group clearfix" 
+                        style="border-bottom:3px solid black; padding-bottom: 10px; padding-top: 10px;">
+							
+                            <label for="writer" style=" float: left;">
                                 작성자
                             </label>
-                            <span style="display: block;">${article.writer}</span>
+                            <span style="display: block; float: left; left: 5px;">${article.writer}</span>
                             <input type="hidden" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         
                         
-                        <div class="form-group">
+                        <div class="form-group"
+                        	style="border-bottom:3px solid black; padding-bottom: 10px;"
+                        >
 
                             <label for="title">
                                 제목

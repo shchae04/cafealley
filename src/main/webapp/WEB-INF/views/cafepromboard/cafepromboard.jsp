@@ -270,6 +270,7 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
+            max-width: 800px
             margin: 0 auto;
         }
 
@@ -439,6 +440,7 @@
 
         .fileDiv {
             width: 800px;
+            height: 600px;
             box-sizing: border-box;
             border: 1px dashed #ffffff;
         }
@@ -455,13 +457,15 @@
 
         .fileDiv p {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 100px;
+            font-size: 20px;
         }
 
-        #myModal4 .modal-promimg img[src="/cafealley/img/upload.png"] {
+        #myModal4 .modal-promimg img[src="/img/upload.png"] {
             width: 300px;
             min-height: 300px;
-            margin: 0 250px 100px;
+            max-height: 580px;
+            margin: 120px 250px 100px;
         }
 
         #myModal4 .like-inner .hashtag p.warn {
@@ -523,7 +527,7 @@
                             <!-- 해쉬태그 -->
                             <ul class="hashtag clearfix">
                                 <li><a id="con-area" href="#">#서울</a></li>
-                                <li><a id="con-place" href="#">#Morden / Neat</a></li>
+                                <li><a id="con-place" href="#">#Modern / Neat</a></li>
                                 <li><a id="con-limit" href="#">#No Kids</a></li>
                             </ul>
                         </div>
@@ -614,7 +618,7 @@
                                     <option value="-"> - </option>
                                     <option value="Nature / Wooden">Nature / Wooden</option>
                                     <option value="Concrete / Industrial">Concrete / Industrial</option>
-                                    <option value="Morden / Neat">Morden / Neat</option>
+                                    <option value="Modern / Neat">Modern / Neat</option>
                                     <option value="Retro / Vintage">Retro / Vintage</option>
                                     <option value="Cozy / Comfort">Cozy / Comfort</option>
                                 </select>
@@ -790,7 +794,7 @@
                         <ul id="place">
                             <li><label><input type="checkbox">Nature / Wooden</label></li>
                             <li><label><input type="checkbox">Concrete / Industrial</label></li>
-                            <li><label><input type="checkbox">Morden / Neat</label></li>
+                            <li><label><input type="checkbox">Modern / Neat</label></li>
                             <li><label><input type="checkbox">Retro / Vintage</label></li>
                             <li><label><input type="checkbox">Cozy / Comfort</label></li>
                         </ul>
@@ -1105,7 +1109,7 @@
                                 }
                             }
 
-                            if(picmood === 'Morden / Neat'){
+                            if(picmood === 'Modern / Neat'){
                                 e.target.parentNode.style.fontSize = '20px';
 
                                 for($li of $place.children){
@@ -1155,8 +1159,9 @@
                             }
 
 
-                            if(picmood === 'Morden / Neat'){
-                                e.target.parentNode.style.fontSize = '14px';
+
+                            if(picmood === 'Modern / Neat'){
+								e.target.parentNode.style.fontSize = '14px';
                                 picmood = '';
                             }
 
@@ -1282,7 +1287,7 @@
 			                    <a class="glyphicon glyphicon-user" href="mypost"> My Posts</a>
 			                    <a class="glyphicon glyphicon-pencil" data-toggle="modal" href="#myModal4"> Write</a>
 			                </div>
-		                </c:if>`;
+		                </c:if>`
 					}
 					
 					for(let i=0; i<list.length; i++) {
@@ -1597,7 +1602,7 @@
                         <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
                         <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                                 class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-                    </div>;`
+                    </div>`
             		    }
 					//data.filenum 이 null 이 아닌경우.
 					} else {
@@ -1663,7 +1668,7 @@
 	                        <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
 	                        <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
 	                                class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-	                    </div>;`
+	                    </div>`
 	            		    }
 						
 					}
@@ -2403,7 +2408,7 @@
 		$(window).scroll(function() {
 			//윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같다면 로직을 수행.
 			//문서높이 - 브라우저 창 높이 = 스크롤 창의 끝 높이와 같다면 -> 새로운 내용을 불러오기
-			if($(window).scrollTop() === $(document).height() - $(window).height()) {
+			if(Math.round($(window).scrollTop()) === $(document).height() - $(window).height() ) {
 							
 				//목록 불러오기 페이징을 완료를 하셨다면
 				//페이지 값 하나 올리고, getList(false) 주셔서 누적해서 계속 열어주면 됩니다.

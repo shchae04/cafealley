@@ -49,7 +49,7 @@ section {
 }
 
 .container img {
-	max-width: 350px;
+	max-width: 800px;
 	display: block;
 	margin: 0 auto;
 }
@@ -275,6 +275,12 @@ button.btn-cart, button.btn-order {
 	top:15px;
 	right:25px;
 }
+img[alt="prod-main"]{
+	min-width:500px;
+	max-width:500px;
+	min-height:400px;
+	max-height:400px;
+}
 
 /* --------------------------------- */
 </style>
@@ -289,7 +295,7 @@ button.btn-cart, button.btn-order {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 prod-img">
-					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-detail" onerror="this.remove();">
+					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/1" alt="prod-main" onerror="this.remove();">
 				</div>
 				<div class="col-xs-6">
 					<div class="detail-info">

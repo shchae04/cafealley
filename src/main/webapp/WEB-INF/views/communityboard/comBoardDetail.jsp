@@ -12,6 +12,17 @@
     <title>cmboarddetail</title>
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
+    <style>
+    	* {
+    		border-radius: 0 !important;
+    	}
+    	
+    	.reply-wrap {
+    		border: none;
+    	}
+    
+    </style>
+    
 </head>
 
 <body>
@@ -24,7 +35,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 content-wrap">
-                    상세보기
                     <div class="titlebox" style="text-align: center; border-bottom: 3px solid black;">
 
 
@@ -33,7 +43,7 @@
                     <form action="#" class="detailform clearfix" method="post">
                         <div class="form-group" style="margin-top: 30px;">
                             <label for="bId">&nbsp;&nbsp;</label>
-                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno }</span>
+                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno}</span>
                             <!-- <input type="text" id="bid" class="form-control" style=" border: none; border-color: transparent; cursor: auto;width: 5%;  background: white;" readonly value="3"> -->
 
                         </div>
@@ -92,7 +102,7 @@
                     <br><br><br>
                     <br>
 					<c:if test="${login.userid eq article.writer}">
-                    <button class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/cmBoard/cmModi?bno=${article.bno}"/>'">수정</button>
+                    <button style="left: 5px;" class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/cmBoard/cmModi?bno=${article.bno}"/>'">수정</button>
                     </c:if>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/cmBoard/cmList"/>'">목록</button>
                     <!-- 이전글 다음글 버튼 배치 -->
@@ -133,7 +143,7 @@
                     <div class="reply-wrap">
 
                         <div class="reply-content">
-                            <hr>
+                            <br>
                             <div class="reply-group" id="replyList">
                                 <!-- 댓글이 반복적으로 달릴 공간! -->
                               <%--   
@@ -430,11 +440,6 @@ $(document).ready(function() {
 					} else return;
 				
 				} else return;
-						
-						
-						
-				
-					
 				
 				
 			});//삭제 처리 끝.

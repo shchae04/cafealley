@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
     <style>
+<<<<<<< HEAD
+  
+  		
+    	* {
+    		border-radius: 0 !important;
+    	}
+  
   		.container{
   			min-height: 550px;
   		}
@@ -38,6 +45,31 @@
         .pagination .page-pre:hover {
             color: #000;
         }
+        
+        .listhead > div {
+        	margin-top: 55px !important;
+        	margin-left: 100px !important;
+        
+        }
+        
+        .navbar-form{
+        	margin-top: 40px !important;
+        	margin-right: 70px !important;
+        }
+        
+        .search-input {
+        	width: 150px !important;
+        }
+        .write {
+        	right: 90px; top: 10px;
+        }
+        
+        table {
+        	width:1000px !important;
+        	margin: 0 auto !important;
+        	text-align: center !important;
+        }
+        
     
     </style>
 
@@ -84,28 +116,26 @@
                     </form>
                 </div>
 
-                <table class="table table-hover table-bordered listtable">
-                    <thead>
-                        <th style="width: 4%; color: black;">번호</th>
-                        <th style="width: 75%; color: black; text-align: center;">제목</th>
-                        <th style="width: 12%;">작성자</th>
-                        <th style="width: 10%;">작성일</th>
-                    </thead>
+                <table class="table table-hover w-auto table-bordered listtable table-list">
+                    <tr class="text-center">
+                        <td class="col-xs-1">번호</td>
+                        <td class="col-xs-3">제목</td>
+                        <td class="col-xs-1">작성자</td>
+                        <td class="col-xs-1">작성일</td>
+                    </tr>
                     <!-- 게시글 가져오기 반복문-->
                     <!-- dummy 데이터 입니다 -->
                     <tbody>
                     
                     <c:forEach var="ev" items="${evList}">
-                        <tr>
+                        <tr class="text-center">
                             <td>${ev.bno}</td>
-                            <td><a href="<c:url value='/evBoard/evDetail?bno=${ev.bno}'/>">${ev.title }</a></td>
+                            <td><a href="<c:url value='/evBoard/evDetail?bno=${ev.bno}'/>">${ev.title}</a></td>
                             <td>${ev.writer}</td>
                             <td> <fmt:formatDate value="${ev.regdate}" pattern="MM-dd"/>
                             <c:if test="${ev.ismod = '0'}"></c:if>
                             <c:if test="${ev.ismod = '0'}"> <small>수정됨</small> </c:if>
                             </td>
-                            
-
                         </tr>
                     </c:forEach>
                        
@@ -115,11 +145,11 @@
                 		<button style="float: right;" type="button" class="write btn"
                 		onclick="location.href='<c:url value="/evBoard/evWrite" />'"
                 		>글쓰기</button>
-                <hr>
+                <br>
 						<!-- 페이징 처리 -->
 						<form action="<c:url value='/evBoard/evList' />" name="pageForm">
 	                        <div class="text-center clearfix">
-	                            <hr>
+	                            <br>
 	                            <ul class="pagination" id="pagination">
 	                            	<c:if test="${pc.prev}">
 	                                	<li><a href="#" data-pageNum="${pc.beginPage-1}">이전</a></li>

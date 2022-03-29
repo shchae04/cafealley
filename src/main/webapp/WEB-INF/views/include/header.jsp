@@ -98,12 +98,12 @@
 					<c:if test="${login.businessnum != ''}">
 					<li class="dropdown"><a href="<c:url value='/shop/shopList'/>">Owner Mall </a>
 						<ul class="dropdown-menu">
-							<li><a href="#">원두</a></li>
-							<li><a href="#">티 / 액상차</a></li>
-							<li><a href="#">유제품</a></li>
-							<li><a href="#">시럽 / 소스</a></li>
-							<li><a href="#">파우더 / 농축액</a></li>
-							<li><a href="#">커피용품, 머신</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=beans&keyword=latest'/>">원두</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=tea&keyword=latest'/>">티 / 액상차</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=milk&keyword=latest'/>">유제품</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=syrup&keyword=latest'/>">시럽 / 소스</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=powder&keyword=latest'/>">파우더 / 농축액</a></li>
+							<li><a href="<c:url value='/shop/shopList?condition=coffeemachine&keyword=latest'/>">커피용품, 머신</a></li>
 						</ul>
 					</li>
 
