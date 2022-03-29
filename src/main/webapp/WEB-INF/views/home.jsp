@@ -433,7 +433,7 @@
             position: absolute;
             bottom: -100px;
             color: red;
-        }        
+        }      
         
 
 </style>

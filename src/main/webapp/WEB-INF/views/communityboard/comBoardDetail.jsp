@@ -12,6 +12,17 @@
     <title>cmboarddetail</title>
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
+    <style>
+    	* {
+    		border-radius: 0 !important;
+    	}
+    	
+    	.reply-wrap {
+    		border: none;
+    	}
+    
+    </style>
+    
 </head>
 
 <body>
@@ -24,7 +35,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 content-wrap">
-                    상세보기
                     <div class="titlebox" style="text-align: center; border-bottom: 3px solid black;">
 
 
@@ -33,7 +43,7 @@
                     <form action="#" class="detailform clearfix" method="post">
                         <div class="form-group" style="margin-top: 30px;">
                             <label for="bId">&nbsp;&nbsp;</label>
-                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno }</span>
+                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno}</span>
                             <!-- <input type="text" id="bid" class="form-control" style=" border: none; border-color: transparent; cursor: auto;width: 5%;  background: white;" readonly value="3"> -->
 
                         </div>
@@ -133,7 +143,7 @@
                     <div class="reply-wrap">
 
                         <div class="reply-content">
-                            <hr>
+                            <br>
                             <div class="reply-group" id="replyList">
                                 <!-- 댓글이 반복적으로 달릴 공간! -->
                               <%--   
