@@ -92,7 +92,7 @@
                 <!-- 검색창을 배치하고 싶을 때 -->
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div
-                        style="float: left; font-size: 20px; margin-top: 15px; margin-left: 30px; border-bottom: 3px solid black;">
+                        style="float: left; font-size: 20px; margin-top: 15px; margin-left:100px; border-bottom: 3px solid black;">
                         <strong>공지 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
