@@ -100,15 +100,16 @@ public class EvBoardController {
 		System.out.println("list files :" + files);
 		
 		//key를 가장최근 업로드된 번호로 가져온다
-		if(files.size() == 0) {
-			//파일이 없다.
-			vo.setKey(0);
-		} else {		
+		for(MultipartFile f : files) {
+			if(f.getSize() == 0) {
+				vo.setKey(0);
+			}
+		}		
 			//파일이 있다.
 			imgservice.upload(files);
 			System.out.println("file: " + files);
 			vo.setKey(imgservice.getLastUploaded());
-		}
+		
 		
 		//key값.
 		System.out.println("key값"+vo.getKey());
