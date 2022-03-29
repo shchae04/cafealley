@@ -92,8 +92,8 @@
 
                 <!-- 검색창을 배치하고 싶을 때 -->
                 <div class="listhead" style="margin-bottom: 100px;">
-                    <div
-                        style="float: left; font-size: 20px; margin-top: 50px; border-bottom: 3px solid black;">
+                    <div style="float: left; font-size: 20px; margin-top: 55px; margin-left: 100px; border-bottom: 3px solid black;">
+
                         <strong>이벤트 게시판</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
