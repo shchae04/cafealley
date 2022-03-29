@@ -51,7 +51,7 @@ public class BoardHandler implements HandlerInterceptor {
 						return true;
 					}
 				}else if(request.getRequestURI().contains("noBoard")) {
-					BoardVO vo = evBoardMapper.getContent(Integer.parseInt( request.getParameter("bno") ));
+					BoardVO vo = noBoardMapper.getContent(Integer.parseInt( request.getParameter("bno") ));
 					if(vo != null) {
 						return true;
 					}

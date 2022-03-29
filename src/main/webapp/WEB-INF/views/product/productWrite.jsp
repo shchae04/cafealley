@@ -424,6 +424,7 @@ tbody> tr> td> .topmargin{
                 return;
             }
             
+
             if($('input[name="proprice"]').val()<=$('input[name="prosellprice"]').val()){
             	console.log('proprice' + $('input[name="proprice"]').val());
             	console.log('prosellprice' + $('input[name="prosellprice"]').val());

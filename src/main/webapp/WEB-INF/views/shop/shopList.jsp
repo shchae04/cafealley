@@ -49,9 +49,15 @@ section {
 	font-weight: bold;
 }
 
-.prod-list-inner img {
+.prod-list-inner {
 	width: 270px;
+}
+
+
+.prod-list-inner img {
+	width: 300px;
 	height: 300px;
+	padding: 0 30px;
 }
 
 .row li {

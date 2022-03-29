@@ -2408,7 +2408,7 @@
 		$(window).scroll(function() {
 			//윈도우(device)의 높이와 현재 스크롤 위치 값을 더한 뒤, 문서(컨텐츠) 높이와 비교해서 같다면 로직을 수행.
 			//문서높이 - 브라우저 창 높이 = 스크롤 창의 끝 높이와 같다면 -> 새로운 내용을 불러오기
-			if($(window).scrollTop() === $(document).height() - $(window).height()) {
+			if(Math.round($(window).scrollTop()) === $(document).height() - $(window).height() ) {
 							
 				//목록 불러오기 페이징을 완료를 하셨다면
 				//페이지 값 하나 올리고, getList(false) 주셔서 누적해서 계속 열어주면 됩니다.

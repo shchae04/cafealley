@@ -38,11 +38,11 @@
                     <li><a href="#">개인정보 처리방침</a></li>
                 </ul>
                 <div class="footer-sns">
-                    <a href="#"><span class="fa-brands fa-facebook-square"></span></a>
+                    <a href="https://facebook.com/cafeallyy"><span class="fa-brands fa-facebook-square"></span></a>
 
-                    <a href="#"><span class="fa fa-instagram"></span></a>
+                    <a href="https://www.instagram.com/explore/tags/cafealley/"><span class="fa fa-instagram"></span></a>
 
-                    <a href="#"><span class="fa-brands fa-youtube"></span></a>
+                    <a href="https://www.youtube.com/"><span class="fa-brands fa-youtube"></span></a>
                 </div>
 
 
