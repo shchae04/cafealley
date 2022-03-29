@@ -81,7 +81,7 @@
 						</c:otherwise>
 					</c:choose>
 					
-					<c:if test="${login.userid == ''}">
+					<c:if test="${empty login}">
 					<li><a href="<c:url value='/user/joinSelect' />">회원가입</a></li>
 					</c:if>
 					<li><a href="mailto:coffeealley.gmail.com">고객문의</a></li>

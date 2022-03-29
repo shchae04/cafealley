@@ -220,13 +220,18 @@ public class UserController {
 		System.out.println("param: " + vo);
 		System.out.println("file: " + file);
 		
+		
+		
 		List<MultipartFile> fileList = new ArrayList<>();
 		fileList.add(file);
 		
 		
 		if(file.getSize() == 0) {
 			System.out.println("파일정보가 존재하지 않음. " + file);
-			vo.setFilenum(0);
+			if(service.getInfo(vo.getUserid()).getFilenum() != 0 ) {
+				vo.setFilenum(service.getInfo(vo.getUserid()).getFilenum()); 
+			}else
+				vo.setFilenum(0);
 		} else {
 			System.out.println("파일정보가 존재함. imgService 호출. " + file);
 			System.out.println(imgService.getLastUploaded());
