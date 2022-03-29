@@ -99,7 +99,7 @@ public class NoBoardController {
 		System.out.println("list files :" + files);
 		
 		//key를 가장최근 업로드된 번호로 가져온다
-		if(files.size() == 1) {
+		if(files.size() == 0) {
 			//파일이 없다.
 			vo.setKey(0);
 		} else {		
