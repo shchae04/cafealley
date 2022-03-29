@@ -16,7 +16,7 @@
 		<div class="container" style="margin-top: 50px">
 			<div class="row">
 				<ul style="text-align: center;">
-					<div id="map" style="width: 1100px; height: 700px;"></div>
+					<div id="map" style="width: 1200px; height: 700px;"></div>
 				</ul>
 			</div>
 		</div>
@@ -74,6 +74,7 @@
 	
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
+		        
 		    } 
 		});
 	}
