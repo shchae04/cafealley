@@ -76,9 +76,10 @@ public class OrderingController {
 		
 		
 		
-		
+		System.out.println("주문 테이블에 넣는 order :" + vo );
 		service.order(vo);
 		OrderingVO lastOrdered = service.getOrder(userid, vo.getCarttype());
+		System.out.println("넣자마자 orderservice로 가져온 order : " + lastOrdered);
 		ra.addFlashAttribute("lastOrdered",lastOrdered);
 		ra.addFlashAttribute("cartList",cartservice.select(userid, lastOrdered.getCarttype()));
 		return "redirect:/ordering/orderFinish";

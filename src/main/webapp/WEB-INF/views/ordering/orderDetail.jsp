@@ -216,10 +216,10 @@ input:read-only {
 							<td><span name="orderusername" style="line-height: normal; width: 250px;">${order.refundreason == 'wrong-sending' ?'오배송':order.refundreason=='different-info'?'상품정보 상이':order.refundreason=='missing-prize'?'상품누락':'단순변심'} ${order.refunddetailreason != '' && order.refunddetailreason !=null ? '/' : ''} ${order.refunddetailreason !='' && order.refunddetailreason !=null ? order.refunddetailreason :''} </span></td>
 						</tr>
 						<c:choose>
-							<c:when test="${order.refundbank}">
+							<c:when test="${order.refundbank !=''}">
 								<tr>
 									<td>환불 계좌</td>
-									<td>${order.refundbankname} / ${order.refundbank}</td>
+									<td><span id="refundbankname"></span> / ${order.refundbank}</td>
 								</tr>
 							</c:when>
 						</c:choose>
@@ -256,7 +256,47 @@ input:read-only {
 		}
 		
 		
-		
+		let refundbankname = '${order.refundbankname}';
+		if(refundbankname === 'hana'){
+			$('#refundbankname').text('KEB하나은행');
+		}else if(refundbankname ==='jeil')
+			$('#refundbankname').text('제일은행');
+		else if(refundbankname ==='kyungnam')
+			$('#refundbankname').text('경남은행');
+		else if(refundbankname ==='kwangju')
+			$('#refundbankname').text('광주은행');
+		else if(refundbankname ==='kookmin')
+			$('#refundbankname').text('국민은행');
+		else if(refundbankname ==='kiup')
+			$('#refundbankname').text('기업은행');
+		else if(refundbankname ==='nonghyup')
+			$('#refundbankname').text('농협');
+		else if(refundbankname ==='daegu')
+			$('#refundbankname').text('대구은행');
+		else if(refundbankname ==='busan')
+			$('#refundbankname').text('부산은행');
+		else if(refundbankname ==='sanup')
+			$('#refundbankname').text('산업은행');
+		else if(refundbankname ==='saemaeul')
+			$('#refundbankname').text('새마을금고');
+		else if(refundbankname ==='suhyup')
+			$('#refundbankname').text('수협');
+		else if(refundbankname ==='sinhan')
+			$('#refundbankname').text('신한은행');
+		else if(refundbankname ==='sinhyup')
+			$('#refundbankname').text('신협');
+		else if(refundbankname ==='city')
+			$('#refundbankname').text('씨티은행');
+		else if(refundbankname ==='woori')
+			$('#refundbankname').text('우리은행');
+		else if(refundbankname ==='wooche')
+			$('#refundbankname').text('우체국');
+		else if(refundbankname ==='jeju')
+			$('#refundbankname').text('제주은행');
+		else if(refundbankname ==='kakao')
+			$('#refundbankname').text('카카오뱅크');
+		else if(refundbankname ==='kbank')
+			$('#refundbankname').text('케이뱅크');
 	
 	});
 

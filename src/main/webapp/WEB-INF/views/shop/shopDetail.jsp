@@ -196,6 +196,12 @@ button.btn-cart, button.btn-order {
 	padding: 15px 0;
 	display: inline-block
 }
+.select-list> .selected-img{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-right:10px;
+}
 
 .selected-qty {
 	position: relative;
@@ -300,21 +306,22 @@ img[alt="prod-main"]{
 				<div class="col-xs-6">
 					<div class="detail-info">
 						<p class="title">${shop.title}</p>
+						<c:if test="${not empty login.admin}">
 						<a class = "shop-modify" href="<c:url value='/shop/shopModify/${shop.bno}'/>"><span class="glyphicon glyphicon-erase">수정/삭제</span></a>
-						
+						</c:if>
 						<p class="price">
 						<p class="org-price">
-							<span class="prod-text">정가</span> <s>${leastPro.proprice}</s>원
+							<span class="prod-text">정가</span> <s id="proprice">${leastPro.proprice}</s>원
 						</p>
 						<p class="sell-price">
-							<span class="prod-text">판매가</span> <strong>${leastPro.prosellprice}</strong>원
+							<span class="prod-text">판매가</span> <strong id="prosellprice">${leastPro.prosellprice}</strong>원
 						</p>
 						</p>
 						<p class="quantity">
 							<!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
 						</p>
 						<p class="delivery">
-							<span class="prod-text">배송비</span> <strong>3000원</strong>
+							<span class="prod-text">배송비</span> <strong>3,000원</strong>
 						</p>
 						<p class="prod-sel">
 							<span class="prod-text">옵션선택</span> <select id="sel-option">
@@ -337,7 +344,7 @@ img[alt="prod-main"]{
 						</div>
 						</p>
 					</div>
-
+					
 					<div class="detail-control">
 						<div class="order clearfix">
 							<button class="left btn-cart">장바구니</button>
@@ -346,6 +353,7 @@ img[alt="prod-main"]{
 					</div>
 					<!-- end 'detail-control' -->
 				</div>
+				
 
 				<div class="col-xs-12 prod-detail">
 					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="this.remove();">
@@ -396,12 +404,12 @@ img[alt="prod-main"]{
                 // easycart내에 이미 존재하는 select-list들중
                 if ($list.classList.contains('select-list')) {
                     // 옵션 이름이 선택한 옵션이름과 같은게 존재한다면 
-                    if ($list.children[0].textContent === optiontext) {
+                    if ($list.children[1].textContent === optiontext) {
                         console.log('cc');
-                        $list.children[1].children[0].value = parseInt($list.children[1].children[0].value) + 1;
+                        $list.children[2].children[0].value = parseInt($list.children[2].children[0].value) + 1;
                         // 윗줄처럼 인위적으로 증가시키면 change이벤트가 아니기때문에 상품합계가 바뀌지않아요.
                         // 그래서 상품합계갱신하는 함수를 다시 불러요.
-                        productTotalLoad($list.children[1].children[0]);
+                        productTotalLoad($list.children[2].children[0]);
                         totalLoad()
                         // 옵션을 "선택"으로 바꿔놓아요~
                         e.target.value = 'not-selected';
@@ -418,7 +426,10 @@ img[alt="prod-main"]{
             // 가격 이쁘게 표시
             let sellprice2 = sellprice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
             
-            $selectList.innerHTML = `<span class="selected-prod">`+ optiontext +`</span>
+            $selectList.innerHTML = `<c:forEach var = "pro" items="${shop.proList}" varStatus="status">
+									<img class="selected-img" src="<c:url value='/loadimg/display/${pro.filenum}/1'/>" >
+									</c:forEach>
+            						<span class="selected-prod">`+ optiontext +`</span>
                                     <span class="selected-qty">
                                         <input type="number" name="" id=`+'b'+ sellprice +` value="1" min="1"><br>
                                     </span>
@@ -504,7 +515,10 @@ img[alt="prod-main"]{
 						'carttotalprice' : carttotalprice
 					});
 				}
-				
+				if(arr.length == 0 ){
+					alert('상품 옵션을 선택해주세요.');
+					return;
+				}
 				$.ajax({
 					type: "post",
 					url: "<c:url value='/cart/cartRegist' />",
@@ -543,6 +557,11 @@ img[alt="prod-main"]{
 					});
 				}
 				
+				if(arr.length == 0 ){
+					alert('상품 옵션을 선택해주세요.');
+					return;
+				}
+				
 				$.ajax({
 					type: "post",
 					url: "<c:url value='/cart/cartOrder' />",
@@ -560,6 +579,9 @@ img[alt="prod-main"]{
 				
 			}); // end btn-order click
 			
+			
+			$('#proprice').text($('#proprice').text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			$('#prosellprice').text($('#prosellprice').text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 			
 		});// end $(function(){});
 		

@@ -119,29 +119,7 @@
                     </tr>
                     <tr>
                         <td>입금은행</td>
-                        <td>
-                        	<c:choose>
-                        		<c:when test="${lastOrdered.paybank =='hana' ? true : false}">KEB하나은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='jeil' ? true : false} ">SC제일은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kyungnam' ? true : false} ">경남은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kwangju' ? true : false} ">광주은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kookmin' ? true : false} ">국민은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kiup' ? true : false} ">기업은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='konghyup' ? true : false} ">농협</c:when>
-                        		<c:when test="${lastOrdered.paybank =='daegu' ? true : false} ">대구은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='busan' ? true : false} ">부산은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='sanup' ? true : false} ">산업은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='saemaeul' ? true : false} ">새마을금고</c:when>
-                        		<c:when test="${lastOrdered.paybank =='suhyup' ? true : false} ">수협</c:when>
-                        		<c:when test="${lastOrdered.paybank =='sinhan' ? true : false} ">신한은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='sinhyup' ? true : false} ">신협</c:when>
-                        		<c:when test="${lastOrdered.paybank =='city' ? true : false} ">씨티은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='woori' ? true : false} ">우리은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='wooche' ? true : false} ">우체국</c:when>
-                        		<c:when test="${lastOrdered.paybank =='jeju' ? true : false} ">제주은행</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kakao' ? true : false} ">카카오뱅크</c:when>
-                        		<c:when test="${lastOrdered.paybank =='kbank' ? true : false}">케이뱅크</c:when>
-                        	</c:choose>
+                        <td id="paybank">
                         </td>
                     </tr>
                     <tr>
@@ -183,6 +161,51 @@
 		ttp.textContent = ttp.textContent.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
 		ctn.textContent = ctn.textContent.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "개"
 	}
+	
+	$(function(){
+		let paybank = '${lastOrdered.paybank}';
+		if(paybank === 'hana' )
+			$('#paybank').text('KEB하나은행');
+		else if(paybank ==='jeil')
+			$('#paybank').text('제일은행');
+		else if(paybank ==='kyungnam')
+			$('#paybank').text('경남은행');
+		else if(paybank ==='kwangju')
+			$('#paybank').text('광주은행');
+		else if(paybank ==='kookmin')
+			$('#paybank').text('국민은행');
+		else if(paybank ==='kiup')
+			$('#paybank').text('기업은행');
+		else if(paybank ==='nonghyup')
+			$('#paybank').text('농협');
+		else if(paybank ==='daegu')
+			$('#paybank').text('대구은행');
+		else if(paybank ==='busan')
+			$('#paybank').text('부산은행');
+		else if(paybank ==='sanup')
+			$('#paybank').text('산업은행');
+		else if(paybank ==='saemaeul')
+			$('#paybank').text('새마을금고');
+		else if(paybank ==='suhyup')
+			$('#paybank').text('수협');
+		else if(paybank ==='sinhan')
+			$('#paybank').text('신한은행');
+		else if(paybank ==='sinhyup')
+			$('#paybank').text('신협');
+		else if(paybank ==='city')
+			$('#paybank').text('씨티은행');
+		else if(paybank ==='woori')
+			$('#paybank').text('우리은행');
+		else if(paybank ==='wooche')
+			$('#paybank').text('우체국');
+		else if(paybank ==='jeju')
+			$('#paybank').text('제주은행');
+		else if(paybank ==='kakao')
+			$('#paybank').text('카카오뱅크');
+		else if(paybank ==='kbank')
+			$('#paybank').text('케이뱅크');
+
+	});
     
     </script>
     

@@ -107,6 +107,10 @@ section {
 	font-weight: 900;
 }
 
+.select-category li{
+	text-align : left;
+}
+
 .select-category a {
 	color: black;
 }

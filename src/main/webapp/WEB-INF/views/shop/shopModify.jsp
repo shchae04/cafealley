@@ -332,7 +332,7 @@
 	                        </p>
 	                        <p class="price">
 	                            <p class="org-price">
-	                                <span class="prod-text">정가</span> <span id="prorice"><s>${leastPro.proprice}</s></span>원
+	                                <span class="prod-text">정가</span> <span><s id="proprice">${leastPro.proprice}</s></span>원
 	                            </p>
 	                            <p class="sell-price">
 	                                <span class="prod-text">판매가</span> <strong><span id="prosellprice">${leastPro.prosellprice}</span>원</strong>
@@ -342,7 +342,7 @@
 	                            <!-- <span class="prod-text">주문수량</span><input type="number" name="" id="" value="1" min="1"><br> -->
 	                        </p>
 	                        <p class="delivery">
-	                            <span class="prod-text">배송비</span> <strong>3000원</strong>
+	                            <span class="prod-text">배송비</span> <strong>3,000원</strong>
 	                        </p>
 	                        <p class="prod-sel">
 	                            <span class="prod-text">판매할 상품 목록</span>
@@ -366,10 +366,10 @@
 	                                        </td>
 	                                        <td>${product.procategory}</td>
 	                                        <td>${product.prono}</td>
-	                                        <td class="large-cell">${product.proname }</td>
-	                                        <td>${product.proprice}</td>
-	                                        <td>${product.prosellprice}</td>
-	                                        <td>${product.prostock}</td>
+	                                        <td class= "large-cell">${product.proname }</td>
+	                                        <td class= "proprice reg">${product.proprice}</td>
+	                                        <td class= "prosellprice reg">${product.prosellprice}</td>
+	                                        <td class= "stock reg">${product.prostock}</td>
 	                                    </tr>
 	                                    <input type="hidden" name="prono${status.first?'':'status.count'}" value="${product.prono}" />
                                 	</c:forEach>
@@ -433,7 +433,18 @@
         		document.updateForm.submit();
         	});
         	
-        	
+			$('#proprice').text($('#proprice').text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			$('#prosellprice').text($('#prosellprice').text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+			
+			
+			for(let n of document.querySelectorAll('.reg')){
+        		n.textContent = n.textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        		if(n.classList.contains('proprice') || n.classList.contains('prosellprice')){
+        			n.textContent = n.textContent + '원'; 
+        		}
+        	}
+			
+			
         });
 	
     

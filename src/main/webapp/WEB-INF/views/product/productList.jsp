@@ -504,13 +504,13 @@ thead{
 								str+="<p><a href='"+productList[i].prono+"'>"+productList[i].proname+"</a></p>";
 								str+="</td>";
 								str+="<td class='prod-qty' id='stock" + productList[i].prono + "'>";
-								str+="<p>"+productList[i].prostock+"</p>";
+								str+="<p class='reg'>"+productList[i].prostock+"</p>";
 								str+="</td>";
 								str+="<td class='prod-normal-price' id='np"+productList[i].prono + "'>";
-								str+="<p>"+productList[i].proprice+"</p>";
+								str+="<p class='reg'>"+productList[i].proprice+"</p>";
 								str+="</td>";
 								str+="<td class='prod-discount-price' id='sp"+productList[i].prono + "'>";
-								str+="<p>"+productList[i].prosellprice+"</p>";
+								str+="<p class='reg'>"+productList[i].prosellprice+"</p>";
 								str+="</td>";
 								str+="<td class=link-inner>";
 								str+="<p style='width: fit-content; height: fit-content;'>";
@@ -532,11 +532,24 @@ thead{
 							}
 							$('tbody').html(str);	
 							isTbodyEmpty();
+							for(let n of document.querySelectorAll('.reg')){
+				        		console.log(n);
+				        		console.log('n.textContent = ' + n.textContent);
+				        		console.log('n.paretNode = ' + n.parentNode);
+				        		n.textContent = n.textContent.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				        		if(n.parentNode.classList.contains('prod-discount-price') || n.parentNode.classList.contains('prod-normal-price')){
+				        			n.textContent = n.textContent + '원'; 
+				        		}
+				        	}
 	        			}// end getJSON function
 	        			
 				); // end get JSON
 	        	
         	}// end getList()
+        	
+        	
+        	
+        	
         	
         	
         	function isTbodyEmpty(){
@@ -647,9 +660,9 @@ thead{
 	        		
 	        		
 	        		let infovalue = $('#info'+prono).children().first().children().first().text();
-	        		let stockvalue = $('#stock'+prono).children().first().text();
-	        		let npvalue = $('#np'+prono).children().first().text();
-	        		let spvalue = $('#sp'+prono).children().first().text();
+	        		let stockvalue = $('#stock'+prono).children().first().text().replaceAll(',','');
+	        		let npvalue = $('#np'+prono).children().first().text().replaceAll(',','').replace('원','');
+	        		let spvalue = $('#sp'+prono).children().first().text().replaceAll(',','').replace('원','');
 	        		
 	        		$('#info'+prono).html(`<input type="text" class="topmargin" name="proname" value=`+infovalue +`>`);
 	        		$('#stock'+prono).html(`<input type="number" class="topmargin" name="prostock"
