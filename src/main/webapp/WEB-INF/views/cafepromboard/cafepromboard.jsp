@@ -1148,26 +1148,33 @@
                         } else {
 
                             if(picmood === 'Nature / Wooden'){
+                                e.target.parentNode.style.fontSize = '14px';
+
                                 picmood = '';
                             }
 
                             if(picmood === 'Concrete / Industrial'){
-                                picmood = '';
+                                e.target.parentNode.style.fontSize = '14px';
+                            	picmood = '';
                             }
 
 
+
                             if(picmood === 'Modern / Neat'){
+								e.target.parentNode.style.fontSize = '14px';
                                 picmood = '';
                             }
 
 
                             if(picmood === 'Retro / Vintage'){
-                                picmood = '';
+                                e.target.parentNode.style.fontSize = '14px';
+                            	picmood = '';
                             }
 
 
                             if(picmood === 'Cozy / Comfort'){
-                                picmood = '';
+                                e.target.parentNode.style.fontSize = '14px';
+                            	picmood = '';
                             }
 
 

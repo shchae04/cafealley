@@ -18,4 +18,12 @@ public class BoardVO {
 	private Timestamp regdate;
 	private int cnt;
 	private String ismod;
+	
+	
+	 
+	
+	
+	
+	
+	
 }
