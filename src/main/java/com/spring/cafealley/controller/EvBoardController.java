@@ -97,27 +97,34 @@ public class EvBoardController {
 		
 		
 
-		System.out.println("list files :" + files);
+		System.out.println("list files :" + files.get(0).getName().equals(""));
 		
-		//key를 가장최근 업로드된 번호로 가져온다
-		for(MultipartFile f : files) {
-			if(f.getSize() == 0) {
-				vo.setKey(0);
-			}
-		}		
-			//파일이 있다.
+		
+		
+		//파일을 업로드 하지 않으면 
+		if(files.get(0).getOriginalFilename().equals("")) {
+			
+			vo.setKey(0);
+			
+			service.regist(vo);
+			System.out.println("사진없는 글 작성완료~");
+			
+		} else {
+			
 			imgservice.upload(files);
 			System.out.println("file: " + files);
 			vo.setKey(imgservice.getLastUploaded());
+			
+			System.out.println("key값"+vo.getKey());
+			System.out.println("작성내용"+vo);
+			service.regist(vo);
+			
+			System.out.println("글 작성 완료 LIST로 이동");
+		}
 		
 		
-		//key값.
-		System.out.println("key값"+vo.getKey());
-		System.out.println("작성내용"+vo);
-		service.regist(vo);
-		
-		System.out.println("글 작성 완료 LIST로 이동");
-		
+	
+		 
 		
 		 
 		
