@@ -359,7 +359,7 @@
 	                                    <tr>
 	                                        <td><img src="${pageContext.request.contextPath}/loadimg/display/${product.filenum}/1" alt="상품이미지" style="width: 50px; height: 50px;">
 	                                        </td>
-	                                        <td>${product.procategory}</td>
+	                                        <td id="procat">${product.procategory}</td>
 	                                        <td>${product.prono}</td>
 	                                        <td class="large-cell">${product.proname}</td>
 	                                        <td class="proprice reg">${product.proprice}</td>
@@ -403,7 +403,19 @@
 
 	<script>
 		
-	
+		if($('#procat').text() == 'beans'){
+			$('#procat').text('원두');
+		}else if ($('#procat').text() == 'tea'){
+			$('#procat').text('티/액상차');
+		}else if ($('#procat').text() == 'syrup'){
+			$('#procat').text('시럽/소스');
+		}else if ($('#procat').text() == 'powder'){
+			$('#procat').text('파우더/농축액');
+		}else if ($('#procat').text() == 'milk'){
+			$('#procat').text('유제품');
+		}else if ($('#procat').text() == 'coffeemachine'){
+			$('#procat').text('커피머신');
+		}
 	
         // 이미지 파일 업로드시 이미지 파일 띄우게끔
 

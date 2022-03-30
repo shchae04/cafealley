@@ -234,6 +234,8 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
+            min-width: 800px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -642,10 +644,7 @@
 								<!-- 비동기 방식으로 불러오고 있습니다. -->
 								
 	                        </div>
-	                        <div class="reply-form">
-	                                <textarea name="content" id="modal-reply-content" placeholder="댓글 입력"></textarea>
-	                                <input type="button" value="게시" id="replyRegBtn"></input>
-	                        </div>
+
 	
 	
 	
@@ -778,16 +777,7 @@
 					
 					if(data.filenum != 0){
 					
-					str += '<ol class="carousel-indicators">';
-	                str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-	                if(data.filecnt === 2) {
-	                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                } else if(data.filecnt === 3) {
-	                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
-	                }
-	                str += '</ol>';     
-	                
+		
 	                str += '<div class="carousel-inner" role="listbox">';
 	                str += `<div class="item active">
 	                    <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
@@ -844,15 +834,7 @@
 						
 						
 						
-						str += '<ol class="carousel-indicators">';
-	                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-	                    if(data.filecnt === 2) {
-	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                    } else if(data.filecnt === 3) {
-	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
-	                    }
-	                    str += '</ol>';     
+   
 	                    
 	                    str += '<div class="carousel-inner" role="listbox">';
 	                    str += `<div class="item active">

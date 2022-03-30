@@ -94,8 +94,12 @@
                         <td>${lastOrdered.deliveryname}</td>
                     </tr>
                     <tr>
-                        <td>배송지</td>
-                        <td>${lastOredered.deliverybasicaddr} ${lastOrdered.deliverydetailaddr}</td>
+                        <td>기본주소</td>
+                        <td>${lastOrdered.deliverybasicaddr}</td>
+                    </tr>
+                    <tr>
+                    	<td>상세주소</td>
+                    	<td>${lastOrdered.deliverydetailaddr}</td>
                     </tr>
                     <tr>
                         <td>연락처</td>

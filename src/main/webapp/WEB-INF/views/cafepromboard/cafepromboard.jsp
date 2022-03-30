@@ -1549,17 +1549,8 @@
 					if(data.filenum != 0){
 						
 					
-					/*
-					str += '<ol class="carousel-indicators">';
-                    str += '<li data-target="#myCarousel2" data-slide-to="0"></li>';
-                    if(data.filecnt === 2) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1" class=""></li>';
-                    } else if(data.filecnt === 3) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1" class=""></li>';
-                    	str += '<li data-target="#myCarousel2" data-slide-to="2" class=""></li>';
-                    }
-                    str += '</ol>';     
-                    */
+    
+                    
                     str += '<div class="carousel-inner" role="listbox">';
                     str += `<div class="item active">
                         <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>"  alt="슬라이드1">
@@ -1615,17 +1606,7 @@
 						
 						
 						
-						
-						str += '<ol class="carousel-indicators" >';
-	                    str += '<li data-target="#myCarousel2" data-slide-to="0"></li>';
-	                    if(data.filecnt === 2) {
-	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                    } else if(data.filecnt === 3) {
-	                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-	                    	str += '<li data-target="#myCarousel2" data-slide-to="2"></li>';
-	                    }
-	                    str += '</ol>';     
-	                    
+
 	                    str += '<div class="carousel-inner" role="listbox">';
 	                    str += `<div class="item active">
 	                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">

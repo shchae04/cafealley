@@ -163,7 +163,7 @@ button.btn-cart, button.btn-order {
 
 /* 간편선택 바구니 */
 .easy-cart>div {
-	width: 100%;
+	width: 530px;
 }
 
 .easy-text {
@@ -191,24 +191,19 @@ button.btn-cart, button.btn-order {
 }
 
 .select-list>.selected-prod {
-	width: 176px;
+	width: 250px;
 	height: 50px;
 	padding: 15px 0;
 	display: inline-block
 }
-.select-list> .selected-img{
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	margin-right:10px;
-}
+
 
 .selected-qty {
-	position: relative;
+	line-height: 100%;
 }
 
 .selected-qty>input[type="text"] {
-	width: 40px;
+	width: 30px;
 	height: 22px;
 }
 
@@ -225,7 +220,7 @@ button.btn-cart, button.btn-order {
 }
 
 .select-list .selected-qty {
-	width: 100px;
+	width: 80px;
 	height: 50px;
 	display: inline-block;
 }

@@ -129,20 +129,20 @@
 				</div>
 				<div class="modal-body">
 					<form action="#">
-						<h5>아이디</h5>
-						<input type="text" id="userid" class="form-control"
-							placeholder="Text input"><span id="idCheck"></span>
-						<h5>비밀번호</h5>
-						<input type="password" id="userpw" class="form-control"
-							placeholder="password input"><span id="pwCheck"></span> <label>
-							<input style="border:1px solid #ddd; width:8px; height:8px" id="autoLogin" type="checkbox"> <small>로그인 유지</small>
+						<h5 style="text-align: center;">아이디</h5>
+						<input type="text" id="userid" class=""
+							placeholder="아이디 입력" style="width: 300px; border: 1px solid black; border-radius: 3px; margin-left: 135px;"></span>
+						<h5 style="text-align: center;">비밀번호</h5>
+						<input type="password" id="userpw" class=""
+							placeholder="비밀번호 입력" style="width: 300px; border: 1px solid black; border-radius: 3px; margin-left: 135px;"> <label style="display:block; margin-top: 5px; margin-left: 350px;">
+							<input style="border:1px solid #ddd; width:10px; height: 10px;"  id="autoLogin" type="checkbox"> 로그인 유지
 						</label>
 						<div class="login-center">
 							<button type="button" id="btnLogin"
-								class="btn btn-primary btn-block">Log In</button>
+								class="btn btn-block" style="background : black; color: white; font-weight: 900; margin-top: 30px;">Log In</button>
 							<div class="login-center2 clearfix">
-								<div style="float: left;">아직 회원이 아니신가요?</div>
-								<div style="float: right;">
+								<div style="float: left; margin-top: 15px;">아직 회원이 아니신가요?</div>
+								<div style="float: right; margin-top: 10px;">
 									<a href="<c:url value='/user/formJoinGen' />">일반회원 가입</a><br> <a href="<c:url value='/user/formJoinBsns' />">카페회원 가입</a>
 								</div>
 							</div>
