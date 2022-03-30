@@ -270,8 +270,8 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
-            max-width: 800px
-            margin: 0 auto;
+            max-width: 800px;
+            min-width: 800px;
         }
 
         .modal-promcontent {
@@ -462,9 +462,10 @@
         }
 
         #myModal4 .modal-promimg img[src="/img/upload.png"] {
-            width: 300px;
-            min-height: 300px;
-            max-height: 580px;
+            max-width: 300px;
+			min-width: 300px;
+            min-height: 300px !important;
+            max-height: 300px !important;
             margin: 120px 250px 100px;
         }
 
@@ -474,6 +475,11 @@
             position: absolute;
             bottom: -100px;
             color: red;
+        }
+        
+
+        #myCarousel2 carousel-inner img{
+        	min-width: 800px;
         }
     </style>
 
@@ -1543,7 +1549,7 @@
 					if(data.filenum != 0){
 						
 					
-					
+					/*
 					str += '<ol class="carousel-indicators">';
                     str += '<li data-target="#myCarousel2" data-slide-to="0"></li>';
                     if(data.filecnt === 2) {
@@ -1553,21 +1559,21 @@
                     	str += '<li data-target="#myCarousel2" data-slide-to="2" class=""></li>';
                     }
                     str += '</ol>';     
-                    
+                    */
                     str += '<div class="carousel-inner" role="listbox">';
                     str += `<div class="item active">
-                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
+                        <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>"  alt="슬라이드1">
                     	</div>`;
                    	if(data.filecnt === 2) {
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>"  alt="슬라이드2">
                         	</div>`;
                    	} else if(data.filecnt === 3) {
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>"  alt="슬라이드2">
                         	</div>`;
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>"  alt="슬라이드3">
                         	</div>`;
                    	}
                    	
@@ -1826,14 +1832,14 @@
                     	</div>`;
                    	if(data.filecnt === 2) {
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>"   alt="슬라이드2">
                         	</div>`;
                    	} else if(data.filecnt === 3) {
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>" alt="슬라이드2">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/2'/>"   alt="슬라이드2">
                         	</div>`;
                    		str += `<div class="item">
-                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
+                            <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>"    alt="슬라이드3">
                         	</div>`;
                    	}
                    	
@@ -2015,6 +2021,7 @@
                     console.log(event.target);
                     $(fileImg).attr("src", event.target.result);
                 	console.log($(fileImg).attr('src'));
+                	$(fileImg).css('min-width','800px');
                     filecount++;
                     makeImgWindow(filecount);
                 }

@@ -41,12 +41,10 @@
         }
 
         .pagination .cur-page {
-            background: #000;
+            background: #ddd;
             color: #fff;
         }
-        
-        
-    	.blinking{ 
+      .blinking{ 
 	    	-webkit-animation:blink 1.2s ease-in-out  alternate; 
 	    	-moz-animation:blink 1.2s ease-in-out  alternate; 
 	    	animation:blink 1.2s ease-in-out  alternate; 
@@ -75,6 +73,55 @@
         }
         a:focus{
             color:black;
+        }
+        li {
+            list-style: none;
+        }
+		
+        .aside-wrapper {
+            position: absolute;
+            min-width: 20%;
+            max-width: 20%;
+            margin: 0;
+            left: 0px;
+            background-color: #ffffff;
+            top: 150px;
+
+        }
+
+        aside {
+            min-width: 100%;
+            float: left;
+            position: sticky;
+            top: 150px;
+        }
+
+        .promboard-filter {
+            padding: 0 30px 0 30px;
+        }
+
+        .promboard-filter>li {
+            border-bottom: solid 1px black;
+            padding: 0.5vh 0 0.5vh 0;
+        }
+
+        .promboard-filter li span {
+            font-size: 2vh;
+            font-weight: 700;
+        }
+
+        .promboard-filter li ul li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .promboard-filter input[type="checkbox"] {
+            font-size: 1.5vh;
+            display: none;
+        }
+
+        .promboard-filter label:hover {
+            cursor: pointer;
         }
 
 
@@ -257,6 +304,8 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
+            max-width: 800px;
+            min-width: 800px;
             margin: 0 auto;
         }
 
@@ -426,6 +475,7 @@
 
         .fileDiv {
             width: 800px;
+            height: 600px;
             box-sizing: border-box;
             border: 1px dashed #ffffff;
         }
@@ -442,13 +492,15 @@
 
         .fileDiv p {
             text-align: center;
-            margin-top: 150px;
+            margin-top: 100px;
+            font-size: 20px;
         }
 
-        #myModal4 .modal-promimg img[alt="upload"] {
+        #myModal4 .modal-promimg img[src="/img/upload.png"] {
             width: 300px;
             min-height: 300px;
-            margin: 0 250px 100px;
+            max-height: 580px;
+            margin: 120px 250px 100px;
         }
 
         #myModal4 .like-inner .hashtag p.warn {
@@ -458,7 +510,16 @@
             bottom: -100px;
             color: red;
         }
-        
+		li[data-taget="#myCarousel2"] {
+            cursor: pointer;
+            border: 1px solid #fff;
+            border-radius: 10px !important;
+        }       	
+        .carousel-indicators  li {
+            cursor: pointer;
+            border: 1px solid #fff;
+            border-radius: 10px !important;
+        }
         
     </style>
     
@@ -779,7 +840,7 @@
 			'<c:url value="/promo/getContent/" />' + bno,
 			function(data) {
 				console.log(data);
-				
+				/*
 				if(data.filenum != 0){
 					
 				
@@ -793,7 +854,7 @@
                 	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
                 }
                 str += '</ol>';     
-                
+                */
                 str += '<div class="carousel-inner" role="listbox">';
                 str += `<div class="item active">
                     <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
@@ -1069,7 +1130,7 @@
                     	</div>`;
                		str += `<div class="item">
                         <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
-                    	</div>`;
+                    	</div>`
                	}
                	
                	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">

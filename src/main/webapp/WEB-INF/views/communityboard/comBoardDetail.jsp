@@ -14,13 +14,64 @@
     
     <style>
     	* {
-    		border-radius: 0 !important;
+    		border-radius: 0;
     	}
     	
     	.reply-wrap {
     		border: none;
     	}
-    
+    	#contentarea{
+    		resize: none;
+    		width : 800px;
+    		height: 400px;
+    		border: none;
+    		outline: none;
+    		
+    	}
+    	#bid{
+    		display:none;
+    	}
+    	#title{
+    		font-size: 20px;
+    		font-weight: 700;  
+    	}
+    	
+    	#userprofile{
+    		width:50px;
+    		height:50px;
+    		border-radius: 100%;
+    	}
+    	#board{
+    		font-size: 50px;
+    		font-weight: 900;
+    		padding-top: 20px;
+    		padding-bottom: 40px;
+    		margin-bottom: 30px;
+    		border-bottom: 1px solid #ddd;
+    	}
+    	.na{
+    		padding-bottom: 20px;
+    		border-bottom: 1px solid #ddd;
+    	}
+    	.nb{
+    		padding-top : 20px;
+    	}
+    	.container{
+    		width: 1000px;
+    	}
+    	.naa{
+    		padding-left:10px;
+    		
+    	}
+    	.ca{
+    		width: fit-content;
+    	}
+    	.caa{
+    		width: 1200px;
+    	}
+    	#replydelbtn{
+    		padding-left: 10px;
+    	}
     </style>
     
 </head>
@@ -35,22 +86,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 content-wrap">
-                    <div class="titlebox" style="text-align: center; border-bottom: 3px solid black;">
+
 
 
                     </div>
 
                     <form action="#" class="detailform clearfix" method="post">
-                        <div class="form-group" style="margin-top: 30px;">
-                            <label for="bId">&nbsp;&nbsp;</label>
-                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno}</span>
+							<p id="board" class="">Cofee Talk</p>
+                            <span id="bid" name="bid" style="font-size: 16px;">${article.bno }</span>
                             <!-- <input type="text" id="bid" class="form-control" style=" border: none; border-color: transparent; cursor: auto;width: 5%;  background: white;" readonly value="3"> -->
 
+                          <div class="form-group naa nb ca">
+                            <!-- <input type="text" id="title" style="cursor: auto; width: 20%;background: white;" class="form-control" readonly > -->
+                            <span id="title" name="title">${article.title }</span>
                         </div>
-                        <div class="form-group">
+                       <div class="form-group naa na ca">
+                        <label for="writer"><img id="userprofile" src="<c:url value='/loadimg/display/${user.filenum}/1'/>"></label>
+                            <!-- <input type="text" id="writer" style="border-color: transparent;cursor: auto; width: 20%;background: white;" class="form-control" readonly value="admin" > -->
+                            <span id="write" name="writer">${article.writer }</span>
+                            &nbsp;&nbsp;
                             <label class="regdate"
-                                style="display: inline;">작성일&nbsp;&nbsp;&nbsp;<small><fmt:formatDate value="${article.regdate }" pattern="MM-dd"/></small>
-								
+                                style="display: inline;"><span class="glyphicon glyphicon-calendar"></span><small><fmt:formatDate value="${article.regdate }" pattern="MM-dd"/></small>
+								</label>
                                 <label class="modifycheck" style="float:inherit; font-size: 8px;">
                                 
                                 <c:if test="${article.ismod!=0}">
@@ -58,21 +115,9 @@
                                 </c:if>
                                 
                                 </label>
-                            </label>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="writer">작성자&nbsp;&nbsp;</label>
-                            <!-- <input type="text" id="writer" style="border-color: transparent;cursor: auto; width: 20%;background: white;" class="form-control" readonly value="admin" > -->
-                            <span id="write" name="writer">${article.writer }</span>
+                            
                         </div>
                         <div class="form-group">
-                            <label for="title"> 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <!-- <input type="text" id="title" style="cursor: auto; width: 20%;background: white;" class="form-control" readonly > -->
-                            <span id="title" name="title">${article.title }</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="content clearfix">내용</label>
                            
                            <div class="form-group">
                                    
@@ -87,10 +132,7 @@
                                     
                                 </div>
                                 <div class="form-group" style="float: left;">
-             					 <p>
-             					 ${article.content}
-             					 
-             					 </p>	
+             					 <textarea id="contentarea" onfocus="this.blur()">${article.content}</textarea>	
                               </div>
                         </div>
 
@@ -101,7 +143,7 @@
                     
                     <br><br><br>
                     <br>
-					<c:if test="${login.userid eq article.writer || login.admin != null}">
+					<c:if test="${login.userid eq article.writer}">
                     <button style="left: 5px;" class="detailbtn btn btn-dark" id="modbtn" onclick="location.href='<c:url value="/cmBoard/cmModi?bno=${article.bno}"/>'">수정</button>
                     </c:if>
                     <button class="detailbtn btn btn-dark" id="listbtn" onclick="location.href='<c:url value="/cmBoard/cmList"/>'">목록</button>
@@ -174,7 +216,20 @@
   <%@ include file="../include/footer.jsp" %>
 
     <script>
-   
+    
+    if(${user.filenum} == 0){
+    	$('#userprofile').attr('src','<c:url value="/img/profile.png"/>');
+    }
+    
+    
+    function adjustHeight() {
+    	  var textEle = $('#contentarea');
+    	  textEle[0].style.height = 'auto';
+    	  var textEleHeight = textEle.prop('scrollHeight');
+    	  textEle.css('height', textEleHeight);
+    	};
+
+    	adjustHeight(); // 함수를 실행하면 자동으로 textarea의 높이 조절
     
     // img load실패시 이미지태그 삭제
     function deleteimg($input){
@@ -270,14 +325,16 @@ $(document).ready(function() {
 					
 					for(let i=0; i<replyList.length; i++) {
 						
-						strAdd += "<div style='padding: 20px 50px; border-bottom: 2px solid black; border-top: 2px solid black;''>";
+						strAdd += "<div style='padding: 20px 50px; border-top: 1px solid #ddd;''>";
                         strAdd += "<strong class='left'>"+ replyList[i].writer +"</strong>";
                         strAdd += "<small class='left'>"+timeStamp(replyList[i].regdate) +"</small>";
                         strAdd += "<c:if test='"+ replyList[i].ismod = 1 +"'>";
                         strAdd += "<small class='left'>수정됨</small>";
                         strAdd += "</c:if>";
-                        strAdd += "<a id='replymodbtn' class='modi' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>&nbsp;&nbsp;";
-                        strAdd += "&nbsp;&nbsp;<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        if(replyList[i].writer == '${login.userid}'){
+                        strAdd += "<a id='replydelbtn' class='del' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-remove'></span>삭제</a>";
+                        strAdd += "<a id='replymodbtn' class='modi' href='"+ replyList[i].rno +"'><span class='glyphicon glyphicon-pencil'></span>수정</a>";
+                        }
                         strAdd += "<p>"+replyList[i].content+"</p>"; 
 						strAdd += "</div>";
 						

@@ -368,6 +368,9 @@ thead{
 	top:0;
 	background:white;
 }
+.select-category li{
+	text-align : left;
+}
 </style>
 </head>
 

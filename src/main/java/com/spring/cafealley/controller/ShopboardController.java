@@ -46,10 +46,10 @@ public class ShopboardController {
 		
 		
 		if(paging.getCondition() == null || paging.getCondition().equals("") )
-			paging.setCondition("");
+			paging.setCondition("all");
 		if(paging.getKeyword() == null || paging.getKeyword().equals(""))
-			paging.setKeyword("lastest");
-		
+			paging.setKeyword("latest");
+		System.out.println(paging.getCondition());
 		List<ShopboardVO> shopList = service.getList(paging);
 		
 		// 해당 판매 게시글에 등록된 상품중 최저가를 같이 뿌려주기 위함.

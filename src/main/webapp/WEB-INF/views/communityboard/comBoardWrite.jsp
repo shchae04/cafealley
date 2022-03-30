@@ -38,6 +38,16 @@
 			width: 100%;
 			height: 100%;
 		}
+		#writer{
+			font-size: 15px;
+			display: block;
+		}
+		#title{
+        	heigth: 30px;
+        	padding: 10px;
+        	margin-left: 20px;
+        	border: 1px solid black;
+        }
     </style>
 
 
@@ -58,7 +68,7 @@
                     <div class="row">
                         <div >
                             <h3 class="write-service">
-                                &nbsp;&nbsp; <strong>커뮤니티 게시판</strong>
+                                &nbsp;&nbsp; <strong>Coffee Talk</strong>
                             </h3>
                             
                         </div>
@@ -80,9 +90,9 @@
                         style="border-top:3px solid black; border-bottom:3px solid black; padding-bottom: 20px; padding-top: 20px;">
 
                             <label for="writer">
-                                작성자
+                                <span class="glyphicon glyphicon-user"></span>작성자
                             </label>
-                            <input type="text" class="form-control" id="writer" name="writer" value="${login.userid }" readonly
+                            <input type="text" class="" id="writer" name="writer" value="${login.userid }" readonly
                                 style="cursor: auto; border-color: transparent; background-color: transparent; width: 180px;">
                         </div>
                         <div class="form-group">
@@ -90,7 +100,7 @@
                             <label for="title">
                                 제목
                             </label>
-                            <input type="text" class="form-control" id="title" name="title"
+                            <input type="text" class="" id="title" name="title"
                                 style="width: 300px; background-color: transparent;" />
                         </div>
                         
@@ -172,7 +182,7 @@
         document.querySelector('#delbtn').addEventListener('click', function (e) {
             if (confirm('작성하신 내용은 사라집니다 이동하시겠습니까?')) {
 
-                location.href = '/cmBoard/write';
+                history.back();
             }
             return;
         });

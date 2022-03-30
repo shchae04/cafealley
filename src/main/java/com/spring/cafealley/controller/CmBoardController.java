@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cafealley.board.service.ICmBoardService;
 import com.spring.cafealley.command.BoardVO;
+import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.IImgService;
+import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
 
@@ -28,14 +30,18 @@ public class CmBoardController {
 	@Autowired
 	private ICmBoardService service;
 	
+	@Autowired
+	private IUserService userservice;
+	
 	//상세보기 이동처리
 	@GetMapping("/cmDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
 		System.out.println("커뮤니티 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
-		
-		model.addAttribute("article",service.getContent(bno));
+		UserVO user =  userservice.getInfo( bo.getWriter());
+		model.addAttribute("user", user);
+		model.addAttribute("article",bo);
 		System.out.println("key값."+service.getContent(bno).getKey());;
 		return "communityboard/comBoardDetail";
 		
@@ -90,7 +96,7 @@ public class CmBoardController {
 		System.out.println("list files :" + files.get(0).getName().equals(""));
 		
 		
-		
+		System.out.println(files.get(0).getOriginalFilename().equals(""));
 		//파일을 업로드 하지 않으면 
 		if(files.get(0).getOriginalFilename().equals("")) {
 			

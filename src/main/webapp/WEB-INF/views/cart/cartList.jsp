@@ -257,7 +257,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     	let msg2 = '${msg2}';
     	if(msg1 !== '' && msg2 !== ''){
     		alert(msg1 + '\n' + msg2 );
-	
+    	}
 	
 	
         $(function(){

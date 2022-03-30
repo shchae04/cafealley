@@ -41,7 +41,7 @@
         }
 
         .pagination .cur-page {
-            background: #000;
+            background: #ddd;
             color: #fff;
         }
         
@@ -256,6 +256,8 @@
             min-width: 630px; */
             min-height: 600px;
             max-height: 600px;
+            max-width: 800px;
+            min-width: 800px;
             margin: 0 auto;
         }
 

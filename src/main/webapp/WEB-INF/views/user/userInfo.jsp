@@ -210,7 +210,7 @@
 										<tr>
 											<td>휴대폰</td>
 											<td>
-												<select style="width: 70px; display: inline-block"
+												<select value="${login.userphone1}" style="width: 70px; display: inline-block"
 													class="userphone1 form-control input-sm sel" id="userphone1" name="userphone1">
 														<option>010</option>
 														<option>011</option>
@@ -219,10 +219,10 @@
 												</select>
 												<input style="width: 120px; display: inline-block" class="form-control input-sm"
 													class="userphone2" id="userphone2" name="userphone2" maxlength="4"
-													placeholder="숫자 4자리 입력">
+													placeholder="숫자 4자리 입력" value="${login.userphone2}" >
 												<input style="width: 120px; display: inline-block" class="form-control input-sm"
 													 class="userphone3" id="userphone3" name="userphone3" maxlength="4"
-													placeholder="숫자 4자리 입력"><span id="phoneChk"></span>
+													placeholder="숫자 4자리 입력" value="${login.userphone3}" ><span id="phoneChk"></span>
 											</td>
 										</tr>
 										

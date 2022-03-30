@@ -130,7 +130,6 @@
 
         .product tr th,
         .product tr td {
-            border-bottom: 1px solid black;
             text-align: center;
             margin-bottom: 20px;
             line-height: 60px;
@@ -147,6 +146,13 @@
 
         .product tr td.large-cell {
             width: 150px;
+              overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 160px;
+  height: 81.5px;
+  display:block;
+  margin: 0px;
         }
 
         .prod-img input[type="file"],
@@ -304,7 +310,7 @@
 	                <div class="upper-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="submit"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
 	                    </div>
 	                </div>
 	                <div class="col-xs-6 prod-img">

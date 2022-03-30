@@ -40,7 +40,7 @@
         }
 
         .pagination .cur-page {
-            background: #000;
+            background: #ddd;
             color: #fff;
         }
     </style>

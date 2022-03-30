@@ -93,7 +93,7 @@
                 <!-- 검색창을 배치하고 싶을 때 -->
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div style="float: left; font-size: 20px; border-bottom: 3px solid black;">
-                        <strong>커뮤니티 게시판</strong>
+                        <strong>Coffee Talk</strong>
                     </div>
                     <form class="navbar-form navbar-right"
                     	action="#" method="get">

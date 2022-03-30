@@ -21,7 +21,9 @@ import com.spring.cafealley.board.service.IBoardService;
 import com.spring.cafealley.board.service.IEvBoardService;
 import com.spring.cafealley.command.BoardVO;
 import com.spring.cafealley.command.ImgVO;
+import com.spring.cafealley.command.UserVO;
 import com.spring.cafealley.img.service.IImgService;
+import com.spring.cafealley.user.service.IUserService;
 import com.spring.cafealley.util.PageCreator;
 import com.spring.cafealley.util.PageVO;
 
@@ -36,14 +38,18 @@ public class EvBoardController {
 	@Autowired
 	private IImgService imgservice;
 	
+	@Autowired
+	private IUserService userservice;
+	
 	//상세보기 이동처리
 	@GetMapping("/evDetail")
 	public String getContent(int bno, @ModelAttribute("p") PageVO vo, Model model) {
 		System.out.println("이벤트 게시글 상세보기 페이지로 이동");
 	
 		BoardVO bo = service.getContent(bno);
-
-		model.addAttribute("article",service.getContent(bno));
+		UserVO user =  userservice.getInfo( bo.getWriter());
+		model.addAttribute("user", user);
+		model.addAttribute("article",bo);
 
 		
 		return "eventboard/EventBoardDetail";
@@ -97,7 +103,7 @@ public class EvBoardController {
 		
 		
 
-		System.out.println("list files :" + files.get(0).getName().equals(""));
+		System.out.println(files.get(0).getOriginalFilename().equals(""));
 		
 		
 		

@@ -404,12 +404,12 @@ img[alt="prod-main"]{
                 // easycart내에 이미 존재하는 select-list들중
                 if ($list.classList.contains('select-list')) {
                     // 옵션 이름이 선택한 옵션이름과 같은게 존재한다면 
-                    if ($list.children[1].textContent === optiontext) {
+                    if ($list.children[0].textContent === optiontext) {
                         console.log('cc');
-                        $list.children[2].children[0].value = parseInt($list.children[2].children[0].value) + 1;
+                        $list.children[1].children[0].value = parseInt($list.children[1].children[0].value) + 1;
                         // 윗줄처럼 인위적으로 증가시키면 change이벤트가 아니기때문에 상품합계가 바뀌지않아요.
                         // 그래서 상품합계갱신하는 함수를 다시 불러요.
-                        productTotalLoad($list.children[2].children[0]);
+                        productTotalLoad($list.children[1].children[0]);
                         totalLoad()
                         // 옵션을 "선택"으로 바꿔놓아요~
                         e.target.value = 'not-selected';
@@ -426,10 +426,7 @@ img[alt="prod-main"]{
             // 가격 이쁘게 표시
             let sellprice2 = sellprice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
             
-            $selectList.innerHTML = `<c:forEach var = "pro" items="${shop.proList}" varStatus="status">
-									<img class="selected-img" src="<c:url value='/loadimg/display/${pro.filenum}/1'/>" >
-									</c:forEach>
-            						<span class="selected-prod">`+ optiontext +`</span>
+            $selectList.innerHTML = `<span class="selected-prod">`+ optiontext +`</span>
                                     <span class="selected-qty">
                                         <input type="number" name="" id=`+'b'+ sellprice +` value="1" min="1"><br>
                                     </span>

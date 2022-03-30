@@ -26,6 +26,16 @@
             margin-top: 180px;
             margin-bottom: 80px;
         }
+		#writer{
+			font-size: 15px;
+			display: block;
+		}
+		#title{
+        	heigth: 30px;
+        	padding: 10px;
+        	margin-left: 20px;
+        	border: 1px solid black;
+        }
     </style>
 
 
@@ -46,7 +56,7 @@
                     <div class="row">
                         <div>
                             <h3 class="write-service">
-                                &nbsp;&nbsp;<strong style="border-bottom:3px solid black;">커뮤니티 게시판</strong>
+                                &nbsp;&nbsp;<strong style="border-bottom:3px solid black;">Coffee Talk</strong>
                             </h3>
                             
                         </div>
@@ -71,7 +81,7 @@
                         <div class="form-group clearfix">
 							
                             <label for="writer">
-                                작성자
+                                <span class="glyphicon glyphicon-user"></span>작성자
                             </label><br>
                             <span style="display: block;">${article.writer}</span>
                             <input type="hidden" class="form-control" id="writer" name="writer" value="${article.writer}" readonly
@@ -86,7 +96,7 @@
                             <label for="title">
                                 제목
                             </label>
-                            <input type="text" class="form-control" id="title" name="title" value="${article.title }"
+                            <input type="text" class="" id="title" name="title" value="${article.title }"
                                 style="width: 300px; background-color: transparent;" />
                         </div>
 
@@ -94,7 +104,7 @@
 						<div class="form-group">
 							<label for="content" class="col-sm-14">
 								내용
-		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="180"></textarea>
+		                        <textarea name="content" id="content" class="" style="width:100%; resize:none;" rows="7" cols="180">${article.content}</textarea>
 							</label>
                         </div>
 						

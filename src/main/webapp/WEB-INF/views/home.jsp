@@ -436,6 +436,10 @@
             color: red;
         }      
         
+        #nomargin{
+        	margin-top : 0px;
+        }
+        
 
 </style>
 
@@ -664,7 +668,7 @@
 
 	<!--하단 배너 2-->
 	<section>
-		<div class="container" style="margin-bottom: 50px">
+		<div class="container" id="nomargin" style="margin-bottom: 50px">
 			<div class="row">
 				<ul class="col-xs-12">
 					<li class="col-xs-6">

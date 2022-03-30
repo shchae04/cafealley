@@ -47,7 +47,7 @@
   
   	<!--  shopboard 카테고리 -->
   	<sql id="search">
-  		<if test="condition != '' and condition != null ">
+  		<if test="condition != 'all'">
   		WHERE p.procategory = #{condition}
   		</if>
   	</sql>
@@ -56,8 +56,6 @@
   		<if test=" keyword == 'latest' "> ORDER BY s.regdate DESC </if>
   		<if test=" keyword == 'oldest' "> ORDER BY s.regdate ASC </if>
   		<if test=" keyword == 'hit' "> ORDER BY s.hit ASC </if>
-  		<if test=" keyword == 'pricelow' "> ORDER BY p.prosellprice ASC </if>
-  		<if test=" keyword == 'pricehigh' "> ORDER BY p.prosellprice DESC </if>
   	</sql>
   
   
@@ -82,10 +80,8 @@
   </select>
    -->
   <select id="getList" resultMap="shopInfo">
-	SELECT *
-	  FROM (SELECT ROWNUM AS rn,
-	                         tbl.*
-	          FROM (SELECT s.bno,
+
+					SELECT s.bno,
 	                 	   s.title,
 	                 	   s.content,
 	                 	   s.regdate,
@@ -110,11 +106,7 @@
 	              		OR s.prono3 = p.prono
 	              		OR s.prono4 = p.prono
 	              	 <include refid="search"/>	
-	           		 <include refid="order"/>) tbl)
-	<![CDATA[
-	WHERE rn <= #{pageNum} * #{countPerPage}
-	AND rn >((#{pageNum} -1) * #{countPerPage})
-	]]>
+	           		 <include refid="order"/>
 	</select>
   
   <select id="getContent" resultMap="shopInfo">

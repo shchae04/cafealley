@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지 게시판</title>
+    <title>Notice</title>
 
     <link rel="stylesheet" href="<c:url value='/css/shstyle.css'/>">
     
@@ -93,7 +93,7 @@
                 <!-- 검색창을 배치하고 싶을 때 -->
                 <div class="listhead">
                     <div style="float: left; font-size: 20px; margin-top: 15px; margin-left:100px; border-bottom: 3px solid black;">
-                        <strong>공지 게시판</strong>
+                        <strong>Notice</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
@@ -136,10 +136,11 @@
                        
                     </tbody>
                 </table>
-
+						<c:if test="${not empty login.admin}">
                 		<button style="float: right;" type="button" class="write btn"
                 		onclick="location.href='<c:url value="/noBoard/noWrite" />'"
                 		>글쓰기</button>
+                		</c:if>
                 <br>
 						<!-- 페이징 처리 -->
 						<form action="<c:url value='/noBoard/noList' />" name="pageForm">

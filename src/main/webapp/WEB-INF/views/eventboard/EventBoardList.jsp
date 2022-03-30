@@ -94,7 +94,7 @@
                 <div class="listhead" style="margin-bottom: 100px;">
                     <div style="float: left; font-size: 20px; margin-top: 55px; margin-left: 100px; border-bottom: 3px solid black;">
 
-                        <strong>이벤트 게시판</strong>
+                        <strong>Event</strong>
                     </div>
                     <form class="navbar-form navbar-right" action="#" method="get">
                         <div class="input-group">
@@ -137,10 +137,11 @@
                        
                     </tbody>
                 </table>
-
+						<c:if test="${not empty login.admin}">
                 		<button style="float: right;" type="button" class="write btn"
                 		onclick="location.href='<c:url value="/evBoard/evWrite" />'"
                 		>글쓰기</button>
+                		</c:if>
                 <br>
 						<!-- 페이징 처리 -->
 						<form action="<c:url value='/evBoard/evList' />" name="pageForm">
