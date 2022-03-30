@@ -100,7 +100,7 @@ a:active {
 .header-nav {
     position: absolute;
     right: 20px;
-    background-color: #ffffff;
+    background-color: white;
 }
 
 .header-nav>li {
@@ -111,7 +111,7 @@ a:active {
 
 .header-nav-upper {
     position: absolute;
-    background-color: #fdfdfd;
+    background-color: white;
     top: 5px;
 }
 
