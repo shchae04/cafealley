@@ -37,9 +37,10 @@ public class BoardHandler implements HandlerInterceptor {
 		
 		
 		
-
+			// 글 상세보기시 
 			if(request.getRequestURI().contains("Detail")) {
 				
+				//글이 존재하면 retrun true
 				if(request.getRequestURI().contains("cmBoard")) {
 					BoardVO vo = cmBoardMapper.getContent(Integer.parseInt( request.getParameter("bno") ));
 					if(vo != null) {
@@ -64,15 +65,23 @@ public class BoardHandler implements HandlerInterceptor {
 				out.print(html);
 				out.flush();
 				return false;
-				
+			
+			// 글 수정, 삭제시
 			}else {
-				if(request.getSession().getAttribute("login")!=null) {
-					String userid = ( (UserVO) (request.getSession().getAttribute("login")) ).getUserid();
-					String writer = cmBoardMapper.getContent(Integer.parseInt(request.getParameter("bno"))).getWriter();
-					if(writer.equals(userid)) {
-						return true;
-					}
+				if(request.getSession().getAttribute("login")==null) {
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					String html = "<script>alert('로그인이 필요합니다.');history.back();</script>";
+					out.print(html);
+					out.flush();
+					return false;
 				}
+				String userid = ( (UserVO) (request.getSession().getAttribute("login")) ).getUserid();
+				String writer = cmBoardMapper.getContent(Integer.parseInt(request.getParameter("bno"))).getWriter();
+				if(writer.equals(userid)) {
+					return true;
+				}
+				
 			}
 		
 		// reply에대한 작성자 검사는 많이 복잡해서 그냥 각자의 Controller에서 update랑 delete 요청때마다 검사박아넣음.
