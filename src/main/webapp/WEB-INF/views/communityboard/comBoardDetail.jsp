@@ -374,7 +374,7 @@ $(document).ready(function() {
 			
 			const rno = $(this).attr('href');
 			
-			if(e.target.className ==='modi' && e.target.id === 'replymodbtn'){
+			if(e.target.className ==='modi'){
 				//수정버튼 클릭시
 				console.log(e);
 				//지워지기는 한다...
@@ -388,7 +388,9 @@ $(document).ready(function() {
 				$(this).parent().children('#comModi').text('수정완료'); 
 				//$(this).parent('div').css('display','none');
 			//수정창 생성
-			$(this).next().next().html('<textarea id="content" name="content"></textarea>');
+			console.log('this next next는');
+			console.log($(this).next());
+			$(this).next().html('<textarea id="content" name="content"></textarea>');
 			
 			//수정완료 버튼 클릭
 			$(this).parent().children('#comModi').on('click',$(this),function(){

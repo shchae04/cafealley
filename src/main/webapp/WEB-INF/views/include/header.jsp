@@ -253,7 +253,7 @@
 					            chk2 = false;
 							} else {
 								console.log('로그인 성공');
-								location.href='http://localhost';
+								location.href='${pageContext.request.contextPath}/';
 							}
 						},
 						error : function() {

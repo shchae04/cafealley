@@ -310,7 +310,7 @@
 	                <div class="upper-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 판매글 등록완료</button>
 	                    </div>
 	                </div>
 	                <div class="col-xs-6 prod-img">
@@ -387,7 +387,7 @@
 	                <div class="lower-bar clearfix">
 	                    <div class="divforright">
 	                        <button class="btn-cancel" onclick="history.back()">취소</button>
-	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 상품 등록완료</button>
+	                        <button class="btn-regist" type="button"> <span class="glyphicon glyphicon-ok"></span> 판매글 등록완료</button>
 	                    </div>
 	                </div>
                 </form> <!-- end form  --> 
@@ -470,8 +470,8 @@
         	// 등록 버튼 클릭시 유효성검사 후 submit해주기.
         	$('.btn-regist').on('click',function(e){
         		// 상품 게시글 메인 이미지 등록 해야함
-        		if($('#img').val = ''){
-        			alert('상품판매 게시글의 메인 이메지는 필수입니다.');
+        		if($('#img').val() == ''){
+        			alert('상품판매 게시글의 메인 이미지는 필수입니다.');
         			$('label[for="img"]').focus();
         			return;
         		// 상품 게시글 타이틀 등록해야함.

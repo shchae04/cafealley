@@ -165,13 +165,13 @@ float: right;
 				<form action="<c:url value='/shop/shopList'/>" method="get" name="catForm">
 				<p>종류</p>
 				<ul class="select-category">
-					<li><a href="" style="${pc.paging.condition == '' ? 'font-weight: 700;' : '' }">전체</a></li>
+					<li><a href="" style="${pc.paging.condition == '' || pc.paging.condition == 'all' ? 'font-weight: 700;' : '' }">전체</a></li>
 					<li><a href="beans" style="${pc.paging.condition == 'beans' ? 'font-weight: 700;' : '' }">원두</a></li>
 					<li><a href="tea" style="${pc.paging.condition == 'tea' ? 'font-weight: 700;' : '' }">티/액상차</a></li>
 					<li><a href="milk" style="${pc.paging.condition == 'milk' ? 'font-weight: 700;' : '' }">유제품</a></li>
 					<li><a href="syrup" style="${pc.paging.condition == 'syrup' ? 'font-weight: 700;' : '' }">시럽/소스</a></li>
 					<li><a href="powder" style="${pc.paging.condition == 'powder' ? 'font-weight: 700;' : '' }">파우더/농축액</a></li>
-					<li><a href="coffeemachine" style="${pc.paging.condition == 'cofeemachine' ? 'font-weight: 700;' : '' }">커피용품, 머신</a></li>
+					<li><a href="coffeemachine" style="${pc.paging.condition == 'coffeemachine' ? 'font-weight: 700;' : '' }">커피용품, 머신</a></li>
 				</ul>
 					<input type="hidden" name="condition" id="cfcondition" value="">
 					<input type="hidden" name="keyword" id="cfkeyword" value="">
@@ -232,7 +232,7 @@ float: right;
 			let condition;
 			for(let a of document.querySelectorAll('.select-category > li > a')){
 				console.log(a.style.fontWeight);
-				if(a.style.fontWeight === 700){
+				if(a.style.fontWeight === '700'){
 					condition = a.getAttribute('href');
 				}
 			}

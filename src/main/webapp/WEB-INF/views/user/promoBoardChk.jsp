@@ -840,21 +840,11 @@
 			'<c:url value="/promo/getContent/" />' + bno,
 			function(data) {
 				console.log(data);
-				/*
+				
 				if(data.filenum != 0){
 					
 				
 				
-				str += '<ol class="carousel-indicators">';
-                str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-                if(data.filecnt === 2) {
-                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                } else if(data.filecnt === 3) {
-                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
-                }
-                str += '</ol>';     
-                */
                 str += '<div class="carousel-inner" role="listbox">';
                 str += `<div class="item active">
                     <img src="<c:url value='/loadimg/display/` + data.key + `/1'/>" alt="슬라이드1">
@@ -903,23 +893,12 @@
                     <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
                     <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                             class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-                </div>;`
+                </div>`;
         		    }
 				//data.filenum 이 null 이 아닌경우.
 				} else {
 					
-					
-					
-					
-					str += '<ol class="carousel-indicators">';
-                    str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-                    if(data.filecnt === 2) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                    } else if(data.filecnt === 3) {
-                    	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                    	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
-                    }
-                    str += '</ol>';     
+  
                     
                     str += '<div class="carousel-inner" role="listbox">';
                     str += `<div class="item active">
@@ -969,7 +948,7 @@
                         <a id="removeModalBtn" href="` + data.bno + `"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove</a>
                         <a id="modifyModalBtn" data-toggle="modal" href="` + data.bno + `"><span
                                 class="glyphicon glyphicon-erase"></span>&nbsp;Modify</a>
-                    </div>;`
+                    </div>`;
             		    }
 					
 				}
@@ -1007,6 +986,8 @@
 			'<c:url value="/promoReply/replyList/" />' + bno,
 			function(list) {
 				console.log(list);
+				let rwriter = [];
+				let rrno = [];
 				for(let i=0; i<list.length; i++) {
 					if(i === 0) {
 						str += '<div class="reply-content blinking">';
@@ -1047,8 +1028,18 @@
 	                    		</div>`;
 							
 						}
+						rwriter.push(list[i].writer);
+						rrno.push(list[i].rno);
 					}
 				$('#replyContentDiv').html(str);
+				let loginuser = '${login.userid}';
+				let count = 0;
+				for(let writer of rwriter){	
+					if(writer !== loginuser){
+						$('a[href="' + rrno[count] + '"]').css('display','none');
+					}
+					count = count + 1;
+				}
 			}
 		); //end getJSON	
 	} //end 댓글 목록 불러오기
@@ -1105,16 +1096,7 @@
 			'<c:url value="/promo/getContent/" />' + bno,
 			function(data) {
 				console.log(data);
-				
-				str += '<ol class="carousel-indicators">';
-                str += '<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-                if(data.filecnt === 2) {
-                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                } else if(data.filecnt === 3) {
-                	str += '<li data-target="#myCarousel2" data-slide-to="1"></li>';
-                	str += ' <li data-target="#myCarousel2" data-slide-to="2"></li>';
-                }
-                str += '</ol>';     
+				     
                 
                 str += '<div class="carousel-inner" role="listbox">';
                 str += `<div class="item active">
@@ -1130,7 +1112,7 @@
                     	</div>`;
                		str += `<div class="item">
                         <img src="<c:url value='/loadimg/display/` + data.key + `/3'/>" alt="슬라이드3">
-                    	</div>`
+                    	</div>`;
                	}
                	
                	str += `<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">

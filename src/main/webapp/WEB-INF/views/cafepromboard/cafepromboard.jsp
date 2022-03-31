@@ -1256,6 +1256,7 @@
                  })
 
              }
+        	 window.scrollTo(0,0);
                 }); //이벤트 처리 끝. 
                 	
         
@@ -1263,12 +1264,6 @@
 
 			
         	// 값 불러오는곳!
-        	
-        
-        		
-                
-        
-                
 
         console.log(data);
 			if(reset == true) {
@@ -1400,7 +1395,6 @@
 	                        
 	                    str += ` 
 	                        <a id="regist" href="` + list[i].bno +`"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
-	                        <a id="delete" href="` + list[i].bno +`"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
 	                    </div>
 	                </div>`;
 	                
@@ -1503,7 +1497,6 @@
                     
 	                    str += ` 
 	                        <a id="regist" href="` + list[i].bno +`"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
-	                        <a id="delete" href="` + list[i].bno +`"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
 	                    </div>
 	                </div>`;
 	                
@@ -1693,6 +1686,8 @@
 				'<c:url value="/promoReply/replyList/" />' + bno,
 				function(list) {
 					console.log(list);
+					let rwriter = [];
+					let rrno = [];
 					for(let i=0; i<list.length; i++) {
 						if(i === 0) {
 							str += '<div class="reply-content blinking">';
@@ -1709,6 +1704,7 @@
 	                            <p>` + list[i].writer + `</p>
 	                            
 	                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+	                            
 		                        </div>
 		                        <div class="content">` + 
 		                        	list[i].content + `
@@ -1725,6 +1721,7 @@
 		                            <p>` + list[i].writer + `</p>
 		                            
 		                            <a href="`+list[i].rno+`" id="rnodelete"><span style="float:right;" class="glyphicon glyphicon-remove"></span></a>
+		                          
 			                        </div>
 			                        <div class="content">` + 
 			                        	list[i].content + `
@@ -1733,8 +1730,19 @@
 		                    		</div>`;
 								
 							}
+							rwriter.push(list[i].writer);
+							rrno.push(list[i].rno);
 						}
 					$('#replyContentDiv').html(str);
+					
+					let loginuser = '${login.userid}';
+					let count = 0;
+					for(let writer of rwriter){	
+						if(writer !== loginuser){
+							$('a[href="' + rrno[count] + '"]').css('display','none');
+						}
+						count = count + 1;
+					}
 				}
 			); //end getJSON	
 		} //end 댓글 목록 불러오기

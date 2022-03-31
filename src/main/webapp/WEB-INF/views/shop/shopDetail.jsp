@@ -282,7 +282,14 @@ img[alt="prod-main"]{
 	min-height:400px;
 	max-height:400px;
 }
-
+#contentarea{
+	resize: none;
+	width : 800px;
+	height: 400px;
+	margin-left: 150px;
+	border: none;
+	outline: none;
+}
 /* --------------------------------- */
 </style>
 
@@ -353,7 +360,7 @@ img[alt="prod-main"]{
 				<div class="col-xs-12 prod-detail">
 					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/2" alt="prod-detail" onerror="this.remove();">
 					<img src="${pageContext.request.contextPath}/loadimg/display/${shop.filenum}/3" alt="prod-detail" onerror="this.remove();">					
-					<p style="text-align: center; margin-top: 50px;">${shop.content}</p>
+					<textarea id="contentarea" style="margin-top : 50px">${shop.content}</textarea>
 				</div>
 
 			</div>
@@ -367,6 +374,14 @@ img[alt="prod-main"]{
         const $seloption = document.querySelector('#sel-option');
         const $easycart = document.querySelector('.easy-cart');
         
+        function adjustHeight() {
+        	var textEle = $('#contentarea');
+        	textEle[0].style.height = 'auto';
+        	var textEleHeight = textEle.prop('scrollHeight');
+        	textEle.css('height', textEleHeight);
+        };
+
+        	adjustHeight(); // 함수를 실행하면 자동으로 textarea의 높이 조절
         
         // 옵션선택하면 easycart에 해당 옵션 띄우게~
         $seloption.addEventListener('change', e => {

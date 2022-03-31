@@ -61,7 +61,7 @@
                 </button>
                 &emsp;&emsp;&emsp;&nbsp;
                 <button type="button" class="btn btn-lg">
-                	<a herf="http://localhost/">메인페이지</a>
+                	<a herf="<c:url value='/'/>">메인페이지</a>
                 </button>
                 
 

@@ -234,7 +234,7 @@ tfoot tr td {
 .cart-table tr td p > .btn-modify {
 	display: block;
 	cursor: pointer;
-	margin-left: 70px;
+	margin-left: 0px;
 }
 
 .cart-table tr td .chk-shop-regist{
