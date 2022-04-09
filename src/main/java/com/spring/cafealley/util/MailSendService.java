@@ -14,11 +14,12 @@ public class MailSendService {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
 	private String authKey;//컨트롤러에 리턴할 인증키 값
 	
 	//인증 키 발생 메서드
 	public void makeRandomKey() {
-		String uuid = UUID.randomUUID().toString();
+		String uuid = UUID.randomUUID().toString().split("-")[0];
 		System.out.println("생성된 인증 번호: " + uuid);
 		
 		authKey = uuid;
